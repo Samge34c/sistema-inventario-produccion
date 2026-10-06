@@ -49,6 +49,10 @@ Comprobar formato:
 npx prettier "**/*.{js,html,css}" --check
 ```
 
+## Formato PHP
+
+Instalar las herramientas con `composer install` y comprobar con `composer comprobar-formato`. Ver [requisitos y comandos](docs/herramientas-php.md).
+
 ## Flujo Git
 
 - `main`: versión integrada y estable.

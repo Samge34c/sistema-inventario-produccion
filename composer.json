@@ -1,0 +1,16 @@
+{
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "^3.95"
+    },
+    "name": "samge34c/sistema-inventario-produccion",
+    "description": "Herramientas de desarrollo del sistema de inventario",
+    "type": "project",
+    "require": {
+        "php": ">=8.2"
+    },
+    "scripts": {
+        "validar": "@composer validate --no-check-publish",
+        "comprobar-formato": "php-cs-fixer fix --dry-run --diff",
+        "aplicar-formato": "php-cs-fixer fix"
+    }
+}
