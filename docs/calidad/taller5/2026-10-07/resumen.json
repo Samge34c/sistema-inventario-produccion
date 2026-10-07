@@ -1,0 +1,67 @@
+{
+  "date": "2026-10-07",
+  "timezone": "America/Bogota",
+  "tested_commit": "7a01251325365c8d2ebbead5b89d5732671f1463",
+  "scope": [
+    "HU01",
+    "HU02"
+  ],
+  "metrics": {
+    "coverage": {
+      "covered": 113,
+      "executable": 117,
+      "percent": 96.58119658119658,
+      "files": [
+        "modules/inventario/funciones.php",
+        "modules/inventario/movimientos-funciones.php"
+      ],
+      "target_percent": 90
+    },
+    "complexity": {
+      "metric": "CCN2",
+      "max": 13,
+      "function": "registrarMovimiento",
+      "target_max": 10,
+      "above_target": [
+        "registrarMovimiento (13)",
+        "actualizarMateriaPrimaProtegida (11)"
+      ]
+    },
+    "defect_density": {
+      "confirmed_open_defects": 2,
+      "stories_tested": 2,
+      "value_per_story": 1.0,
+      "target_before_increment": 0
+    }
+  },
+  "cases": {
+    "planned": 15,
+    "executed": 14,
+    "passed": 12,
+    "failed": 2,
+    "not_executed": 1
+  },
+  "tools": {
+    "PHPUnit": "11.5.57",
+    "PCOV": "1.0.11",
+    "PHPStan": "2.3.0",
+    "PHP_Depend": "3.0.0",
+    "PHP": "8.3.6",
+    "MariaDB": "10.11.14",
+    "Chromium": "131.0.6778.204"
+  },
+  "static": {
+    "level": 5,
+    "source_files": 11,
+    "findings": 11,
+    "undefined_variable": 9,
+    "unreachable_conditions": 2,
+    "suppressed": 0
+  },
+  "notes": [
+    "Coverage excludes controllers, templates, SQL and future modules",
+    "Browser uses local Bootstrap 5.3.8 test substitution; production remains CDN",
+    "Executed by assistant authorized by Samuel; independent human review and business acceptance pending",
+    "Thresholds operationalized from Acta and standards; plan awaits group/business validation"
+  ]
+}

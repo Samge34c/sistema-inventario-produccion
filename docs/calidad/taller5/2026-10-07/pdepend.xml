@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metrics generated="2026-10-07T14:50:08" pdepend="@package_version@" ahh="0" andc="0" calls="50" ccn="42" ccn2="55" cloc="2" clsa="0" clsc="0" eloc="566" fanout="11" leafs="0" lloc="217" loc="626" maxDIT="0" ncloc="624" noc="0" nof="13" noi="0" nom="0" nop="1" roots="0">
+  <files>
+    <file name="modules/inventario/editar.php" loc="134" cloc="0" eloc="120" lloc="39" ncloc="134"/>
+    <file name="modules/inventario/funciones.php" loc="38" cloc="0" eloc="29" lloc="20" ncloc="38"/>
+    <file name="modules/inventario/index.php" loc="158" cloc="0" eloc="148" lloc="26" ncloc="158"/>
+    <file name="modules/inventario/movimientos-funciones.php" loc="174" cloc="2" eloc="152" lloc="93" ncloc="172"/>
+    <file name="modules/inventario/movimientos.php" loc="122" cloc="0" eloc="117" lloc="39" ncloc="122"/>
+  </files>
+  <package name="+global" noc="0" noi="0" nom="0" nof="13">
+    <function name="escapar" start="60" end="63" mi="78.947226438868" hnt="10" hnd="9" hv="31.699250014423" hd="3.75" hl="0.26666666666667" he="118.87218755409" ht="6.6040104196715" hb="0.0080587110079317" hi="8.4531333371795" npath="1" loc="4" cloc="0" eloc="3" lloc="1" ncloc="4" ccn="1" ccn2="1">
+      <file name="modules/inventario/editar.php"/>
+    </function>
+    <function name="obtenerUnidadesPermitidas" start="5" end="8" mi="78.006963954656" hnt="13" hnd="10" hv="43.185065233536" hd="4" hl="0.25" he="172.74026093414" ht="9.5966811630079" hb="0.010338902968954" hi="10.796266308384" npath="1" loc="4" cloc="0" eloc="3" lloc="1" ncloc="4" ccn="1" ccn2="1">
+      <file name="modules/inventario/funciones.php"/>
+    </function>
+    <function name="validarMateriaPrima" start="10" end="37" mi="50.028839182066" hnt="118" hnd="41" hv="632.19113654493" hd="22.72" hl="0.044014084507042" he="14363.382622301" ht="797.96570123894" hb="0.19696235655676" hi="27.825314108492" npath="54" loc="28" cloc="0" eloc="22" lloc="16" ncloc="28" ccn="6" ccn2="8">
+      <file name="modules/inventario/funciones.php"/>
+    </function>
+    <function name="escapar" start="29" end="32" mi="78.947226438868" hnt="10" hnd="9" hv="31.699250014423" hd="3.75" hl="0.26666666666667" he="118.87218755409" ht="6.6040104196715" hb="0.0080587110079317" hi="8.4531333371795" npath="1" loc="4" cloc="0" eloc="3" lloc="1" ncloc="4" ccn="1" ccn2="1">
+      <file name="modules/inventario/index.php"/>
+    </function>
+    <function name="obtenerTiposMovimiento" start="5" end="8" mi="79.435163286757" hnt="9" hnd="8" hv="27" hd="5" hl="0.2" he="135" ht="7.5" hb="0.0087720532146386" hi="5.4" npath="1" loc="4" cloc="0" eloc="3" lloc="1" ncloc="4" ccn="1" ccn2="1">
+      <file name="modules/inventario/movimientos-funciones.php"/>
+    </function>
+    <function name="convertirCantidadCentesimas" start="10" end="19" mi="64.712328156367" hnt="46" hnd="29" hv="223.46712577587" hd="12.6" hl="0.079365079365079" he="2815.6857847759" ht="156.42698804311" hb="0.066466305206397" hi="17.735486172688" npath="3" loc="10" cloc="0" eloc="7" lloc="4" ncloc="10" ccn="2" ccn2="3">
+      <file name="modules/inventario/movimientos-funciones.php"/>
+    </function>
+    <function name="convertirCentesimasCantidad" start="21" end="24" mi="75.577701946166" hnt="24" hnd="16" hv="96" hd="7" hl="0.14285714285714" he="672" ht="37.333333333333" hb="0.025573583862192" hi="13.714285714286" npath="1" loc="4" cloc="0" eloc="3" lloc="1" ncloc="4" ccn="1" ccn2="1">
+      <file name="modules/inventario/movimientos-funciones.php"/>
+    </function>
+    <function name="validarMovimiento" start="26" end="46" mi="52.220708474419" hnt="104" hnd="39" hv="549.68183076167" hd="16.52" hl="0.060532687651332" he="9080.7438441829" ht="504.48576912127" hb="0.1450862854642" hi="33.273718569109" npath="72" loc="21" cloc="0" eloc="18" lloc="12" ncloc="21" ccn="5" ccn2="9">
+      <file name="modules/inventario/movimientos-funciones.php"/>
+    </function>
+    <function name="registrarMovimiento" start="48" end="112" mi="37.720612092258" hnt="231" hnd="70" hv="1415.8643769143" hd="22.5" hl="0.044444444444444" he="31856.948480571" ht="1769.8304711429" hb="0.33497690123359" hi="62.927305640635" npath="584" loc="65" cloc="2" eloc="58" lloc="35" ncloc="63" ccn="13" ccn2="13">
+      <file name="modules/inventario/movimientos-funciones.php"/>
+    </function>
+    <function name="obtenerTokenMovimiento" start="114" end="121" mi="69.026641070777" hnt="24" hnd="14" hv="91.376518129383" hd="13.5" hl="0.074074074074074" he="1233.5829947467" ht="68.532388597037" hb="0.038340490198512" hi="6.7686309725469" npath="2" loc="8" cloc="0" eloc="6" lloc="3" ncloc="8" ccn="2" ccn2="2">
+      <file name="modules/inventario/movimientos-funciones.php"/>
+    </function>
+    <function name="actualizarMateriaPrimaProtegida" start="123" end="167" mi="41.238294641213" hnt="203" hnd="68" hv="1235.7549567738" hd="20.34" hl="0.049164208456244" he="25135.255820779" ht="1396.4031011544" hb="0.2860229962232" hi="60.754914295665" npath="78" loc="45" cloc="0" eloc="43" lloc="27" ncloc="45" ccn="7" ccn2="11">
+      <file name="modules/inventario/movimientos-funciones.php"/>
+    </function>
+    <function name="validarTokenMovimiento" start="169" end="173" mi="73.37442977758" hnt="20" hnd="13" hv="74.008794362822" hd="9.6" hl="0.10416666666667" he="710.48442588309" ht="39.471356993505" hb="0.026540867889871" hi="7.7092494127939" npath="2" loc="5" cloc="0" eloc="4" lloc="1" ncloc="5" ccn="1" ccn2="3">
+      <file name="modules/inventario/movimientos-funciones.php"/>
+    </function>
+    <function name="escaparMovimiento" start="26" end="29" mi="77.775236603656" hnt="13" hnd="12" hv="46.604512509375" hd="5.6" hl="0.17857142857143" he="260.9852700525" ht="14.499181669583" hb="0.013613069956043" hi="8.3222343766741" npath="1" loc="4" cloc="0" eloc="3" lloc="1" ncloc="4" ccn="1" ccn2="1">
+      <file name="modules/inventario/movimientos.php"/>
+    </function>
+  </package>
+</metrics>
