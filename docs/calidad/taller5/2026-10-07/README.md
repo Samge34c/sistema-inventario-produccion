@@ -32,3 +32,5 @@ HTTP y navegador: scripts del commit medido `pruebas/hu02-http.py` y `pruebas/hu
 Sondas: `python3 pruebas/taller5/sondas.py`, con HU02_URL hacia un servidor local sintético. Añade dos materias; no borra ni siembra datos. Para rendimiento use exactamente 1000 materias y cero historial en un despliegue separado. Muestra publicada: un cliente, 5 calentamientos y 100 lecturas por ruta; excluye assets y WAN.
 
 Resultados técnicos del asistente. Ejecución humana cruzada, review y aceptación del negocio pendientes. No se declara ninguna HU Done.
+
+Para medir rendimiento sin registrar las dos materias de la sonda, use un despliegue sintético separado con exactamente 1000 materias y cero historial y ejecute `python3 pruebas/taller5/sondas.py --rendimiento`. La medición termina al recibir HTML completo; no incluye assets. Para seguridad, omita esa opción.
