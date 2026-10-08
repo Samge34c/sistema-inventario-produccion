@@ -1,0 +1,20 @@
+[
+  {
+    "id": "CP-13",
+    "expected": "403 y ninguna escritura",
+    "http_final": 200,
+    "created": true,
+    "status": "Fallido",
+    "session_cookie_sent": false,
+    "csrf_token_sent": false
+  },
+  {
+    "id": "CP-14",
+    "expected": "403 y ninguna escritura",
+    "http_final": 200,
+    "created": true,
+    "status": "Fallido",
+    "session_cookie_sent": true,
+    "csrf_token_sent": false
+  }
+]
