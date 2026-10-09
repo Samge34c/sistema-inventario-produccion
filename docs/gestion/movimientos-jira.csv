@@ -1,0 +1,11 @@
+item,fecha_bogota,estado_anterior,estado_nuevo,clasificacion
+SCRUM-2,2026-10-04T23:27:29.100-05:00,Por hacer,En curso,Tarea de ejemplo
+SCRUM-3,2026-10-04T23:27:29.697-05:00,Por hacer,En curso,Tarea de ejemplo
+SCRUM-5,2026-10-04T23:41:49.214-05:00,Por hacer,En curso,Epica
+SCRUM-9,2026-10-04T23:41:43.633-05:00,Por hacer,En curso,HU01
+SCRUM-9,2026-10-05T13:59:11.812-05:00,En curso,En revision,HU01
+SCRUM-10,2026-10-04T23:41:45.503-05:00,Por hacer,En curso,HU02
+SCRUM-10,2026-10-05T13:59:36.856-05:00,En curso,Por hacer,HU02
+SCRUM-10,2026-10-05T19:16:38.771-05:00,Por hacer,En curso,HU02
+SCRUM-11,2026-10-04T23:41:47.475-05:00,Por hacer,En curso,HU03
+SCRUM-11,2026-10-05T12:55:32.586-05:00,En curso,Por hacer,HU03
