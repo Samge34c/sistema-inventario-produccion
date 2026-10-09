@@ -1,0 +1,54 @@
+{
+  "fecha": "2026-10-08T23:46:06.302243-05:00",
+  "casos": [
+    {
+      "caso": "CP14_origen_ajeno_sin_token",
+      "http": 403,
+      "registros_antes": 0,
+      "registros_despues": 0,
+      "aprobado": true
+    },
+    {
+      "caso": "token_incorrecto",
+      "http": 403,
+      "registros_antes": 0,
+      "registros_despues": 0,
+      "aprobado": true
+    },
+    {
+      "caso": "token_tipo_arreglo",
+      "http": 403,
+      "registros_antes": 0,
+      "registros_despues": 0,
+      "aprobado": true
+    },
+    {
+      "caso": "token_otra_sesion",
+      "http": 403,
+      "registros_antes": 0,
+      "registros_despues": 0,
+      "aprobado": true
+    },
+    {
+      "caso": "sin_sesion_sin_token",
+      "http": 403,
+      "registros_antes": 0,
+      "registros_despues": 0,
+      "aprobado": true
+    },
+    {
+      "caso": "alta_valida",
+      "http": 200,
+      "registros_antes": 0,
+      "registros_despues": 1,
+      "aprobado": true
+    },
+    {
+      "caso": "cantidad_invalida",
+      "http": 200,
+      "registros_antes": 1,
+      "registros_despues": 1,
+      "aprobado": true
+    }
+  ]
+}
