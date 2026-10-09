@@ -69,7 +69,7 @@ async function main() {
 
   const fila = r.pagina.match(new RegExp("<tr>\\s*<td>" + nombre + "</td>[\\s\\S]*?</tr>"));
   if (!fila) throw new Error("No se encontró la materia prima creada en la base de pruebas.");
-  const id = fila[0].match(/editar\\.php\\?id=(\\d+)/)?.[1];
+  const id = fila[0].match(/editar\.php\?id=(\d+)/)?.[1];
   if (!id) throw new Error("No se encontró el ID de la materia prima de prueba.");
 
   r = await solicitar(baseRuta + "movimientos.php");
