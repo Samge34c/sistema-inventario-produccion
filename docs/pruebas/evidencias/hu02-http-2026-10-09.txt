@@ -1,0 +1,30 @@
+EVIDENCIA HTTP HU02 — salida recuperada de la conversación
+Responsable: Julián Caicedo
+Fecha registrada: 2026-10-09
+Hora exacta de ejecución: no capturada por la terminal.
+Rama: feat/hu02-movimientos
+Commit: 7a01251325365c8d2ebbead5b89d5732671f1463
+Entorno: PHP 8.2.12; MariaDB 10.4.32; Node.js v24.21.0
+URL: http://127.0.0.1:8001
+Base de datos objetivo: prueba_hu02_http (desechable)
+
+Transcripción normalizada de las 15 comprobaciones reportadas:
+OK HTTP 1: HU01 registra y consulta 10000 g
+OK HTTP 2: entrada aumenta a 12000
+OK HTTP 3: salida disminuye a 11000
+OK HTTP 4: pendiente conserva 11000 disponibles
+OK HTTP 5: pendiente visible por separado
+OK HTTP 6: salida excesiva informa error controlado
+OK HTTP 7: rechazo conserva existencia
+OK HTTP 8: CSRF inválido rechazado
+OK HTTP 9: GET al registro rechazado
+OK HTTP 10: backend rechaza más de dos decimales
+OK HTTP 11: texto de prueba escapado y conservado
+OK HTTP 12: texto de prueba no modifica existencias
+OK HTTP 13: edición directa del saldo bloqueada
+OK HTTP 14: borrado de materia referenciada informa error
+OK HTTP 15: materia e inventario conservados
+RESULTADO HTTP: 15 comprobaciones correctas.
+
+NOTA DE INTEGRIDAD:
+Este archivo es una transcripción normalizada a partir de la salida compartida en la conversación; no es una exportación binaria ni una captura original de PowerShell. Se preserva el resultado y los nombres de los casos sin fingir que el formato del terminal se conservó byte por byte.
