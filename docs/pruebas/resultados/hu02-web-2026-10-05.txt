@@ -1,0 +1,20 @@
+ENTORNO: Bootstrap 5.3.8 servido como recurso local de prueba; disponibilidad del CDN no evaluada.
+OK WEB 1: HU01 registra y consulta 10000 g
+OK WEB 2: entrada web aumenta a 12000
+OK WEB 3: salida web disminuye a 11000
+OK WEB 4: pendiente web conserva 11000 disponibles
+OK WEB 5: pendiente visible por separado
+OK WEB 6: salida excesiva informa error controlado
+OK WEB 7: salida rechazada no modifica existencia
+OK WEB 8: POST sin token válido rechazado
+OK WEB 9: GET al registro rechazado
+OK WEB 10: backend controla más de dos decimales
+OK WEB 11: validación del backend visible tras redirect
+OK WEB 12: texto con comillas se almacena mediante consulta preparada
+OK WEB 13: observación escapada no ejecuta script
+OK WEB 14: edición directa del saldo bloqueada
+OK WEB 15: borrado de materia referenciada informa error controlado
+OK WEB 16: materia e inventario se conservan
+OK WEB 17: sin excepciones JavaScript del flujo
+OK WEB 18: sin errores en consola del navegador
+RESULTADO WEB: 18 comprobaciones correctas.
