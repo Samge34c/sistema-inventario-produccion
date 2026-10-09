@@ -4,6 +4,7 @@ Fecha de corte: 9 de octubre de 2026, America/Bogota.
 
 ## Avance y gestión
 
+- [Trabajo pendiente de Sprint 1 y reparto actual](gestion/cierre-trabajo-sprint1.md): pasos para HU01-HU03, D-01/D-02, revisiones de GitHub y estados de Jira; responsable de HU03 asignado a Julian el 09/10. Es planificación, no evidencia de terminación.
 - [Avance consolidado](gestion/avance-consolidado.md): integra Acta, estándares y Taller 5; incluye decisiones, backlog, riesgos, calidad y responsabilidades.
 - [Historial de transiciones de Jira](gestion/movimientos-jira.csv): 10 cambios reales de estado en seis ítems, dentro de semana 9; tres son HU01-HU03 y aportan siete cambios. Inicio de semana 1 confirmado por Samuel: 04/08/2026. El corte llega a semana 10; semana 11 (13-19/10) sigue futura. No se inventan movimientos para ese periodo.
 - [Estándares adoptados](../ESTANDARES.md).
