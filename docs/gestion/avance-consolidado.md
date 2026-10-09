@@ -19,11 +19,22 @@ Stefany Gomez Riveros
 
 ## Tabla de contenido
 
+- Consolidación de los talleres (p. 3 del PDF)
+- Estándares y responsabilidades del equipo (p. 4 del PDF)
+- Control de cambios (p. 5 del PDF)
+- Estado real frente al acta (p. 6 del PDF)
+- Product backlog estimado (p. 7 del PDF)
+- Tablero y seguimiento del trabajo (p. 8 del PDF)
+- Atributos de calidad y condiciones de evaluación (p. 9 del PDF)
+- Calidad y resultados medidos (p. 10 del PDF)
+- Evidencias del repositorio (p. 11 del PDF)
+- Ejecución independiente de HU02 (p. 12 del PDF)
+- Riesgos y respuestas (p. 13 del PDF)
+- Responsabilidades y uso de inteligencia artificial (p. 14 del PDF)
+- Referencias (p. 15 del PDF)
 Fecha de corte: 9 de octubre de 2026, hora de Bogotá. Se distinguen resultados publicados, compromisos de recuperación y actividades pendientes. El periodo académico se presenta hasta la semana 10; la semana 11 aún no ha transcurrido.
 
 ## Consolidación de los talleres
-
-El primer hito continúa abierto: materias primas tiene correcciones pendientes, movimientos cuenta con un reporte de ejecución independiente de Julian y recetas no tiene implementación publicada. El cierre requiere pruebas, revisión formal e integración; se conservan las fechas del Acta.
 
 Se consolidan las versiones aportadas del Acta, los estándares y el Taller 5 (Caicedo Ramirez & Riveros Martinez, 2026a, 2026b, 2026c), siguiendo la guía del avance (Universidad Santo Tomás, s. f.). La Tabla 1 relaciona las fuentes con la gestión actual.
 
@@ -35,17 +46,41 @@ Se consolidan las versiones aportadas del Acta, los estándares y el Taller 5 (C
 | Taller 4: estándares del 30/09 | Exige criterios reproducibles, nombres del dominio en español, formato automático y revisión por el otro integrante. |
 | Taller 5: calidad del 07/10 | Mide HU01/HU02, identifica dos fallos altos y evita declarar terminadas historias que incumplen sus criterios. |
 
-### Tecnología e interlocutora
+### Propósito, alcance y restricciones del Acta
 
-Se mantiene PHP con acceso a datos mediante PDO, esquema MySQL, HTML/Bootstrap y JavaScript. Bootstrap es el framework de interfaz; no se usa uno backend PHP. Los laboratorios registran MariaDB 10.11.14 y, en el reporte de Julian, 10.4.32. MySQL 8 y el entorno final siguen por verificar. PHPStan analiza código; Prettier y PHP CS Fixer controlan formato.
+El control manual y separado de inventario, recetas y ventas dificulta anticipar faltantes. La aplicación centralizará esa información para calcular capacidad de producción, planificar por fecha y consultar ventas.
 
-Diana Marcela Caicedo, propietaria, es la interlocutora principal confirmada en el Acta. Su aceptación funcional está pendiente. GitHub conserva código y evidencia; Jira registra el trabajo.
+Incluye materias primas y movimientos; recetas, ingrediente limitante y proyección con materiales pendientes; planificación y descuento de insumos; ventas y reportes diarios, semanales y de hora pico.
+
+Excluye facturación, contabilidad, nómina, pagos, domicilios, tienda virtual, inteligencia artificial como función del producto, integración automática con proveedores y aplicación móvil nativa. Cualquier ampliación exige revisar el tiempo disponible.
+
+El Acta prevé cuatro horas semanales por integrante: unas 66 horas-persona teóricas entre el 20/09 y el 17/11, y 43-50 tras descontar imprevistos. Es capacidad estimada, distinta de los 60 puntos del backlog; las horas adicionales del Sprint 2 siguen sin cuantificar.
+
+## Estándares y responsabilidades del equipo
+
+La Tabla 2 resume las reglas adoptadas el 30/09 y su aplicación al trabajo actual (Caicedo Ramirez & Riveros Martinez, 2026b).
+
+**Tabla 2. Reglas de trabajo y tecnología**
+
+| Aspecto | Regla o situación comprobada |
+| --- | --- |
+| Tecnología | PHP/PDO, MySQL, HTML, CSS/Bootstrap y JavaScript; Git/GitHub y Jira. Bootstrap es el framework de interfaz; no se adoptó un framework backend PHP. |
+| Estilo y nombres | Dominio y documentación en español. Variables y funciones: camelCase; clases: PascalCase; constantes: MAYUSCULAS_CON_GUION_BAJO; páginas: kebab-case. Términos externos conservan su idioma. |
+| Guías y formato | PSR-12 para PHP y JavaScript Standard Style como bases. Prettier publicado; PHP CS Fixer propuesto en PR #9. PHPStan realiza análisis estático. |
+| Commits | tipo(alcance): descripción en español, con verbo en imperativo y un cambio lógico. Usar feat, fix, docs, refactor, test, style o chore según el cambio. |
+| Ramas | main conserva versiones estables; develop integra trabajo revisado. Ramas feat/<hu>-<nombre>, fix/<nombre> y docs/<nombre>, creadas desde develop. |
+| Preparación | Definición de preparado (Definition of Ready, DoR): historia, criterios, dependencias, estimación, sprint, flujo si aplica y caso con resultado esperado. |
+| Terminación | Definición de terminado (Definition of Done, DoD): criterios reproducidos por el otro integrante, sintaxis, flujo web, formato, SQL si aplica, ausencia de secretos y documentación. Integrar tras revisión. |
+
+Hasta el Sprint 2, Julian asume requisitos, backlog, lógica y base de datos; Samuel, seguimiento Scrum, interfaz, pruebas y documentación. La rotación prevista comienza el 19/10. Estas responsabilidades generales no sustituyen la asignación de cada tarea.
+
+Diana Marcela Caicedo, propietaria e interlocutora, debe validar los roles propuestos de producción y ventas. Su aceptación está pendiente. Laboratorios: MariaDB 10.11.14 y 10.4.32; MySQL 8 y entorno final sin verificar.
 
 ## Control de cambios
 
-La Tabla 2 distingue cambios, incumplimientos y publicaciones. Los criterios de aceptación (CA) detallados el 07/10 no se atribuyen a una fecha anterior. Las decisiones comunicadas por Samuel se separan de la ejecución técnica asistida.
+La Tabla 3 distingue cambios, incumplimientos y publicaciones. Los criterios de aceptación (CA) detallados el 07/10 no se atribuyen a una fecha anterior. Las decisiones comunicadas por Samuel se separan de la ejecución técnica asistida.
 
-**Tabla 2. Registro de cambios y seguimiento**
+**Tabla 3. Registro de cambios y seguimiento**
 
 | Origen y tipo | Fecha Bogotá | Cambio, motivo y decisión |
 | --- | --- | --- |
@@ -63,9 +98,9 @@ NC-01 no conserva hora inicial. Los estándares aportados coinciden con develop.
 
 ## Estado real frente al acta
 
-La Tabla 3 contrasta los hitos; O1 acumula cinco días de atraso al 09/10.
+La Tabla 4 contrasta los hitos; O1 acumula cinco días de atraso al 09/10.
 
-**Tabla 3. Compromisos y situación al corte**
+**Tabla 4. Compromisos y situación al corte**
 
 | Hito y fecha original | Estado real y efecto |
 | --- | --- |
@@ -74,9 +109,9 @@ La Tabla 3 contrasta los hitos; O1 acumula cinco días de atraso al 09/10.
 | O3: planificación; 01/11 | Pendiente. Se conserva inicio del Sprint 3 el 19/10 como objetivo del equipo, condicionado a resolver las dependencias. |
 | O4: ventas y reportes; 17/11 aproximado | Pendiente. No hay evidencia de implementación; se conserva el alcance del Acta. |
 
-Arrastre detectado: 05/10, 12:55. Samuel comunicó el 08/10 organización apresurada y acuerdo con Julian de mayor dedicación al Sprint 2. La Tabla 4 propone recuperar O1 el 09/10 e iniciar el Sprint 3 el 19/10; faltan confirmar horas y responsables pendientes.
+Arrastre detectado: 05/10, 12:55. Samuel comunicó el 08/10 organización apresurada y acuerdo con Julian de mayor dedicación al Sprint 2. La Tabla 5 propone recuperar O1 el 09/10 e iniciar el Sprint 3 el 19/10; faltan confirmar horas y responsables pendientes.
 
-**Tabla 4. Secuencia propuesta de recuperación**
+**Tabla 5. Secuencia propuesta de recuperación**
 
 | Orden y meta | Responsable y evidencia necesaria |
 | --- | --- |
@@ -87,9 +122,9 @@ Arrastre detectado: 05/10, 12:55. Samuel comunicó el 08/10 organización apresu
 
 ## Product backlog estimado
 
-La unidad es el punto de historia (story point, SP). Las 12 historias suman 60 SP, estimaciones relativas que no equivalen a horas ni a porcentaje terminado. La Tabla 5 prioriza inventario y recetas por las dependencias del cálculo.
+La unidad es el punto de historia (story point, SP). Las 12 historias suman 60 SP, estimaciones relativas que no equivalen a horas ni a porcentaje terminado. La Tabla 6 prioriza inventario y recetas por las dependencias del cálculo.
 
-**Tabla 5. Backlog completo en orden de trabajo**
+**Tabla 6. Backlog completo en orden de trabajo**
 
 | Historia | Resultado | SP | Sprint | Estado |
 | --- | --- | --- | --- | --- |
@@ -108,15 +143,15 @@ La unidad es el punto de historia (story point, SP). Las 12 historias suman 60 S
 
 Nota. HU significa historia de usuario. HU04, HU08 y HU09 tienen prioridad alta; las demás, media. La prioridad de Jira y el orden de trabajo son campos distintos.
 
-Ninguna de las 12 historias aparece Finalizada. Las tareas D-01, D-02 y la revisión cruzada se controlan aparte y no aumentan automáticamente los 60 SP del backlog. Se corrige el total de 65 SP del borrador anterior.
+Ninguna de las 12 historias aparece Finalizada. Las tareas D-01, D-02 y la revisión cruzada se controlan aparte y no aumentan automáticamente los 60 SP del backlog. 
 
 HU04-HU06 dependen de inventario y recetas. HU03 debe cumplir la definición de preparado (Definition of Ready, DoR). HU02/HU03 no tienen persona asignada en Jira; confirmar responsable.
 
 ## Tablero y seguimiento del trabajo
 
-Fuente: [tablero SCRUM en Jira](https://sistema-inventario-produccion.atlassian.net/jira/software/projects/SCRUM/boards/1). Sprint 1 cerrado el 05/10 a las 12:54:40 sin cerrar HU01-HU03; Sprint 2 activo del 05/10 al 18/10. La Tabla 6 resume las políticas publicadas en [SCRUM-24](https://sistema-inventario-produccion.atlassian.net/browse/SCRUM-24).
+Fuente: [tablero SCRUM en Jira](https://sistema-inventario-produccion.atlassian.net/jira/software/projects/SCRUM/boards/1). Sprint 1 cerrado el 05/10 a las 12:54:40 sin cerrar HU01-HU03; Sprint 2 activo del 05/10 al 18/10. La Tabla 7 resume las políticas publicadas en [SCRUM-24](https://sistema-inventario-produccion.atlassian.net/browse/SCRUM-24).
 
-**Tabla 6. Condiciones para avanzar en el tablero**
+**Tabla 7. Condiciones para avanzar en el tablero**
 
 | Columna | Política operativa |
 | --- | --- |
@@ -135,11 +170,29 @@ Samuel confirmó semana 1 desde el 04/08/2026: semana 6, 08-14/09; semana 11, 13
 
 Hasta el corte: seis ítems con 10 transiciones reales el 04-05/10, semana 9. HU01-HU03 aportan siete; SCRUM-2/3 son ejemplos y SCRUM-5 una épica. Se excluyen ediciones y comentarios. SCRUM-24 no agrega transiciones; semana 11 aún futura.
 
+## Atributos de calidad y condiciones de evaluación
+
+La Tabla 8 integra los cinco atributos con característica, métrica e instrumento, umbral y contexto. Conserva fuentes y alcance del Taller 5; las metas no prueban cumplimiento (Caicedo Ramirez & Riveros Martinez, 2026c).
+
+**Tabla 8. Especificaciones de calidad del proyecto**
+
+| Característica | Métrica e instrumento | Umbral y origen | Contexto |
+| --- | --- | --- | --- |
+| ACQ-01: fiabilidad | Diferencias entre saldo/historial esperado y registrado; consultas SQL y pruebas de integración. | 0 diferencias; RQ01 y HU02, CA6. | Base de prueba: fallo al guardar, migración y dos salidas de 80 con saldo 100. |
+| ACQ-02: seguridad | Registros indebidos aceptados; solicitudes HTTP y consulta de la base de datos. | 0 registros indebidos; RQ02 y HU01, CA6-7. | Altas, edición, borrado y movimientos; sin autorización o token válido del formulario. |
+| ACQ-03: eficiencia de desempeño | Percentil 95 (p95) del tiempo de recepción de la página; script Python. | p95 ≤ 1 s; RQ03. Nielsen (1993), citado en el Taller 5. | 1000 materias, sin historial, un cliente; cinco consultas de calentamiento y 100 mediciones por página. |
+| ACQ-04: capacidad de interacción | Campos etiquetados/12 y errores que identifican el dato/4, en porcentaje; lista manual. | 100 % en ambos controles; RQ04 y WCAG 3.3.1/3.3.2 citadas en el Taller 5. | 4 campos por formulario: alta, edición y movimientos; errores de nombre, unidad, cantidad y saldo. |
+| ACQ-05: compatibilidad | Casos con cantidad/unidad coincidentes/3, en porcentaje; integración y consulta CP-05 a CP-07. | 100 %; misma unidad y hasta dos decimales. RQ05 y HU02, CA4/CA7. | Formulario, PHP y base de inventario/movimientos; no incluye recetas ni módulos futuros. |
+
+Nota. Umbrales del Taller 5; aceptación y validación conjunta pendientes. La consolidación no incorpora mediciones nuevas.
+
+Julian revisa datos y acceso; Samuel, formularios y desempeño; Diana, comprensión. Fallar criterios incumple DoD 1; una migración no reproducible afecta DoD 5. La frecuencia sigue el plan original.
+
 ## Calidad y resultados medidos
 
-El 07/10: 15 casos, 14 ejecutados, 12 aprobados, dos fallidos y uno pendiente. CP-13/14 fallaron por seguridad; CP-15 espera recetas. La Tabla 7 conserva esa línea base (Caicedo Ramirez & Riveros Martinez, 2026c).
+El 07/10: 15 casos, 14 ejecutados, 12 aprobados, dos fallidos y uno pendiente. CP-13/14 fallaron por seguridad; CP-15 espera recetas. La Tabla 9 conserva esa línea base (Caicedo Ramirez & Riveros Martinez, 2026c).
 
-**Tabla 7. Requisitos del Acta y evidencia del Taller 5**
+**Tabla 9. Requisitos del Acta y evidencia del Taller 5**
 
 | Requisito | Resultado y alcance |
 | --- | --- |
@@ -149,9 +202,9 @@ El 07/10: 15 casos, 14 ejecutados, 12 aprobados, dos fallidos y uno pendiente. C
 | RQ04: interacción | Controles de 12 campos visibles y cuatro escenarios de error documentados; la comprensión por Diana no está aceptada. |
 | RQ05: compatibilidad | Intercambio de cantidad/unidad entre formulario, PHP y base de inventario. Alcance parcial; no incluye módulos futuros. |
 
-Tabla 8: métricas medidas; metas propuestas pendientes de validación.
+La Tabla 10 registra métricas medidas; las metas propuestas siguen pendientes de validación.
 
-**Tabla 8. Indicadores del 7 de octubre de 2026**
+**Tabla 10. Indicadores del 7 de octubre de 2026**
 
 | Métrica | Valor medido y decisión |
 | --- | --- |
@@ -163,9 +216,9 @@ PHPStan 2.3.0, nivel 5: 11 archivos analizados, 11 avisos en siete. Nueve sobre 
 
 ## Evidencias del repositorio
 
-Repositorio: [https://github.com/Samge34c/sistema-inventario-produccion](https://github.com/Samge34c/sistema-inventario-produccion). El [índice de documentación](https://github.com/Samge34c/sistema-inventario-produccion/blob/docs/avance-consolidado/docs/README.md) reúne fuentes y ramas. La Tabla 9 identifica tres commits verificables (Samge34c, 2026).
+Repositorio: [https://github.com/Samge34c/sistema-inventario-produccion](https://github.com/Samge34c/sistema-inventario-produccion). El [índice de documentación](https://github.com/Samge34c/sistema-inventario-produccion/blob/docs/avance-consolidado/docs/README.md) reúne fuentes y ramas. La Tabla 11 identifica tres commits verificables (Samge34c, 2026).
 
-**Tabla 9. Tres commits representativos**
+**Tabla 11. Tres commits representativos**
 
 | Hash y fecha Bogotá | Cambio comprobado |
 | --- | --- |
@@ -175,9 +228,9 @@ Repositorio: [https://github.com/Samge34c/sistema-inventario-produccion](https:/
 
 Nota. Los dos primeros corresponden a semana 9 y el tercero a semana 10, según el inicio académico confirmado por el equipo.
 
-La Tabla 10 distingue publicación, pruebas y aprobación; las propuestas siguen sin integrar.
+La Tabla 12 distingue publicación, pruebas y aprobación; las propuestas siguen sin integrar.
 
-**Tabla 10. Propuestas y estado de revisión**
+**Tabla 12. Propuestas y estado de revisión**
 
 | PR | Contenido y situación |
 | --- | --- |
@@ -193,7 +246,7 @@ D-02: siete pruebas HTTP/SQL correctas el 08/10 a las 23:46 sobre 5e5c333. CP-14
 
 Julian Caicedo publicó el 09/10 el [reporte de ejecución de HU02](https://github.com/Samge34c/sistema-inventario-produccion/blob/3d96f4afb1640b66f3a8ef08c4a543e5e432490b/docs/pruebas/evidencias/julian-hu02-2026-10-09.md) y sus salidas en PR #8 (Caicedo Ramirez, 2026). La publicación identifica responsable, fecha, versión probada y herramientas; permite registrar su aporte sin atribuirle las ejecuciones anteriores del asistente.
 
-**Tabla 11. Evidencia publicada por Julian**
+**Tabla 13. Evidencia publicada por Julian**
 
 | Dato | Registro y alcance |
 | --- | --- |
@@ -204,15 +257,15 @@ Julian Caicedo publicó el 09/10 el [reporte de ejecución de HU02](https://gith
 | Entorno | Según el reporte: base temporal prueba_hu02_http y aplicación aislada en localhost:8001; sin utilizar la base habitual. |
 | Comportamientos | Entradas, salidas, pendientes, cantidades inválidas, token de seguridad, bloqueo de GET, edición del saldo y protección del historial. |
 
-Las 42 y 15 comprobaciones pertenecen a dos conjuntos técnicos; no equivalen a 57 casos del plan. Los 15 casos del Taller 5, sus dos fallos históricos y CP-15 pendiente se conservan. La Tabla 11 resume la nueva evidencia; su enlace quedó registrado en SCRUM-23.
+Las 42 y 15 comprobaciones pertenecen a dos conjuntos técnicos; no equivalen a 57 casos del plan. Los 15 casos del Taller 5, sus dos fallos históricos y CP-15 pendiente se conservan. La Tabla 13 resume la nueva evidencia; su enlace quedó registrado en SCRUM-23.
 
 La protección frente a falsificación de solicitudes entre sitios (CSRF) probada en movimientos no certifica la autorización de usuarios ni corrige por sí misma HU01. D-01 y D-02 siguen abiertos. La publicación de resultados tampoco reemplaza una revisión formal del PR o el cumplimiento de todos los criterios de aceptación.
 
 ## Riesgos y respuestas
 
-La Tabla 12 revisa los seis riesgos del Acta y conserva su probabilidad (P) e impacto (I) originales. Se distingue la respuesta prevista de lo ejecutado; la ausencia de evidencia de materialización no permite cerrar un riesgo (Caicedo Ramirez & Riveros Martinez, 2026a).
+La Tabla 14 revisa los seis riesgos del Acta y conserva su probabilidad (P) e impacto (I) originales. Se distingue la respuesta prevista de lo ejecutado; la ausencia de evidencia de materialización no permite cerrar un riesgo (Caicedo Ramirez & Riveros Martinez, 2026a).
 
-**Tabla 12. Situación de los riesgos originales**
+**Tabla 14. Situación de los riesgos originales**
 
 | Riesgo y responsable | Materialización, respuesta y vigencia |
 | --- | --- |
@@ -231,9 +284,9 @@ D-01/D-02, detectados el 07/10, siguen abiertos. La red de distribución de cont
 
 ## Responsabilidades y uso de inteligencia artificial
 
-Se conservan los roles del Acta hasta el Sprint 2, con rotación prevista el 19/10. La Tabla 13 identifica actividades y evidencia de cierre; una asignación no demuestra ejecución.
+Se conservan los roles del Acta hasta el Sprint 2, con rotación prevista el 19/10. La Tabla 15 identifica actividades y evidencia de cierre; una asignación no demuestra ejecución.
 
-**Tabla 13. Trabajo inmediato y evidencia de cierre**
+**Tabla 15. Trabajo inmediato y evidencia de cierre**
 
 | Responsable | Actividad y evidencia |
 | --- | --- |
@@ -247,7 +300,7 @@ Se conservan los roles del Acta hasta el Sprint 2, con rotación prevista el 19/
 
 Se utilizó ChatGPT (Codex) para leer las fuentes, consultar GitHub/Jira, extraer historial, apoyar pruebas y correcciones, y organizar y redactar el consolidado bajo autorización de Samuel. La comprobación técnica de SCRUM-22 fue ejecutada por el asistente en un entorno aislado y no constituye ejecución personal de Julian.
 
-Julian registró revisión documental el 07/10 y publicó su ejecución independiente de HU02 el 09/10: 42 comprobaciones de integración y 15 HTTP, con las limitaciones descritas en la Tabla 11. Samuel aportó las fuentes, confirmó el calendario y comunicó el acuerdo de recuperación. La revisión formal, la interpretación conjunta de hallazgos y la aceptación del negocio siguen pendientes.
+Julian registró revisión documental el 07/10 y publicó su ejecución independiente de HU02 el 09/10: 42 comprobaciones de integración y 15 HTTP, con las limitaciones descritas en la Tabla 13. Samuel aportó las fuentes, confirmó el calendario y comunicó el acuerdo de recuperación. La revisión formal, la interpretación conjunta de hallazgos y la aceptación del negocio siguen pendientes.
 
 ## Referencias
 
