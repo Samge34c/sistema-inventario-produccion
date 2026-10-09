@@ -109,16 +109,18 @@ La Tabla 4 contrasta los hitos; O1 acumula cinco días de atraso al 09/10.
 | O3: planificación; 01/11 | Pendiente. Se conserva inicio del Sprint 3 el 19/10 como objetivo del equipo, condicionado a resolver las dependencias. |
 | O4: ventas y reportes; 17/11 aproximado | Pendiente. No hay evidencia de implementación; se conserva el alcance del Acta. |
 
-Arrastre detectado: 05/10, 12:55. Samuel comunicó el 08/10 organización apresurada y acuerdo con Julian de mayor dedicación al Sprint 2. La Tabla 5 propone recuperar O1 el 09/10 e iniciar el Sprint 3 el 19/10; faltan confirmar horas y responsables pendientes.
+Arrastre detectado: 05/10, 12:55. Samuel comunicó el 08/10 organización apresurada y acuerdo con Julian de mayor dedicación al Sprint 2. La Tabla 5 conserva la meta de recuperación de O1 el 09/10 e inicio del Sprint 3 el 19/10; ambas requieren verificar resultados y capacidad.
 
 **Tabla 5. Secuencia propuesta de recuperación**
 
 | Orden y meta | Responsable y evidencia necesaria |
 | --- | --- |
-| 1. HU01, meta 09/10 | Julian: D-01 y revisión de PR #11. Samuel: D-02 propuesta y revisión cruzada. Cierre: casos de seguridad aprobados e integración autorizada. |
+| 1. HU01, meta 09/10 | Julian: resolver D-01 y revisar PR #11. Samuel: revisión cruzada. La meta 09/10 no acredita cierre; el acceso básico propuesto requiere acordar esfuerzo y probarse antes de integrar. |
 | 2. HU02, meta 09/10 | Julian: contraste y revisión pendientes. Samuel: integrar tras aprobación y capacidad disponible. Conservar versión y resultados publicados. |
 | 3. HU03, meta 09/10 | Responsable por confirmar: preparar criterios, implementar recetas y ejecutar CP-15. No iniciar otra tarjeta excediendo el límite. |
 | 4. HU04-HU06, meta 18/10 | Equipo: cerrar dependencias, acordar horas adicionales y registrar avance. Confirmar inicio del Sprint 3 el 19/10 según resultados. |
+
+RQ02 y D-01 requieren control de acceso. Se propone un login básico para el Sprint 2; implementación y esfuerzo por acordar. La Tabla 15 detalla las revisiones propuestas.
 
 ## Product backlog estimado
 
@@ -149,7 +151,7 @@ HU04-HU06 dependen de inventario y recetas. HU03 debe cumplir la definición de 
 
 ## Tablero y seguimiento del trabajo
 
-Fuente: [tablero SCRUM en Jira](https://sistema-inventario-produccion.atlassian.net/jira/software/projects/SCRUM/boards/1). Sprint 1 cerrado el 05/10 a las 12:54:40 sin cerrar HU01-HU03; Sprint 2 activo del 05/10 al 18/10. La Tabla 7 resume las políticas publicadas en [SCRUM-24](https://sistema-inventario-produccion.atlassian.net/browse/SCRUM-24).
+Fuente: [tablero SCRUM en Jira](https://sistema-inventario-produccion.atlassian.net/jira/software/projects/SCRUM/boards/1). El periodo del Sprint 1 se cerró en Jira el 05/10; su trabajo quedó incompleto. HU01-HU03 pasaron al Sprint 2, activo del 05/10 al 18/10. La Tabla 7 resume las políticas publicadas en [SCRUM-24](https://sistema-inventario-produccion.atlassian.net/browse/SCRUM-24).
 
 **Tabla 7. Condiciones para avanzar en el tablero**
 
@@ -208,7 +210,7 @@ La Tabla 10 registra métricas medidas; las metas propuestas siguen pendientes d
 
 | Métrica | Valor medido y decisión |
 | --- | --- |
-| Cobertura de líneas | 113/117 = 96,58 %, solo en functions.php y movimientos-funciones.php. Meta propuesta 90 %; no representa todo el producto. |
+| Cobertura de líneas | 113/117 = 96,58 %, solo en funciones.php y movimientos-funciones.php. Meta propuesta 90 %; no representa todo el producto. |
 | Complejidad ciclomática (CCN2) | Máximo 13; otra función 11. Meta propuesta 10; ambas requieren revisión. Se conserva el resultado medido. |
 | Densidad de defectos | Dos defectos abiertos / dos HU probadas = 1,00 defecto/HU. Meta 0 antes de liberar el producto. |
 
@@ -284,23 +286,24 @@ D-01/D-02, detectados el 07/10, siguen abiertos. La red de distribución de cont
 
 ## Responsabilidades y uso de inteligencia artificial
 
-Se conservan los roles del Acta hasta el Sprint 2, con rotación prevista el 19/10. La Tabla 15 identifica actividades y evidencia de cierre; una asignación no demuestra ejecución.
+La Tabla 15 propone revisiones dentro del alcance vigente. Acceso pendiente y protección parcial están comprobados; los casos futuros son preventivos. El equipo debe acordar esfuerzo y responsables de cada historia.
 
-**Tabla 15. Trabajo inmediato y evidencia de cierre**
+**Tabla 15. Prioridades propuestas y comprobación de cierre**
 
 | Responsable | Actividad y evidencia |
 | --- | --- |
-| Julian | HU02: reporte publicado el 09/10. SCRUM-23 sigue parcial: contrastar el resto del Taller 5, revisar avisos de PHPStan, umbrales propuestos y PR pendientes. |
-| Julian | SCRUM-21: corregir D-01, probar acceso permitido/rechazado y solicitar revisión de Samuel. Revisar PR #11 de D-02. |
-| Samuel | Consolidado actualizado y enlaces registrados en SCRUM-23. SCRUM-22 propuesta y probada con asistencia; falta revisión de Julian e integración posterior. |
-| Ambos | Confirmar responsable de HU03 y horas adicionales; registrar resultados y revisar cierre real de O1. La meta 09/10 no está acreditada. |
-| Samuel y Julian | Confirmar adopción de WIP 1 + 1; comprobar entrada del docente al tablero y repositorio desde otra sesión. Ensayar cinco minutos entre ambos. |
+| Julian; Samuel revisa | Sprint 2: SCRUM-21, acceso básico y cierre de sesión; rechazar acciones sin autorización. Revisar PR #11: cubre alta, no edición ni borrado; extender y probar CSRF en estas acciones. |
+| Equipo; asignar HU03 | Sprint 2, HU03-HU06: acordar unidades y cantidades válidas; impedir borrados que eliminen ingredientes de recetas por cascada. Probar stock cero, redondeo y pendientes separados del saldo actual. |
+| Equipo; Sprint 3 | HU09: verificar descuento completo de insumos, rechazo sin cambios si falta stock y ausencia de consumo duplicado al reenviar el registro. Son casos por preparar y ejecutar. |
+| Equipo; Sprint 4 | HU10-HU12: acordar límites diarios/semanales y referencia horaria del negocio. Verificar sumas y hora pico por unidades vendidas; no hay resultados medidos aún. |
+| Julian | SCRUM-23: completar contraste del Taller 5, revisar 11 avisos de PHPStan, umbrales y PR pendientes. La reproducción de HU02 publicada no sustituye aprobación formal. |
+| Ambos | Samuel mantiene consolidado y revisión cruzada. Confirmar horas adicionales, responsable de HU03, cierre real de O1, adopción de WIP y acceso docente; ensayar la presentación. |
 
 ### Declaración de uso de inteligencia artificial
 
-Se utilizó ChatGPT (Codex) para leer las fuentes, consultar GitHub/Jira, extraer historial, apoyar pruebas y correcciones, y organizar y redactar el consolidado bajo autorización de Samuel. La comprobación técnica de SCRUM-22 fue ejecutada por el asistente en un entorno aislado y no constituye ejecución personal de Julian.
+ChatGPT (Codex) apoyó consultas, pruebas, correcciones y redacción bajo autorización de Samuel. Las siete pruebas de SCRUM-22 fueron ejecutadas por el asistente en un entorno aislado. La revisión de código del 09/10 no agregó resultados de ejecución.
 
-Julian registró revisión documental el 07/10 y publicó su ejecución independiente de HU02 el 09/10: 42 comprobaciones de integración y 15 HTTP, con las limitaciones descritas en la Tabla 13. Samuel aportó las fuentes, confirmó el calendario y comunicó el acuerdo de recuperación. La revisión formal, la interpretación conjunta de hallazgos y la aceptación del negocio siguen pendientes.
+Julian registró revisión documental el 07/10 y publicó HU02 el 09/10: 42 comprobaciones de integración y 15 HTTP (Tabla 13). Samuel aportó fuentes, calendario y acuerdo de recuperación. Revisión formal, validación conjunta y aceptación del negocio siguen pendientes.
 
 ## Referencias
 
