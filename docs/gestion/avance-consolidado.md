@@ -5,17 +5,15 @@ Corte: 9 de octubre de 2026, America/Bogota.
 Avance del proyecto de inventario,
 recetas y planificación de producción
 
-Julian Camilo Caicedo Ramirez y
-Samuel Esteban Riveros Martinez
+Julian Camilo Caicedo Ramirez y Samuel Esteban Riveros Martinez
 
-Ingeniería de Sistemas
-Universidad Santo Tomás
+Ingeniería de Sistemas, Universidad Santo Tomás
 
 Gerencia de Software
 
 Stefany Gomez Riveros
 
-9 de octubre de 2026
+Fecha de entrega: pendiente de confirmar
 
 ## Tabla de contenido
 
@@ -32,7 +30,7 @@ Stefany Gomez Riveros
 - Riesgos y respuestas (p. 13 del PDF)
 - Responsabilidades y uso de inteligencia artificial (p. 14 del PDF)
 - Referencias (p. 15 del PDF)
-Fecha de corte: 9 de octubre de 2026, hora de Bogotá. Se distinguen resultados publicados, compromisos de recuperación y actividades pendientes. El periodo académico se presenta hasta la semana 10; la semana 11 aún no ha transcurrido.
+Corte histórico: 9 de octubre de 2026, Bogotá; no es la fecha de entrega. Sesión 21, plazo, nombre del archivo y corte final: pendientes de confirmar. El conteo publicado llega a semana 10; semana 11 sin cubrir.
 
 ## Consolidación de los talleres
 
@@ -66,7 +64,7 @@ La Tabla 2 resume las reglas adoptadas el 30/09 y su aplicación al trabajo actu
 | --- | --- |
 | Tecnología | PHP/PDO, MySQL, HTML, CSS/Bootstrap y JavaScript; Git/GitHub y Jira. Bootstrap es el framework de interfaz; no se adoptó un framework backend PHP. |
 | Estilo y nombres | Dominio y documentación en español. Variables y funciones: camelCase; clases: PascalCase; constantes: MAYUSCULAS_CON_GUION_BAJO; páginas: kebab-case. Términos externos conservan su idioma. |
-| Guías y formato | PSR-12 para PHP y JavaScript Standard Style como bases. Prettier publicado; PHP CS Fixer propuesto en PR #9. PHPStan realiza análisis estático. |
+| Guías y formato | PSR-12 para PHP y JavaScript Standard Style. Prettier publicado; PHP CS Fixer propuesto en PR #9. PHPStan no figura en el Taller 4: su uso posterior está documentado en el Taller 5. Fecha y motivo del acuerdo: pendientes de confirmar. |
 | Commits | tipo(alcance): descripción en español, con verbo en imperativo y un cambio lógico. Usar feat, fix, docs, refactor, test, style o chore según el cambio. |
 | Ramas | main conserva versiones estables; develop integra trabajo revisado. Ramas feat/<hu>-<nombre>, fix/<nombre> y docs/<nombre>, creadas desde develop. |
 | Preparación | Definición de preparado (Definition of Ready, DoR): historia, criterios, dependencias, estimación, sprint, flujo si aplica y caso con resultado esperado. |
@@ -78,49 +76,47 @@ Diana Marcela Caicedo, propietaria e interlocutora, debe validar los roles propu
 
 ## Control de cambios
 
-La Tabla 3 distingue cambios, incumplimientos y publicaciones. Los criterios de aceptación (CA) detallados el 07/10 no se atribuyen a una fecha anterior. Las decisiones comunicadas por Samuel se separan de la ejecución técnica asistida.
+La Tabla 3 separa hechos y decisiones pendientes. CA: criterio de aceptación. Fechas de 2026, Bogotá; versiones radicadas: pendientes de confirmar.
 
-**Tabla 3. Registro de cambios y seguimiento**
+**Tabla 3. Control de cambios frente a los talleres**
 
-| Origen y tipo | Fecha Bogotá | Cambio, motivo y decisión |
-| --- | --- | --- |
-| Acta: desviación | 05/10, 12:55 | HU01-HU03 pasan al Sprint 2 al quedar O1 abierto. Samuel registra el arrastre; plazo original: 04/10. |
-| Estándares: incumplimiento NC-01 | 05/10 | HU01 integrada sin revisión previa. Samuel registra la excepción; Julian debe revisar. No cambia la regla. |
-| Estándares: aplicación | 30/09 y 05/10 | Prettier publicado y PHP CS Fixer propuesto en PR #9. Preparación de Samuel; revisión de Julian pendiente. |
-| Taller 5: publicación | 07/10 | Pruebas y métricas en PR #10, con apoyo de Codex autorizado por Samuel. No cambia el alcance del Acta. |
-| Calidad: refinamiento CA4-7 | 07/10, 21:30 | Validaciones y seguridad detalladas en Jira, por autorización de Samuel. No consta aceptación de Diana. |
-| Acta: recuperación propuesta | 08/10 | Samuel comunica acuerdo con Julian: meta 09/10 y más dedicación al Sprint 2; horas sin cuantificar. |
-| Calidad: corrección D-02 | 08/10, 23:46 | Propuesta autorizada por Samuel: rechazo de solicitudes sin token válido. Siete pruebas correctas; PR #11 sin integrar. |
-| Tablero: distribución de límites | 09/10 | Samuel configura máximo uno En curso y uno En revisión; políticas en SCRUM-24. Confirmación de Julian pendiente. |
-| Calidad: evidencia independiente | 09/10 | Julian publica reporte HU02: 42 comprobaciones de integración y 15 HTTP correctas. No cierra D-01/D-02 ni sustituye aprobación. |
+| Qué cambió | Fecha | Por qué | Quién lo decidió |
+| --- | --- | --- | --- |
+| Acta: HU01-HU03 pasaron al Sprint 2. | 05/10, 12:55 | O1 pendiente al 04/10; causa pendiente de confirmar. | Samuel registró; decisión no documentada. |
+| T4: NC-01, HU01 integrada sin revisión. | 05/10 | Causa y decisión correctiva: pendientes de confirmar. | Decisión no documentada. |
+| T4: Prettier publicado; PHP CS Fixer propuesto, PR #9. | 30/09 y 05/10 | Formato previsto; configuración posterior. Motivo: pendiente de confirmar. | Samuel preparó; acuerdo pendiente de confirmar. |
+| T5: pruebas y métricas publicadas, PR #10. | 07/10 | Diferencias frente a lo radicado: pendiente de confirmar. | Samuel autorizó apoyo; cambios pendientes de confirmar. |
+| CA4-7 en Jira después de las comprobaciones. | 07/10, 21:30 | HU01: validaciones/RQ02; HU02: reglas del 05/10. Motivo pendiente de confirmar. | Samuel autorizó; aceptación de Diana pendiente. |
+| Acta: meta 09/10 y mayor dedicación comunicadas. | 08/10 | Responder al arrastre; horas y resultado pendientes de confirmar. | Samuel comunicó acuerdo con Julian. |
+| D-02: corrección propuesta, siete pruebas; PR #11. | 08/10, 23:46 | Evitar altas sin token válido del formulario. | Samuel autorizó; ejecutó el asistente. |
+| Tablero: máximo 1 + 1; SCRUM-24. | 09/10 | WIP 1 + 1; motivo pendiente de confirmar. | Samuel configuró; acuerdo de Julian pendiente de confirmar. |
+| T5: reporte independiente HU02 publicado. | 09/10 | Actualiza reproducción HU02 pendiente; resto de revisión sin completar. | Julian publicó; aprobación formal pendiente. |
+| PHPStan: uso posterior a T4, documentado en T5. | 07/10; (reporte) | Acuerdo: fecha y motivo pendientes de confirmar. | Decisión no documentada. |
 
-NC-01 no conserva hora inicial. Los estándares aportados coinciden con develop.
+Nota. Decisión no documentada: decisión original no documentada; confirmación pendiente. Las fechas de reporte no acreditan adopción.
 
 ## Estado real frente al acta
 
-La Tabla 4 contrasta los hitos; O1 acumula cinco días de atraso al 09/10.
+La Tabla 4 responde las cuatro preguntas de la guía. Conserva el corte del 09/10; el resultado final de la meta de ese día está pendiente de confirmar.
 
-**Tabla 4. Compromisos y situación al corte**
+**Tabla 4. Contraste escrito con el Acta**
 
-| Hito y fecha original | Estado real y efecto |
+| Pregunta | Respuesta al corte histórico |
 | --- | --- |
-| O1: inventario y recetas; 04/10 | Abierto: HU01 con defectos; HU02 probada según reporte de Julian, en rama sin aprobación; HU03 sin implementación publicada. Meta 09/10 aún no acreditada. |
-| O2: cálculo y proyección; 18/10 | Pendiente. HU04-HU06 necesitan inventario y recetas. El arrastre reduce la capacidad del Sprint 2. |
-| O3: planificación; 01/11 | Pendiente. Se conserva inicio del Sprint 3 el 19/10 como objetivo del equipo, condicionado a resolver las dependencias. |
-| O4: ventas y reportes; 17/11 aproximado | Pendiente. No hay evidencia de implementación; se conserva el alcance del Acta. |
+| Qué se cumplió como estaba previsto | Se conservan las 12 HU y las tecnologías del Acta. Hay inventario integrado y movimientos publicados con pruebas; esto no acredita el cierre de O1. |
+| Qué se desvió, cuánto y por qué | O1 venció el 04/10 y seguía abierto al 09/10: cinco días. NC-01 registra HU01 integrada sin revisión el 05/10. Causas concretas y registros originales: pendientes de confirmar. |
+| Qué decidió el equipo | Jira registra arrastre el 05/10, 12:55; decisión original no documentada; confirmación pendiente. Samuel comunicó más dedicación el 08/10; horas pendientes de confirmar. No consta el registro original del acuerdo. |
+| Qué hitos pasaron y cuáles vienen | Venció O1 el 04/10; siguen O2 (18/10), O3 (01/11) y O4 (17/11 aproximado). La meta del 09/10 queda como registro; resultado final pendiente de confirmar. |
 
-Arrastre detectado: 05/10, 12:55. Samuel comunicó el 08/10 organización apresurada y acuerdo con Julian de mayor dedicación al Sprint 2. La Tabla 5 conserva la meta de recuperación de O1 el 09/10 e inicio del Sprint 3 el 19/10; ambas requieren verificar resultados y capacidad.
+La Tabla 5 es una propuesta sujeta a capacidad real; no fija nuevas fechas de cumplimiento.
 
-**Tabla 5. Secuencia propuesta de recuperación**
+**Tabla 5. Propuesta de recuperación sujeta a capacidad real**
 
-| Orden y meta | Responsable y evidencia necesaria |
+| Trabajo | Responsable y condición de cierre |
 | --- | --- |
-| 1. HU01, meta 09/10 | Julian: resolver D-01 y revisar PR #11. Samuel: revisión cruzada. La meta 09/10 no acredita cierre; el acceso básico propuesto requiere acordar esfuerzo y probarse antes de integrar. |
-| 2. HU02, meta 09/10 | Julian: contraste y revisión pendientes. Samuel: integrar tras aprobación y capacidad disponible. Conservar versión y resultados publicados. |
-| 3. HU03, meta 09/10 | Responsable por confirmar: preparar criterios, implementar recetas y ejecutar CP-15. No iniciar otra tarjeta excediendo el límite. |
-| 4. HU04-HU06, meta 18/10 | Equipo: cerrar dependencias, acordar horas adicionales y registrar avance. Confirmar inicio del Sprint 3 el 19/10 según resultados. |
-
-RQ02 y D-01 requieren control de acceso. Se propone un login básico para el Sprint 2; implementación y esfuerzo por acordar. La Tabla 15 detalla las revisiones propuestas.
+| HU01 y HU02 | Julian atiende D-01 y revisa PR #11; Samuel hace revisión cruzada. Incorporar cada cambio después de la revisión y aprobación del otro integrante. |
+| HU03: recetas | Responsable y horas adicionales: pendiente de confirmar. Preparar criterios, implementar y ejecutar CP-15. Nueva fecha: pendiente de confirmar. |
+| HU04-HU06 | Dependen de inventario y recetas. Hito original: 18/10; viabilidad sujeta a capacidad real. Inicio del Sprint 3 previsto en el Acta: 19/10. |
 
 ## Product backlog estimado
 
@@ -145,9 +141,7 @@ La unidad es el punto de historia (story point, SP). Las 12 historias suman 60 S
 
 Nota. HU significa historia de usuario. HU04, HU08 y HU09 tienen prioridad alta; las demás, media. La prioridad de Jira y el orden de trabajo son campos distintos.
 
-Ninguna de las 12 historias aparece Finalizada. Las tareas D-01, D-02 y la revisión cruzada se controlan aparte y no aumentan automáticamente los 60 SP del backlog. 
-
-HU04-HU06 dependen de inventario y recetas. HU03 debe cumplir la definición de preparado (Definition of Ready, DoR). HU02/HU03 no tienen persona asignada en Jira; confirmar responsable.
+Al corte histórico, ninguna HU aparece Finalizada. D-01/D-02 no aumentan automáticamente los 60 SP. HU02/HU03 no tienen persona asignada en Jira. Responsable de HU03, horas adicionales y nueva fecha: pendientes de confirmar; recuperación sujeta a capacidad real (Tabla 5).
 
 ## Tablero y seguimiento del trabajo
 
@@ -164,13 +158,13 @@ Fuente: [tablero SCRUM en Jira](https://sistema-inventario-produccion.atlassian.
 
 El 09/10 Samuel configuró trabajo en progreso (WIP) de 1 + 1: HU02 En curso y HU01 En revisión. Verificado en Jira; requiere confirmación de Julian. El límite señala exceso, sin bloqueo automático ni aplicación retrospectiva.
 
-Cuenta docente: Invitado. Samuel reportó seleccionar Lector; faltan aceptación, confirmación del permiso y apertura efectiva del tablero.
+Samuel reportó invitación y selección de Lector. Acceso de la profesora probado con cuenta invitada, fecha y resultado: pendientes de confirmar. Este texto no acredita que pueda entrar.
 
 ### Historial comprobado y periodo académico
 
 Samuel confirmó semana 1 desde el 04/08/2026: semana 6, 08-14/09; semana 11, 13-19/10. Referencia del equipo, sin calendario institucional aportado; el corte está en semana 10.
 
-Hasta el corte: seis ítems con 10 transiciones reales el 04-05/10, semana 9. HU01-HU03 aportan siete; SCRUM-2/3 son ejemplos y SCRUM-5 una épica. Se excluyen ediciones y comentarios. SCRUM-24 no agrega transiciones; semana 11 aún futura.
+Historial al 09/10: seis ítems distintos y 10 cambios de estado. Tres HU (SCRUM-9/10/11) aportan siete cambios; dos ejemplos (SCRUM-2/3), dos; una épica (SCRUM-5), uno. Ocurrieron el 04-05/10. Se excluyen ediciones y comentarios. Conteo final de semanas 6-11 y fecha de corte final: pendientes de confirmar.
 
 ## Atributos de calidad y condiciones de evaluación
 
@@ -182,13 +176,13 @@ La Tabla 8 integra los cinco atributos con característica, métrica e instrumen
 | --- | --- | --- | --- |
 | ACQ-01: fiabilidad | Diferencias entre saldo/historial esperado y registrado; consultas SQL y pruebas de integración. | 0 diferencias; RQ01 y HU02, CA6. | Base de prueba: fallo al guardar, migración y dos salidas de 80 con saldo 100. |
 | ACQ-02: seguridad | Registros indebidos aceptados; solicitudes HTTP y consulta de la base de datos. | 0 registros indebidos; RQ02 y HU01, CA6-7. | Altas, edición, borrado y movimientos; sin autorización o token válido del formulario. |
-| ACQ-03: eficiencia de desempeño | Percentil 95 (p95) del tiempo de recepción de la página; script Python. | p95 ≤ 1 s; RQ03. Nielsen (1993), citado en el Taller 5. | 1000 materias, sin historial, un cliente; cinco consultas de calentamiento y 100 mediciones por página. |
+| ACQ-03: eficiencia de desempeño | Percentil 95 (p95): tiempo que no supera el 95 % de consultas; recepción de página con Python. | p95 ≤ 1 s; RQ03. Nielsen (1993), según Taller 5. | 1000 materias, sin historial, un cliente; cinco consultas de calentamiento y 100 mediciones por página. |
 | ACQ-04: capacidad de interacción | Campos etiquetados/12 y errores que identifican el dato/4, en porcentaje; lista manual. | 100 % en ambos controles; RQ04 y WCAG 3.3.1/3.3.2 citadas en el Taller 5. | 4 campos por formulario: alta, edición y movimientos; errores de nombre, unidad, cantidad y saldo. |
 | ACQ-05: compatibilidad | Casos con cantidad/unidad coincidentes/3, en porcentaje; integración y consulta CP-05 a CP-07. | 100 %; misma unidad y hasta dos decimales. RQ05 y HU02, CA4/CA7. | Formulario, PHP y base de inventario/movimientos; no incluye recetas ni módulos futuros. |
 
-Nota. Umbrales del Taller 5; aceptación y validación conjunta pendientes. La consolidación no incorpora mediciones nuevas.
+Nota. Nielsen y WCAG se retoman del Taller 5 (Caicedo Ramirez & Riveros Martinez, 2026c); sin consulta nueva ni mediciones adicionales. Metas y aceptación por validar.
 
-Julian revisa datos y acceso; Samuel, formularios y desempeño; Diana, comprensión. Fallar criterios incumple DoD 1; una migración no reproducible afecta DoD 5. La frecuencia sigue el plan original.
+Responsabilidades previstas: Julian, datos/acceso; Samuel, formularios/desempeño; Diana, comprensión. Fallar criterios incumple DoD 1; migración no reproducible, DoD 5. Frecuencia: plan del Taller 5.
 
 ## Calidad y resultados medidos
 
@@ -204,7 +198,7 @@ El 07/10: 15 casos, 14 ejecutados, 12 aprobados, dos fallidos y uno pendiente. C
 | RQ04: interacción | Controles de 12 campos visibles y cuatro escenarios de error documentados; la comprensión por Diana no está aceptada. |
 | RQ05: compatibilidad | Intercambio de cantidad/unidad entre formulario, PHP y base de inventario. Alcance parcial; no incluye módulos futuros. |
 
-La Tabla 10 registra métricas medidas; las metas propuestas siguen pendientes de validación.
+La Tabla 10 conserva mediciones; las metas deben revisarse y acordarse.
 
 **Tabla 10. Indicadores del 7 de octubre de 2026**
 
@@ -214,7 +208,7 @@ La Tabla 10 registra métricas medidas; las metas propuestas siguen pendientes d
 | Complejidad ciclomática (CCN2) | Máximo 13; otra función 11. Meta propuesta 10; ambas requieren revisión. Se conserva el resultado medido. |
 | Densidad de defectos | Dos defectos abiertos / dos HU probadas = 1,00 defecto/HU. Meta 0 antes de liberar el producto. |
 
-PHPStan 2.3.0, nivel 5: 11 archivos analizados, 11 avisos en siete. Nueve sobre conexión y dos condiciones siempre falsas; requieren inspección, no son defectos confirmados. [Reporte completo de análisis estático](https://github.com/Samge34c/sistema-inventario-produccion/blob/75d97605c2bfb7c76e3041f426060341f552aa93/docs/calidad/taller5/2026-10-07/REPORTE_ANALISIS_ESTATICO.md).
+PHPStan inspecciona código sin ejecutarlo. 2.3.0, nivel 5: 11 archivos, 11 avisos en siete (nueve sobre conexión; dos condiciones siempre falsas). Requieren revisión; no son defectos confirmados. [Reporte estático](https://github.com/Samge34c/sistema-inventario-produccion/blob/75d97605c2bfb7c76e3041f426060341f552aa93/docs/calidad/taller5/2026-10-07/REPORTE_ANALISIS_ESTATICO.md).
 
 ## Evidencias del repositorio
 
@@ -246,7 +240,7 @@ D-02: siete pruebas HTTP/SQL correctas el 08/10 a las 23:46 sobre 5e5c333. CP-14
 
 ## Ejecución independiente de HU02
 
-Julian Caicedo publicó el 09/10 el [reporte de ejecución de HU02](https://github.com/Samge34c/sistema-inventario-produccion/blob/3d96f4afb1640b66f3a8ef08c4a543e5e432490b/docs/pruebas/evidencias/julian-hu02-2026-10-09.md) y sus salidas en PR #8 (Caicedo Ramirez, 2026). La publicación identifica responsable, fecha, versión probada y herramientas; permite registrar su aporte sin atribuirle las ejecuciones anteriores del asistente.
+La Tabla 13 resume el [reporte de ejecución de HU02](https://github.com/Samge34c/sistema-inventario-produccion/blob/3d96f4afb1640b66f3a8ef08c4a543e5e432490b/docs/pruebas/evidencias/julian-hu02-2026-10-09.md) publicado por Julian Caicedo el 09/10 en PR #8 (Caicedo Ramirez, 2026). Conserva responsable, fecha, versión, herramientas y límites de la evidencia; no le atribuye pruebas anteriores del asistente.
 
 **Tabla 13. Evidencia publicada por Julian**
 
@@ -255,34 +249,36 @@ Julian Caicedo publicó el 09/10 el [reporte de ejecución de HU02](https://gith
 | Versión probada | 7a01251325365c8d2ebbead5b89d5732671f1463, rama feat/hu02-movimientos. Los archivos de evidencia se publicaron en 3d96f4a. |
 | Fecha y herramientas | 09/10/2026, Bogotá; hora exacta no conservada. PHP 8.2.12, MariaDB 10.4.32, Node.js v24.21.0. |
 | Integración PHP | 42 comprobaciones correctas reportadas. El archivo conserva el resultado final, sin la salida completa de las 42 comprobaciones. |
-| Pruebas HTTP | 15 comprobaciones correctas y cero fallidas, en transcripción normalizada; script publicado. No se conserva la captura original de terminal. |
+| Pruebas HTTP | 15 comprobaciones correctas y cero fallidas reportadas. Salida de pruebas organizada; no se conserva la captura original. Script publicado. |
 | Entorno | Según el reporte: base temporal prueba_hu02_http y aplicación aislada en localhost:8001; sin utilizar la base habitual. |
 | Comportamientos | Entradas, salidas, pendientes, cantidades inválidas, token de seguridad, bloqueo de GET, edición del saldo y protección del historial. |
 
-Las 42 y 15 comprobaciones pertenecen a dos conjuntos técnicos; no equivalen a 57 casos del plan. Los 15 casos del Taller 5, sus dos fallos históricos y CP-15 pendiente se conservan. La Tabla 13 resume la nueva evidencia; su enlace quedó registrado en SCRUM-23.
+Las 42 y 15 comprobaciones pertenecen a dos conjuntos técnicos; no equivalen a 57 casos del plan. Se conservan los 15 casos del Taller 5, dos fallos históricos y CP-15 pendiente. El enlace del reporte quedó registrado en SCRUM-23.
 
 La protección frente a falsificación de solicitudes entre sitios (CSRF) probada en movimientos no certifica la autorización de usuarios ni corrige por sí misma HU01. D-01 y D-02 siguen abiertos. La publicación de resultados tampoco reemplaza una revisión formal del PR o el cumplimiento de todos los criterios de aceptación.
 
 ## Riesgos y respuestas
 
-La Tabla 14 revisa los seis riesgos del Acta y conserva su probabilidad (P) e impacto (I) originales. Se distingue la respuesta prevista de lo ejecutado; la ausencia de evidencia de materialización no permite cerrar un riesgo (Caicedo Ramirez & Riveros Martinez, 2026a).
+La Tabla 14 conserva los seis riesgos, responsables, probabilidad (P) e impacto (I) del Acta. Distingue respuesta prevista, ejecución y vigencia (Caicedo Ramirez & Riveros Martinez, 2026a).
 
 **Tabla 14. Situación de los riesgos originales**
 
 | Riesgo y responsable | Materialización, respuesta y vigencia |
 | --- | --- |
-| R1: validación tardía; Julian; P media, I alto | Sin materialización causal comprobada. Previsto: consultar y registrar pendientes. Ejecución: no consta aceptación de Diana. Vigente; eficacia no evaluada. |
-| R2: aumento de alcance; Samuel; P media, I alto | Sin ampliación acreditada. Previsto: contrastar solicitudes y diferir extras. Ejecución: se conservan 12 HU. Vigente; no hay solicitudes nuevas para evaluar eficacia. |
-| R3: unidades inconsistentes; Julian; P media, I alto | Sin inconsistencia entre módulos demostrada. Previsto: unidad por materia y casos conocidos. Ejecución: pruebas de inventario/HU02 publicadas. Vigente; eficacia parcial, recetas sin implementar. |
-| R4: menor disponibilidad; Samuel; P alta, I medio | Atraso confirmado, causa por parciales no acreditada. Previsto: dividir tareas y revisar semanalmente. Ejecución: acuerdo de más dedicación comunicado. Vigente; horas y eficacia sin comprobar. |
-| R5: datos insuficientes; Julian; P media, I medio | Sin error atribuible demostrado. Previsto: normales, faltantes, pendientes y horas de venta. Ejecución: datos ficticios y casos de inventario. Vigente; eficacia parcial, faltan datos validados del negocio. |
-| R6: integración tardía; Samuel; P media, I alto | Sin materialización comprobada del flujo completo. Previsto: integrar cada sprint y probar extremo a extremo. Ejecución: HU01 integrada, HU02 en rama. Vigente; eficacia global aún no evaluable. |
+| R1: validación tardía; Julian; P media, I alto | No tenemos evidencia de que haya causado un problema. Consultar y registrar pendientes: previsto. Aceptación de Diana no consta; respuesta sin evaluar. Vigente. |
+| R2: aumento de alcance; Samuel; P media, I alto | Sin ampliación demostrada. Previsto: diferir extras; se conservan 12 HU. Sin solicitudes nuevas para evaluar la respuesta. Vigente. |
+| R3: unidades inconsistentes; Julian; P media, I alto | Sin inconsistencia demostrada. Previsto: unidad por materia y casos conocidos. Pruebas inventario/HU02 publicadas; recetas pendientes. Respuesta parcial; vigente. |
+| R4: menor disponibilidad; Samuel; P alta, I medio | Atraso demostrado; causa pendiente de confirmar. Previsto: dividir tareas y revisar semanalmente. Mayor dedicación comunicada; horas y resultados pendientes de confirmar. Vigente. |
+| R5: datos insuficientes; Julian; P media, I medio | Sin error atribuible comprobado. Previsto: probar faltantes, pendientes y ventas. Hay datos ficticios de inventario; faltan datos validados. Respuesta parcial; vigente. |
+| R6: integración tardía; Samuel; P media, I alto | Previsto: integrar cada sprint y probar flujo completo. HU01 integrada; HU02 en rama. Todavía no podemos comprobar si la respuesta funcionó en todo el sistema. Vigente. |
 
-### Riesgos nuevos
+### Incumplimientos, defectos y recurso externo
 
-NC-01 detectada el 05/10: falta revisión posterior de HU01. El reporte de Julian del 09/10 aclara la versión probada; no conserva todas las salidas originales.
+NC-01, 05/10: integrar sin revisión amenaza la calidad. El avance registra el hecho; causa, decisión correctiva y registro original: pendientes de confirmar.
 
-D-01/D-02, detectados el 07/10, siguen abiertos. La red de distribución de contenido (CDN) falló en laboratorio; Bootstrap local no certifica el recurso externo.
+D-01/D-02, 07/10: amenazan autorización e integridad (Taller 5; SCRUM-21/22). PR #11 propone protección del alta, con siete pruebas del asistente. Revisión e integración pendientes.
+
+CDN: servicio externo que entrega Bootstrap. Su fallo afecta la interfaz; fecha pendiente de confirmar. Se usó Bootstrap local en laboratorio, sin comprobar corrección del recurso externo.
 
 ## Responsabilidades y uso de inteligencia artificial
 
@@ -301,9 +297,9 @@ La Tabla 15 propone revisiones dentro del alcance vigente. Acceso pendiente y pr
 
 ### Declaración de uso de inteligencia artificial
 
-ChatGPT (Codex) apoyó consultas, pruebas, correcciones y redacción bajo autorización de Samuel. Las siete pruebas de SCRUM-22 fueron ejecutadas por el asistente en un entorno aislado. La revisión de código del 09/10 no agregó resultados de ejecución.
+ChatGPT (Codex) apoyó consultas, pruebas, correcciones y redacción bajo autorización de Samuel. Las siete pruebas de SCRUM-22 fueron ejecutadas por el asistente en un entorno aislado. Autor y alcance de la revisión de código del 09/10: pendientes de confirmar.
 
-Julian registró revisión documental el 07/10 y publicó HU02 el 09/10: 42 comprobaciones de integración y 15 HTTP (Tabla 13). Samuel aportó fuentes, calendario y acuerdo de recuperación. Revisión formal, validación conjunta y aceptación del negocio siguen pendientes.
+Verificación manual del equipo de lo generado con IA, persona, fuente contrastada y registro: pendientes de confirmar. La evidencia HU02 publicada se conserva por separado (Tabla 13). Revisión formal, validación conjunta y aceptación del negocio siguen pendientes; esta edición no acredita verificaciones adicionales.
 
 ## Referencias
 
