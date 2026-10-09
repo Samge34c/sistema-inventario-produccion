@@ -6,6 +6,7 @@ session_start();
 
 require_once __DIR__ . '/../../config/database.php';
 require_once __DIR__ . '/funciones.php';
+require_once __DIR__ . '/proteccion-formulario.php';
 
 $consulta = $conexion->query(
     'SELECT id, nombre, unidad_medida, cantidad_disponible, stock_minimo
@@ -68,6 +69,7 @@ function escapar(string $valor): string
         <div class="card-body">
             <h2 class="h5">Registrar materia prima</h2>
             <form action="guardar.php" method="post" class="row g-3">
+                <input type="hidden" name="token" value="<?= escapar(obtenerTokenMateriaPrima()) ?>">
                 <div class="col-md-5">
                     <label class="form-label" for="nombre">Nombre</label>
                     <input class="form-control" id="nombre" name="nombre" maxlength="100" required
