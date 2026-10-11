@@ -22,9 +22,15 @@ Salidas conservadas:
 - [Siete casos y registro del servidor](resultados-scrum22-aislamiento-2026-10-11.json).
 - [Rechazos de configuraciones incorrectas](resultados-guardas-scrum22-2026-10-11.json).
 
-Las salidas contienen la fecha, las versiones y los resultados reales. No acreditan todavía la reproducción de Julian ni la aprobación de PR #11.
+Estas dos salidas contienen la fecha, las versiones y los resultados de las comprobaciones anteriores. La reproducción independiente publicada después se registra a continuación; no se confunde con una aprobación de PR #11.
 
-## Reproducción independiente
+## Resultado independiente publicado — 11/10/2026
+
+Julian publicó [la salida original de siete casos](resultado-scrum22-julian-20261011.json) en el commit `dec9ff79375c875497eba31cff763aab65c71924`. Ejecución de 17:41:39 a 17:41:44, hora local de Villavicencio: PHP 8.2.12, MariaDB 10.4.32 y Python 3.12.10. Los siete casos aprobaron; se confirmó aislamiento antes de cada POST, configuración original sin cambios y eliminación de la base temporal. El commit publica únicamente esa evidencia; no cambia el script.
+
+El JSON no contiene el hash del checkout ejecutado: Julian debe confirmarlo a partir de su registro local, sin reconstruir un dato ausente. La segunda solicitud de cambios se retiró con referencia a su aclaración en SCRUM-22, comentario 10024: el TypeError alegado no quedó demostrado. La reproducción está publicada; aprobación formal e integración siguen pendientes.
+
+## Procedimiento para otra ejecución independiente
 
 Requisitos: PHP con PDO MySQL, un servicio local MySQL/MariaDB activo, Python con la zona `America/Bogota` disponible y un usuario local que pueda crear y eliminar bases temporales. Si falta alguno, detenerse y registrar el impedimento; no sustituirlo por la base habitual ni declarar resultados.
 
@@ -42,4 +48,4 @@ No ejecutar directamente `scrum22-http.py` ni configurar manualmente la URL o la
 
 ## Alcance y revisión
 
-La comprobación repite CP-14 a nivel de servidor; no demuestra un ataque en navegador autenticado. El token no sustituye autenticación/autorización: D-01 sigue siendo trabajo de Julian. Este cambio solo protege el alta de materias primas; no amplía el alcance a edición, eliminación o movimientos. La rama parte de develop, sin integrar HU02. Julian debe reproducir y revisar antes de integrar; D-02 no se cierra automáticamente.
+La comprobación repite CP-14 a nivel de servidor; no demuestra un ataque en navegador autenticado. El token no sustituye autenticación/autorización: D-01 sigue siendo trabajo de Julian. Este cambio solo protege el alta de materias primas; no amplía el alcance a edición, eliminación o movimientos. La rama parte de develop, sin integrar HU02. La reproducción de Julian ya está publicada. Falta su revisión formal final; integrar únicamente después de aprobación y comprobar la versión integrada antes de cerrar D-02.
