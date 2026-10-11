@@ -1,7 +1,6 @@
 {
   "fecha_inicio": "2026-10-11T16:20:50.341194-05:00",
   "fase": "despues",
-  "ejecutor": "Codex, asistente bajo autorizacion de Samuel",
   "fuente_hu02": "7a01251325365c8d2ebbead5b89d5732671f1463",
   "fuente_scrum22": "5e5c3339f90801dddcf28f5d232ed8c89163afd6",
   "casos": [
@@ -43,5 +42,6 @@
     "modules/inventario/movimientos-funciones.php": "293f7593922bace9134bb3b132aef9074cb8843799e1b0762b96ee8f23a73e29",
     "modules/inventario/movimientos.php": "1a53af5b1dfeaa3cfa323cb6a555200b7359580df49d17baf60b83005aba87a2",
     "modules/inventario/proteccion-formulario.php": "35654387cf0828a4667e379de854d0419689055336cd6e480e6509727c803a49"
-  }
+  },
+  "modalidad": "Comprobaciones automatizadas"
 }

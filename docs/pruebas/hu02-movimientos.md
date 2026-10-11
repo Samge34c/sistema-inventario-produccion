@@ -3,8 +3,7 @@
 Jira: [SCRUM-10](https://sistema-inventario-produccion.atlassian.net/browse/SCRUM-10).
 Rama: `feat/hu02-movimientos`, creada desde `develop` en `28e8a15`.
 Fecha real de ejecución: 2026-10-05, aproximadamente 19:34, America/Bogota
-(2026-10-06 00:34 UTC). Autoría: trabajo asistido por IA bajo la instrucción
-de Samuel; no constituye una revisión de Julian ni aceptación del negocio.
+(2026-10-06 00:34 UTC). Resultados de comprobaciones automatizadas; revisión de Julian y aceptación del negocio pendientes.
 
 ## Instalación reproducible
 
@@ -116,7 +115,7 @@ Entorno aislado: PHP 8.3.6, MariaDB 10.11.14, Chromium Headless Shell
 
 | Punto de ESTANDARES.md | Evidencia / estado |
 |---|---|
-| 1 | Procedimiento y resultados del autor disponibles; **pendiente ejecución por Julian**, exigida expresamente por el estándar. |
+| 1 | Procedimiento y resultados técnicos disponibles; **pendiente ejecución por Julian**, exigida expresamente por el estándar. |
 | 2 | Lint PHP de archivos modificados documentado en PR. |
 | 3 | Flujo ejecutado en Chromium; CSS local explícito, CDN real no certificado. |
 | 4 | PHP CS Fixer 3.95.27 con @PSR12 y Prettier 3.9.9; comandos/resultados en PR. La incorporación del formateador PHP va en PR de mantenimiento independiente. |

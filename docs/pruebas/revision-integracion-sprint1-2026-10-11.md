@@ -1,8 +1,8 @@
 # Revisión técnica de HU02 junto con SCRUM-22 — 11 de octubre de 2026
 
-## Alcance y autoría
+## Alcance de la revisión
 
-Ejecución realizada por Codex bajo autorización de Samuel. Es evidencia técnica asistida por IA; no acredita ejecución personal ni aprobación de Samuel o Julián. Se comprobó una combinación local y temporal de las propuestas de HU02 (PR #8) y protección del alta de materia prima (SCRUM-22, PR #11). Ninguna de estas propuestas se integró en `develop` mediante esta revisión.
+Esta evidencia recoge comprobaciones automatizadas y no sustituye la revisión del equipo. Se comprobó una combinación local y temporal de las propuestas de HU02 (PR #8) y protección del alta de materia prima (SCRUM-22, PR #11). Ninguna de estas propuestas se integró en `develop` mediante esta revisión.
 
 Fuentes verificadas:
 
@@ -42,7 +42,7 @@ Comprobaciones adicionales: los 12 PHP de la combinación pasaron revisión de s
 
 PHP 8.3.6, MariaDB 10.11.14, Node 24.19.0 y Python 3.12.14. Cada fase utilizó una instancia temporal de MariaDB y una base desechable con nombre `prueba_revision_sprint1_…`; no se utilizó la base habitual del proyecto. Se detuvieron los servicios y se eliminaron esas bases al terminar.
 
-El navegador usó Bootstrap 5.3.8 servido como recurso local de prueba. No se verificó disponibilidad del CDN. Esta ejecución no comprueba MySQL 8, datos reales, autorización general ni todos los flujos del sistema. El navegador fue automatizado por Codex; no se presenta como revisión manual del equipo.
+El navegador usó Bootstrap 5.3.8 servido como recurso local de prueba. No se verificó disponibilidad del CDN. Esta ejecución no comprueba MySQL 8, datos reales, autorización general ni todos los flujos del sistema. El navegador se utilizó mediante un script automatizado; no se presenta como revisión manual del equipo.
 
 ## Cómo reproducir y qué falta
 
