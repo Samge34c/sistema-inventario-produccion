@@ -6,7 +6,7 @@ SCRUM-22 / D-02: CP-14 permitió guardar una materia prima desde un origen ajeno
 
 ## Comprobación ejecutada
 
-El 8 de octubre de 2026 a las 23:46, America/Bogota, se ejecutaron siete casos HTTP con verificación del número de registros en una base aleatoria de datos ficticios: origen ajeno sin token, token incorrecto, token de tipo arreglo, token de otra sesión, falta de sesión/token, alta válida y cantidad negativa. Los siete aprobaron. Los cinco rechazos devolvieron 403 sin crear registros; el alta válida creó exactamente uno y la cantidad negativa no creó ninguno.
+El 8 de octubre de 2026 a las 23:46, hora local de Villavicencio (UTC−5), se ejecutaron siete casos HTTP con verificación del número de registros en una base aleatoria de datos ficticios: origen ajeno sin token, token incorrecto, token de tipo arreglo, token de otra sesión, falta de sesión/token, alta válida y cantidad negativa. Los siete aprobaron. Los cinco rechazos devolvieron 403 sin crear registros; el alta válida creó exactamente uno y la cantidad negativa no creó ninguno.
 
 Entorno: PHP 8.3.6, MariaDB 10.11.14, Python 3.12.14. Se comprobó sintaxis y formato PHP de los tres archivos modificados. Resultado: [resultados-scrum22-2026-10-08.json](resultados-scrum22-2026-10-08.json).
 
