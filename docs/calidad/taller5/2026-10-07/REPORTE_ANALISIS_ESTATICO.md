@@ -41,4 +41,4 @@ php herramientas-calidad/vendor/bin/pdepend --summary-xml=pdepend.xml modules/in
 - Defectos confirmados abiertos: D-01 alta HU01 sin control de acceso; D-02 alta HU01 sin validación CSRF. Dos causas distintas; no duplicar por endpoint.
 - Origin ajeno + cookie prueba aceptación del POST en servidor; no acredita explotación en navegador autenticado ni evalúa SameSite.
 
-Medición técnica del asistente autorizado por Samuel. No sustituye ejecución independiente de Julian, review formal ni aceptación de Diana Marcela Caicedo. Reportes JSON/XML y logs acompañan este documento.
+Medición técnica automatizada. No sustituye ejecución independiente de Julian, review formal ni aceptación de Diana Marcela Caicedo. Reportes JSON/XML y logs acompañan este documento.
