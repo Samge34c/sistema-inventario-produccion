@@ -20,7 +20,7 @@ Se actualizan `pruebas/hu02-http.py` y `docs/pruebas/evidencias/hu02-http.js` pa
 
 ## Resultados y respaldo
 
-Las horas corresponden a Bogotá (UTC−5). Primera fase: 16:20:07–16:20:11. Segunda fase: 16:20:50–16:20:52 del 11/10/2026.
+Las horas corresponden a Villavicencio (UTC−5). Primera fase: 16:20:07–16:20:11. Segunda fase: 16:20:50–16:20:52 del 11/10/2026.
 
 | Grupo | Resultado | Salida conservada |
 | --- | --- | --- |

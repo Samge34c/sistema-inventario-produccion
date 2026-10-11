@@ -2,7 +2,7 @@
 
 Jira: [SCRUM-10](https://sistema-inventario-produccion.atlassian.net/browse/SCRUM-10).
 Rama: `feat/hu02-movimientos`, creada desde `develop` en `28e8a15`.
-Fecha real de ejecución: 2026-10-05, aproximadamente 19:34, America/Bogota
+Fecha real de ejecución: 2026-10-05, aproximadamente 19:34, hora local de Villavicencio (UTC−5)
 (2026-10-06 00:34 UTC). Resultados de comprobaciones automatizadas; revisión de Julian y aceptación del negocio pendientes.
 
 ## Instalación reproducible
