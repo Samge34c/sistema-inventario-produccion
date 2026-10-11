@@ -208,7 +208,7 @@ La Tabla 10 conserva mediciones; las metas deben revisarse y acordarse.
 | Complejidad ciclomática (CCN2) | Máximo 13; otra función 11. Meta propuesta 10; ambas requieren revisión. Se conserva el resultado medido. |
 | Densidad de defectos | Dos defectos abiertos / dos HU probadas = 1,00 defecto/HU. Meta 0 antes de liberar el producto. |
 
-PHPStan inspecciona código sin ejecutarlo. 2.3.0, nivel 5: 11 archivos, 11 avisos en siete (nueve sobre conexión; dos condiciones siempre falsas). Requieren revisión; no son defectos confirmados. [Reporte estático](https://github.com/Samge34c/sistema-inventario-produccion/blob/75d97605c2bfb7c76e3041f426060341f552aa93/docs/calidad/taller5/2026-10-07/REPORTE_ANALISIS_ESTATICO.md).
+PHPStan inspecciona código sin ejecutarlo. 2.3.0, nivel 5: 11 archivos, 11 avisos en siete (nueve sobre conexión; dos condiciones siempre falsas). Requieren revisión; no son defectos confirmados. [Reporte estático](https://github.com/Samge34c/sistema-inventario-produccion/blob/docs/taller5-calidad/docs/calidad/taller5/2026-10-07/REPORTE_ANALISIS_ESTATICO.md).
 
 ## Evidencias del repositorio
 
@@ -276,7 +276,7 @@ La Tabla 14 conserva los seis riesgos, responsables, probabilidad (P) e impacto 
 
 NC-01, 05/10: integrar sin revisión amenaza la calidad. El avance registra el hecho; causa, decisión correctiva y registro original: pendientes de confirmar.
 
-D-01/D-02, 07/10: amenazan autorización e integridad (Taller 5; SCRUM-21/22). PR #11 propone protección del alta, con siete comprobaciones automatizadas. Revisión e integración pendientes.
+D-01/D-02, 07/10: amenazan autorización e integridad (Taller 5; SCRUM-21/22). PR #11 propone protección del alta, con siete pruebas. Revisión e integración pendientes.
 
 CDN: servicio externo que entrega Bootstrap. Su fallo afecta la interfaz; fecha pendiente de confirmar. Se usó Bootstrap local en laboratorio, sin comprobar corrección del recurso externo.
 
