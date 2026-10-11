@@ -1,0 +1,65 @@
+{
+  "fecha_inicio": "2026-10-11T16:20:07.480867-05:00",
+  "fase": "antes",
+  "ejecutor": "Codex, asistente bajo autorizacion de Samuel",
+  "fuente_hu02": "7a01251325365c8d2ebbead5b89d5732671f1463",
+  "fuente_scrum22": "5e5c3339f90801dddcf28f5d232ed8c89163afd6",
+  "casos": [
+    {
+      "grupo": "inicializar-bd-aislada",
+      "codigo_salida": 0,
+      "codigo_esperado": 0,
+      "cumple_ejecucion_esperada": true
+    },
+    {
+      "grupo": "integracion-php",
+      "codigo_salida": 0,
+      "codigo_esperado": 0,
+      "cumple_ejecucion_esperada": true
+    },
+    {
+      "grupo": "http-python-original",
+      "codigo_salida": 1,
+      "codigo_esperado": 1,
+      "cumple_ejecucion_esperada": true
+    },
+    {
+      "grupo": "http-node-original",
+      "codigo_salida": 1,
+      "codigo_esperado": 1,
+      "cumple_ejecucion_esperada": true
+    },
+    {
+      "grupo": "scrum22-http",
+      "codigo_salida": 0,
+      "codigo_esperado": 0,
+      "cumple_ejecucion_esperada": true
+    },
+    {
+      "grupo": "navegador",
+      "codigo_salida": 0,
+      "codigo_esperado": 0,
+      "cumple_ejecucion_esperada": true
+    }
+  ],
+  "hu02_base_actual": "3d96f4afb1640b66f3a8ef08c4a543e5e432490b (solo evidencia agregada desde 7a01251)",
+  "entorno": {
+    "php": "8.3.6",
+    "mariadb": "10.11.14-MariaDB-0ubuntu0.24.04.1",
+    "node": "v24.19.0",
+    "python": "3.12.14",
+    "base_temporal": "prueba_revision_sprint1_12adffb166bd"
+  },
+  "fecha_fin": "2026-10-11T16:20:11.808014-05:00",
+  "archivos_php_sha256": {
+    "modules/inventario/editar.php": "96b0887d3635124ab5359d25cf9229e71e81df616df78eaa6993f2a9e1cef263",
+    "modules/inventario/eliminar.php": "2de70190a3e6123dba8066d9eb7382298583890b6b90f01edd28a4bd6cea9e76",
+    "modules/inventario/funciones.php": "a37f77c03828a2a97031ba6b381a5dc02cec294d0bdb1cf24025e25abf088910",
+    "modules/inventario/guardar-movimiento.php": "bf0c6f2de391e4db23222ce2a564b67bae2df88e1e043ea6cec12bcf26571ab9",
+    "modules/inventario/guardar.php": "0bd70f85936888d7ffde39758396a5fe9f21c196dc469845d821307183d55dd5",
+    "modules/inventario/index.php": "1537655b7dd1f7b52110c759116c62284485428f6f3546cd8e207d3cee07509c",
+    "modules/inventario/movimientos-funciones.php": "293f7593922bace9134bb3b132aef9074cb8843799e1b0762b96ee8f23a73e29",
+    "modules/inventario/movimientos.php": "1a53af5b1dfeaa3cfa323cb6a555200b7359580df49d17baf60b83005aba87a2",
+    "modules/inventario/proteccion-formulario.php": "35654387cf0828a4667e379de854d0419689055336cd6e480e6509727c803a49"
+  }
+}

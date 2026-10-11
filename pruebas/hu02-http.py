@@ -48,9 +48,17 @@ def comprobar(esCorrecto, caso):
 
 base = "/modules/inventario/"
 nombre = "Harina HU02 HTTP " + secrets.token_hex(5)
-estado, pagina = solicitar(base + "guardar.php", {
+estado, formulario = solicitar(base + "index.php")
+if estado != 200:
+    raise AssertionError("No se pudo abrir el formulario de materias primas")
+camposAlta = LeerCampos()
+camposAlta.feed(formulario)
+datosAlta = {
     "nombre": nombre, "unidad_medida": "g", "cantidad_disponible": "10000", "stock_minimo": "1000"
-})
+}
+if "token" in camposAlta.campos:
+    datosAlta["token"] = camposAlta.campos["token"]
+estado, pagina = solicitar(base + "guardar.php", datosAlta)
 comprobar(estado == 200 and nombre in pagina and "10000.00" in pagina, "HU01 registra y consulta 10000 g")
 fila = re.search(r"<tr>\s*<td>" + nombre + r"</td>.*?</tr>", pagina, re.S)
 if fila is None:
