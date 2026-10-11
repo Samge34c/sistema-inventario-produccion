@@ -1,6 +1,6 @@
 # Trabajo pendiente de Sprint 1
 
-Seguimiento del 9 de octubre de 2026, America/Bogota. Preparado con apoyo de Codex por solicitud de Samuel. Reparto operativo registrado hoy; no es un acuerdo atribuido a fechas anteriores. Horas adicionales y fecha de terminación: pendientes de confirmar.
+Seguimiento del 9 de octubre de 2026, America/Bogota. Reparto operativo registrado hoy; no es un acuerdo atribuido a fechas anteriores. Horas adicionales y fecha de terminación: pendientes de confirmar.
 
 El periodo de Sprint 1 ya está cerrado en Jira. HU01, HU02 y HU03 quedaron pendientes y se arrastraron a Sprint 2. Completar ese trabajo no cambia el cierre histórico.
 
@@ -12,7 +12,7 @@ El periodo de Sprint 1 ya está cerrado en Jira. HU01, HU02 y HU03 quedaron pend
 | HU02 / SCRUM-10 | En curso; PR #8 abierta, fuera de borrador | Pruebas de Julian publicadas; falta revisión formal e integración |
 | HU03 / SCRUM-11 | Por hacer | Sin rama ni implementación de recetas |
 | D-01 / SCRUM-21 | Por hacer; Julian | Falta control de acceso del alta |
-| D-02 / SCRUM-22 | Por hacer; Samuel | PR #11 propuesta y probada por el asistente; falta revisión de Julian e integración |
+| D-02 / SCRUM-22 | Por hacer; Samuel | PR #11 propuesta con comprobaciones automatizadas; falta revisión de Julian e integración |
 
 No se ejecutaron pruebas nuevas del producto durante este seguimiento. No se cierran historias ni defectos con esta organización.
 

@@ -28,7 +28,7 @@ Fecha de entrega: pendiente de confirmar
 - Evidencias del repositorio (p. 11 del PDF)
 - Ejecución independiente de HU02 (p. 12 del PDF)
 - Riesgos y respuestas (p. 13 del PDF)
-- Responsabilidades y uso de inteligencia artificial (p. 14 del PDF)
+- Responsabilidades del equipo (p. 14 del PDF)
 - Referencias (p. 15 del PDF)
 Corte histórico: 9 de octubre de 2026, Bogotá; no es la fecha de entrega. Sesión 21, plazo, nombre del archivo y corte final: pendientes de confirmar. El conteo publicado llega a semana 10; semana 11 sin cubrir.
 
@@ -50,7 +50,7 @@ El control manual y separado de inventario, recetas y ventas dificulta anticipar
 
 Incluye materias primas y movimientos; recetas, ingrediente limitante y proyección con materiales pendientes; planificación y descuento de insumos; ventas y reportes diarios, semanales y de hora pico.
 
-Excluye facturación, contabilidad, nómina, pagos, domicilios, tienda virtual, inteligencia artificial como función del producto, integración automática con proveedores y aplicación móvil nativa. Cualquier ampliación exige revisar el tiempo disponible.
+Excluye facturación, contabilidad, nómina, pagos, domicilios, tienda virtual, integración automática con proveedores y aplicación móvil nativa. Cualquier ampliación exige revisar el tiempo disponible.
 
 El Acta prevé cuatro horas semanales por integrante: unas 66 horas-persona teóricas entre el 20/09 y el 17/11, y 43-50 tras descontar imprevistos. Es capacidad estimada, distinta de los 60 puntos del backlog; las horas adicionales del Sprint 2 siguen sin cuantificar.
 
@@ -88,7 +88,7 @@ La Tabla 3 separa hechos y decisiones pendientes. CA: criterio de aceptación. F
 | T5: pruebas y métricas publicadas, PR #10. | 07/10 | Diferencias frente a lo radicado: pendiente de confirmar. | Samuel autorizó apoyo; cambios pendientes de confirmar. |
 | CA4-7 en Jira después de las comprobaciones. | 07/10, 21:30 | HU01: validaciones/RQ02; HU02: reglas del 05/10. Motivo pendiente de confirmar. | Samuel autorizó; aceptación de Diana pendiente. |
 | Acta: meta 09/10 y mayor dedicación comunicadas. | 08/10 | Responder al arrastre; horas y resultado pendientes de confirmar. | Samuel comunicó acuerdo con Julian. |
-| D-02: corrección propuesta, siete pruebas; PR #11. | 08/10, 23:46 | Evitar altas sin token válido del formulario. | Samuel autorizó; ejecutó el asistente. |
+| D-02: corrección propuesta, siete pruebas; PR #11. | 08/10, 23:46 | Evitar altas sin token válido del formulario. | Seguimiento de Samuel; comprobación automatizada. |
 | Tablero: máximo 1 + 1; SCRUM-24. | 09/10 | WIP 1 + 1; motivo pendiente de confirmar. | Samuel configuró; acuerdo de Julian pendiente de confirmar. |
 | T5: reporte independiente HU02 publicado. | 09/10 | Actualiza reproducción HU02 pendiente; resto de revisión sin completar. | Julian publicó; aprobación formal pendiente. |
 | PHPStan: uso posterior a T4, documentado en T5. | 07/10; (reporte) | Acuerdo: fecha y motivo pendientes de confirmar. | Decisión no documentada. |
@@ -240,7 +240,7 @@ D-02: siete pruebas HTTP/SQL correctas el 08/10 a las 23:46 sobre 5e5c333. CP-14
 
 ## Ejecución independiente de HU02
 
-La Tabla 13 resume el [reporte de ejecución de HU02](https://github.com/Samge34c/sistema-inventario-produccion/blob/3d96f4afb1640b66f3a8ef08c4a543e5e432490b/docs/pruebas/evidencias/julian-hu02-2026-10-09.md) publicado por Julian Caicedo el 09/10 en PR #8 (Caicedo Ramirez, 2026). Conserva responsable, fecha, versión, herramientas y límites de la evidencia; no le atribuye pruebas anteriores del asistente.
+La Tabla 13 resume el [reporte de ejecución de HU02](https://github.com/Samge34c/sistema-inventario-produccion/blob/3d96f4afb1640b66f3a8ef08c4a543e5e432490b/docs/pruebas/evidencias/julian-hu02-2026-10-09.md) publicado por Julian Caicedo el 09/10 en PR #8 (Caicedo Ramirez, 2026). Conserva responsable, fecha, versión, herramientas y límites de la evidencia; distingue esta evidencia de las comprobaciones anteriores.
 
 **Tabla 13. Evidencia publicada por Julian**
 
@@ -276,11 +276,11 @@ La Tabla 14 conserva los seis riesgos, responsables, probabilidad (P) e impacto 
 
 NC-01, 05/10: integrar sin revisión amenaza la calidad. El avance registra el hecho; causa, decisión correctiva y registro original: pendientes de confirmar.
 
-D-01/D-02, 07/10: amenazan autorización e integridad (Taller 5; SCRUM-21/22). PR #11 propone protección del alta, con siete pruebas del asistente. Revisión e integración pendientes.
+D-01/D-02, 07/10: amenazan autorización e integridad (Taller 5; SCRUM-21/22). PR #11 propone protección del alta, con siete comprobaciones automatizadas. Revisión e integración pendientes.
 
 CDN: servicio externo que entrega Bootstrap. Su fallo afecta la interfaz; fecha pendiente de confirmar. Se usó Bootstrap local en laboratorio, sin comprobar corrección del recurso externo.
 
-## Responsabilidades y uso de inteligencia artificial
+## Responsabilidades del equipo
 
 La Tabla 15 propone revisiones dentro del alcance vigente. Acceso pendiente y protección parcial están comprobados; los casos futuros son preventivos. El equipo debe acordar esfuerzo y responsables de cada historia.
 
