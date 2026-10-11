@@ -36,7 +36,7 @@ Los dos clientes HTTP comprueban los mismos escenarios; no representan 30 casos 
 
 Los resúmenes [antes](evidencias/revision-2026-10-11/resumen-antes.json) y [después](evidencias/revision-2026-10-11/resumen-despues.json) incluyen horas, versiones y huellas SHA-256 de los PHP del inventario. Estas huellas coinciden entre las fases: solo se corrigieron los clientes. En la primera fase, `codigo_esperado: 1` indica que el ejecutor esperaba reproducir el fallo del cliente; no significa que el escenario funcional pasara.
 
-Comprobaciones adicionales: los 12 PHP de la combinación pasaron revisión de sintaxis; PHP CS Fixer 3.95.27 con PSR-12 no propuso cambios en los 9 PHP del inventario; el cliente Node corregido pasó Prettier y revisión de sintaxis; el cliente Python corregido pasó compilación de sintaxis. Se detectó una línea vacía final en el script de SCRUM-22, que se corrige como ajuste de presentación en su propia propuesta.
+Comprobaciones adicionales: los 12 PHP de la combinación pasaron revisión de sintaxis; PHP CS Fixer 3.95.27 con PSR-12 no propuso cambios en los 9 PHP del inventario; el cliente Node corregido pasó Prettier y revisión de sintaxis; el cliente Python corregido pasó compilación de sintaxis. Se retiró una línea vacía final de la copia temporal del script de SCRUM-22. Al contrastarla, el script remoto ya tenía el contenido limpio: no fue necesario cambiar su lógica ni su contenido.
 
 ## Entorno y límites
 
