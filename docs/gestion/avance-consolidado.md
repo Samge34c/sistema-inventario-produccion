@@ -88,7 +88,7 @@ La Tabla 3 separa hechos y decisiones pendientes. CA: criterio de aceptación. F
 | T5: pruebas y métricas publicadas, PR #10. | 07/10 | Diferencias frente a lo radicado: pendiente de confirmar. | Samuel autorizó apoyo; cambios pendientes de confirmar. |
 | CA4-7 en Jira después de las comprobaciones. | 07/10, 21:30 | HU01: validaciones/RQ02; HU02: reglas del 05/10. Motivo pendiente de confirmar. | Samuel autorizó; aceptación de Diana pendiente. |
 | Acta: meta 09/10 y mayor dedicación comunicadas. | 08/10 | Responder al arrastre; horas y resultado pendientes de confirmar. | Samuel comunicó acuerdo con Julian. |
-| D-02: corrección propuesta, siete pruebas; PR #11. | 08/10, 23:46 | Evitar altas sin token válido del formulario. | Seguimiento de Samuel; comprobación automatizada. |
+| D-02: corrección propuesta, siete pruebas; PR #11. | 08/10, 23:46 | Evitar altas sin token válido del formulario. | Samuel autorizó. |
 | Tablero: máximo 1 + 1; SCRUM-24. | 09/10 | WIP 1 + 1; motivo pendiente de confirmar. | Samuel configuró; acuerdo de Julian pendiente de confirmar. |
 | T5: reporte independiente HU02 publicado. | 09/10 | Actualiza reproducción HU02 pendiente; resto de revisión sin completar. | Julian publicó; aprobación formal pendiente. |
 | PHPStan: uso posterior a T4, documentado en T5. | 07/10; (reporte) | Acuerdo: fecha y motivo pendientes de confirmar. | Decisión no documentada. |
