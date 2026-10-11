@@ -1,0 +1,18 @@
+EVIDENCIA DE INTEGRACIÓN HU02 — resultado recuperado
+Responsable: Julián Caicedo
+Fecha registrada en este informe: 2026-10-09
+Hora exacta de ejecución: no capturada por la terminal.
+Rama: feat/hu02-movimientos
+Commit: 7a01251325365c8d2ebbead5b89d5732671f1463
+Entorno local identificado: PHP 8.2.12; MariaDB 10.4.32.
+
+Salida final conservada en la conversación:
+RESULTADO: 42 comprobaciones correctas.
+
+LIMITACIÓN:
+La conversación conserva el resultado final, pero no la salida completa de las 42 líneas de esta ejecución local. Este archivo no inventa esas líneas ni copia como propia la salida detallada de otra ejecución. Para recuperar un log completo de esta ejecución concreta, habría que volver a ejecutar la prueba con redirección de salida a un archivo y guardar la fecha/hora de inicio y fin.
+
+Comando para una nueva captura reproducible:
+php .\pruebas\hu02-integracion.php *> "$env:TEMP\hu02-integracion-rerun.txt"
+
+Antes de ejecutarlo, verifica que el entorno del script apunte solo a bases temporales de prueba. No ejecutar contra datos de negocio.
