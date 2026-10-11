@@ -1,6 +1,6 @@
 # Taller 5 — Reporte de análisis estático
 
-Fecha: 07/10/2026 (America/Bogota). Código: **7a01251325365c8d2ebbead5b89d5732671f1463** de HU02, PR #8. No certifica develop ni módulos futuros.
+Fecha: 07/10/2026 (hora local de Villavicencio (UTC−5)). Código: **7a01251325365c8d2ebbead5b89d5732671f1463** de HU02, PR #8. No certifica develop ni módulos futuros.
 
 ## PHPStan 2.3.0
 
