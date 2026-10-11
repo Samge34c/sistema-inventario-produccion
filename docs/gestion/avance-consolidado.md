@@ -1,6 +1,6 @@
 # Avance del proyecto
 
-Corte: 9 de octubre de 2026, America/Bogota.
+Corte: 9 de octubre de 2026, hora local de Villavicencio (UTC−5).
 
 Avance del proyecto de inventario,
 recetas y planificación de producción
@@ -30,7 +30,7 @@ Fecha de entrega: pendiente de confirmar
 - Riesgos y respuestas (p. 13 del PDF)
 - Responsabilidades del equipo (p. 14 del PDF)
 - Referencias (p. 15 del PDF)
-Corte histórico: 9 de octubre de 2026, Bogotá; no es la fecha de entrega. Sesión 21, plazo, nombre del archivo y corte final: pendientes de confirmar. El conteo publicado llega a semana 10; semana 11 sin cubrir.
+Corte histórico: 9 de octubre de 2026, Villavicencio; no es la fecha de entrega. Sesión 21, plazo, nombre del archivo y corte final: pendientes de confirmar. El conteo publicado llega a semana 10; semana 11 sin cubrir.
 
 ## Consolidación de los talleres
 
@@ -76,7 +76,7 @@ Diana Marcela Caicedo, propietaria e interlocutora, debe validar los roles propu
 
 ## Control de cambios
 
-La Tabla 3 separa hechos y decisiones pendientes. CA: criterio de aceptación. Fechas de 2026, Bogotá; versiones radicadas: pendientes de confirmar.
+La Tabla 3 separa hechos y decisiones pendientes. CA: criterio de aceptación. Fechas de 2026, Villavicencio; versiones radicadas: pendientes de confirmar.
 
 **Tabla 3. Control de cambios frente a los talleres**
 
@@ -216,7 +216,7 @@ Repositorio: [https://github.com/Samge34c/sistema-inventario-produccion](https:/
 
 **Tabla 11. Tres commits representativos**
 
-| Hash y fecha Bogotá | Cambio comprobado |
+| Hash y fecha Villavicencio | Cambio comprobado |
 | --- | --- |
 | [13f529e](https://github.com/Samge34c/sistema-inventario-produccion/commit/13f529e23e7dc1e299a41c3f2dbbc4b69bb6d706); 30/09, 21:16:43 | Publicación de los estándares adoptados por ambos integrantes. |
 | [28a54fc](https://github.com/Samge34c/sistema-inventario-produccion/commit/28a54fc14b9a41917b11837869e398ce465d5eb7); 05/10, 19:36:52 | Implementación de movimientos y actualización transaccional del saldo. |
@@ -247,7 +247,7 @@ La Tabla 13 resume el [reporte de ejecución de HU02](https://github.com/Samge34
 | Dato | Registro y alcance |
 | --- | --- |
 | Versión probada | 7a01251325365c8d2ebbead5b89d5732671f1463, rama feat/hu02-movimientos. Los archivos de evidencia se publicaron en 3d96f4a. |
-| Fecha y herramientas | 09/10/2026, Bogotá; hora exacta no conservada. PHP 8.2.12, MariaDB 10.4.32, Node.js v24.21.0. |
+| Fecha y herramientas | 09/10/2026, Villavicencio; hora exacta no conservada. PHP 8.2.12, MariaDB 10.4.32, Node.js v24.21.0. |
 | Integración PHP | 42 comprobaciones correctas reportadas. El archivo conserva el resultado final, sin la salida completa de las 42 comprobaciones. |
 | Pruebas HTTP | 15 comprobaciones correctas y cero fallidas reportadas. Salida de pruebas organizada; no se conserva la captura original. Script publicado. |
 | Entorno | Según el reporte: base temporal prueba_hu02_http y aplicación aislada en localhost:8001; sin utilizar la base habitual. |

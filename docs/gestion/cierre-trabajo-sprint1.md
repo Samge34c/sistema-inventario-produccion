@@ -1,6 +1,6 @@
 # Trabajo pendiente de Sprint 1
 
-Seguimiento del 9 de octubre de 2026, America/Bogota. Reparto operativo registrado hoy; no es un acuerdo atribuido a fechas anteriores. Horas adicionales y fecha de terminación: pendientes de confirmar.
+Seguimiento del 9 de octubre de 2026, hora local de Villavicencio (UTC−5). Reparto operativo registrado hoy; no es un acuerdo atribuido a fechas anteriores. Horas adicionales y fecha de terminación: pendientes de confirmar.
 
 El periodo de Sprint 1 ya está cerrado en Jira. HU01, HU02 y HU03 quedaron pendientes y se arrastraron a Sprint 2. Completar ese trabajo no cambia el cierre histórico.
 

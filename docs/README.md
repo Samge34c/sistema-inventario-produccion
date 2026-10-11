@@ -1,6 +1,6 @@
 # Índice de documentación del proyecto
 
-Fecha de corte: 9 de octubre de 2026, America/Bogota.
+Fecha de corte: 9 de octubre de 2026, hora local de Villavicencio (UTC−5).
 
 ## Avance y gestión
 
