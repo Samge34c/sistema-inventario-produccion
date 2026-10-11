@@ -4,7 +4,7 @@ Seguimiento del 9 de octubre de 2026, hora local de Villavicencio (UTC−5). Rep
 
 El periodo de Sprint 1 ya está cerrado en Jira. HU01, HU02 y HU03 quedaron pendientes y se arrastraron a Sprint 2. Completar ese trabajo no cambia el cierre histórico.
 
-## Estado comprobado
+## Estado inicial — 9 de octubre
 
 | Trabajo | Estado | Qué impide terminar |
 |---|---|---|
@@ -16,9 +16,15 @@ El periodo de Sprint 1 ya está cerrado en Jira. HU01, HU02 y HU03 quedaron pend
 
 No se ejecutaron pruebas nuevas del producto durante este seguimiento. No se cierran historias ni defectos con esta organización.
 
+## Actualización comprobada — 11 de octubre
+
+D-02 / SCRUM-22: Julian publicó siete casos aprobados, ejecutados entre 17:41:39 y 17:41:44, hora de Villavicencio. Entorno: PHP 8.2.12, MariaDB 10.4.32 y Python 3.12.10. [Salida original](https://github.com/Samge34c/sistema-inventario-produccion/blob/dec9ff79375c875497eba31cff763aab65c71924/docs/pruebas/resultado-scrum22-julian-20261011.json), publicada en `dec9ff7`; ese commit añade evidencia y no cambia el script. El hash del checkout ejecutado no figura en el JSON y queda pendiente de confirmación por Julian.
+
+La solicitud de cambios por el TypeError alegado se retiró conforme a la aclaración del propio revisor en SCRUM-22, comentario 10024. La solicitud anterior por aislamiento ya estaba retirada. D-02 sigue abierto: falta revisión formal final, aprobación, integración y comprobación de la versión integrada. La publicación de las pruebas no cierra HU01, HU02 ni HU03 ni cambia el cierre histórico de Sprint 1.
+
 ## Orden y responsables
 
-1. **Julian revisa la corrección D-02 (PR #11).** Reproducir el procedimiento publicado en una base aislada. Comprobar que el alta sin token válido se rechaza sin escritura y que un alta válida sigue funcionando. Guardar fecha, versión, entorno y salida real; indicar bloqueantes o aprobar formalmente si procede. El reporte HU02 no sustituye esta comprobación.
+1. **Julian completa la revisión formal de D-02 (PR #11).** La reproducción independiente de siete casos ya está publicada: no repetirla solo para generar más evidencia. Confirmar el hash del checkout ejecutado con su registro local, revisar la versión actual e indicar hallazgos o aprobar formalmente si procede. Si cambia el código probado, ejecutar las comprobaciones afectadas. El reporte HU02 no sustituye esta revisión.
 2. **Julian implementa D-01 (SCRUM-21).** Crear una rama desde develop actualizado. Implementar control de acceso básico del alta conforme a CA6/RQ02, sin ampliar a permisos complejos ni nuevas funciones. El caso CP-13 debe rechazar una solicitud sin autorización con 403 y sin escribir; el uso autorizado debe seguir funcionando. Versionar cambios SQL si aplican y dejar procedimiento reproducible, evidencia y PR.
 3. **Samuel revisa el cambio de Julian para D-01.** Ejecutar los casos en un entorno aislado y registrar resultados propios. Revisar los criterios y los demás puntos aplicables de la DoD. Si hay problemas, devolverlos como bloqueantes; aprobar solo después de comprobarlos.
 4. **Samuel coordina la integración de las correcciones de HU01.** Integrar solo cambios aprobados por el integrante distinto del autor. Actualizar las ramas, resolver cualquier conflicto y comprobar el resultado integrado. Julian ejecuta el caso HU01 y documenta la validación posterior; NC-01 conserva su fecha y no se convierte en una aprobación previa.
