@@ -1,0 +1,16 @@
+OK HTTP 1: HU01 registra y consulta 10000 g
+OK HTTP 2: entrada aumenta a 12000
+OK HTTP 3: salida disminuye a 11000
+OK HTTP 4: pendiente conserva 11000 disponibles
+OK HTTP 5: pendiente visible por separado
+OK HTTP 6: salida excesiva informa error controlado
+OK HTTP 7: rechazo conserva existencia
+OK HTTP 8: CSRF inválido rechazado
+OK HTTP 9: GET al registro rechazado
+OK HTTP 10: backend rechaza más de dos decimales
+OK HTTP 11: consulta preparada conserva texto y HTML escapa el script
+OK HTTP 12: texto de prueba no modifica existencias
+OK HTTP 13: edición directa del saldo bloqueada
+OK HTTP 14: borrado de materia referenciada informa error
+OK HTTP 15: materia e inventario conservados
+RESULTADO HTTP: 15 comprobaciones correctas. No evalúa consola JavaScript.

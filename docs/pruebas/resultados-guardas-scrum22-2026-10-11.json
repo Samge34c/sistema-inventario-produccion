@@ -1,0 +1,44 @@
+{
+  "inicio": "2026-10-11T16:54:54.311740-05:00",
+  "fuente_pr11": "67eeab71fdd2967e4ebbf1aa3ad144239dd8aeab",
+  "comprobaciones": [
+    {
+      "caso": "siete_casos_en_copia_y_base_nuevas",
+      "aprobado": true,
+      "casos_http": 7
+    },
+    {
+      "caso": "aplicacion_y_verificador_en_bases_distintas",
+      "aprobado": true,
+      "codigo_salida": 1,
+      "base_habitual_simulada_sin_cambios": true
+    },
+    {
+      "caso": "sin_comprobacion_del_servidor",
+      "aprobado": true,
+      "codigo_salida": 1,
+      "base_habitual_simulada_sin_cambios": true
+    },
+    {
+      "caso": "dsn_de_base_habitual",
+      "aprobado": true,
+      "codigo_salida": 1,
+      "base_habitual_simulada_sin_cambios": true
+    },
+    {
+      "caso": "testigo_incorrecto",
+      "aprobado": true,
+      "codigo_salida": 1,
+      "base_habitual_simulada_sin_cambios": true
+    }
+  ],
+  "entorno": {
+    "php": "8.3.6",
+    "base_de_datos": "10.11.14-MariaDB-0ubuntu0.24.04.1",
+    "python": "3.12.14"
+  },
+  "solicitudes_post_en_casos_rechazados": 0,
+  "base_habitual_simulada_sin_cambios": true,
+  "base_de_los_siete_casos_eliminada_confirmado": true,
+  "fin": "2026-10-11T16:54:57.040737-05:00"
+}

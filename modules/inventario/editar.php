@@ -2,8 +2,16 @@
 
 declare(strict_types=1);
 
+require_once __DIR__ . '/../../config/acceso.php';
+exigirAcceso();
+
 require_once __DIR__ . '/../../config/database.php';
 require_once __DIR__ . '/funciones.php';
+require_once __DIR__ . '/movimientos-funciones.php';
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    exigirTokenAcceso();
+}
 
 $id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -41,24 +49,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $errores = validarMateriaPrima($datos);
 
     if ($errores === []) {
-        $actualizar = $conexion->prepare(
-            'UPDATE materias_primas
-             SET nombre = :nombre,
-                 unidad_medida = :unidad_medida,
-                 cantidad_disponible = :cantidad_disponible,
-                 stock_minimo = :stock_minimo
-             WHERE id = :id'
-        );
-        $actualizar->execute([
-            'nombre' => $datos['nombre'],
-            'unidad_medida' => $datos['unidad_medida'],
-            'cantidad_disponible' => (float) $datos['cantidad_disponible'],
-            'stock_minimo' => (float) $datos['stock_minimo'],
-            'id' => $id,
-        ]);
-
-        header('Location: index.php?estado=actualizada');
-        exit;
+        try {
+            actualizarMateriaPrimaProtegida($conexion, $id, $datos);
+            header('Location: index.php?estado=actualizada', true, 303);
+            exit;
+        } catch (DomainException $error) {
+            $errores[] = $error->getMessage();
+        } catch (Throwable $error) {
+            error_log('No se pudo editar la materia prima: ' . $error->getMessage());
+            $errores[] = 'No se pudo guardar la materia prima. Revise la conexión y la migración HU02.';
+        }
     }
 
     $materiaPrima = array_merge($materiaPrima, $datos);
@@ -94,6 +94,7 @@ function escapar(string $valor): string
             <?php endif; ?>
 
             <form method="post" class="row g-3">
+                <input type="hidden" name="token" value="<?= obtenerTokenAcceso() ?>">
                 <input type="hidden" name="id" value="<?= (int) $materiaPrima['id'] ?>">
 
                 <div class="col-md-6">
@@ -138,3 +139,4 @@ function escapar(string $valor): string
 </main>
 </body>
 </html>
+
