@@ -2,9 +2,16 @@
 
 declare(strict_types=1);
 
+require_once __DIR__ . '/../../config/acceso.php';
+exigirAcceso();
+
 require_once __DIR__ . '/../../config/database.php';
 require_once __DIR__ . '/funciones.php';
 require_once __DIR__ . '/movimientos-funciones.php';
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    exigirTokenAcceso();
+}
 
 $id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -87,6 +94,7 @@ function escapar(string $valor): string
             <?php endif; ?>
 
             <form method="post" class="row g-3">
+                <input type="hidden" name="token" value="<?= obtenerTokenAcceso() ?>">
                 <input type="hidden" name="id" value="<?= (int) $materiaPrima['id'] ?>">
 
                 <div class="col-md-6">
@@ -131,3 +139,4 @@ function escapar(string $valor): string
 </main>
 </body>
 </html>
+

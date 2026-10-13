@@ -2,7 +2,10 @@
 
 declare(strict_types=1);
 
-session_start();
+require_once __DIR__ . '/../../config/acceso.php';
+exigirAcceso();
+
+
 require_once __DIR__ . '/movimientos-funciones.php';
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
@@ -39,3 +42,4 @@ $_SESSION['errores_movimiento'] = $errores;
 $_SESSION['datos_movimiento'] = $datos;
 header('Location: movimientos.php', true, 303);
 exit;
+

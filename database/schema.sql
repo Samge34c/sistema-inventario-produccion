@@ -53,3 +53,11 @@ CREATE TABLE materiales_pendientes (
         ON DELETE RESTRICT ON UPDATE CASCADE,
     CONSTRAINT ck_pendiente_cantidad CHECK (cantidad > 0)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS usuarios (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL,
+    correo VARCHAR(190) NOT NULL UNIQUE,
+    clave_hash VARCHAR(255) NOT NULL,
+    activo TINYINT(1) NOT NULL DEFAULT 1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

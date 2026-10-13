@@ -2,7 +2,10 @@
 
 declare(strict_types=1);
 
-session_start();
+require_once __DIR__ . '/../../config/acceso.php';
+exigirAcceso();
+
+
 
 require_once __DIR__ . '/../../config/database.php';
 require_once __DIR__ . '/funciones.php';
@@ -142,6 +145,7 @@ function escapar(string $valor): string
                                     <a class="btn btn-sm btn-outline-primary"
                                         href="editar.php?id=<?= (int) $materiaPrima['id'] ?>">Editar</a>
                                     <form action="eliminar.php" method="post" class="d-inline">
+                                        <input type="hidden" name="token" value="<?= obtenerTokenAcceso() ?>">
                                         <input type="hidden" name="id" value="<?= (int) $materiaPrima['id'] ?>">
                                         <button class="btn btn-sm btn-outline-danger" type="submit">Eliminar</button>
                                     </form>
@@ -157,3 +161,4 @@ function escapar(string $valor): string
 </main>
 </body>
 </html>
+
