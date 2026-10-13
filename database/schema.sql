@@ -26,8 +26,8 @@ CREATE TABLE receta_ingredientes (
         ON DELETE CASCADE
         ON UPDATE CASCADE,
 
-    FOREIGN KEY (materia_prima_id) REFERENCES materias_primas(id)
-        ON DELETE CASCADE
+    CONSTRAINT fk_ingrediente_materia FOREIGN KEY (materia_prima_id) REFERENCES materias_primas(id)
+        ON DELETE RESTRICT
         ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 CREATE TABLE movimientos_inventario (
@@ -53,6 +53,7 @@ CREATE TABLE materiales_pendientes (
         ON DELETE RESTRICT ON UPDATE CASCADE,
     CONSTRAINT ck_pendiente_cantidad CHECK (cantidad > 0)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 
 CREATE TABLE IF NOT EXISTS usuarios (
     id INT AUTO_INCREMENT PRIMARY KEY,

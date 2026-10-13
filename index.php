@@ -16,6 +16,7 @@ exigirAcceso();
 <nav class="d-flex gap-3 mb-4" aria-label="Módulos">
 <a class="btn btn-primary" href="modules/inventario/index.php">Materias primas</a>
 <a class="btn btn-primary" href="modules/inventario/movimientos.php">Movimientos</a>
+<a class="btn btn-primary" href="modules/recetas/index.php">Recetas</a>
 </nav>
 <form action="cerrar-sesion.php" method="post"><input type="hidden" name="token" value="<?= obtenerTokenAcceso() ?>">
 <button class="btn btn-outline-secondary" type="submit">Cerrar sesión</button></form>
