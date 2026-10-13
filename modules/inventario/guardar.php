@@ -4,13 +4,21 @@ declare(strict_types=1);
 
 session_start();
 
-require_once __DIR__ . '/../../config/database.php';
-require_once __DIR__ . '/funciones.php';
+require_once __DIR__ . '/proteccion-formulario.php';
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     header('Location: index.php');
     exit;
 }
+
+if (!validarTokenMateriaPrima($_POST['token'] ?? null)) {
+    http_response_code(403);
+    echo 'Solicitud rechazada: código de seguridad del formulario no válido.';
+    exit;
+}
+
+require_once __DIR__ . '/../../config/database.php';
+require_once __DIR__ . '/funciones.php';
 
 $datos = [
     'nombre' => trim((string) ($_POST['nombre'] ?? '')),
