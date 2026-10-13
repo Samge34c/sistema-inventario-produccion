@@ -1,0 +1,7 @@
+{
+    "require-dev": {
+        "phpstan/phpstan": "^2.3",
+        "phpunit/phpunit": "^11",
+        "pdepend/pdepend": "^3.0"
+    }
+}

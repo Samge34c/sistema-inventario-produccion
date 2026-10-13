@@ -1,0 +1,111 @@
+{
+    "totals": {
+        "errors": 0,
+        "file_errors": 11
+    },
+    "files": {
+        "modules/inventario/editar.php": {
+            "errors": 2,
+            "messages": [
+                {
+                    "message": "Variable $conexion might not be defined.",
+                    "line": 19,
+                    "ignorable": true,
+                    "identifier": "variable.undefined"
+                },
+                {
+                    "message": "Variable $conexion might not be defined.",
+                    "line": 46,
+                    "ignorable": true,
+                    "identifier": "variable.undefined"
+                }
+            ]
+        },
+        "modules/inventario/eliminar.php": {
+            "errors": 1,
+            "messages": [
+                {
+                    "message": "Variable $conexion might not be defined.",
+                    "line": 19,
+                    "ignorable": true,
+                    "identifier": "variable.undefined"
+                }
+            ]
+        },
+        "modules/inventario/guardar-movimiento.php": {
+            "errors": 1,
+            "messages": [
+                {
+                    "message": "Variable $conexion might not be defined.",
+                    "line": 27,
+                    "ignorable": true,
+                    "identifier": "variable.undefined"
+                }
+            ]
+        },
+        "modules/inventario/guardar.php": {
+            "errors": 1,
+            "messages": [
+                {
+                    "message": "Variable $conexion might not be defined.",
+                    "line": 31,
+                    "ignorable": true,
+                    "identifier": "variable.undefined"
+                }
+            ]
+        },
+        "modules/inventario/index.php": {
+            "errors": 1,
+            "messages": [
+                {
+                    "message": "Variable $conexion might not be defined.",
+                    "line": 10,
+                    "ignorable": true,
+                    "identifier": "variable.undefined"
+                }
+            ]
+        },
+        "modules/inventario/movimientos-funciones.php": {
+            "errors": 2,
+            "messages": [
+                {
+                    "message": "Strict comparison using === between int and null will always evaluate to false.",
+                    "line": 32,
+                    "ignorable": true,
+                    "tip": "Because the type is coming from a PHPDoc, you can turn off this check by setting treatPhpDocTypesAsCertain: false in your %configurationFile%.",
+                    "identifier": "identical.alwaysFalse"
+                },
+                {
+                    "message": "If condition is always false.",
+                    "line": 107,
+                    "ignorable": true,
+                    "identifier": "if.alwaysFalse"
+                }
+            ]
+        },
+        "modules/inventario/movimientos.php": {
+            "errors": 3,
+            "messages": [
+                {
+                    "message": "Variable $conexion might not be defined.",
+                    "line": 16,
+                    "ignorable": true,
+                    "identifier": "variable.undefined"
+                },
+                {
+                    "message": "Variable $conexion might not be defined.",
+                    "line": 17,
+                    "ignorable": true,
+                    "identifier": "variable.undefined"
+                },
+                {
+                    "message": "Variable $conexion might not be defined.",
+                    "line": 19,
+                    "ignorable": true,
+                    "identifier": "variable.undefined"
+                }
+            ]
+        }
+    },
+    "errors": []
+}

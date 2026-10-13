@@ -1,0 +1,34 @@
+[
+    {
+        "tipo": "ENTRADA",
+        "cantidad": "1",
+        "aceptada": true,
+        "saldo": "11.00",
+        "resultado": true,
+        "actual": "11.00"
+    },
+    {
+        "tipo": "SALIDA",
+        "cantidad": "11",
+        "aceptada": false,
+        "saldo": "10.00",
+        "resultado": false,
+        "actual": "10.00"
+    },
+    {
+        "tipo": "PENDIENTE",
+        "cantidad": "11",
+        "aceptada": true,
+        "saldo": "10.00",
+        "resultado": true,
+        "actual": "10.00"
+    },
+    {
+        "tipo": "OTRO",
+        "cantidad": "1",
+        "aceptada": false,
+        "saldo": "10.00",
+        "resultado": false,
+        "actual": "10.00"
+    }
+]

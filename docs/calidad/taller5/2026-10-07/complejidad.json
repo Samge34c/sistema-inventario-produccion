@@ -1,0 +1,80 @@
+[
+  {
+    "function": "escapar",
+    "ccn": 1,
+    "ccn2": 1,
+    "file": "modules/inventario/editar.php"
+  },
+  {
+    "function": "obtenerUnidadesPermitidas",
+    "ccn": 1,
+    "ccn2": 1,
+    "file": "modules/inventario/funciones.php"
+  },
+  {
+    "function": "validarMateriaPrima",
+    "ccn": 6,
+    "ccn2": 8,
+    "file": "modules/inventario/funciones.php"
+  },
+  {
+    "function": "escapar",
+    "ccn": 1,
+    "ccn2": 1,
+    "file": "modules/inventario/index.php"
+  },
+  {
+    "function": "obtenerTiposMovimiento",
+    "ccn": 1,
+    "ccn2": 1,
+    "file": "modules/inventario/movimientos-funciones.php"
+  },
+  {
+    "function": "convertirCantidadCentesimas",
+    "ccn": 2,
+    "ccn2": 3,
+    "file": "modules/inventario/movimientos-funciones.php"
+  },
+  {
+    "function": "convertirCentesimasCantidad",
+    "ccn": 1,
+    "ccn2": 1,
+    "file": "modules/inventario/movimientos-funciones.php"
+  },
+  {
+    "function": "validarMovimiento",
+    "ccn": 5,
+    "ccn2": 9,
+    "file": "modules/inventario/movimientos-funciones.php"
+  },
+  {
+    "function": "registrarMovimiento",
+    "ccn": 13,
+    "ccn2": 13,
+    "file": "modules/inventario/movimientos-funciones.php"
+  },
+  {
+    "function": "obtenerTokenMovimiento",
+    "ccn": 2,
+    "ccn2": 2,
+    "file": "modules/inventario/movimientos-funciones.php"
+  },
+  {
+    "function": "actualizarMateriaPrimaProtegida",
+    "ccn": 7,
+    "ccn2": 11,
+    "file": "modules/inventario/movimientos-funciones.php"
+  },
+  {
+    "function": "validarTokenMovimiento",
+    "ccn": 1,
+    "ccn2": 3,
+    "file": "modules/inventario/movimientos-funciones.php"
+  },
+  {
+    "function": "escaparMovimiento",
+    "ccn": 1,
+    "ccn2": 1,
+    "file": "modules/inventario/movimientos.php"
+  }
+]
