@@ -1,3 +1,9 @@
+# Procedimiento vigente tras incorporar acceso
+
+La propuesta de recuperación del 12/10 añade inicio de sesión y cambios de protección. Para comprobarla completa, usar [recuperacion-sprint1-2026-10-12.md](recuperacion-sprint1-2026-10-12.md) y `pruebas/recuperacion-sprint1.py`, con una cuenta ficticia creada automáticamente en una base nueva. Las salidas y scripts anteriores se conservan como evidencia de las versiones sin ese control de acceso; no prueban por sí solos la propuesta nueva.
+
+## Registro anterior de SCRUM-22
+
 # Protección del registro de materias primas
 
 ## Problema y resultado

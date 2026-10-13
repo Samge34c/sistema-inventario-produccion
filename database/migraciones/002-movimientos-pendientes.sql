@@ -24,3 +24,4 @@ CREATE TABLE materiales_pendientes (
         ON DELETE RESTRICT ON UPDATE CASCADE,
     CONSTRAINT ck_pendiente_cantidad CHECK (cantidad > 0)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+

@@ -171,3 +171,4 @@ function validarTokenMovimiento(mixed $token): bool
     return is_string($token) && isset($_SESSION['token_movimiento'])
         && hash_equals($_SESSION['token_movimiento'], $token);
 }
+

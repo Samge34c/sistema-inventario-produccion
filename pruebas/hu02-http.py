@@ -19,7 +19,7 @@ class LeerCampos(HTMLParser):
     def handle_starttag(self, etiqueta, atributos):
         datos = dict(atributos)
         if etiqueta == "input" and "name" in datos:
-            self.campos[datos["name"]] = datos.get("value", "")
+            self.campos.setdefault(datos["name"], datos.get("value", ""))
 
 
 url = os.environ.get("HU02_URL", "http://127.0.0.1:8000").rstrip("/")
@@ -46,6 +46,17 @@ def comprobar(esCorrecto, caso):
     print(f"OK HTTP {numeroPruebas}: {caso}")
 
 
+# Las credenciales pertenecen a una cuenta ficticia creada en la base desechable.
+estado, paginaAcceso = solicitar('/iniciar-sesion.php')
+camposAcceso = LeerCampos()
+camposAcceso.feed(paginaAcceso)
+estado, paginaAcceso = solicitar('/iniciar-sesion.php', {
+    'correo': os.environ['HU02_PRUEBA_CORREO'],
+    'clave': os.environ['HU02_PRUEBA_CLAVE_USUARIO'],
+    'token': camposAcceso.campos['token'],
+})
+if estado != 200 or 'Cerrar sesión' not in paginaAcceso:
+    raise AssertionError('No se pudo iniciar sesión con la cuenta ficticia de prueba')
 base = "/modules/inventario/"
 nombre = "Harina HU02 HTTP " + secrets.token_hex(5)
 estado, formulario = solicitar(base + "index.php")
@@ -103,11 +114,15 @@ estado, pagina = registrar("PENDIENTE", "1", observacion)
 comprobar(estado == 200 and html.escape(observacion, quote=True).replace("&#x27;", "&#039;") in pagina,
           "consulta preparada conserva texto y HTML escapa el script")
 comprobar("11000.00" in obtenerSaldo(pagina), "texto de prueba no modifica existencias")
+estado, formularioEdicion = solicitar(base + "editar.php?id=" + idMateria)
+camposEdicion = LeerCampos()
+camposEdicion.feed(formularioEdicion)
 estado, pagina = solicitar(base + "editar.php?id=" + idMateria, {
-    "id": idMateria, "nombre": nombre, "unidad_medida": "g", "cantidad_disponible": "9000", "stock_minimo": "1000"
+    "token": camposEdicion.campos["token"], "id": idMateria, "nombre": nombre, "unidad_medida": "g", "cantidad_disponible": "9000", "stock_minimo": "1000"
 })
 comprobar("entrada o salida" in pagina, "edición directa del saldo bloqueada")
-estado, pagina = solicitar(base + "eliminar.php", {"id": idMateria})
+estado, pagina = solicitar(base + "eliminar.php", {"id": idMateria, "token": camposEdicion.campos["token"]})
 comprobar(estado == 200 and "historial" in pagina, "borrado de materia referenciada informa error")
 comprobar(nombre in pagina and "11000.00" in pagina, "materia e inventario conservados")
 print(f"RESULTADO HTTP: {numeroPruebas} comprobaciones correctas. No evalúa consola JavaScript.")
+

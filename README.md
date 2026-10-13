@@ -1,66 +1,27 @@
-# Panadería — Sistema de inventario, recetas y planificación de producción
+# Sistema de inventario, recetas y planificación de producción
 
-Aplicación web en PHP y MySQL para gestionar materias primas, recetas, planificación de producción y ventas.
+Aplicación web en PHP, MySQL, HTML, Bootstrap y JavaScript.
 
-## Requisitos
+## Preparar una instalación local
 
-- PHP 8 o superior con PDO MySQL y mbstring.
-- MySQL 8 o MariaDB compatible.
-- Git.
-- Node.js y npm para las herramientas de formato frontend.
+1. Instalar PHP con PDO MySQL y mbstring, y un servidor MySQL/MariaDB.
+2. Para una base nueva, importar `database/schema.sql`. Para una instalación anterior a HU02, aplicar en orden las migraciones 002, 003 y 004 sobre la base seleccionada. Si HU02 ya estaba instalada, aplicar solo 003 y 004. Conservar una copia antes de migrar una instalación con datos; no importar el esquema nuevo encima.
+3. Configurar la conexión local con `INVENTARIO_DSN`, `INVENTARIO_USUARIO` y `INVENTARIO_CLAVE`. El DSN debe indicar la base seleccionada. No guardar credenciales en GitHub.
+4. Crear una cuenta desde la terminal: configurar temporalmente `INVENTARIO_CLAVE_INICIAL` con una contraseña privada de al menos 12 caracteres y ejecutar `php herramientas/crear-usuario.php correo nombre`. Utilizar los datos reales elegidos localmente; eliminar la variable de contraseña después. No hay cuentas públicas ni contraseñas predeterminadas.
+5. Iniciar `php -S 127.0.0.1:8000` desde la raíz y abrir `http://127.0.0.1:8000/iniciar-sesion.php`.
 
-## Instalación local
+## Flujo disponible en la propuesta
 
-1. Clonar el repositorio.
-2. Para una base nueva, importar `database/schema.sql` en MySQL. Si ya existe una base del esquema anterior, respaldarla y aplicar una sola vez `database/migraciones/002-movimientos-pendientes.sql`; no reimportar el esquema sobre datos existentes.
-3. Revisar la conexión local en `config/database.php`.
-4. Desde la raíz ejecutar:
+- Iniciar y cerrar sesión con una cuenta activa.
+- Registrar y consultar materias primas.
+- Registrar entradas, salidas y materiales pendientes; consultar el historial.
+- Registrar y consultar recetas con cantidades por unidad del producto. Cada ingrediente utiliza la unidad de su materia prima; crear recetas no descuenta inventario.
 
-```bash
-php -S localhost:8000
-```
+## Pruebas y seguimiento
 
-5. Abrir `http://localhost:8000`.
+- [Recuperación de HU01–HU03 y procedimiento vigente](docs/pruebas/recuperacion-sprint1-2026-10-12.md).
+- [Evidencia anterior de HU02](docs/pruebas/hu02-movimientos.md).
+- [Estándares del equipo](ESTANDARES.md).
+- [Tablero Jira](https://sistema-inventario-produccion.atlassian.net/jira/software/projects/SCRUM/boards/1).
 
-## Módulos
-
-- `modules/inventario/`: materias primas y movimientos de inventario.
-- `modules/recetas/`: recetas e ingredientes.
-- `modules/produccion/`: planificación y cálculos de producción.
-- `modules/ventas/`: ventas y reportes.
-
-## HU01 — Gestionar materias primas
-
-Permite registrar, consultar, editar y eliminar materias primas con nombre, unidad de medida, existencia disponible y stock mínimo.
-
-El caso de prueba reproducible está en `docs/pruebas/hu01-materias-primas.md`.
-
-## HU02 — Movimientos y materiales pendientes
-
-Desde Materias primas, abrir **Movimientos**. Registrar ENTRADA o SALIDA actualiza la existencia en la unidad de la materia prima; PENDIENTE se guarda por separado y no aumenta la disponibilidad actual. Se rechazan salidas mayores al saldo y cantidades con más de dos decimales. Una materia prima con historial no puede borrarse ni cambiar su unidad o saldo directamente; el saldo se ajusta mediante un movimiento.
-
-Caso numérico, instalación, pruebas automatizadas y límites de verificación: [HU02](docs/pruebas/hu02-movimientos.md). La implementación sigue pendiente de revisión e integración.
-
-## Formato frontend
-
-Instalar dependencias:
-
-```bash
-npm install
-```
-
-Comprobar formato:
-
-```bash
-npx prettier "**/*.{js,html,css}" --check
-```
-
-## Flujo Git
-
-- `main`: versión integrada y estable.
-- `develop`: integración del sprint.
-- `feat/<hu>-<nombre-corto>`: funcionalidades.
-- `fix/<nombre-corto>`: correcciones.
-- `docs/<nombre-corto>`: documentación.
-
-Las ramas de trabajo nacen de `develop` y se integran mediante Pull Request revisada por el integrante distinto del autor.
+Los informes y pruebas anteriores conservan sus versiones y fechas. La implementación preparada no sustituye revisión independiente, aprobación ni verificación de una integración. No hay Laravel u otro framework de servidor incorporado.

@@ -64,7 +64,7 @@ try {
     $basesTemporales[] = $nombreBase;
     $sql = str_replace('sistema_inventario', $nombreBase, file_get_contents(__DIR__ . '/../database/schema.sql'));
     $conexion->exec($sql);
-    comprobar((int) $conexion->query('SELECT COUNT(*) FROM information_schema.TABLES WHERE TABLE_SCHEMA = DATABASE()')->fetchColumn() === 5, 'schema nuevo crea las cinco tablas');
+    comprobar((int) $conexion->query('SELECT COUNT(*) FROM information_schema.TABLES WHERE TABLE_SCHEMA = DATABASE()')->fetchColumn() === 6, 'schema nuevo crea las seis tablas, incluida usuarios');
     comprobar($conexion->query("SELECT ENGINE FROM information_schema.TABLES WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'movimientos_inventario'")->fetchColumn() === 'InnoDB', 'movimientos usa InnoDB');
     $conexion->exec("INSERT INTO materias_primas (nombre, unidad_medida, cantidad_disponible) VALUES ('Harina de prueba', 'g', 10000)");
     $id = (string) $conexion->lastInsertId();
@@ -153,3 +153,4 @@ try {
         $conexion->exec('DROP DATABASE IF EXISTS ' . $baseTemporal);
     }
 }
+
