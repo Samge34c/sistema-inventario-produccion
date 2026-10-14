@@ -1,0 +1,71 @@
+{
+  "fecha": "2026-10-11T17:51:20.517324-05:00",
+  "aislamiento": {
+    "verificado": true,
+    "base": "prueba_scrum22_954abdc157391d7497d217d5",
+    "config_sha256": "09820d2e3c6167b7849719b87d1dfcc65d4f3380ef3258ef7fd673f7e3433fda",
+    "antes_de_cada_post": true
+  },
+  "casos": [
+    {
+      "caso": "CP14_origen_ajeno_sin_token",
+      "http": 403,
+      "registros_antes": 0,
+      "registros_despues": 0,
+      "aprobado": true
+    },
+    {
+      "caso": "token_incorrecto",
+      "http": 403,
+      "registros_antes": 0,
+      "registros_despues": 0,
+      "aprobado": true
+    },
+    {
+      "caso": "token_tipo_arreglo",
+      "http": 403,
+      "registros_antes": 0,
+      "registros_despues": 0,
+      "aprobado": true
+    },
+    {
+      "caso": "token_otra_sesion",
+      "http": 403,
+      "registros_antes": 0,
+      "registros_despues": 0,
+      "aprobado": true
+    },
+    {
+      "caso": "sin_sesion_sin_token",
+      "http": 403,
+      "registros_antes": 0,
+      "registros_despues": 0,
+      "aprobado": true
+    },
+    {
+      "caso": "alta_valida",
+      "http": 200,
+      "registros_antes": 0,
+      "registros_despues": 1,
+      "aprobado": true
+    },
+    {
+      "caso": "cantidad_invalida",
+      "http": 200,
+      "registros_antes": 1,
+      "registros_despues": 1,
+      "aprobado": true
+    }
+  ],
+  "inicio": "2026-10-11T17:51:16.342330-05:00",
+  "entorno": {
+    "php": "8.2.12",
+    "base_de_datos": "10.4.32-MariaDB",
+    "python": "3.12.10"
+  },
+  "configuracion_original_sin_cambios": true,
+  "registro_servidor": "[Sun Oct 11 17:51:16 2026] PHP 8.2.12 Development Server (http://127.0.0.1:50501) started\n[Sun Oct 11 17:51:16 2026] 127.0.0.1:50503 Accepted\n[Sun Oct 11 17:51:16 2026] 127.0.0.1:50503 Closed without sending a request; it was probably just an unused speculative preconnection\n[Sun Oct 11 17:51:16 2026] 127.0.0.1:50503 Closing\n[Sun Oct 11 17:51:17 2026] 127.0.0.1:50505 Accepted\n[Sun Oct 11 17:51:17 2026] 127.0.0.1:50505 [200]: GET /comprobar-aislamiento-741334c6a5155783b246134f.php\n[Sun Oct 11 17:51:17 2026] 127.0.0.1:50505 Closing\n[Sun Oct 11 17:51:17 2026] 127.0.0.1:50507 Accepted\n[Sun Oct 11 17:51:17 2026] 127.0.0.1:50507 [200]: GET /modules/inventario/index.php\n[Sun Oct 11 17:51:17 2026] 127.0.0.1:50507 Closing\n[Sun Oct 11 17:51:17 2026] 127.0.0.1:50510 Accepted\n[Sun Oct 11 17:51:17 2026] 127.0.0.1:50510 [200]: GET /comprobar-aislamiento-741334c6a5155783b246134f.php\n[Sun Oct 11 17:51:17 2026] 127.0.0.1:50510 Closing\n[Sun Oct 11 17:51:17 2026] 127.0.0.1:50513 Accepted\n[Sun Oct 11 17:51:17 2026] 127.0.0.1:50513 [403]: POST /modules/inventario/guardar.php\n[Sun Oct 11 17:51:17 2026] 127.0.0.1:50513 Closing\n[Sun Oct 11 17:51:18 2026] 127.0.0.1:50516 Accepted\n[Sun Oct 11 17:51:18 2026] 127.0.0.1:50516 [200]: GET /comprobar-aislamiento-741334c6a5155783b246134f.php\n[Sun Oct 11 17:51:18 2026] 127.0.0.1:50516 Closing\n[Sun Oct 11 17:51:18 2026] 127.0.0.1:50519 Accepted\n[Sun Oct 11 17:51:18 2026] 127.0.0.1:50519 [403]: POST /modules/inventario/guardar.php\n[Sun Oct 11 17:51:18 2026] 127.0.0.1:50519 Closing\n[Sun Oct 11 17:51:18 2026] 127.0.0.1:50533 Accepted\n[Sun Oct 11 17:51:18 2026] 127.0.0.1:50533 [200]: GET /comprobar-aislamiento-741334c6a5155783b246134f.php\n[Sun Oct 11 17:51:18 2026] 127.0.0.1:50533 Closing\n[Sun Oct 11 17:51:18 2026] 127.0.0.1:50537 Accepted\n[Sun Oct 11 17:51:18 2026] 127.0.0.1:50537 [403]: POST /modules/inventario/guardar.php\n[Sun Oct 11 17:51:18 2026] 127.0.0.1:50537 Closing\n[Sun Oct 11 17:51:18 2026] 127.0.0.1:50540 Accepted\n[Sun Oct 11 17:51:19 2026] 127.0.0.1:50540 [200]: GET /comprobar-aislamiento-741334c6a5155783b246134f.php\n[Sun Oct 11 17:51:19 2026] 127.0.0.1:50540 Closing\n[Sun Oct 11 17:51:19 2026] 127.0.0.1:50544 Accepted\n[Sun Oct 11 17:51:19 2026] 127.0.0.1:50544 [403]: POST /modules/inventario/guardar.php\n[Sun Oct 11 17:51:19 2026] 127.0.0.1:50544 Closing\n[Sun Oct 11 17:51:19 2026] 127.0.0.1:50547 Accepted\n[Sun Oct 11 17:51:19 2026] 127.0.0.1:50547 [200]: GET /comprobar-aislamiento-741334c6a5155783b246134f.php\n[Sun Oct 11 17:51:19 2026] 127.0.0.1:50547 Closing\n[Sun Oct 11 17:51:19 2026] 127.0.0.1:50550 Accepted\n[Sun Oct 11 17:51:19 2026] 127.0.0.1:50550 [403]: POST /modules/inventario/guardar.php\n[Sun Oct 11 17:51:19 2026] 127.0.0.1:50550 Closing\n[Sun Oct 11 17:51:19 2026] 127.0.0.1:50553 Accepted\n[Sun Oct 11 17:51:19 2026] 127.0.0.1:50553 [200]: GET /comprobar-aislamiento-741334c6a5155783b246134f.php\n[Sun Oct 11 17:51:19 2026] 127.0.0.1:50553 Closing\n[Sun Oct 11 17:51:19 2026] 127.0.0.1:50556 Accepted\n[Sun Oct 11 17:51:20 2026] 127.0.0.1:50556 [302]: POST /modules/inventario/guardar.php\n[Sun Oct 11 17:51:20 2026] 127.0.0.1:50556 Closing\n[Sun Oct 11 17:51:20 2026] 127.0.0.1:50558 Accepted\n[Sun Oct 11 17:51:20 2026] 127.0.0.1:50558 [200]: GET /modules/inventario/index.php?estado=creada\n[Sun Oct 11 17:51:20 2026] 127.0.0.1:50558 Closing\n[Sun Oct 11 17:51:20 2026] 127.0.0.1:50562 Accepted\n[Sun Oct 11 17:51:20 2026] 127.0.0.1:50562 [200]: GET /comprobar-aislamiento-741334c6a5155783b246134f.php\n[Sun Oct 11 17:51:20 2026] 127.0.0.1:50562 Closing\n[Sun Oct 11 17:51:20 2026] 127.0.0.1:50565 Accepted\n[Sun Oct 11 17:51:20 2026] 127.0.0.1:50565 [302]: POST /modules/inventario/guardar.php\n[Sun Oct 11 17:51:20 2026] 127.0.0.1:50565 Closing\n[Sun Oct 11 17:51:20 2026] 127.0.0.1:50567 Accepted\n[Sun Oct 11 17:51:20 2026] 127.0.0.1:50567 [200]: GET /modules/inventario/index.php\n[Sun Oct 11 17:51:20 2026] 127.0.0.1:50567 Closing\n",
+  "aprobada": true,
+  "base_temporal_eliminada": true,
+  "fin": "2026-10-11T17:51:20.961266-05:00"
+}
