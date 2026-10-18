@@ -188,6 +188,18 @@ def ejecutar():
                         resultado = subprocess.run(['node', str(raiz / 'pruebas/recetas-web.js')], env=entorno, capture_output=True, text=True, timeout=90)
                         resumen['recetas_navegador'] = {'codigo_salida': resultado.returncode, 'stdout': resultado.stdout, 'stderr': resultado.stderr}
                         comprobar(resultado.returncode == 0, 'CP-15 desde el navegador y alta dinámica de ingredientes')
+                    if os.environ.get('RECUPERACION_PRODUCCION') == '1':
+                        resultado = subprocess.run([php, str(raiz / 'pruebas/produccion-integracion.php')], env=entorno, capture_output=True, text=True, timeout=60)
+                        resumen['produccion_integracion'] = {'codigo_salida': resultado.returncode, 'stdout': resultado.stdout, 'stderr': resultado.stderr}
+                        comprobar(resultado.returncode == 0, 'HU04-HU06: cálculos, viabilidad y proyección')
+                        datosWeb = re.search(r'^DATOS_WEB: (.+)$', resultado.stdout, re.M)
+                        if datosWeb is None:
+                            raise RuntimeError('No se obtuvieron las recetas de prueba de producción.')
+                        entorno['PRODUCCION_DATOS_WEB'] = datosWeb.group(1)
+                        if os.environ.get('RECUPERACION_NAVEGADOR') == '1':
+                            resultado = subprocess.run(['node', str(raiz / 'pruebas/produccion-web.js')], env=entorno, capture_output=True, text=True, timeout=90)
+                            resumen['produccion_navegador'] = {'codigo_salida': resultado.returncode, 'stdout': resultado.stdout, 'stderr': resultado.stderr}
+                            comprobar(resultado.returncode == 0, 'HU04-HU06: flujo web de escritorio y móvil')
                     sql('$c->exec("UPDATE usuarios SET activo=0");')
                     estado, _ = solicitar('/index.php')
                     comprobar(estado == 403, 'cuenta deshabilitada pierde acceso')
