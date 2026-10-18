@@ -16,10 +16,14 @@ Aplicación web en PHP, MySQL, HTML, Bootstrap y JavaScript.
 - Registrar y consultar materias primas.
 - Registrar entradas, salidas y materiales pendientes; consultar el historial.
 - Registrar y consultar recetas con cantidades por unidad del producto. Cada ingrediente utiliza la unidad de su materia prima; crear recetas no descuenta inventario.
+- Calcular producción máxima con existencias actuales e identificar todos los ingredientes limitantes.
+- Consultar recetas posibles y no posibles, evaluadas individualmente para producir al menos una unidad.
+- Consultar por separado producción actual y proyección con materiales pendientes, sin recibirlos ni descontar inventario.
 
 ## Pruebas y seguimiento
 
 - [Recuperación de HU01–HU03 y procedimiento vigente](docs/pruebas/recuperacion-sprint1-2026-10-12.md).
+- [Sprint 2: cálculos, ejemplos y resultados de HU04–HU06](docs/pruebas/sprint2-calculos.md).
 - [Evidencia anterior de HU02](docs/pruebas/hu02-movimientos.md).
 - [Estándares del equipo](ESTANDARES.md).
 - [Tablero Jira](https://sistema-inventario-produccion.atlassian.net/jira/software/projects/SCRUM/boards/1).
