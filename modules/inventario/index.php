@@ -2,10 +2,14 @@
 
 declare(strict_types=1);
 
-session_start();
+require_once __DIR__ . '/../../config/acceso.php';
+exigirAcceso();
+
+
 
 require_once __DIR__ . '/../../config/database.php';
 require_once __DIR__ . '/funciones.php';
+require_once __DIR__ . '/proteccion-formulario.php';
 
 $consulta = $conexion->query(
     'SELECT id, nombre, unidad_medida, cantidad_disponible, stock_minimo
@@ -46,7 +50,10 @@ function escapar(string $valor): string
             <h1 class="h3 mb-1">Materias primas</h1>
             <p class="text-secondary mb-0">Registro y consulta de existencias.</p>
         </div>
-        <a class="btn btn-outline-secondary" href="../../index.php">Inicio</a>
+        <div class="d-flex gap-2">
+            <a class="btn btn-primary" href="movimientos.php">Movimientos</a>
+            <a class="btn btn-outline-secondary" href="../../index.php">Inicio</a>
+        </div>
     </div>
 
     <?php if ($mensaje !== null): ?>
@@ -55,7 +62,7 @@ function escapar(string $valor): string
 
     <?php if ($errores !== []): ?>
         <div class="alert alert-danger" role="alert">
-            <strong>No se pudo registrar la materia prima.</strong>
+            <strong>No se pudo completar la operación.</strong>
             <ul class="mb-0 mt-2">
                 <?php foreach ($errores as $error): ?>
                     <li><?= escapar((string) $error) ?></li>
@@ -68,6 +75,7 @@ function escapar(string $valor): string
         <div class="card-body">
             <h2 class="h5">Registrar materia prima</h2>
             <form action="guardar.php" method="post" class="row g-3">
+                <input type="hidden" name="token" value="<?= escapar(obtenerTokenMateriaPrima()) ?>">
                 <div class="col-md-5">
                     <label class="form-label" for="nombre">Nombre</label>
                     <input class="form-control" id="nombre" name="nombre" maxlength="100" required
@@ -137,6 +145,7 @@ function escapar(string $valor): string
                                     <a class="btn btn-sm btn-outline-primary"
                                         href="editar.php?id=<?= (int) $materiaPrima['id'] ?>">Editar</a>
                                     <form action="eliminar.php" method="post" class="d-inline">
+                                        <input type="hidden" name="token" value="<?= obtenerTokenAcceso() ?>">
                                         <input type="hidden" name="id" value="<?= (int) $materiaPrima['id'] ?>">
                                         <button class="btn btn-sm btn-outline-danger" type="submit">Eliminar</button>
                                     </form>
@@ -152,3 +161,4 @@ function escapar(string $valor): string
 </main>
 </body>
 </html>
+

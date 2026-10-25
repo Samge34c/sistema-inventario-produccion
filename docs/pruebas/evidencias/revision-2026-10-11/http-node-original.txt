@@ -1,0 +1,1 @@
+ERROR HTTP: FALLO: HU01 registra y consulta 10000 g

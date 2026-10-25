@@ -1,0 +1,43 @@
+OK 1: schema nuevo crea las cinco tablas
+OK 2: movimientos usa InnoDB
+OK 3: entrada 2000 deja 12000 g
+OK 4: salida 1000 deja 11000 g
+OK 5: pendiente 5000 conserva 11000 disponibles
+OK 6: pendiente queda en tabla separada
+OK 7: pendiente no aparece como entrada/salida
+OK 8: salida excesiva rechazada
+OK 9: rechazo conserva saldo
+OK 10: cantidad inválida rechazada: "0"
+OK 11: cantidad inválida rechazada: "-1"
+OK 12: cantidad inválida rechazada: "1.001"
+OK 13: cantidad inválida rechazada: "100000000"
+OK 14: cantidad inválida rechazada: "1e2"
+OK 15: cantidad inválida rechazada: "NaN"
+OK 16: cantidad inválida rechazada: "INF"
+OK 17: cantidad inválida rechazada: ""
+OK 18: cantidad inválida rechazada: "1,5"
+OK 19: cantidad inválida rechazada: ["1"]
+OK 20: tipo no permitido rechazado
+OK 21: identificador cero rechazado
+OK 22: materia inexistente rechazada
+OK 23: observación mayor de 255 caracteres rechazada
+OK 24: observación con estructura inesperada rechazada
+OK 25: fallo simulado de INSERT propagado
+OK 26: rollback revierte el UPDATE
+OK 27: rollback conserva dos movimientos
+OK 28: FK impide borrar la materia y perder su historial
+OK 29: edición directa de saldo con historial bloqueada
+OK 30: cambio de unidad con historial bloqueado
+OK 31: edición permitida de stock mínimo conserva saldo
+OK 32: centésima exacta sin error de flotantes
+OK 33: salida exacta permite saldo cero
+OK 34: desbordamiento de saldo rechazado
+OK 35: proceso concurrente completa sin error técnico
+OK 36: proceso concurrente completa sin error técnico
+OK 37: dos salidas de 80 sobre 100: una aceptada y otra rechazada
+OK 38: saldo concurrente final 20
+OK 39: migración conserva existencia anterior
+OK 40: migración conserva historial anterior
+OK 41: pendiente funciona después de migrar sin modificar saldo
+OK 42: migración protege el historial de borrados
+RESULTADO: 42 comprobaciones correctas.
