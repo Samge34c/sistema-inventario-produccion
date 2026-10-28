@@ -1,0 +1,19 @@
+﻿HU02 - Informe de validación
+
+Proyecto: sistema-inventario-produccion
+Fecha: 28 de octubre de 2026
+
+RESULTADOS
+- Pruebas de integración: 42 comprobaciones aprobadas.
+- Sintaxis PHP: 20 archivos revisados sin errores.
+- Sintaxis Python: comprobada.
+- Sintaxis JavaScript: comprobada.
+- Pruebas HTTP: pendientes de ejecución aislada.
+- Pruebas de navegador Playwright: pendientes de ejecución aislada.
+
+ALCANCE
+Las comprobaciones de integración cubren movimientos de inventario,
+cantidades inválidas, saldos, restricciones, concurrencia y migración.
+
+Nota: las pruebas HTTP y de navegador no se consideran aprobadas
+hasta que se ejecuten y se verifiquen sus resultados.
