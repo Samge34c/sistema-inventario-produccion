@@ -1,0 +1,6 @@
+Traceback (most recent call last):
+  File "/workspace/scratch/1b53906db11e/tmp/revision-integracion-sprint1/pruebas/hu02-http.py", line 54, in <module>
+    comprobar(estado == 200 and nombre in pagina and "10000.00" in pagina, "HU01 registra y consulta 10000 g")
+  File "/workspace/scratch/1b53906db11e/tmp/revision-integracion-sprint1/pruebas/hu02-http.py", line 44, in comprobar
+    raise AssertionError(caso)
+AssertionError: HU01 registra y consulta 10000 g

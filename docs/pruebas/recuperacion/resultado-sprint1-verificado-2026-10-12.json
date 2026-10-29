@@ -1,0 +1,229 @@
+{
+  "inicio": "2026-10-12T20:24:26.283315-05:00",
+  "ciudad_referencia": "Villavicencio",
+  "modo": "Comprobaciones automatizadas",
+  "base_temporal": "prueba_recuperacion_75bf0075fe04a073f340fad2",
+  "casos": [
+    {
+      "caso": "migraciones 002 a 004 aplicadas sobre esquema anterior",
+      "aprobado": true
+    },
+    {
+      "caso": "migración protege los ingredientes contra eliminación",
+      "aprobado": true
+    },
+    {
+      "caso": "lectura privada requiere iniciar sesión",
+      "aprobado": true
+    },
+    {
+      "caso": "CP-13: alta sin autorización rechazada",
+      "aprobado": true
+    },
+    {
+      "caso": "CP-13: ninguna escritura",
+      "aprobado": true
+    },
+    {
+      "caso": "inicio de sesión sin token rechazado",
+      "aprobado": true
+    },
+    {
+      "caso": "contraseña incorrecta rechazada",
+      "aprobado": true
+    },
+    {
+      "caso": "inicio de sesión válido",
+      "aprobado": true
+    },
+    {
+      "caso": "CP-14: sin token rechazado",
+      "aprobado": true
+    },
+    {
+      "caso": "CP-14: token incorrecto rechazado",
+      "aprobado": true
+    },
+    {
+      "caso": "CP-14: token como arreglo rechazado",
+      "aprobado": true
+    },
+    {
+      "caso": "CP-14: origen ajeno sin token rechazado",
+      "aprobado": true
+    },
+    {
+      "caso": "token de otra sesión autenticada rechazado",
+      "aprobado": true
+    },
+    {
+      "caso": "alta autorizada con token válida",
+      "aprobado": true
+    },
+    {
+      "caso": "alta negativa no agrega registros",
+      "aprobado": true
+    },
+    {
+      "caso": "receta sin autorización rechazada",
+      "aprobado": true
+    },
+    {
+      "caso": "CP-15: receta guarda y consulta ambos ingredientes y cantidades",
+      "aprobado": true
+    },
+    {
+      "caso": "registrar receta no descuenta inventario",
+      "aprobado": true
+    },
+    {
+      "caso": "receta rechazada sin guardar: sin ingredientes",
+      "aprobado": true
+    },
+    {
+      "caso": "sin ingredientes parciales: sin ingredientes",
+      "aprobado": true
+    },
+    {
+      "caso": "receta rechazada sin guardar: cantidad cero",
+      "aprobado": true
+    },
+    {
+      "caso": "sin ingredientes parciales: cantidad cero",
+      "aprobado": true
+    },
+    {
+      "caso": "receta rechazada sin guardar: cantidad negativa",
+      "aprobado": true
+    },
+    {
+      "caso": "sin ingredientes parciales: cantidad negativa",
+      "aprobado": true
+    },
+    {
+      "caso": "receta rechazada sin guardar: más de dos decimales",
+      "aprobado": true
+    },
+    {
+      "caso": "sin ingredientes parciales: más de dos decimales",
+      "aprobado": true
+    },
+    {
+      "caso": "receta rechazada sin guardar: ingrediente repetido",
+      "aprobado": true
+    },
+    {
+      "caso": "sin ingredientes parciales: ingrediente repetido",
+      "aprobado": true
+    },
+    {
+      "caso": "receta rechazada sin guardar: ingrediente inexistente",
+      "aprobado": true
+    },
+    {
+      "caso": "sin ingredientes parciales: ingrediente inexistente",
+      "aprobado": true
+    },
+    {
+      "caso": "eliminación sin token rechazada",
+      "aprobado": true
+    },
+    {
+      "caso": "materia usada en receta no se elimina",
+      "aprobado": true
+    },
+    {
+      "caso": "edición sin token rechazada",
+      "aprobado": true
+    },
+    {
+      "caso": "HU02: quince comprobaciones HTTP",
+      "aprobado": true
+    },
+    {
+      "caso": "flujo web HU02 y consola JavaScript",
+      "aprobado": true
+    },
+    {
+      "caso": "CP-15 desde el navegador y alta dinámica de ingredientes",
+      "aprobado": true
+    },
+    {
+      "caso": "cuenta deshabilitada pierde acceso",
+      "aprobado": true
+    },
+    {
+      "caso": "cierre de sesión válido",
+      "aprobado": true
+    },
+    {
+      "caso": "sesión cerrada no permite escribir",
+      "aprobado": true
+    },
+    {
+      "caso": "HU02: integración, concurrencia y migración",
+      "aprobado": true
+    }
+  ],
+  "aprobado": true,
+  "fuentes_sha256": {
+    "index.php": "da017ae4ccd542400e932645ffd583737fe57e69b3d5e817fc1284d0023b019d",
+    "cerrar-sesion.php": "ca33ec59d4b1f30e4b3f6f3bcc6ec60899ed6bc9630fbe24b781367bbd7783f7",
+    "iniciar-sesion.php": "75f3d908c49cc6c1218e886ab4824a8ab3250494d3bc8e180a5965a0bb92cafb",
+    "pruebas/recetas-web.js": "f03042f070d431d21f74fb0f039cda2baf1d45e7e5c3fddab7c419bebf2c3859",
+    "pruebas/hu02-web.js": "6d6838fb1f99ab3c2ef831b670c33c087f8e03bb4aada35d39cc49274e531ade",
+    "pruebas/hu02-integracion.php": "6bc3db488390e51944c4f4dfbd1ea105758ff4c476e2abc6c9e9c44385a8bea8",
+    "pruebas/recuperacion-sprint1.py": "f5edb7cc2ef43010e71b5db04106399d93a3b703d0ce53b66c954341204d1266",
+    "pruebas/hu02-http.py": "7e623840c206d7b6cf6acc16226b1694ddaade16b70e50dc22e2b5e081368598",
+    "config/acceso.php": "82eb0422782a5e3bdae94c8713acd90c775d9494b1f1736641fb0cf8f885b902",
+    "config/database.php": "b6deafcd1ad1b99b97cd9fcf639c13013f1a8db3867e460c72c896caeb763764",
+    "herramientas/crear-usuario.php": "f077267a60c1d281d6fc4b02e46c1bb29374e8665b8447245458f21c3efa5973",
+    "database/schema.sql": "caad64386e8d27804e1e99dd9f1c49cd2077b166ef2617613dde7eba0e0bd4ab",
+    "pruebas/datos/schema-anterior-hu01.sql": "d1af241246ab1d449e145c41fa6a59d74a32bd8a63c55ce34947b549fbf96b30",
+    "modules/recetas/consultar.php": "7021632dd98ead0085baef82cf5d09bea8f3c710fc77345b73c6842e6e81734e",
+    "modules/recetas/recetas.js": "d1a4338583dc5d607984a034e4002dab46e91093ee30e15a69e4c6472a8e7447",
+    "modules/recetas/index.php": "1a3eb96b1f4c2ac68489b6f2d59a88743bc407d14fb37e0d5a5c583d453d291f",
+    "modules/recetas/funciones.php": "e57a2556145147d81188fc9a5300cb07c3e088f6dbf248851ced2b651d39e0c1",
+    "modules/recetas/guardar.php": "f9c30728e661be1e5e175c34eed9ca5920ada341db244dc439568bb3523cedf3",
+    "modules/inventario/proteccion-formulario.php": "601ec2a2756c2dab4eec387626d7c9542595712808f3021b527451e32f8be341",
+    "modules/inventario/guardar-movimiento.php": "791da93b687e7ea76d0c51e9d4033cd69cfb34eddbc777476afe17cd085d18b0",
+    "modules/inventario/movimientos-funciones.php": "3f94d40bfeee097dbf2d80185311fd3978e9b442ff99607de2d12722a4c533f7",
+    "modules/inventario/index.php": "7da734eb4d6b31c375f1f2e9e68110ad5a3c34ecb29c7ad020e54a943f8569f4",
+    "modules/inventario/funciones.php": "9821aa3279b1615af70313e76164f33696ac1d78297e28bcffa351771f976dd7",
+    "modules/inventario/guardar.php": "5faa7ba9d8498fc966d331e75643a2b7cbb2abd17f6026099efb88fb1de7d2eb",
+    "modules/inventario/editar.php": "befd690bb9160314b60780342d48f0664099c8c7f6a498872a83a67f35e2ee8e",
+    "modules/inventario/movimientos.php": "b623c4444cb6a342ca288474462fe5b28a3a4fe8851d885ecf3bcdfeb1dce9fa",
+    "modules/inventario/eliminar.php": "5c98f26346beae18d62c9fd49e21c078effeaa5662e061258529f25f0edfb11f",
+    "database/migraciones/003-usuarios.sql": "c3964cf2e2bd10a109cdec1fb6ca5ad2c4e10ceaf4b1be549a9ac23fa8ef0c4b",
+    "database/migraciones/004-proteger-ingredientes.sql": "5e1c89942a627206912f600de41351afab4f96728d3a35fc9bc2a44cc57f2c2f",
+    "database/migraciones/002-movimientos-pendientes.sql": "d2315114d7f33ea7cea447fa28b98abbc436ee01549cff8f1eb4178788c0d153"
+  },
+  "entorno": {
+    "php": "8.3.6",
+    "python": "3.12.14",
+    "base_de_datos": "10.11.14-MariaDB-0ubuntu0.24.04.1"
+  },
+  "hu02_http": {
+    "codigo_salida": 0,
+    "stdout": "OK HTTP 1: HU01 registra y consulta 10000 g\nOK HTTP 2: entrada aumenta a 12000\nOK HTTP 3: salida disminuye a 11000\nOK HTTP 4: pendiente conserva 11000 disponibles\nOK HTTP 5: pendiente visible por separado\nOK HTTP 6: salida excesiva informa error controlado\nOK HTTP 7: rechazo conserva existencia\nOK HTTP 8: CSRF inválido rechazado\nOK HTTP 9: GET al registro rechazado\nOK HTTP 10: backend rechaza más de dos decimales\nOK HTTP 11: consulta preparada conserva texto y HTML escapa el script\nOK HTTP 12: texto de prueba no modifica existencias\nOK HTTP 13: edición directa del saldo bloqueada\nOK HTTP 14: borrado de materia referenciada informa error\nOK HTTP 15: materia e inventario conservados\nRESULTADO HTTP: 15 comprobaciones correctas. No evalúa consola JavaScript.\n",
+    "stderr": ""
+  },
+  "navegador": {
+    "codigo_salida": 0,
+    "stdout": "ENTORNO: Bootstrap 5.3.8 servido como recurso local de prueba; disponibilidad del CDN no evaluada.\nOK WEB 1: HU01 registra y consulta 10000 g\nOK WEB 2: entrada web aumenta a 12000\nOK WEB 3: salida web disminuye a 11000\nOK WEB 4: pendiente web conserva 11000 disponibles\nOK WEB 5: pendiente visible por separado\nOK WEB 6: salida excesiva informa error controlado\nOK WEB 7: salida rechazada no modifica existencia\nOK WEB 8: POST sin token válido rechazado\nOK WEB 9: GET al registro rechazado\nOK WEB 10: backend controla más de dos decimales\nOK WEB 11: validación del backend visible tras redirect\nOK WEB 12: texto con comillas se almacena mediante consulta preparada\nOK WEB 13: observación escapada no ejecuta script\nOK WEB 14: edición directa del saldo bloqueada\nOK WEB 15: borrado de materia referenciada informa error controlado\nOK WEB 16: materia e inventario se conservan\nOK WEB 17: sin excepciones JavaScript del flujo\nOK WEB 18: sin errores en consola del navegador\nRESULTADO WEB: 18 comprobaciones correctas.\n",
+    "stderr": ""
+  },
+  "recetas_navegador": {
+    "codigo_salida": 0,
+    "stdout": "OK RECETAS WEB 1: recetas exige iniciar sesión\nOK RECETAS WEB 2: formulario muestra filas de ingredientes\nOK RECETAS WEB 3: añadir ingrediente funciona\nOK RECETAS WEB 4: CP-15 completo desde el navegador\nOK RECETAS WEB 5: receta aparece en el listado\nOK RECETAS WEB 6: sin excepciones JavaScript del flujo de recetas\nRESULTADO RECETAS WEB: 6 comprobaciones correctas.\n",
+    "stderr": ""
+  },
+  "registro_servidor": "[Mon Oct 12 21:24:26 2026] PHP 8.3.6 Development Server (http://127.0.0.1:53783) started\n[Mon Oct 12 21:24:26 2026] 127.0.0.1:46586 Accepted\n[Mon Oct 12 21:24:26 2026] 127.0.0.1:46586 Closed without sending a request; it was probably just an unused speculative preconnection\n[Mon Oct 12 21:24:26 2026] 127.0.0.1:46586 Closing\n[Mon Oct 12 21:24:26 2026] 127.0.0.1:46594 Accepted\n[Mon Oct 12 21:24:26 2026] 127.0.0.1:46594 [303]: GET /index.php\n[Mon Oct 12 21:24:26 2026] 127.0.0.1:46594 Closing\n[Mon Oct 12 21:24:26 2026] 127.0.0.1:46604 Accepted\n[Mon Oct 12 21:24:26 2026] 127.0.0.1:46604 [200]: GET /iniciar-sesion.php\n[Mon Oct 12 21:24:26 2026] 127.0.0.1:46604 Closing\n[Mon Oct 12 21:24:26 2026] 127.0.0.1:46614 Accepted\n[Mon Oct 12 21:24:26 2026] 127.0.0.1:46614 [200]: GET /identidad-1f4138d7bce6a446acaa0083.php\n[Mon Oct 12 21:24:26 2026] 127.0.0.1:46614 Closing\n[Mon Oct 12 21:24:26 2026] 127.0.0.1:46618 Accepted\n[Mon Oct 12 21:24:26 2026] 127.0.0.1:46618 [403]: POST /modules/inventario/guardar.php\n[Mon Oct 12 21:24:26 2026] 127.0.0.1:46618 Closing\n[Mon Oct 12 21:24:26 2026] 127.0.0.1:46620 Accepted\n[Mon Oct 12 21:24:26 2026] 127.0.0.1:46620 [200]: GET /identidad-1f4138d7bce6a446acaa0083.php\n[Mon Oct 12 21:24:26 2026] 127.0.0.1:46620 Closing\n[Mon Oct 12 21:24:26 2026] 127.0.0.1:46624 Accepted\n[Mon Oct 12 21:24:26 2026] 127.0.0.1:46624 [403]: POST /iniciar-sesion.php\n[Mon Oct 12 21:24:26 2026] 127.0.0.1:46624 Closing\n[Mon Oct 12 21:24:26 2026] 127.0.0.1:46640 Accepted\n[Mon Oct 12 21:24:26 2026] 127.0.0.1:46640 [200]: GET /iniciar-sesion.php\n[Mon Oct 12 21:24:26 2026] 127.0.0.1:46640 Closing\n[Mon Oct 12 21:24:26 2026] 127.0.0.1:46646 Accepted\n[Mon Oct 12 21:24:26 2026] 127.0.0.1:46646 [200]: GET /identidad-1f4138d7bce6a446acaa0083.php\n[Mon Oct 12 21:24:26 2026] 127.0.0.1:46646 Closing\n[Mon Oct 12 21:24:26 2026] 127.0.0.1:46652 Accepted\n[Mon Oct 12 21:24:26 2026] 127.0.0.1:46652 [401]: POST /iniciar-sesion.php\n[Mon Oct 12 21:24:26 2026] 127.0.0.1:46652 Closing\n[Mon Oct 12 21:24:26 2026] 127.0.0.1:46662 Accepted\n[Mon Oct 12 21:24:26 2026] 127.0.0.1:46662 [200]: GET /iniciar-sesion.php\n[Mon Oct 12 21:24:26 2026] 127.0.0.1:46662 Closing\n[Mon Oct 12 21:24:26 2026] 127.0.0.1:46670 Accepted\n[Mon Oct 12 21:24:26 2026] 127.0.0.1:46670 [200]: GET /identidad-1f4138d7bce6a446acaa0083.php\n[Mon Oct 12 21:24:26 2026] 127.0.0.1:46670 Closing\n[Mon Oct 12 21:24:26 2026] 127.0.0.1:46682 Accepted\n[Mon Oct 12 21:24:26 2026] 127.0.0.1:46682 [303]: POST /iniciar-sesion.php\n[Mon Oct 12 21:24:26 2026] 127.0.0.1:46682 Closing\n[Mon Oct 12 21:24:26 2026] 127.0.0.1:46684 Accepted\n[Mon Oct 12 21:24:26 2026] 127.0.0.1:46684 [200]: GET /index.php\n[Mon Oct 12 21:24:26 2026] 127.0.0.1:46684 Closing\n[Mon Oct 12 21:24:26 2026] 127.0.0.1:46698 Accepted\n[Mon Oct 12 21:24:26 2026] 127.0.0.1:46698 [200]: GET /identidad-1f4138d7bce6a446acaa0083.php\n[Mon Oct 12 21:24:26 2026] 127.0.0.1:46698 Closing\n[Mon Oct 12 21:24:26 2026] 127.0.0.1:46714 Accepted\n[Mon Oct 12 21:24:26 2026] 127.0.0.1:46714 [403]: POST /modules/inventario/guardar.php\n[Mon Oct 12 21:24:26 2026] 127.0.0.1:46714 Closing\n[Mon Oct 12 21:24:26 2026] 127.0.0.1:46718 Accepted\n[Mon Oct 12 21:24:26 2026] 127.0.0.1:46718 [200]: GET /identidad-1f4138d7bce6a446acaa0083.php\n[Mon Oct 12 21:24:26 2026] 127.0.0.1:46718 Closing\n[Mon Oct 12 21:24:26 2026] 127.0.0.1:46726 Accepted\n[Mon Oct 12 21:24:26 2026] 127.0.0.1:46726 [403]: POST /modules/inventario/guardar.php\n[Mon Oct 12 21:24:26 2026] 127.0.0.1:46726 Closing\n[Mon Oct 12 21:24:26 2026] 127.0.0.1:46730 Accepted\n[Mon Oct 12 21:24:26 2026] 127.0.0.1:46730 [200]: GET /identidad-1f4138d7bce6a446acaa0083.php\n[Mon Oct 12 21:24:26 2026] 127.0.0.1:46730 Closing\n[Mon Oct 12 21:24:26 2026] 127.0.0.1:46744 Accepted\n[Mon Oct 12 21:24:26 2026] 127.0.0.1:46744 [403]: POST /modules/inventario/guardar.php\n[Mon Oct 12 21:24:26 2026] 127.0.0.1:46744 Closing\n[Mon Oct 12 21:24:26 2026] 127.0.0.1:46760 Accepted\n[Mon Oct 12 21:24:26 2026] 127.0.0.1:46760 [200]: GET /identidad-1f4138d7bce6a446acaa0083.php\n[Mon Oct 12 21:24:26 2026] 127.0.0.1:46760 Closing\n[Mon Oct 12 21:24:26 2026] 127.0.0.1:46776 Accepted\n[Mon Oct 12 21:24:26 2026] 127.0.0.1:46776 [403]: POST /modules/inventario/guardar.php\n[Mon Oct 12 21:24:26 2026] 127.0.0.1:46776 Closing\n[Mon Oct 12 21:24:26 2026] 127.0.0.1:46778 Accepted\n[Mon Oct 12 21:24:26 2026] 127.0.0.1:46778 [200]: GET /iniciar-sesion.php\n[Mon Oct 12 21:24:26 2026] 127.0.0.1:46778 Closing\n[Mon Oct 12 21:24:26 2026] 127.0.0.1:46790 Accepted\n[Mon Oct 12 21:24:26 2026] 127.0.0.1:46790 [200]: GET /identidad-1f4138d7bce6a446acaa0083.php\n[Mon Oct 12 21:24:26 2026] 127.0.0.1:46790 Closing\n[Mon Oct 12 21:24:26 2026] 127.0.0.1:46800 Accepted\n[Mon Oct 12 21:24:26 2026] 127.0.0.1:46800 [303]: POST /iniciar-sesion.php\n[Mon Oct 12 21:24:26 2026] 127.0.0.1:46800 Closing\n[Mon Oct 12 21:24:26 2026] 127.0.0.1:46812 Accepted\n[Mon Oct 12 21:24:26 2026] 127.0.0.1:46812 [200]: GET /index.php\n[Mon Oct 12 21:24:26 2026] 127.0.0.1:46812 Closing\n[Mon Oct 12 21:24:26 2026] 127.0.0.1:46820 Accepted\n[Mon Oct 12 21:24:26 2026] 127.0.0.1:46820 [200]: GET /modules/inventario/index.php\n[Mon Oct 12 21:24:26 2026] 127.0.0.1:46820 Closing\n[Mon Oct 12 21:24:26 2026] 127.0.0.1:46836 Accepted\n[Mon Oct 12 21:24:26 2026] 127.0.0.1:46836 [200]: GET /identidad-1f4138d7bce6a446acaa0083.php\n[Mon Oct 12 21:24:26 2026] 127.0.0.1:46836 Closing\n[Mon Oct 12 21:24:26 2026] 127.0.0.1:46848 Accepted\n[Mon Oct 12 21:24:26 2026] 127.0.0.1:46848 [403]: POST /modules/inventario/guardar.php\n[Mon Oct 12 21:24:26 2026] 127.0.0.1:46848 Closing\n[Mon Oct 12 21:24:26 2026] 127.0.0.1:46862 Accepted\n[Mon Oct 12 21:24:26 2026] 127.0.0.1:46862 [200]: GET /identidad-1f4138d7bce6a446acaa0083.php\n[Mon Oct 12 21:24:26 2026] 127.0.0.1:46862 Closing\n[Mon Oct 12 21:24:26 2026] 127.0.0.1:46870 Accepted\n[Mon Oct 12 21:24:26 2026] 127.0.0.1:46870 [302]: POST /modules/inventario/guardar.php\n[Mon Oct 12 21:24:26 2026] 127.0.0.1:46870 Closing\n[Mon Oct 12 21:24:26 2026] 127.0.0.1:46878 Accepted\n[Mon Oct 12 21:24:26 2026] 127.0.0.1:46878 [200]: GET /modules/inventario/index.php?estado=creada\n[Mon Oct 12 21:24:26 2026] 127.0.0.1:46878 Closing\n[Mon Oct 12 21:24:26 2026] 127.0.0.1:46894 Accepted\n[Mon Oct 12 21:24:26 2026] 127.0.0.1:46894 [200]: GET /identidad-1f4138d7bce6a446acaa0083.php\n[Mon Oct 12 21:24:26 2026] 127.0.0.1:46894 Closing\n[Mon Oct 12 21:24:26 2026] 127.0.0.1:46910 Accepted\n[Mon Oct 12 21:24:26 2026] 127.0.0.1:46910 [302]: POST /modules/inventario/guardar.php\n[Mon Oct 12 21:24:26 2026] 127.0.0.1:46910 Closing\n[Mon Oct 12 21:24:26 2026] 127.0.0.1:46918 Accepted\n[Mon Oct 12 21:24:26 2026] 127.0.0.1:46918 [200]: GET /modules/inventario/index.php\n[Mon Oct 12 21:24:26 2026] 127.0.0.1:46918 Closing\n[Mon Oct 12 21:24:26 2026] 127.0.0.1:46924 Accepted\n[Mon Oct 12 21:24:26 2026] 127.0.0.1:46924 [200]: GET /modules/recetas/index.php\n[Mon Oct 12 21:24:26 2026] 127.0.0.1:46924 Closing\n[Mon Oct 12 21:24:26 2026] 127.0.0.1:46930 Accepted\n[Mon Oct 12 21:24:26 2026] 127.0.0.1:46930 [200]: GET /identidad-1f4138d7bce6a446acaa0083.php\n[Mon Oct 12 21:24:26 2026] 127.0.0.1:46930 Closing\n[Mon Oct 12 21:24:26 2026] 127.0.0.1:46946 Accepted\n[Mon Oct 12 21:24:26 2026] 127.0.0.1:46946 [403]: POST /modules/recetas/guardar.php\n[Mon Oct 12 21:24:26 2026] 127.0.0.1:46946 Closing\n[Mon Oct 12 21:24:26 2026] 127.0.0.1:46960 Accepted\n[Mon Oct 12 21:24:26 2026] 127.0.0.1:46960 [200]: GET /identidad-1f4138d7bce6a446acaa0083.php\n[Mon Oct 12 21:24:26 2026] 127.0.0.1:46960 Closing\n[Mon Oct 12 21:24:26 2026] 127.0.0.1:46972 Accepted\n[Mon Oct 12 21:24:26 2026] 127.0.0.1:46972 [303]: POST /modules/recetas/guardar.php\n[Mon Oct 12 21:24:26 2026] 127.0.0.1:46972 Closing\n[Mon Oct 12 21:24:26 2026] 127.0.0.1:46988 Accepted\n[Mon Oct 12 21:24:26 2026] 127.0.0.1:46988 [200]: GET /modules/recetas/consultar.php?id=1\n[Mon Oct 12 21:24:26 2026] 127.0.0.1:46988 Closing\n[Mon Oct 12 21:24:26 2026] 127.0.0.1:46990 Accepted\n[Mon Oct 12 21:24:26 2026] 127.0.0.1:46990 [200]: GET /identidad-1f4138d7bce6a446acaa0083.php\n[Mon Oct 12 21:24:26 2026] 127.0.0.1:46990 Closing\n[Mon Oct 12 21:24:26 2026] 127.0.0.1:46992 Accepted\n[Mon Oct 12 21:24:26 2026] 127.0.0.1:46992 [303]: POST /modules/recetas/guardar.php\n[Mon Oct 12 21:24:26 2026] 127.0.0.1:46992 Closing\n[Mon Oct 12 21:24:26 2026] 127.0.0.1:46994 Accepted\n[Mon Oct 12 21:24:26 2026] 127.0.0.1:46994 [200]: GET /modules/recetas/index.php\n[Mon Oct 12 21:24:26 2026] 127.0.0.1:46994 Closing\n[Mon Oct 12 21:24:26 2026] 127.0.0.1:46998 Accepted\n[Mon Oct 12 21:24:26 2026] 127.0.0.1:46998 [200]: GET /identidad-1f4138d7bce6a446acaa0083.php\n[Mon Oct 12 21:24:26 2026] 127.0.0.1:46998 Closing\n[Mon Oct 12 21:24:26 2026] 127.0.0.1:47004 Accepted\n[Mon Oct 12 21:24:26 2026] 127.0.0.1:47004 [303]: POST /modules/recetas/guardar.php\n[Mon Oct 12 21:24:26 2026] 127.0.0.1:47004 Closing\n[Mon Oct 12 21:24:26 2026] 127.0.0.1:47010 Accepted\n[Mon Oct 12 21:24:26 2026] 127.0.0.1:47010 [200]: GET /modules/recetas/index.php\n[Mon Oct 12 21:24:26 2026] 127.0.0.1:47010 Closing\n[Mon Oct 12 21:24:26 2026] 127.0.0.1:47014 Accepted\n[Mon Oct 12 21:24:26 2026] 127.0.0.1:47014 [200]: GET /identidad-1f4138d7bce6a446acaa0083.php\n[Mon Oct 12 21:24:26 2026] 127.0.0.1:47014 Closing\n[Mon Oct 12 21:24:26 2026] 127.0.0.1:47020 Accepted\n[Mon Oct 12 21:24:26 2026] 127.0.0.1:47020 [303]: POST /modules/recetas/guardar.php\n[Mon Oct 12 21:24:26 2026] 127.0.0.1:47020 Closing\n[Mon Oct 12 21:24:26 2026] 127.0.0.1:47028 Accepted\n[Mon Oct 12 21:24:27 2026] 127.0.0.1:47028 [200]: GET /modules/recetas/index.php\n[Mon Oct 12 21:24:27 2026] 127.0.0.1:47028 Closing\n[Mon Oct 12 21:24:27 2026] 127.0.0.1:47040 Accepted\n[Mon Oct 12 21:24:27 2026] 127.0.0.1:47040 [200]: GET /identidad-1f4138d7bce6a446acaa0083.php\n[Mon Oct 12 21:24:27 2026] 127.0.0.1:47040 Closing\n[Mon Oct 12 21:24:27 2026] 127.0.0.1:47056 Accepted\n[Mon Oct 12 21:24:27 2026] 127.0.0.1:47056 [303]: POST /modules/recetas/guardar.php\n[Mon Oct 12 21:24:27 2026] 127.0.0.1:47056 Closing\n[Mon Oct 12 21:24:27 2026] 127.0.0.1:47072 Accepted\n[Mon Oct 12 21:24:27 2026] 127.0.0.1:47072 [200]: GET /modules/recetas/index.php\n[Mon Oct 12 21:24:27 2026] 127.0.0.1:47072 Closing\n[Mon Oct 12 21:24:27 2026] 127.0.0.1:47080 Accepted\n[Mon Oct 12 21:24:27 2026] 127.0.0.1:47080 [200]: GET /identidad-1f4138d7bce6a446acaa0083.php\n[Mon Oct 12 21:24:27 2026] 127.0.0.1:47080 Closing\n[Mon Oct 12 21:24:27 2026] 127.0.0.1:47088 Accepted\n[Mon Oct 12 21:24:27 2026] 127.0.0.1:47088 [303]: POST /modules/recetas/guardar.php\n[Mon Oct 12 21:24:27 2026] 127.0.0.1:47088 Closing\n[Mon Oct 12 21:24:27 2026] 127.0.0.1:47094 Accepted\n[Mon Oct 12 21:24:27 2026] 127.0.0.1:47094 [200]: GET /modules/recetas/index.php\n[Mon Oct 12 21:24:27 2026] 127.0.0.1:47094 Closing\n[Mon Oct 12 21:24:27 2026] 127.0.0.1:47098 Accepted\n[Mon Oct 12 21:24:27 2026] 127.0.0.1:47098 [200]: GET /identidad-1f4138d7bce6a446acaa0083.php\n[Mon Oct 12 21:24:27 2026] 127.0.0.1:47098 Closing\n[Mon Oct 12 21:24:27 2026] 127.0.0.1:47114 Accepted\n[Mon Oct 12 21:24:27 2026] 127.0.0.1:47114 [303]: POST /modules/recetas/guardar.php\n[Mon Oct 12 21:24:27 2026] 127.0.0.1:47114 Closing\n[Mon Oct 12 21:24:27 2026] 127.0.0.1:47120 Accepted\n[Mon Oct 12 21:24:27 2026] 127.0.0.1:47120 [200]: GET /modules/recetas/index.php\n[Mon Oct 12 21:24:27 2026] 127.0.0.1:47120 Closing\n[Mon Oct 12 21:24:27 2026] 127.0.0.1:47132 Accepted\n[Mon Oct 12 21:24:27 2026] 127.0.0.1:47132 [200]: GET /identidad-1f4138d7bce6a446acaa0083.php\n[Mon Oct 12 21:24:27 2026] 127.0.0.1:47132 Closing\n[Mon Oct 12 21:24:27 2026] 127.0.0.1:47138 Accepted\n[Mon Oct 12 21:24:27 2026] 127.0.0.1:47138 [403]: POST /modules/inventario/eliminar.php\n[Mon Oct 12 21:24:27 2026] 127.0.0.1:47138 Closing\n[Mon Oct 12 21:24:27 2026] 127.0.0.1:47152 Accepted\n[Mon Oct 12 21:24:27 2026] 127.0.0.1:47152 [200]: GET /modules/inventario/editar.php?id=1\n[Mon Oct 12 21:24:27 2026] 127.0.0.1:47152 Closing\n[Mon Oct 12 21:24:27 2026] 127.0.0.1:47154 Accepted\n[Mon Oct 12 21:24:27 2026] 127.0.0.1:47154 [200]: GET /identidad-1f4138d7bce6a446acaa0083.php\n[Mon Oct 12 21:24:27 2026] 127.0.0.1:47154 Closing\n[Mon Oct 12 21:24:27 2026] 127.0.0.1:47158 Accepted\n[Mon Oct 12 21:24:27 2026] No se pudo eliminar la materia prima: SQLSTATE[23000]: Integrity constraint violation: 1451 Cannot delete or update a parent row: a foreign key constraint fails (`prueba_recuperacion_75bf0075fe04a073f340fad2`.`receta_ingredientes`, CONSTRAINT `fk_ingrediente_materia` FOREIGN KEY (`materia_prima_id`) REFERENCES `materias_primas` (`id`) ON UPDATE CASCADE)\n[Mon Oct 12 21:24:27 2026] 127.0.0.1:47158 [303]: POST /modules/inventario/eliminar.php\n[Mon Oct 12 21:24:27 2026] 127.0.0.1:47158 Closing\n[Mon Oct 12 21:24:27 2026] 127.0.0.1:47164 Accepted\n[Mon Oct 12 21:24:27 2026] 127.0.0.1:47164 [200]: GET /modules/inventario/index.php\n[Mon Oct 12 21:24:27 2026] 127.0.0.1:47164 Closing\n[Mon Oct 12 21:24:27 2026] 127.0.0.1:47172 Accepted\n[Mon Oct 12 21:24:27 2026] 127.0.0.1:47172 [200]: GET /identidad-1f4138d7bce6a446acaa0083.php\n[Mon Oct 12 21:24:27 2026] 127.0.0.1:47172 Closing\n[Mon Oct 12 21:24:27 2026] 127.0.0.1:47182 Accepted\n[Mon Oct 12 21:24:27 2026] 127.0.0.1:47182 [403]: POST /modules/inventario/editar.php?id=1\n[Mon Oct 12 21:24:27 2026] 127.0.0.1:47182 Closing\n[Mon Oct 12 21:24:27 2026] 127.0.0.1:47198 Accepted\n[Mon Oct 12 21:24:27 2026] 127.0.0.1:47198 [200]: GET /iniciar-sesion.php\n[Mon Oct 12 21:24:27 2026] 127.0.0.1:47198 Closing\n[Mon Oct 12 21:24:27 2026] 127.0.0.1:47206 Accepted\n[Mon Oct 12 21:24:27 2026] 127.0.0.1:47206 [303]: POST /iniciar-sesion.php\n[Mon Oct 12 21:24:27 2026] 127.0.0.1:47206 Closing\n[Mon Oct 12 21:24:27 2026] 127.0.0.1:47210 Accepted\n[Mon Oct 12 21:24:27 2026] 127.0.0.1:47210 [200]: GET /index.php\n[Mon Oct 12 21:24:27 2026] 127.0.0.1:47210 Closing\n[Mon Oct 12 21:24:27 2026] 127.0.0.1:47224 Accepted\n[Mon Oct 12 21:24:27 2026] 127.0.0.1:47224 [200]: GET /modules/inventario/index.php\n[Mon Oct 12 21:24:27 2026] 127.0.0.1:47224 Closing\n[Mon Oct 12 21:24:27 2026] 127.0.0.1:47230 Accepted\n[Mon Oct 12 21:24:27 2026] 127.0.0.1:47230 [302]: POST /modules/inventario/guardar.php\n[Mon Oct 12 21:24:27 2026] 127.0.0.1:47230 Closing\n[Mon Oct 12 21:24:27 2026] 127.0.0.1:47240 Accepted\n[Mon Oct 12 21:24:27 2026] 127.0.0.1:47240 [200]: GET /modules/inventario/index.php?estado=creada\n[Mon Oct 12 21:24:27 2026] 127.0.0.1:47240 Closing\n[Mon Oct 12 21:24:27 2026] 127.0.0.1:47242 Accepted\n[Mon Oct 12 21:24:27 2026] 127.0.0.1:47242 [200]: GET /modules/inventario/movimientos.php\n[Mon Oct 12 21:24:27 2026] 127.0.0.1:47242 Closing\n[Mon Oct 12 21:24:27 2026] 127.0.0.1:47254 Accepted\n[Mon Oct 12 21:24:27 2026] 127.0.0.1:47254 [303]: POST /modules/inventario/guardar-movimiento.php\n[Mon Oct 12 21:24:27 2026] 127.0.0.1:47254 Closing\n[Mon Oct 12 21:24:27 2026] 127.0.0.1:47260 Accepted\n[Mon Oct 12 21:24:27 2026] 127.0.0.1:47260 [200]: GET /modules/inventario/movimientos.php?estado=registrado\n[Mon Oct 12 21:24:27 2026] 127.0.0.1:47260 Closing\n[Mon Oct 12 21:24:27 2026] 127.0.0.1:47274 Accepted\n[Mon Oct 12 21:24:27 2026] 127.0.0.1:47274 [303]: POST /modules/inventario/guardar-movimiento.php\n[Mon Oct 12 21:24:27 2026] 127.0.0.1:47274 Closing\n[Mon Oct 12 21:24:27 2026] 127.0.0.1:47282 Accepted\n[Mon Oct 12 21:24:27 2026] 127.0.0.1:47282 [200]: GET /modules/inventario/movimientos.php?estado=registrado\n[Mon Oct 12 21:24:27 2026] 127.0.0.1:47282 Closing\n[Mon Oct 12 21:24:27 2026] 127.0.0.1:47294 Accepted\n[Mon Oct 12 21:24:27 2026] 127.0.0.1:47294 [303]: POST /modules/inventario/guardar-movimiento.php\n[Mon Oct 12 21:24:27 2026] 127.0.0.1:47294 Closing\n[Mon Oct 12 21:24:27 2026] 127.0.0.1:47296 Accepted\n[Mon Oct 12 21:24:27 2026] 127.0.0.1:47296 [200]: GET /modules/inventario/movimientos.php?estado=registrado\n[Mon Oct 12 21:24:27 2026] 127.0.0.1:47296 Closing\n[Mon Oct 12 21:24:27 2026] 127.0.0.1:47308 Accepted\n[Mon Oct 12 21:24:27 2026] 127.0.0.1:47308 [303]: POST /modules/inventario/guardar-movimiento.php\n[Mon Oct 12 21:24:27 2026] 127.0.0.1:47308 Closing\n[Mon Oct 12 21:24:27 2026] 127.0.0.1:47318 Accepted\n[Mon Oct 12 21:24:27 2026] 127.0.0.1:47318 [200]: GET /modules/inventario/movimientos.php\n[Mon Oct 12 21:24:27 2026] 127.0.0.1:47318 Closing\n[Mon Oct 12 21:24:27 2026] 127.0.0.1:47332 Accepted\n[Mon Oct 12 21:24:27 2026] 127.0.0.1:47332 [403]: POST /modules/inventario/guardar-movimiento.php\n[Mon Oct 12 21:24:27 2026] 127.0.0.1:47332 Closing\n[Mon Oct 12 21:24:27 2026] 127.0.0.1:47338 Accepted\n[Mon Oct 12 21:24:27 2026] 127.0.0.1:47338 [405]: GET /modules/inventario/guardar-movimiento.php\n[Mon Oct 12 21:24:27 2026] 127.0.0.1:47338 Closing\n[Mon Oct 12 21:24:27 2026] 127.0.0.1:47342 Accepted\n[Mon Oct 12 21:24:27 2026] 127.0.0.1:47342 [303]: POST /modules/inventario/guardar-movimiento.php\n[Mon Oct 12 21:24:27 2026] 127.0.0.1:47342 Closing\n[Mon Oct 12 21:24:27 2026] 127.0.0.1:47344 Accepted\n[Mon Oct 12 21:24:27 2026] 127.0.0.1:47344 [200]: GET /modules/inventario/movimientos.php\n[Mon Oct 12 21:24:27 2026] 127.0.0.1:47344 Closing\n[Mon Oct 12 21:24:27 2026] 127.0.0.1:47346 Accepted\n[Mon Oct 12 21:24:27 2026] 127.0.0.1:47346 [303]: POST /modules/inventario/guardar-movimiento.php\n[Mon Oct 12 21:24:27 2026] 127.0.0.1:47346 Closing\n[Mon Oct 12 21:24:27 2026] 127.0.0.1:47362 Accepted\n[Mon Oct 12 21:24:27 2026] 127.0.0.1:47362 [200]: GET /modules/inventario/movimientos.php?estado=registrado\n[Mon Oct 12 21:24:27 2026] 127.0.0.1:47362 Closing\n[Mon Oct 12 21:24:27 2026] 127.0.0.1:47374 Accepted\n[Mon Oct 12 21:24:27 2026] 127.0.0.1:47374 [200]: GET /modules/inventario/editar.php?id=4\n[Mon Oct 12 21:24:27 2026] 127.0.0.1:47374 Closing\n[Mon Oct 12 21:24:27 2026] 127.0.0.1:47390 Accepted\n[Mon Oct 12 21:24:27 2026] 127.0.0.1:47390 [200]: POST /modules/inventario/editar.php?id=4\n[Mon Oct 12 21:24:27 2026] 127.0.0.1:47390 Closing\n[Mon Oct 12 21:24:27 2026] 127.0.0.1:47398 Accepted\n[Mon Oct 12 21:24:27 2026] No se pudo eliminar la materia prima: SQLSTATE[23000]: Integrity constraint violation: 1451 Cannot delete or update a parent row: a foreign key constraint fails (`prueba_recuperacion_75bf0075fe04a073f340fad2`.`movimientos_inventario`, CONSTRAINT `fk_movimiento_materia` FOREIGN KEY (`materia_prima_id`) REFERENCES `materias_primas` (`id`) ON UPDATE CASCADE)\n[Mon Oct 12 21:24:27 2026] 127.0.0.1:47398 [303]: POST /modules/inventario/eliminar.php\n[Mon Oct 12 21:24:27 2026] 127.0.0.1:47398 Closing\n[Mon Oct 12 21:24:27 2026] 127.0.0.1:47408 Accepted\n[Mon Oct 12 21:24:27 2026] 127.0.0.1:47408 [200]: GET /modules/inventario/index.php\n[Mon Oct 12 21:24:27 2026] 127.0.0.1:47408 Closing\n[Mon Oct 12 21:24:27 2026] 127.0.0.1:52686 Accepted\n[Mon Oct 12 21:24:27 2026] 127.0.0.1:52686 [200]: GET /iniciar-sesion.php\n[Mon Oct 12 21:24:27 2026] 127.0.0.1:52686 Closing\n[Mon Oct 12 21:24:28 2026] 127.0.0.1:52702 Accepted\n[Mon Oct 12 21:24:28 2026] 127.0.0.1:52702 [303]: POST /iniciar-sesion.php\n[Mon Oct 12 21:24:28 2026] 127.0.0.1:52702 Closing\n[Mon Oct 12 21:24:28 2026] 127.0.0.1:52716 Accepted\n[Mon Oct 12 21:24:28 2026] 127.0.0.1:52716 [200]: GET /index.php\n[Mon Oct 12 21:24:28 2026] 127.0.0.1:52716 Closing\n[Mon Oct 12 21:24:28 2026] 127.0.0.1:52722 Accepted\n[Mon Oct 12 21:24:28 2026] 127.0.0.1:52722 [200]: GET /modules/inventario/index.php\n[Mon Oct 12 21:24:28 2026] 127.0.0.1:52722 Closing\n[Mon Oct 12 21:24:28 2026] 127.0.0.1:52734 Accepted\n[Mon Oct 12 21:24:28 2026] 127.0.0.1:52734 [302]: POST /modules/inventario/guardar.php\n[Mon Oct 12 21:24:28 2026] 127.0.0.1:52734 Closing\n[Mon Oct 12 21:24:28 2026] 127.0.0.1:52736 Accepted\n[Mon Oct 12 21:24:28 2026] 127.0.0.1:52736 [200]: GET /modules/inventario/index.php?estado=creada\n[Mon Oct 12 21:24:28 2026] 127.0.0.1:52736 Closing\n[Mon Oct 12 21:24:28 2026] 127.0.0.1:52746 Accepted\n[Mon Oct 12 21:24:28 2026] 127.0.0.1:52746 [200]: GET /modules/inventario/movimientos.php\n[Mon Oct 12 21:24:28 2026] 127.0.0.1:52746 Closing\n[Mon Oct 12 21:24:28 2026] 127.0.0.1:52758 Accepted\n[Mon Oct 12 21:24:28 2026] 127.0.0.1:52758 [303]: POST /modules/inventario/guardar-movimiento.php\n[Mon Oct 12 21:24:28 2026] 127.0.0.1:52758 Closing\n[Mon Oct 12 21:24:28 2026] 127.0.0.1:52770 Accepted\n[Mon Oct 12 21:24:28 2026] 127.0.0.1:52770 [200]: GET /modules/inventario/movimientos.php?estado=registrado\n[Mon Oct 12 21:24:28 2026] 127.0.0.1:52770 Closing\n[Mon Oct 12 21:24:28 2026] 127.0.0.1:52786 Accepted\n[Mon Oct 12 21:24:28 2026] 127.0.0.1:52786 [303]: POST /modules/inventario/guardar-movimiento.php\n[Mon Oct 12 21:24:28 2026] 127.0.0.1:52786 Closing\n[Mon Oct 12 21:24:28 2026] 127.0.0.1:52790 Accepted\n[Mon Oct 12 21:24:28 2026] 127.0.0.1:52790 [200]: GET /modules/inventario/movimientos.php?estado=registrado\n[Mon Oct 12 21:24:28 2026] 127.0.0.1:52790 Closing\n[Mon Oct 12 21:24:28 2026] 127.0.0.1:52794 Accepted\n[Mon Oct 12 21:24:28 2026] 127.0.0.1:52794 [303]: POST /modules/inventario/guardar-movimiento.php\n[Mon Oct 12 21:24:28 2026] 127.0.0.1:52794 Closing\n[Mon Oct 12 21:24:28 2026] 127.0.0.1:52798 Accepted\n[Mon Oct 12 21:24:28 2026] 127.0.0.1:52798 [200]: GET /modules/inventario/movimientos.php?estado=registrado\n[Mon Oct 12 21:24:28 2026] 127.0.0.1:52798 Closing\n[Mon Oct 12 21:24:28 2026] 127.0.0.1:52812 Accepted\n[Mon Oct 12 21:24:28 2026] 127.0.0.1:52812 [303]: POST /modules/inventario/guardar-movimiento.php\n[Mon Oct 12 21:24:28 2026] 127.0.0.1:52812 Closing\n[Mon Oct 12 21:24:28 2026] 127.0.0.1:52826 Accepted\n[Mon Oct 12 21:24:28 2026] 127.0.0.1:52826 [200]: GET /modules/inventario/movimientos.php\n[Mon Oct 12 21:24:28 2026] 127.0.0.1:52826 Closing\n[Mon Oct 12 21:24:28 2026] 127.0.0.1:52836 Accepted\n[Mon Oct 12 21:24:28 2026] 127.0.0.1:52836 [403]: POST /modules/inventario/guardar-movimiento.php\n[Mon Oct 12 21:24:28 2026] 127.0.0.1:52836 Closing\n[Mon Oct 12 21:24:28 2026] 127.0.0.1:52846 Accepted\n[Mon Oct 12 21:24:28 2026] 127.0.0.1:52846 [405]: GET /modules/inventario/guardar-movimiento.php\n[Mon Oct 12 21:24:28 2026] 127.0.0.1:52846 Closing\n[Mon Oct 12 21:24:28 2026] 127.0.0.1:52850 Accepted\n[Mon Oct 12 21:24:28 2026] 127.0.0.1:52850 [303]: POST /modules/inventario/guardar-movimiento.php\n[Mon Oct 12 21:24:28 2026] 127.0.0.1:52850 Closing\n[Mon Oct 12 21:24:28 2026] 127.0.0.1:52856 Accepted\n[Mon Oct 12 21:24:28 2026] 127.0.0.1:52856 [200]: GET /modules/inventario/movimientos.php\n[Mon Oct 12 21:24:28 2026] 127.0.0.1:52856 Closing\n[Mon Oct 12 21:24:29 2026] 127.0.0.1:52862 Accepted\n[Mon Oct 12 21:24:29 2026] 127.0.0.1:52862 [303]: POST /modules/inventario/guardar-movimiento.php\n[Mon Oct 12 21:24:29 2026] 127.0.0.1:52862 Closing\n[Mon Oct 12 21:24:29 2026] 127.0.0.1:52874 Accepted\n[Mon Oct 12 21:24:29 2026] 127.0.0.1:52874 [200]: GET /modules/inventario/movimientos.php?estado=registrado\n[Mon Oct 12 21:24:29 2026] 127.0.0.1:52874 Closing\n[Mon Oct 12 21:24:29 2026] 127.0.0.1:52890 Accepted\n[Mon Oct 12 21:24:29 2026] 127.0.0.1:52890 [200]: GET /modules/inventario/movimientos.php\n[Mon Oct 12 21:24:29 2026] 127.0.0.1:52890 Closing\n[Mon Oct 12 21:24:29 2026] 127.0.0.1:52894 Accepted\n[Mon Oct 12 21:24:29 2026] 127.0.0.1:52894 [200]: GET /modules/inventario/editar.php?id=5\n[Mon Oct 12 21:24:29 2026] 127.0.0.1:52894 Closing\n[Mon Oct 12 21:24:29 2026] 127.0.0.1:52898 Accepted\n[Mon Oct 12 21:24:29 2026] 127.0.0.1:52898 [200]: POST /modules/inventario/editar.php?id=5\n[Mon Oct 12 21:24:29 2026] 127.0.0.1:52898 Closing\n[Mon Oct 12 21:24:29 2026] 127.0.0.1:52904 Accepted\n[Mon Oct 12 21:24:29 2026] 127.0.0.1:52904 [200]: GET /modules/inventario/index.php\n[Mon Oct 12 21:24:29 2026] 127.0.0.1:52904 Closing\n[Mon Oct 12 21:24:29 2026] 127.0.0.1:52912 Accepted\n[Mon Oct 12 21:24:29 2026] No se pudo eliminar la materia prima: SQLSTATE[23000]: Integrity constraint violation: 1451 Cannot delete or update a parent row: a foreign key constraint fails (`prueba_recuperacion_75bf0075fe04a073f340fad2`.`movimientos_inventario`, CONSTRAINT `fk_movimiento_materia` FOREIGN KEY (`materia_prima_id`) REFERENCES `materias_primas` (`id`) ON UPDATE CASCADE)\n[Mon Oct 12 21:24:29 2026] 127.0.0.1:52912 [303]: POST /modules/inventario/eliminar.php\n[Mon Oct 12 21:24:29 2026] 127.0.0.1:52912 Closing\n[Mon Oct 12 21:24:29 2026] 127.0.0.1:52922 Accepted\n[Mon Oct 12 21:24:29 2026] 127.0.0.1:52922 [200]: GET /modules/inventario/index.php\n[Mon Oct 12 21:24:29 2026] 127.0.0.1:52922 Closing\n[Mon Oct 12 21:24:29 2026] 127.0.0.1:52930 Accepted\n[Mon Oct 12 21:24:29 2026] 127.0.0.1:52930 [200]: GET /modules/inventario/movimientos.php\n[Mon Oct 12 21:24:29 2026] 127.0.0.1:52930 Closing\n[Mon Oct 12 21:24:29 2026] 127.0.0.1:52938 Accepted\n[Mon Oct 12 21:24:29 2026] 127.0.0.1:52938 [303]: GET /modules/recetas/index.php\n[Mon Oct 12 21:24:29 2026] 127.0.0.1:52938 Closing\n[Mon Oct 12 21:24:29 2026] 127.0.0.1:52952 Accepted\n[Mon Oct 12 21:24:29 2026] 127.0.0.1:52952 [200]: GET /iniciar-sesion.php\n[Mon Oct 12 21:24:29 2026] 127.0.0.1:52952 Closing\n[Mon Oct 12 21:24:30 2026] 127.0.0.1:52956 Accepted\n[Mon Oct 12 21:24:30 2026] 127.0.0.1:52956 [303]: POST /iniciar-sesion.php\n[Mon Oct 12 21:24:30 2026] 127.0.0.1:52956 Closing\n[Mon Oct 12 21:24:30 2026] 127.0.0.1:52964 Accepted\n[Mon Oct 12 21:24:30 2026] 127.0.0.1:52964 [200]: GET /index.php\n[Mon Oct 12 21:24:30 2026] 127.0.0.1:52964 Closing\n[Mon Oct 12 21:24:30 2026] 127.0.0.1:52966 Accepted\n[Mon Oct 12 21:24:30 2026] 127.0.0.1:52966 [200]: GET /modules/recetas/index.php\n[Mon Oct 12 21:24:30 2026] 127.0.0.1:52966 Closing\n[Mon Oct 12 21:24:30 2026] 127.0.0.1:52972 Accepted\n[Mon Oct 12 21:24:30 2026] 127.0.0.1:52972 [200]: GET /modules/recetas/recetas.js\n[Mon Oct 12 21:24:30 2026] 127.0.0.1:52972 Closing\n[Mon Oct 12 21:24:30 2026] 127.0.0.1:52974 Accepted\n[Mon Oct 12 21:24:30 2026] 127.0.0.1:52974 [303]: POST /modules/recetas/guardar.php\n[Mon Oct 12 21:24:30 2026] 127.0.0.1:52974 Closing\n[Mon Oct 12 21:24:30 2026] 127.0.0.1:52984 Accepted\n[Mon Oct 12 21:24:30 2026] 127.0.0.1:52984 [200]: GET /modules/recetas/consultar.php?id=2\n[Mon Oct 12 21:24:30 2026] 127.0.0.1:52984 Closing\n[Mon Oct 12 21:24:30 2026] 127.0.0.1:52996 Accepted\n[Mon Oct 12 21:24:30 2026] 127.0.0.1:52996 [200]: GET /modules/recetas/index.php\n[Mon Oct 12 21:24:30 2026] 127.0.0.1:52996 Closing\n[Mon Oct 12 21:24:30 2026] 127.0.0.1:53004 Accepted\n[Mon Oct 12 21:24:30 2026] 127.0.0.1:53004 [200]: GET /modules/recetas/recetas.js\n[Mon Oct 12 21:24:30 2026] 127.0.0.1:53004 Closing\n[Mon Oct 12 21:24:30 2026] 127.0.0.1:53006 Accepted\n[Mon Oct 12 21:24:30 2026] 127.0.0.1:53006 [403]: GET /index.php\n[Mon Oct 12 21:24:30 2026] 127.0.0.1:53006 Closing\n[Mon Oct 12 21:24:30 2026] 127.0.0.1:53008 Accepted\n[Mon Oct 12 21:24:30 2026] 127.0.0.1:53008 [200]: GET /iniciar-sesion.php\n[Mon Oct 12 21:24:30 2026] 127.0.0.1:53008 Closing\n[Mon Oct 12 21:24:30 2026] 127.0.0.1:53014 Accepted\n[Mon Oct 12 21:24:30 2026] 127.0.0.1:53014 [200]: GET /identidad-1f4138d7bce6a446acaa0083.php\n[Mon Oct 12 21:24:30 2026] 127.0.0.1:53014 Closing\n[Mon Oct 12 21:24:30 2026] 127.0.0.1:53030 Accepted\n[Mon Oct 12 21:24:30 2026] 127.0.0.1:53030 [303]: POST /iniciar-sesion.php\n[Mon Oct 12 21:24:30 2026] 127.0.0.1:53030 Closing\n[Mon Oct 12 21:24:30 2026] 127.0.0.1:53040 Accepted\n[Mon Oct 12 21:24:30 2026] 127.0.0.1:53040 [200]: GET /index.php\n[Mon Oct 12 21:24:30 2026] 127.0.0.1:53040 Closing\n[Mon Oct 12 21:24:30 2026] 127.0.0.1:53046 Accepted\n[Mon Oct 12 21:24:30 2026] 127.0.0.1:53046 [200]: GET /index.php\n[Mon Oct 12 21:24:30 2026] 127.0.0.1:53046 Closing\n[Mon Oct 12 21:24:30 2026] 127.0.0.1:53060 Accepted\n[Mon Oct 12 21:24:30 2026] 127.0.0.1:53060 [200]: GET /identidad-1f4138d7bce6a446acaa0083.php\n[Mon Oct 12 21:24:30 2026] 127.0.0.1:53060 Closing\n[Mon Oct 12 21:24:30 2026] 127.0.0.1:53070 Accepted\n[Mon Oct 12 21:24:30 2026] 127.0.0.1:53070 [303]: POST /cerrar-sesion.php\n[Mon Oct 12 21:24:30 2026] 127.0.0.1:53070 Closing\n[Mon Oct 12 21:24:30 2026] 127.0.0.1:53074 Accepted\n[Mon Oct 12 21:24:30 2026] 127.0.0.1:53074 [200]: GET /iniciar-sesion.php\n[Mon Oct 12 21:24:30 2026] 127.0.0.1:53074 Closing\n[Mon Oct 12 21:24:30 2026] 127.0.0.1:53082 Accepted\n[Mon Oct 12 21:24:30 2026] 127.0.0.1:53082 [200]: GET /identidad-1f4138d7bce6a446acaa0083.php\n[Mon Oct 12 21:24:30 2026] 127.0.0.1:53082 Closing\n[Mon Oct 12 21:24:30 2026] 127.0.0.1:53090 Accepted\n[Mon Oct 12 21:24:30 2026] 127.0.0.1:53090 [403]: POST /modules/inventario/guardar.php\n[Mon Oct 12 21:24:30 2026] 127.0.0.1:53090 Closing\n",
+  "hu02_integracion": {
+    "codigo_salida": 0,
+    "stdout": "OK 1: schema nuevo crea las seis tablas, incluida usuarios\nOK 2: movimientos usa InnoDB\nOK 3: entrada 2000 deja 12000 g\nOK 4: salida 1000 deja 11000 g\nOK 5: pendiente 5000 conserva 11000 disponibles\nOK 6: pendiente queda en tabla separada\nOK 7: pendiente no aparece como entrada/salida\nOK 8: salida excesiva rechazada\nOK 9: rechazo conserva saldo\nOK 10: cantidad inválida rechazada: \"0\"\nOK 11: cantidad inválida rechazada: \"-1\"\nOK 12: cantidad inválida rechazada: \"1.001\"\nOK 13: cantidad inválida rechazada: \"100000000\"\nOK 14: cantidad inválida rechazada: \"1e2\"\nOK 15: cantidad inválida rechazada: \"NaN\"\nOK 16: cantidad inválida rechazada: \"INF\"\nOK 17: cantidad inválida rechazada: \"\"\nOK 18: cantidad inválida rechazada: \"1,5\"\nOK 19: cantidad inválida rechazada: [\"1\"]\nOK 20: tipo no permitido rechazado\nOK 21: identificador cero rechazado\nOK 22: materia inexistente rechazada\nOK 23: observación mayor de 255 caracteres rechazada\nOK 24: observación con estructura inesperada rechazada\nOK 25: fallo simulado de INSERT propagado\nOK 26: rollback revierte el UPDATE\nOK 27: rollback conserva dos movimientos\nOK 28: FK impide borrar la materia y perder su historial\nOK 29: edición directa de saldo con historial bloqueada\nOK 30: cambio de unidad con historial bloqueado\nOK 31: edición permitida de stock mínimo conserva saldo\nOK 32: centésima exacta sin error de flotantes\nOK 33: salida exacta permite saldo cero\nOK 34: desbordamiento de saldo rechazado\nOK 35: proceso concurrente completa sin error técnico\nOK 36: proceso concurrente completa sin error técnico\nOK 37: dos salidas de 80 sobre 100: una aceptada y otra rechazada\nOK 38: saldo concurrente final 20\nOK 39: migración conserva existencia anterior\nOK 40: migración conserva historial anterior\nOK 41: pendiente funciona después de migrar sin modificar saldo\nOK 42: migración protege el historial de borrados\nRESULTADO: 42 comprobaciones correctas.\n",
+    "stderr": ""
+  },
+  "base_temporal_eliminada": true,
+  "fin": "2026-10-12T20:24:30.677779-05:00"
+}
