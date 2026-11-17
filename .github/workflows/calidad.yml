@@ -63,4 +63,4 @@ jobs:
         run: vendor/bin/phpstan analyse --memory-limit=512M --no-progress
 
       - name: Pruebas automáticas
-        run: vendor/bin/phpunit
+        run: vendor/bin/phpunit --display-warnings --display-deprecations
