@@ -1,0 +1,565 @@
+/*
+ * Estilos propios del sistema. Ajustan Bootstrap a una paleta cálida de
+ * panadería y definen los componentes que Bootstrap no trae: indicadores,
+ * gráficas de barras, caja de ventas y mapa de calor.
+ */
+
+:root {
+  --color-marca: #9c5a1a;
+  --color-marca-hover: #834a13;
+  --color-marca-activo: #6f3f10;
+  --color-marca-suave: #f6e9da;
+  --color-marca-borde: #e7cba9;
+  --color-barra: #3a2516;
+  --color-fondo: #faf6f0;
+  --color-borde: #ebe1d3;
+
+  --bs-primary: var(--color-marca);
+  --bs-primary-rgb: 156, 90, 26;
+  --bs-primary-text-emphasis: #57310d;
+  --bs-primary-bg-subtle: var(--color-marca-suave);
+  --bs-primary-border-subtle: var(--color-marca-borde);
+  --bs-link-color: #8a4d14;
+  --bs-link-color-rgb: 138, 77, 20;
+  --bs-link-hover-color: #6f3f10;
+  --bs-link-hover-color-rgb: 111, 63, 16;
+  --bs-body-bg: var(--color-fondo);
+  --bs-border-color: var(--color-borde);
+  --bs-border-radius: 0.5rem;
+  --bs-border-radius-lg: 0.75rem;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+}
+
+/* Botones y controles con el color de la marca */
+
+.btn-primary {
+  --bs-btn-bg: var(--color-marca);
+  --bs-btn-border-color: var(--color-marca);
+  --bs-btn-hover-bg: var(--color-marca-hover);
+  --bs-btn-hover-border-color: var(--color-marca-hover);
+  --bs-btn-active-bg: var(--color-marca-activo);
+  --bs-btn-active-border-color: var(--color-marca-activo);
+  --bs-btn-disabled-bg: var(--color-marca);
+  --bs-btn-disabled-border-color: var(--color-marca);
+  --bs-btn-focus-shadow-rgb: 156, 90, 26;
+}
+
+.btn-outline-primary {
+  --bs-btn-color: var(--color-marca);
+  --bs-btn-border-color: var(--color-marca);
+  --bs-btn-hover-bg: var(--color-marca);
+  --bs-btn-hover-border-color: var(--color-marca);
+  --bs-btn-active-bg: var(--color-marca-hover);
+  --bs-btn-active-border-color: var(--color-marca-hover);
+  --bs-btn-focus-shadow-rgb: 156, 90, 26;
+}
+
+.form-control:focus,
+.form-select:focus,
+.form-check-input:focus {
+  border-color: #d1a072;
+  box-shadow: 0 0 0 0.25rem rgba(156, 90, 26, 0.2);
+}
+
+.form-check-input:checked {
+  background-color: var(--color-marca);
+  border-color: var(--color-marca);
+}
+
+.form-label {
+  font-weight: 500;
+}
+
+.texto-ayuda {
+  font-size: 0.875rem;
+  color: var(--bs-secondary-color);
+}
+
+/* Barra de navegación */
+
+.barra-principal {
+  background-color: var(--color-barra);
+  box-shadow: 0 2px 8px rgba(58, 37, 22, 0.25);
+}
+
+.barra-principal .nav-link {
+  border-radius: var(--bs-border-radius);
+  padding-inline: 0.75rem !important;
+}
+
+.barra-principal .nav-link.active {
+  background-color: rgba(255, 255, 255, 0.12);
+  font-weight: 600;
+}
+
+.marca {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+.marca-icono {
+  display: inline-grid;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  background-color: #e0a15e;
+  color: var(--color-barra);
+}
+
+.saltar-contenido {
+  position: absolute;
+  top: 0.5rem;
+  left: 0.5rem;
+  z-index: 2000;
+  padding: 0.5rem 1rem;
+  background: #fff;
+  border-radius: var(--bs-border-radius);
+}
+
+.pie {
+  border-top: 1px solid var(--color-borde);
+}
+
+/* Encabezado de cada página */
+
+.encabezado-pagina {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.encabezado-pagina h1 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+}
+
+.encabezado-pagina p {
+  margin-bottom: 0;
+  color: var(--bs-secondary-color);
+}
+
+.encabezado-pagina .acciones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.pestanas-modulo .nav-link {
+  color: var(--bs-secondary-color);
+}
+
+.pestanas-modulo .nav-link.active {
+  color: var(--color-marca);
+  border-bottom-color: var(--color-marca);
+}
+
+/* Tarjetas */
+
+.tarjeta {
+  background-color: #fff;
+  border: 1px solid var(--color-borde);
+  border-radius: var(--bs-border-radius-lg);
+  box-shadow: 0 1px 2px rgba(58, 37, 22, 0.04);
+}
+
+.tarjeta > .card-header {
+  background-color: transparent;
+  border-bottom-color: var(--color-borde);
+  font-weight: 600;
+  padding: 0.875rem 1.25rem;
+}
+
+.tarjeta .table {
+  margin-bottom: 0;
+}
+
+.tarjeta .table > :not(caption) > * > * {
+  padding-inline: 1rem;
+}
+
+.table > thead th {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--bs-secondary-color);
+  background-color: #fcfaf7;
+  white-space: nowrap;
+}
+
+.fila-alerta > td {
+  background-color: #fff8ec;
+}
+
+.fila-peligro > td {
+  background-color: #fff1f0;
+}
+
+.numero {
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+  white-space: nowrap;
+}
+
+/* Indicadores del panel de inicio */
+
+.indicador {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  height: 100%;
+  padding: 1.25rem;
+  color: inherit;
+  text-decoration: none;
+}
+
+a.indicador:hover {
+  background-color: #fffdf9;
+}
+
+.indicador-icono {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 0.75rem;
+  font-size: 1.4rem;
+  background-color: var(--color-marca-suave);
+  color: var(--color-marca);
+}
+
+.indicador-icono.alerta {
+  background-color: #fdecea;
+  color: #b42318;
+}
+
+.indicador-icono.aviso {
+  background-color: #fff4dc;
+  color: #a15c07;
+}
+
+.indicador-icono.bien {
+  background-color: #e7f6ec;
+  color: #1e7a3c;
+}
+
+.indicador-valor {
+  font-size: 1.6rem;
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.indicador-etiqueta {
+  color: var(--bs-secondary-color);
+  font-size: 0.9rem;
+}
+
+.lista-pendientes .list-group-item {
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-start;
+  padding: 0.875rem 1.25rem;
+}
+
+.lista-pendientes .icono-pendiente {
+  font-size: 1.15rem;
+  margin-top: 0.1rem;
+}
+
+.estado-vacio {
+  text-align: center;
+  padding: 2.5rem 1rem;
+  color: var(--bs-secondary-color);
+}
+
+.estado-vacio .bi {
+  display: block;
+  font-size: 2.25rem;
+  margin-bottom: 0.5rem;
+  color: var(--color-marca-borde);
+}
+
+/* Barras horizontales (productos, existencia vs mínimo) */
+
+.barra-horizontal {
+  position: relative;
+  height: 0.5rem;
+  border-radius: 999px;
+  background-color: #f1ebe3;
+  overflow: hidden;
+}
+
+.barra-horizontal > span {
+  position: absolute;
+  inset: 0 auto 0 0;
+  border-radius: inherit;
+  background-color: var(--color-marca);
+}
+
+.barra-horizontal.peligro > span {
+  background-color: #d92d20;
+}
+
+.barra-horizontal.aviso > span {
+  background-color: #e8a317;
+}
+
+.barra-horizontal.bien > span {
+  background-color: #2e9e57;
+}
+
+/* Gráfica de barras verticales por hora o por día */
+
+.grafica-columnas {
+  display: flex;
+  align-items: flex-end;
+  gap: 0.375rem;
+  height: 220px;
+  padding-top: 1.5rem;
+}
+
+.grafica-columna {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  height: 100%;
+  min-width: 0;
+}
+
+.grafica-columna .valor {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--bs-secondary-color);
+  margin-bottom: 0.25rem;
+}
+
+.grafica-columna .columna {
+  width: 100%;
+  max-width: 48px;
+  min-height: 2px;
+  border-radius: 6px 6px 0 0;
+  background-color: #dcb48a;
+  transition: background-color 0.15s;
+}
+
+.grafica-columna.destacada .columna {
+  background-color: var(--color-marca);
+}
+
+.grafica-columna.destacada .valor {
+  color: var(--color-marca);
+}
+
+.grafica-columna .etiqueta {
+  margin-top: 0.375rem;
+  font-size: 0.75rem;
+  color: var(--bs-secondary-color);
+  white-space: nowrap;
+}
+
+.grafica-columna:hover .columna {
+  background-color: var(--color-marca-hover);
+}
+
+/* Mapa de calor día × hora */
+
+.mapa-calor {
+  border-collapse: separate;
+  border-spacing: 3px;
+  font-size: 0.75rem;
+}
+
+.mapa-calor th {
+  font-weight: 500;
+  color: var(--bs-secondary-color);
+  text-align: center;
+  white-space: nowrap;
+  padding: 0 0.25rem;
+}
+
+.mapa-calor td {
+  min-width: 2.25rem;
+  height: 2rem;
+  text-align: center;
+  border-radius: 4px;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Caja de ventas */
+
+.producto-caja {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 0.75rem;
+  height: 100%;
+  padding: 1rem;
+  border: 2px solid var(--color-borde);
+  border-radius: var(--bs-border-radius-lg);
+  background-color: #fff;
+  transition:
+    border-color 0.15s,
+    box-shadow 0.15s;
+}
+
+.producto-caja.seleccionado {
+  border-color: var(--color-marca);
+  box-shadow: 0 0 0 3px rgba(156, 90, 26, 0.15);
+}
+
+.producto-caja .boton-agregar {
+  all: unset;
+  cursor: pointer;
+  display: block;
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+.producto-caja .boton-agregar::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+}
+
+.producto-caja .boton-agregar:focus-visible {
+  outline: none;
+}
+
+.producto-caja:has(.boton-agregar:focus-visible) {
+  box-shadow: 0 0 0 3px rgba(156, 90, 26, 0.35);
+}
+
+.producto-caja .control-cantidad {
+  position: relative;
+  z-index: 1;
+}
+
+.producto-caja .control-cantidad input {
+  text-align: center;
+  font-weight: 600;
+}
+
+.insignia-cantidad {
+  position: absolute;
+  top: -0.6rem;
+  right: -0.6rem;
+  min-width: 1.75rem;
+  height: 1.75rem;
+  padding: 0 0.4rem;
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+  background-color: var(--color-marca);
+  color: #fff;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.resumen-venta {
+  position: sticky;
+  top: 5rem;
+}
+
+/* En pantallas pequeñas, el total y el botón de registrar quedan siempre a la vista */
+.barra-venta-movil {
+  position: fixed;
+  inset: auto 0 0 0;
+  z-index: 1020;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.75rem 1rem;
+  background-color: #fff;
+  border-top: 1px solid var(--color-borde);
+  box-shadow: 0 -4px 12px rgba(58, 37, 22, 0.08);
+}
+
+@media (max-width: 991.98px) {
+  body:has(.barra-venta-movil) {
+    padding-bottom: 4.5rem;
+  }
+}
+
+/* Detalle de abastecimiento */
+
+.texto-faltante {
+  color: #b42318;
+  font-weight: 600;
+}
+
+.texto-pedido {
+  color: #a15c07;
+}
+
+/* Filas de ingredientes en el formulario de recetas */
+
+.fila-ingrediente + .fila-ingrediente {
+  margin-top: 0.75rem;
+}
+
+@media (max-width: 575.98px) {
+  .encabezado-pagina h1 {
+    font-size: 1.4rem;
+  }
+
+  .grafica-columnas {
+    gap: 0.15rem;
+  }
+
+  .grafica-columna .valor {
+    font-size: 0.625rem;
+  }
+}
+
+@media print {
+  .barra-principal,
+  .pie,
+  .acciones,
+  .pestanas-modulo,
+  .no-imprimir {
+    display: none !important;
+  }
+
+  body {
+    background: #fff;
+  }
+
+  .tarjeta {
+    box-shadow: none;
+  }
+}
+
+/* Inicio de sesión */
+
+.pagina-acceso {
+  justify-content: center;
+}
+
+.marca-icono-grande {
+  width: 4rem;
+  height: 4rem;
+  font-size: 1.9rem;
+}

@@ -2,6 +2,12 @@
 
 declare(strict_types=1);
 
+/*
+ * Inicio de sesión y protección de las páginas (SCRUM-22). Todas las páginas
+ * del sistema, salvo iniciar-sesion.php, exigen una cuenta activa, y todos
+ * los formularios llevan el código de seguridad de la sesión (campo «token»).
+ */
+
 function iniciarSesionSegura(): void
 {
     if (session_status() !== PHP_SESSION_ACTIVE) {
@@ -39,12 +45,10 @@ function exigirAcceso(): void
             http_response_code(403);
             exit('Acceso rechazado: debe iniciar sesión.');
         }
-        header('Location: /iniciar-sesion.php', true, 303);
+        header('Location: ' . url('iniciar-sesion.php'), true, 303);
         exit;
     }
-    global $conexion;
-    require_once __DIR__ . '/database.php';
-    $consulta = $conexion->prepare('SELECT id FROM usuarios WHERE id = ? AND activo = 1');
+    $consulta = obtenerConexion()->prepare('SELECT id FROM usuarios WHERE id = ? AND activo = 1');
     $consulta->execute([$_SESSION['usuario_id']]);
     if ($consulta->fetchColumn() === false) {
         $_SESSION = [];
