@@ -1,2 +1,9 @@
 node_modules/
 vendor/
+
+# Configuración local con contraseñas reales: nunca se sube.
+config/configuracion.local.php
+
+# Caché de herramientas de calidad
+.php-cs-fixer.cache
+.phpunit.cache/

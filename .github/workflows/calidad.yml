@@ -1,0 +1,66 @@
+# Verificación automática de la Definition of Done en cada Pull Request:
+# sintaxis, formato, análisis estático y pruebas con una base MySQL 8 temporal.
+
+name: Calidad
+
+on:
+  pull_request:
+  push:
+    branches: [develop, main]
+
+jobs:
+  verificar:
+    name: Pruebas, formato y análisis
+    runs-on: ubuntu-latest
+
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping -h 127.0.0.1"
+          --health-interval=5s
+          --health-timeout=5s
+          --health-retries=20
+
+    env:
+      BD_HOST: 127.0.0.1
+      BD_USUARIO: root
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          extensions: pdo_mysql, mbstring
+          tools: composer
+          coverage: none
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+
+      - name: Instalar dependencias
+        run: |
+          composer install --no-interaction --no-progress
+          npm ci
+
+      - name: Sintaxis PHP (DoD 2)
+        run: find . -name '*.php' -not -path './vendor/*' -not -path './node_modules/*' -print0 | xargs -0 -n1 php -l
+
+      - name: Formato PHP (DoD 4)
+        run: vendor/bin/php-cs-fixer fix --dry-run --diff
+
+      - name: Formato JS y CSS (DoD 4)
+        run: npx prettier "**/*.{js,mjs,html,css}" --check
+
+      - name: Análisis estático
+        run: vendor/bin/phpstan analyse --memory-limit=512M --no-progress
+
+      - name: Pruebas automáticas
+        run: vendor/bin/phpunit

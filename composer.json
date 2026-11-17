@@ -1,0 +1,26 @@
+{
+    "name": "panaderia/sistema-inventario-produccion",
+    "description": "Sistema web de inventario, recetas y planificación de producción para una panadería",
+    "type": "project",
+    "license": "proprietary",
+    "require": {
+        "php": ">=8.2",
+        "ext-pdo": "*",
+        "ext-pdo_mysql": "*",
+        "ext-mbstring": "*"
+    },
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "^3.95",
+        "phpstan/phpstan": "^2.3",
+        "phpunit/phpunit": "^9.6 || ^11.5"
+    },
+    "scripts": {
+        "pruebas": "phpunit",
+        "formato:revisar": "php-cs-fixer fix --dry-run --diff",
+        "formato:aplicar": "php-cs-fixer fix",
+        "analisis": "phpstan analyse --memory-limit=512M"
+    },
+    "config": {
+        "sort-packages": true
+    }
+}
