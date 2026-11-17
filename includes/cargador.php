@@ -14,6 +14,9 @@ if (!defined('RAIZ_PROYECTO')) {
 
 /** @var array<string, mixed> $configuracion */
 $configuracion = require RAIZ_PROYECTO . '/config/configuracion.php';
+// Se guarda también como global: si este archivo se incluye dentro de una
+// función (PHPUnit 10+ lo hace con el bootstrap), $configuracion sería local.
+$GLOBALS['configuracion'] = $configuracion;
 
 date_default_timezone_set((string) $configuracion['zona_horaria']);
 
