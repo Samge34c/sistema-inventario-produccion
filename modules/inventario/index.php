@@ -2,163 +2,188 @@
 
 declare(strict_types=1);
 
-require_once __DIR__ . '/../../config/acceso.php';
-exigirAcceso();
+require_once __DIR__ . '/../../includes/inicio.php';
 
+$conexion = obtenerConexion();
 
+$inventario = new GestorInventario($conexion);
+$filtroEstado = leerParametro('estado') === 'ALERTA' ? 'ALERTA' : '';
+$todasLasMaterias = $inventario->listarMateriasPrimas();
+$materias = $filtroEstado === '' ? $todasLasMaterias : $inventario->listarMateriasPrimas('', $filtroEstado);
+$totalEnAlerta = count(array_filter(
+    $todasLasMaterias,
+    static fn (array $materia): bool => $materia['estado'] !== GestorInventario::DISPONIBLE
+));
 
-require_once __DIR__ . '/../../config/database.php';
-require_once __DIR__ . '/funciones.php';
-require_once __DIR__ . '/proteccion-formulario.php';
-
-$consulta = $conexion->query(
-    'SELECT id, nombre, unidad_medida, cantidad_disponible, stock_minimo
-     FROM materias_primas
-     ORDER BY nombre ASC'
-);
-$materiasPrimas = $consulta->fetchAll();
-
-$errores = $_SESSION['errores_materia_prima'] ?? [];
-$datosAnteriores = $_SESSION['datos_materia_prima'] ?? [];
-unset($_SESSION['errores_materia_prima'], $_SESSION['datos_materia_prima']);
-
-$estado = (string) ($_GET['estado'] ?? '');
-$mensajes = [
-    'creada' => 'Materia prima registrada correctamente.',
-    'actualizada' => 'Materia prima actualizada correctamente.',
-    'eliminada' => 'Materia prima eliminada correctamente.',
-];
-$mensaje = $mensajes[$estado] ?? null;
-
-function escapar(string $valor): string
-{
-    return htmlspecialchars($valor, ENT_QUOTES, 'UTF-8');
-}
+$tituloPagina = 'Inventario';
+$seccionActiva = 'inventario';
+require RAIZ_PROYECTO . '/includes/encabezado.php';
 ?>
-<!doctype html>
-<html lang="es">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Materias primas</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body class="bg-light">
-<main class="container py-4">
-    <div class="d-flex justify-content-between align-items-center mb-4">
-        <div>
-            <h1 class="h3 mb-1">Materias primas</h1>
-            <p class="text-secondary mb-0">Registro y consulta de existencias.</p>
-        </div>
-        <div class="d-flex gap-2">
-            <a class="btn btn-primary" href="movimientos.php">Movimientos</a>
-            <a class="btn btn-outline-secondary" href="../../index.php">Inicio</a>
-        </div>
+<div class="encabezado-pagina">
+  <div>
+    <h1>Inventario</h1>
+    <p>Existencias de materias primas, lo que está por llegar y el mínimo que debe haber de cada una.</p>
+  </div>
+  <div class="acciones">
+    <a class="btn btn-outline-primary" href="<?= escapar(url('modules/inventario/pedido.php')) ?>">
+      <i class="bi bi-truck" aria-hidden="true"></i> Registrar pedido
+    </a>
+    <a class="btn btn-primary" href="<?= escapar(url('modules/inventario/materia-prima.php')) ?>">
+      <i class="bi bi-plus-lg" aria-hidden="true"></i> Nueva materia prima
+    </a>
+  </div>
+</div>
+
+<?= generarPestanas(require __DIR__ . '/pestanas.php', 'materias') ?>
+
+<?php if ($todasLasMaterias === []) : ?>
+  <div class="tarjeta estado-vacio">
+    <i class="bi bi-box-seam" aria-hidden="true"></i>
+    <p class="mb-3">Todavía no hay materias primas registradas.</p>
+    <a class="btn btn-primary" href="<?= escapar(url('modules/inventario/materia-prima.php')) ?>">Registrar la primera</a>
+  </div>
+<?php else : ?>
+  <div class="d-flex flex-wrap gap-2 justify-content-between align-items-center mb-3">
+    <div class="btn-group" role="group" aria-label="Filtrar por estado">
+      <a class="btn btn-sm <?= $filtroEstado === '' ? 'btn-primary' : 'btn-outline-primary' ?>"
+        href="<?= escapar(url('modules/inventario/index.php')) ?>">Todas (<?= count($todasLasMaterias) ?>)</a>
+      <a class="btn btn-sm <?= $filtroEstado === 'ALERTA' ? 'btn-primary' : 'btn-outline-primary' ?>"
+        href="<?= escapar(url('modules/inventario/index.php?estado=ALERTA')) ?>">
+        <i class="bi bi-exclamation-triangle" aria-hidden="true"></i> Por reabastecer (<?= $totalEnAlerta ?>)
+      </a>
     </div>
+    <div class="input-group input-group-sm" style="max-width: 280px">
+      <span class="input-group-text"><i class="bi bi-search" aria-hidden="true"></i></span>
+      <input type="search" class="form-control" placeholder="Buscar materia prima" aria-label="Buscar materia prima"
+        data-filtrar="#tablaMaterias">
+    </div>
+  </div>
 
-    <?php if ($mensaje !== null): ?>
-        <div class="alert alert-success" role="alert"><?= escapar($mensaje) ?></div>
-    <?php endif; ?>
-
-    <?php if ($errores !== []): ?>
-        <div class="alert alert-danger" role="alert">
-            <strong>No se pudo completar la operación.</strong>
-            <ul class="mb-0 mt-2">
-                <?php foreach ($errores as $error): ?>
-                    <li><?= escapar((string) $error) ?></li>
-                <?php endforeach; ?>
-            </ul>
-        </div>
-    <?php endif; ?>
-
-    <section class="card shadow-sm mb-4">
-        <div class="card-body">
-            <h2 class="h5">Registrar materia prima</h2>
-            <form action="guardar.php" method="post" class="row g-3">
-                <input type="hidden" name="token" value="<?= escapar(obtenerTokenMateriaPrima()) ?>">
-                <div class="col-md-5">
-                    <label class="form-label" for="nombre">Nombre</label>
-                    <input class="form-control" id="nombre" name="nombre" maxlength="100" required
-                        value="<?= escapar((string) ($datosAnteriores['nombre'] ?? '')) ?>">
+  <div class="tarjeta">
+    <div class="table-responsive">
+      <table class="table table-hover align-middle" id="tablaMaterias">
+        <thead>
+          <tr>
+            <th scope="col">Materia prima</th>
+            <th scope="col" class="text-end">Existencia</th>
+            <th scope="col" class="text-end">Mínimo</th>
+            <th scope="col">Por llegar</th>
+            <th scope="col">Estado</th>
+            <th scope="col" class="text-end"><span class="visually-hidden">Acciones</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <?php foreach ($materias as $materia) : ?>
+            <?php
+            $claseFila = match ($materia['estado']) {
+                GestorInventario::SIN_EXISTENCIAS => 'fila-peligro',
+                GestorInventario::BAJO_MINIMO => 'fila-alerta',
+                default => '',
+            };
+              $porcentajeBarra = $materia['stock_minimo'] > 0
+                  ? min(100, $materia['cantidad_disponible'] / ($materia['stock_minimo'] * 2) * 100)
+                  : 100;
+              $claseBarra = match ($materia['estado']) {
+                  GestorInventario::SIN_EXISTENCIAS => 'peligro',
+                  GestorInventario::BAJO_MINIMO => 'aviso',
+                  default => 'bien',
+              };
+              $urlMovimiento = 'modules/inventario/movimiento.php?id=' . $materia['id'];
+              ?>
+            <tr class="<?= $claseFila ?>">
+              <td>
+                <div class="fw-semibold"><?= escapar($materia['nombre']) ?></div>
+                <div class="small text-body-secondary">
+                  <?= $materia['total_recetas'] > 0
+                        ? 'Se usa en ' . escapar(pluralizar($materia['total_recetas'], 'receta', 'recetas'))
+                        : 'No se usa en recetas' ?>
                 </div>
-
-                <div class="col-md-3">
-                    <label class="form-label" for="unidad_medida">Unidad</label>
-                    <select class="form-select" id="unidad_medida" name="unidad_medida" required>
-                        <option value="">Seleccione</option>
-                        <?php foreach (obtenerUnidadesPermitidas() as $unidad): ?>
-                            <option value="<?= escapar($unidad) ?>"
-                                <?= (($datosAnteriores['unidad_medida'] ?? '') === $unidad) ? 'selected' : '' ?>>
-                                <?= escapar($unidad) ?>
-                            </option>
-                        <?php endforeach; ?>
-                    </select>
+              </td>
+              <td class="numero" style="min-width: 140px">
+                <div class="fw-semibold"><?= escapar(formatearCantidadConUnidad($materia['cantidad_disponible'], $materia['unidad_medida'])) ?></div>
+                <div class="barra-horizontal <?= $claseBarra ?> mt-1" aria-hidden="true">
+                  <span style="width: <?= round($porcentajeBarra, 1) ?>%"></span>
                 </div>
-
-                <div class="col-md-2">
-                    <label class="form-label" for="cantidad_disponible">Existencia</label>
-                    <input class="form-control" id="cantidad_disponible" name="cantidad_disponible"
-                        type="number" min="0" step="0.01" required
-                        value="<?= escapar((string) ($datosAnteriores['cantidad_disponible'] ?? '0')) ?>">
+              </td>
+              <td class="numero text-body-secondary">
+                <?= escapar(formatearCantidadConUnidad($materia['stock_minimo'], $materia['unidad_medida'])) ?>
+              </td>
+              <td>
+                <?php if ($materia['cantidad_por_llegar'] > 0) : ?>
+                  <?php $diasLlegada = calcularDiferenciaDias(obtenerFechaHoy(), $materia['proxima_llegada']); ?>
+                  <div><?= escapar(formatearCantidadConUnidad($materia['cantidad_por_llegar'], $materia['unidad_medida'])) ?></div>
+                  <div class="small <?= $diasLlegada < 0 ? 'text-danger fw-semibold' : 'text-body-secondary' ?>">
+                    <?= $diasLlegada < 0
+                          ? 'Atrasado desde ' . escapar(mb_strtolower(describirDia($materia['proxima_llegada'])))
+                          : 'Llega ' . escapar(mb_strtolower(describirDia($materia['proxima_llegada']))) ?>
+                  </div>
+                <?php else : ?>
+                  <span class="text-body-secondary">—</span>
+                <?php endif; ?>
+              </td>
+              <td><?= generarInsigniaExistencia($materia['estado']) ?></td>
+              <td class="text-end text-nowrap">
+                <a class="btn btn-sm btn-outline-success" href="<?= escapar(url($urlMovimiento . '&tipo=ENTRADA')) ?>"
+                  title="Registrar entrada de <?= escapar($materia['nombre']) ?>">
+                  <i class="bi bi-plus-lg" aria-hidden="true"></i> Entrada
+                </a>
+                <a class="btn btn-sm btn-outline-secondary" href="<?= escapar(url($urlMovimiento . '&tipo=SALIDA')) ?>"
+                  title="Registrar salida de <?= escapar($materia['nombre']) ?>">
+                  <i class="bi bi-dash-lg" aria-hidden="true"></i> Salida
+                </a>
+                <div class="dropdown d-inline-block">
+                  <button class="btn btn-sm btn-link text-body-secondary" type="button" data-bs-toggle="dropdown"
+                    data-bs-popper-config='{"strategy":"fixed"}' aria-expanded="false"
+                    aria-label="Más acciones para <?= escapar($materia['nombre']) ?>">
+                    <i class="bi bi-three-dots-vertical" aria-hidden="true"></i>
+                  </button>
+                  <ul class="dropdown-menu dropdown-menu-end">
+                    <li>
+                      <a class="dropdown-item" href="<?= escapar(url('modules/inventario/materia-prima.php?id=' . $materia['id'])) ?>">
+                        <i class="bi bi-pencil" aria-hidden="true"></i> Editar
+                      </a>
+                    </li>
+                    <li>
+                      <a class="dropdown-item" href="<?= escapar(url('modules/inventario/movimientos.php?materia_prima_id=' . $materia['id'])) ?>">
+                        <i class="bi bi-clock-history" aria-hidden="true"></i> Ver movimientos
+                      </a>
+                    </li>
+                    <li>
+                      <a class="dropdown-item" href="<?= escapar(url('modules/inventario/pedido.php?materia_prima_id=' . $materia['id'])) ?>">
+                        <i class="bi bi-truck" aria-hidden="true"></i> Registrar pedido
+                      </a>
+                    </li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li>
+                      <form method="post" action="<?= escapar(url('modules/inventario/eliminar-materia-prima.php')) ?>"
+                        data-confirmar="¿Eliminar «<?= escapar($materia['nombre']) ?>»? Solo se puede si no tiene recetas ni historial."
+                        data-confirmar-boton="Eliminar">
+                        <?= generarCampoCsrf() ?>
+                        <input type="hidden" name="id" value="<?= $materia['id'] ?>">
+                        <button class="dropdown-item text-danger" type="submit">
+                          <i class="bi bi-trash" aria-hidden="true"></i> Eliminar
+                        </button>
+                      </form>
+                    </li>
+                  </ul>
                 </div>
+              </td>
+            </tr>
+          <?php endforeach; ?>
+          <tr data-sin-resultados <?= $materias === [] ? '' : 'hidden' ?>>
+            <td colspan="6" class="estado-vacio">
+              <?= $filtroEstado === 'ALERTA'
+                    ? 'Todo está por encima del mínimo. No hay nada por reabastecer.'
+                    : 'Ninguna materia prima coincide con la búsqueda.' ?>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <p class="texto-ayuda mt-2">
+    La barra compara la existencia con el doble del mínimo: verde es suficiente, amarillo está bajo el mínimo y rojo está agotado.
+  </p>
+<?php endif; ?>
 
-                <div class="col-md-2">
-                    <label class="form-label" for="stock_minimo">Stock mínimo</label>
-                    <input class="form-control" id="stock_minimo" name="stock_minimo"
-                        type="number" min="0" step="0.01" required
-                        value="<?= escapar((string) ($datosAnteriores['stock_minimo'] ?? '0')) ?>">
-                </div>
-
-                <div class="col-12">
-                    <button class="btn btn-primary" type="submit">Guardar materia prima</button>
-                </div>
-            </form>
-        </div>
-    </section>
-
-    <section class="card shadow-sm">
-        <div class="card-body">
-            <h2 class="h5">Existencias registradas</h2>
-
-            <?php if ($materiasPrimas === []): ?>
-                <p class="text-secondary mb-0">No hay materias primas registradas.</p>
-            <?php else: ?>
-                <div class="table-responsive">
-                    <table class="table table-striped align-middle mb-0">
-                        <thead>
-                        <tr>
-                            <th>Nombre</th>
-                            <th>Unidad</th>
-                            <th class="text-end">Existencia</th>
-                            <th class="text-end">Stock mínimo</th>
-                            <th class="text-end">Acciones</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <?php foreach ($materiasPrimas as $materiaPrima): ?>
-                            <tr>
-                                <td><?= escapar((string) $materiaPrima['nombre']) ?></td>
-                                <td><?= escapar((string) $materiaPrima['unidad_medida']) ?></td>
-                                <td class="text-end"><?= escapar(number_format((float) $materiaPrima['cantidad_disponible'], 2, '.', '')) ?></td>
-                                <td class="text-end"><?= escapar(number_format((float) $materiaPrima['stock_minimo'], 2, '.', '')) ?></td>
-                                <td class="text-end text-nowrap">
-                                    <a class="btn btn-sm btn-outline-primary"
-                                        href="editar.php?id=<?= (int) $materiaPrima['id'] ?>">Editar</a>
-                                    <form action="eliminar.php" method="post" class="d-inline">
-                                        <input type="hidden" name="token" value="<?= obtenerTokenAcceso() ?>">
-                                        <input type="hidden" name="id" value="<?= (int) $materiaPrima['id'] ?>">
-                                        <button class="btn btn-sm btn-outline-danger" type="submit">Eliminar</button>
-                                    </form>
-                                </td>
-                            </tr>
-                        <?php endforeach; ?>
-                        </tbody>
-                    </table>
-                </div>
-            <?php endif; ?>
-        </div>
-    </section>
-</main>
-</body>
-</html>
-
+<?php require RAIZ_PROYECTO . '/includes/pie.php'; ?>
