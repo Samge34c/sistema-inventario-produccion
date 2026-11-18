@@ -4,15 +4,14 @@ Procedimientos reproducibles para el punto 1 de la Definition of Done (`ESTANDAR
 
 ## Preparación
 
-Todos los casos parten de una base recién cargada y de una sesión iniciada:
+Todos los casos parten de una base recién cargada:
 
 ```bash
 mysql -u root < database/schema.sql
 mysql -u root < database/datos-prueba.sql
-INVENTARIO_CLAVE_INICIAL='una-clave-de-prueba' php herramientas/crear-usuario.php prueba@ejemplo.com "Cuenta de prueba"
 ```
 
-Abra el sistema e inicie sesión con esa cuenta. Si recarga los datos de prueba, la cuenta se conserva (los datos de prueba no tocan la tabla de usuarios).
+Abra el sistema: entra directo al panel de inicio, sin correo ni contraseña.
 
 Los datos de prueba usan fechas relativas al día de la importación, así que «hoy», «mañana» y «ayer» se refieren a ese día. Los casos son independientes entre sí; si ejecuta varios seguidos, los que cambian existencias (CP-05, CP-06, CP-09) pueden alterar los resultados de los siguientes. Para repetir, vuelva a importar `datos-prueba.sql`.
 
@@ -26,12 +25,14 @@ Existencias iniciales relevantes:
 | Queso costeño | 1.200 g | 2.000 g | 3.000 g, atrasado desde ayer |
 | Bocadillo de guayaba | 0 g | 1.000 g | 2.000 g, llega mañana |
 
-## Acceso
+## Formularios
 
-### CP-00 · Inicio de sesión y páginas protegidas
+### CP-00 · Código de seguridad de los formularios
 
-- **Pasos:** sin sesión, abra `modules/inventario/index.php`. Inicie sesión con una contraseña equivocada y luego con la correcta. Después use «Cerrar sesión» en el menú.
-- **Esperado:** sin sesión, la página lleva a `iniciar-sesion.php`. Con la contraseña equivocada: «No se pudo iniciar sesión con esos datos.» Con la correcta se abre el panel de inicio y el menú muestra el nombre de la cuenta. Al cerrar sesión vuelve al inicio de sesión, y las páginas vuelven a pedirlo. Un envío de formulario sin sesión responde 403.
+- **Pasos:** abra «Nueva materia prima», borre el campo oculto `token` con las herramientas del navegador (F12) y guarde.
+- **Esperado:** no se guarda nada y el sistema vuelve al inventario con el mensaje «El formulario venció. Revise los datos y vuelva a enviarlo.»
+
+Desde el 18 de noviembre de 2026 (CC-08) el sistema no tiene cuentas ni inicio de sesión, así que no puede rechazar a una persona sin autorización: cualquiera que lo abra puede crear, editar y borrar registros. El defecto D-01 quedó abierto otra vez.
 
 ## Recetas y capacidad
 
