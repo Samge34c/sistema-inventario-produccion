@@ -31,26 +31,6 @@ function validarTokenAcceso(mixed $token): bool
         && is_string($_SESSION['token_acceso']) && hash_equals($_SESSION['token_acceso'], $token);
 }
 
-function exigirAcceso(): void
-{
-    iniciarSesionSegura();
-    if (!isset($_SESSION['usuario_id']) || !is_int($_SESSION['usuario_id']) || $_SESSION['usuario_id'] < 1) {
-        if (($_SERVER['REQUEST_METHOD'] ?? '') !== 'GET') {
-            http_response_code(403);
-            exit('Acceso rechazado: debe iniciar sesión.');
-        }
-        header('Location: ' . url('iniciar-sesion.php'), true, 303);
-        exit;
-    }
-    $consulta = obtenerConexion()->prepare('SELECT id FROM usuarios WHERE id = ? AND activo = 1');
-    $consulta->execute([$_SESSION['usuario_id']]);
-    if ($consulta->fetchColumn() === false) {
-        $_SESSION = [];
-        http_response_code(403);
-        exit('Acceso rechazado: la cuenta no está habilitada.');
-    }
-}
-
 function exigirTokenAcceso(): void
 {
     if (!validarTokenAcceso($_POST['token'] ?? null)) {

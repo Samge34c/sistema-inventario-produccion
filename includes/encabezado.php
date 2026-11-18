@@ -48,15 +48,6 @@ $nombreNegocio = (string) obtenerConfiguracion('nombre_negocio');
             </li>
           <?php endforeach; ?>
         </ul>
-        <?php if (isset($_SESSION['usuario_nombre'])) : ?>
-          <div class="d-flex align-items-center gap-2 ms-lg-3 mt-2 mt-lg-0 sesion-usuario">
-            <span class="small text-white-50"><?= escapar($_SESSION['usuario_nombre']) ?></span>
-            <form method="post" action="<?= escapar(url('cerrar-sesion.php')) ?>">
-              <?= generarCampoCsrf() ?>
-              <button class="btn btn-sm btn-outline-light" type="submit">Cerrar sesión</button>
-            </form>
-          </div>
-        <?php endif; ?>
       </div>
     </div>
   </nav>

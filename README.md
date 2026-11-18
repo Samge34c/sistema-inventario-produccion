@@ -6,7 +6,7 @@ Sistema web de inventario, recetas y planificación de producción para una pana
 
 | Módulo | Funciones |
 |---|---|
-| **Acceso** | Inicio y cierre de sesión con cuentas activas (SCRUM-22). Todas las páginas y formularios exigen sesión y código de seguridad. |
+| **Formularios** | Todos los formularios exigen un código de seguridad, que rechaza los envíos falsificados (SCRUM-22). El sistema no tiene cuentas ni inicio de sesión: quien lo abre puede usarlo (CC-08, 18 de noviembre de 2026). |
 | **Inicio** | Panel con lo que necesita atención hoy: planes con materiales faltantes, pedidos atrasados, materias primas bajo el mínimo, producción de hoy y mañana, y recetas que se pueden hornear ya. |
 | **Inventario** | Materias primas con existencia, mínimo y estado. Entradas y salidas con historial y origen (manual, pedido o producción). Pedidos pendientes de llegada que, al recibirse, suman la cantidad real. |
 | **Recetas** | Ingredientes por tanda y rendimiento. Producción máxima, ingrediente limitante, recetas posibles y proyección contando los pedidos por llegar. Calculadora de materiales para cualquier cantidad. |
@@ -27,7 +27,7 @@ Sistema web de inventario, recetas y planificación de producción para una pana
 Para una base **nueva**, importe en phpMyAdmin (Importar) o desde la consola, en este orden:
 
 1. `database/schema.sql`: crea la base `sistema_inventario` con todas las tablas.
-2. `database/datos-prueba.sql` (opcional): carga una panadería de ejemplo con 12 materias primas, 6 recetas, materiales por llegar, planes de producción y dos semanas de ventas. Las fechas se ajustan solas al día de la importación. No crea cuentas de usuario.
+2. `database/datos-prueba.sql` (opcional): carga una panadería de ejemplo con 12 materias primas, 6 recetas, materiales por llegar, planes de producción y dos semanas de ventas. Las fechas se ajustan solas al día de la importación.
 
 ```bash
 mysql -u root < database/schema.sql
@@ -38,15 +38,17 @@ Para una instalación **existente**, no importe el esquema encima: haga una copi
 
 | Si su base está en… | Aplique |
 |---|---|
-| El esquema anterior a HU02 | 002, 003, 004 y 005 |
-| HU02 ya instalada | 003, 004 y 005 |
-| La versión de develop con usuarios (HU01 a HU03) | solo 005 |
+| El esquema anterior a HU02 | 002, 003, 004, 005 y 006 |
+| HU02 ya instalada | 003, 004, 005 y 006 |
+| La versión de develop con usuarios (HU01 a HU03) | 005 y 006 |
+| La versión con inicio de sesión de la PR #15 | solo 006 |
 
 ```bash
 mysql -u root sistema_inventario < database/migraciones/005-produccion-y-ventas.sql
+mysql -u root sistema_inventario < database/migraciones/006-quita-usuarios.sql
 ```
 
-La 005 no borra datos: los materiales pendientes que ya existían quedan como pedidos pendientes, con la fecha de registro como llegada estimada.
+La 005 no borra datos: los materiales pendientes que ya existían quedan como pedidos pendientes, con la fecha de registro como llegada estimada. La 006 borra la tabla de cuentas, que el sistema ya no usa.
 
 ### 2. Conexión
 
@@ -57,22 +59,12 @@ Los valores por defecto sirven para XAMPP recién instalado (usuario `root` sin 
 
 En `config/configuracion.php` también se ajustan la zona horaria (por defecto `America/Bogota`), el nombre del negocio y si se muestra el detalle técnico de los errores (`mostrar_detalle_errores`; póngalo en `false` si publica el sistema en un servidor compartido).
 
-### 3. Cuenta de usuario
-
-No hay cuentas públicas ni contraseñas predeterminadas. Cree la suya desde la terminal, con una contraseña privada de al menos 12 caracteres en una variable temporal:
-
-```bash
-INVENTARIO_CLAVE_INICIAL='su-contraseña-privada' php herramientas/crear-usuario.php correo@ejemplo.com "Su nombre"
-```
-
-En Windows (cmd), defina la variable con `set INVENTARIO_CLAVE_INICIAL=su-contraseña-privada`, ejecute `php herramientas\crear-usuario.php correo@ejemplo.com "Su nombre"` y bórrela con `set INVENTARIO_CLAVE_INICIAL=`.
-
-### 4. Abrir el sistema
+### 3. Abrir el sistema
 
 - **Con XAMPP:** copie el proyecto en `htdocs` (por ejemplo `C:\xampp\htdocs\sistema-inventario-produccion`), encienda Apache y MySQL y abra `http://localhost/sistema-inventario-produccion/`.
 - **Con el servidor de PHP:** desde la raíz del proyecto, `php -S 127.0.0.1:8000` y abra `http://127.0.0.1:8000/`.
 
-Sin sesión, cualquier página lleva a `iniciar-sesion.php`.
+El sistema abre directo en el panel de inicio, sin pedir correo ni contraseña.
 
 ## Cómo calcula
 
@@ -88,7 +80,6 @@ Sin sesión, cualquier página lleva a `iniciar-sesion.php`.
 
 ```text
 index.php                 Panel de inicio
-iniciar-sesion.php        Inicio de sesión (cerrar-sesion.php lo cierra)
 modules/inventario/       Materias primas, movimientos y pedidos
 modules/recetas/          Recetas y capacidad de producción
 modules/produccion/       Planificación, materiales del día y registro
@@ -102,8 +93,8 @@ clases/                   Lógica del negocio (una clase por archivo)
   GestorVentas            Ventas y reportes
   Validador, ErrorValidacion, BaseDatos   Apoyo
 includes/                 Arranque, funciones de apoyo y diseño común
-config/                   Configuración, conexión y control de acceso
-herramientas/             crear-usuario.php y copia de librerías
+config/                   Configuración, conexión y código de seguridad de los formularios
+herramientas/             Copia de librerías
 assets/                   CSS, JavaScript propio y librerías locales
 database/                 Esquema, migraciones y datos de prueba
 pruebas/                  Pruebas automáticas (PHPUnit)
