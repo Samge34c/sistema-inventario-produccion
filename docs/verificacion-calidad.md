@@ -9,7 +9,7 @@ Resultados de las herramientas de la Definition of Done ejecutadas el 17 de novi
 | Formato JS y CSS (DoD 4) | Prettier 3.9 | `npx prettier "**/*.{js,mjs,html,css}" --check` | Todos los archivos conformes |
 | Análisis estático | PHPStan 2.3 · nivel 6 | `vendor/bin/phpstan analyse --memory-limit=512M` | 0 errores |
 | Pruebas automáticas | PHPUnit 9.6 | `vendor/bin/phpunit` | 49 pruebas y 153 aserciones, todas aprobadas |
-| Cobertura de las pruebas (18/11) | PHPUnit 9.6 con PCOV 1.0.11 | `composer cobertura` | 68,3 % de las líneas de `clases/` e `includes/` (872 de 1.277); 80,5 % en `clases/` |
+| Cobertura de las pruebas (18/11) | PHPUnit 9.6 con PCOV 1.0.11; en GitHub Actions, PHPUnit 11.5 con PCOV 1.0.12 | `composer cobertura` | 80,5 % de las líneas de `clases/` (824 de 1.023); 68,3 % contando `includes/` (68,4 % en GitHub Actions) |
 | Complejidad ciclomática | PHPMD 3.0 · regla CyclomaticComplexity | `phpmd analyze --ruleset=codesize clases includes config` | Máximo por método: 8, en `GestorVentas::leerLineas` |
 | Esquema reproducible (DoD 5) | MariaDB 10.11 | Importar `schema.sql`, o el `schema.sql` de develop (`30e837a`) más `migraciones/005-produccion-y-ventas.sql` | Ambos caminos dejan una estructura idéntica (columnas, llaves, índices y restricciones CHECK comparados); un material pendiente existente quedó como pendiente con su fecha de registro como llegada estimada |
 
@@ -30,6 +30,8 @@ Medida el 18 de noviembre de 2026 con PHPUnit 9.6 y PCOV 1.0.11, el equivalente 
 | `clases/Validador.php` | 50 de 60 | 83,3 % |
 | `includes/` (5 archivos) | 48 de 254 | 18,9 % |
 | Total | 872 de 1.277 | 68,3 % |
+
+En GitHub Actions (PHPUnit 11.5.58 y PCOV 1.0.12) las clases dan exactamente lo mismo. `includes/` cuenta 252 líneas en vez de 254, así que el total queda en 68,4 % (872 de 1.275).
 
 En `includes/` la cobertura es baja porque son la plantilla de las páginas (encabezado, pie y arranque) y funciones de formato que solo usan las páginas. Las páginas de `modules/` no las ejecutan las pruebas automáticas; se verifican con los casos de `docs/casos-de-prueba.md` y el recorrido en navegador.
 
