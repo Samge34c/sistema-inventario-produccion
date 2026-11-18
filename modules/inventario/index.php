@@ -22,14 +22,13 @@ require RAIZ_PROYECTO . '/includes/encabezado.php';
 <div class="encabezado-pagina">
   <div>
     <h1>Inventario</h1>
-    <p>Existencias de materias primas, lo que está por llegar y el mínimo que debe haber de cada una.</p>
   </div>
   <div class="acciones">
     <a class="btn btn-outline-primary" href="<?= escapar(url('modules/inventario/pedido.php')) ?>">
-      <i class="bi bi-truck" aria-hidden="true"></i> Registrar pedido
+      Registrar pedido
     </a>
     <a class="btn btn-primary" href="<?= escapar(url('modules/inventario/materia-prima.php')) ?>">
-      <i class="bi bi-plus-lg" aria-hidden="true"></i> Nueva materia prima
+      Nueva materia prima
     </a>
   </div>
 </div>
@@ -38,7 +37,7 @@ require RAIZ_PROYECTO . '/includes/encabezado.php';
 
 <?php if ($todasLasMaterias === []) : ?>
   <div class="tarjeta estado-vacio">
-    <i class="bi bi-box-seam" aria-hidden="true"></i>
+    
     <p class="mb-3">Todavía no hay materias primas registradas.</p>
     <a class="btn btn-primary" href="<?= escapar(url('modules/inventario/materia-prima.php')) ?>">Registrar la primera</a>
   </div>
@@ -49,11 +48,11 @@ require RAIZ_PROYECTO . '/includes/encabezado.php';
         href="<?= escapar(url('modules/inventario/index.php')) ?>">Todas (<?= count($todasLasMaterias) ?>)</a>
       <a class="btn btn-sm <?= $filtroEstado === 'ALERTA' ? 'btn-primary' : 'btn-outline-primary' ?>"
         href="<?= escapar(url('modules/inventario/index.php?estado=ALERTA')) ?>">
-        <i class="bi bi-exclamation-triangle" aria-hidden="true"></i> Por reabastecer (<?= $totalEnAlerta ?>)
+        Por reabastecer (<?= $totalEnAlerta ?>)
       </a>
     </div>
     <div class="input-group input-group-sm" style="max-width: 280px">
-      <span class="input-group-text"><i class="bi bi-search" aria-hidden="true"></i></span>
+      <span class="input-group-text"></span>
       <input type="search" class="form-control" placeholder="Buscar materia prima" aria-label="Buscar materia prima"
         data-filtrar="#tablaMaterias">
     </div>
@@ -118,18 +117,18 @@ require RAIZ_PROYECTO . '/includes/encabezado.php';
                           : 'Llega ' . escapar(mb_strtolower(describirDia($materia['proxima_llegada']))) ?>
                   </div>
                 <?php else : ?>
-                  <span class="text-body-secondary">—</span>
+                  <span class="text-body-secondary">-</span>
                 <?php endif; ?>
               </td>
               <td><?= generarInsigniaExistencia($materia['estado']) ?></td>
               <td class="text-end text-nowrap">
                 <a class="btn btn-sm btn-outline-success" href="<?= escapar(url($urlMovimiento . '&tipo=ENTRADA')) ?>"
                   title="Registrar entrada de <?= escapar($materia['nombre']) ?>">
-                  <i class="bi bi-plus-lg" aria-hidden="true"></i> Entrada
+                  Entrada
                 </a>
                 <a class="btn btn-sm btn-outline-secondary" href="<?= escapar(url($urlMovimiento . '&tipo=SALIDA')) ?>"
                   title="Registrar salida de <?= escapar($materia['nombre']) ?>">
-                  <i class="bi bi-dash-lg" aria-hidden="true"></i> Salida
+                  Salida
                 </a>
                 <div class="dropdown d-inline-block">
                   <button class="btn btn-sm btn-link text-body-secondary" type="button" data-bs-toggle="dropdown"
@@ -140,28 +139,28 @@ require RAIZ_PROYECTO . '/includes/encabezado.php';
                   <ul class="dropdown-menu dropdown-menu-end">
                     <li>
                       <a class="dropdown-item" href="<?= escapar(url('modules/inventario/materia-prima.php?id=' . $materia['id'])) ?>">
-                        <i class="bi bi-pencil" aria-hidden="true"></i> Editar
+                        Editar
                       </a>
                     </li>
                     <li>
                       <a class="dropdown-item" href="<?= escapar(url('modules/inventario/movimientos.php?materia_prima_id=' . $materia['id'])) ?>">
-                        <i class="bi bi-clock-history" aria-hidden="true"></i> Ver movimientos
+                        Ver movimientos
                       </a>
                     </li>
                     <li>
                       <a class="dropdown-item" href="<?= escapar(url('modules/inventario/pedido.php?materia_prima_id=' . $materia['id'])) ?>">
-                        <i class="bi bi-truck" aria-hidden="true"></i> Registrar pedido
+                        Registrar pedido
                       </a>
                     </li>
                     <li><hr class="dropdown-divider"></li>
                     <li>
                       <form method="post" action="<?= escapar(url('modules/inventario/eliminar-materia-prima.php')) ?>"
-                        data-confirmar="¿Eliminar «<?= escapar($materia['nombre']) ?>»? Solo se puede si no tiene recetas ni historial."
+                        data-confirmar="¿Eliminar <?= escapar($materia['nombre']) ?>? Solo se puede si no tiene recetas ni historial."
                         data-confirmar-boton="Eliminar">
                         <?= generarCampoCsrf() ?>
                         <input type="hidden" name="id" value="<?= $materia['id'] ?>">
                         <button class="dropdown-item text-danger" type="submit">
-                          <i class="bi bi-trash" aria-hidden="true"></i> Eliminar
+                          Eliminar
                         </button>
                       </form>
                     </li>
@@ -181,9 +180,6 @@ require RAIZ_PROYECTO . '/includes/encabezado.php';
       </table>
     </div>
   </div>
-  <p class="texto-ayuda mt-2">
-    La barra compara la existencia con el doble del mínimo: verde es suficiente, amarillo está bajo el mínimo y rojo está agotado.
-  </p>
 <?php endif; ?>
 
 <?php require RAIZ_PROYECTO . '/includes/pie.php'; ?>

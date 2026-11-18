@@ -1,5 +1,3 @@
-// Caja: sumar productos tocándolos, ajustar cantidades y ver el resumen.
-
 ;(function () {
   'use strict'
 

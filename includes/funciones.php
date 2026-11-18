@@ -30,7 +30,7 @@ function obtenerConexion(): PDO
         mostrarPaginaError(
             'No hay conexión con la base de datos',
             'Revise que MySQL esté encendido (en XAMPP, botón Start de MySQL) y que la base '
-                . '«' . obtenerConfiguracion('bd_nombre') . '» exista. Para crearla, importe '
+                . '"' . obtenerConfiguracion('bd_nombre') . '" exista. Para crearla, importe '
                 . 'database/schema.sql desde phpMyAdmin. Las instrucciones completas están en el README.',
             obtenerConfiguracion('mostrar_detalle_errores') ? $error->getMessage() : null
         );
@@ -302,8 +302,7 @@ function generarPestanas(array $pestanas, string $pestanaActiva): string
         $esActiva = $clave === $pestanaActiva;
         $html .= '<li class="nav-item"><a class="nav-link' . ($esActiva ? ' active' : '') . '"'
             . ($esActiva ? ' aria-current="page"' : '')
-            . ' href="' . escapar(url($ruta)) . '"><i class="bi ' . escapar($icono) . '" aria-hidden="true"></i> '
-            . escapar($texto) . '</a></li>';
+            . ' href="' . escapar(url($ruta)) . '">' . escapar($texto) . '</a></li>';
     }
 
     return $html . '</ul></nav>';
@@ -312,32 +311,32 @@ function generarPestanas(array $pestanas, string $pestanaActiva): string
 function generarInsigniaExistencia(string $estado): string
 {
     return match ($estado) {
-        'SIN_EXISTENCIAS' => '<span class="badge text-bg-danger"><i class="bi bi-x-octagon" aria-hidden="true"></i> Sin existencias</span>',
-        'BAJO_MINIMO' => '<span class="badge text-bg-warning"><i class="bi bi-exclamation-triangle" aria-hidden="true"></i> Bajo el mínimo</span>',
-        default => '<span class="badge bg-success-subtle text-success-emphasis"><i class="bi bi-check-circle" aria-hidden="true"></i> Disponible</span>',
+        'SIN_EXISTENCIAS' => '<span class="badge text-bg-danger">Sin existencias</span>',
+        'BAJO_MINIMO' => '<span class="badge text-bg-warning">Bajo el mínimo</span>',
+        default => '<span class="badge bg-success-subtle text-success-emphasis">Disponible</span>',
     };
 }
 
 function generarInsigniaAbastecimiento(string $estado): string
 {
     return match ($estado) {
-        CalculadoraProduccion::FALTAN_MATERIALES => '<span class="badge text-bg-danger"><i class="bi bi-cart-x" aria-hidden="true"></i> Faltan materiales</span>',
-        CalculadoraProduccion::DEPENDE_DE_PEDIDOS => '<span class="badge text-bg-warning"><i class="bi bi-truck" aria-hidden="true"></i> Depende de pedidos</span>',
+        CalculadoraProduccion::FALTAN_MATERIALES => '<span class="badge text-bg-danger">Faltan materiales</span>',
+        CalculadoraProduccion::DEPENDE_DE_PEDIDOS => '<span class="badge text-bg-warning">Depende de pedidos</span>',
         CalculadoraProduccion::SIN_INGREDIENTES => '<span class="badge text-bg-secondary">Receta sin ingredientes</span>',
-        default => '<span class="badge text-bg-success"><i class="bi bi-check2-circle" aria-hidden="true"></i> Materiales completos</span>',
+        default => '<span class="badge text-bg-success">Materiales completos</span>',
     };
 }
 
 function generarInsigniaProduccion(string $estado, bool $estaAtrasada = false): string
 {
     if ($estado === 'PLANEADA' && $estaAtrasada) {
-        return '<span class="badge bg-danger-subtle text-danger-emphasis"><i class="bi bi-clock-history" aria-hidden="true"></i> Atrasada</span>';
+        return '<span class="badge bg-danger-subtle text-danger-emphasis">Atrasada</span>';
     }
 
     return match ($estado) {
-        'REALIZADA' => '<span class="badge bg-success-subtle text-success-emphasis"><i class="bi bi-check2-all" aria-hidden="true"></i> Realizada</span>',
-        'CANCELADA' => '<span class="badge bg-secondary-subtle text-secondary-emphasis"><i class="bi bi-slash-circle" aria-hidden="true"></i> Cancelada</span>',
-        default => '<span class="badge bg-primary-subtle text-primary-emphasis"><i class="bi bi-calendar-event" aria-hidden="true"></i> Planeada</span>',
+        'REALIZADA' => '<span class="badge bg-success-subtle text-success-emphasis">Realizada</span>',
+        'CANCELADA' => '<span class="badge bg-secondary-subtle text-secondary-emphasis">Cancelada</span>',
+        default => '<span class="badge bg-primary-subtle text-primary-emphasis">Planeada</span>',
     };
 }
 
@@ -381,14 +380,14 @@ function calcularVariacion(int $actual, int $anterior): ?float
 function generarTextoVariacion(?float $variacion, string $periodo): string
 {
     if ($variacion === null) {
-        return '<span class="small text-body-secondary">Sin datos de ' . escapar($periodo) . '</span>';
+        return '<span class="small text-body-secondary">Sin datos ' . escapar(str_starts_with($periodo, 'el ') ? 'del ' . substr($periodo, 3) : 'de ' . $periodo) . '</span>';
     }
 
     $esPositiva = $variacion >= 0;
 
     return '<span class="small ' . ($esPositiva ? 'text-success' : 'text-danger') . '">'
-        . '<i class="bi ' . ($esPositiva ? 'bi-arrow-up-right' : 'bi-arrow-down-right') . '" aria-hidden="true"></i> '
-        . escapar(($esPositiva ? '+' : '') . formatearCantidad($variacion, 0)) . ' % frente a ' . escapar($periodo) . '</span>';
+        . escapar(($esPositiva ? '+' : '') . formatearCantidad($variacion, 0)) . ' % frente '
+        . escapar(str_starts_with($periodo, 'el ') ? 'al ' . substr($periodo, 3) : 'a ' . $periodo) . '</span>';
 }
 
 function mostrarPaginaError(string $titulo, string $mensaje, ?string $detalle = null): never

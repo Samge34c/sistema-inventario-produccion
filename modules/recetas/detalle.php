@@ -57,17 +57,17 @@ require RAIZ_PROYECTO . '/includes/encabezado.php';
       <?php endif; ?>
     </h1>
     <p>
-      <?= $receta['descripcion'] ? escapar($receta['descripcion']) . ' · ' : '' ?>
+      <?= $receta['descripcion'] ? escapar($receta['descripcion']) . ' - ' : '' ?>
       Una tanda rinde <?= escapar(pluralizar($receta['cantidad_producir'], 'unidad', 'unidades')) ?>.
     </p>
   </div>
   <div class="acciones">
     <a class="btn btn-outline-primary" href="<?= escapar(url('modules/recetas/receta.php?id=' . $receta['id'])) ?>">
-      <i class="bi bi-pencil" aria-hidden="true"></i> Editar
+      Editar
     </a>
     <?php if ($receta['esta_activa'] && $unidadesMaximas !== null) : ?>
       <a class="btn btn-primary" href="<?= escapar(url('modules/produccion/plan.php?receta_id=' . $receta['id'])) ?>">
-        <i class="bi bi-calendar-plus" aria-hidden="true"></i> Planificar producción
+        Planificar producción
       </a>
     <?php endif; ?>
   </div>
@@ -82,7 +82,6 @@ require RAIZ_PROYECTO . '/includes/encabezado.php';
   <div class="row g-3 mb-4">
     <div class="col-md-4">
       <div class="tarjeta indicador">
-        <span class="indicador-icono <?= $unidadesMaximas > 0 ? 'bien' : 'alerta' ?>"><i class="bi bi-basket" aria-hidden="true"></i></span>
         <div>
           <div class="indicador-valor"><?= escapar(formatearCantidad($unidadesMaximas)) ?></div>
           <div class="indicador-etiqueta">unidades se pueden producir ahora</div>
@@ -91,7 +90,6 @@ require RAIZ_PROYECTO . '/includes/encabezado.php';
     </div>
     <div class="col-md-4">
       <div class="tarjeta indicador">
-        <span class="indicador-icono aviso"><i class="bi bi-bullseye" aria-hidden="true"></i></span>
         <div>
           <div class="fw-semibold fs-5"><?= escapar($capacidad['limitante']['nombre']) ?></div>
           <div class="indicador-etiqueta">es el ingrediente que limita la producción</div>
@@ -100,7 +98,6 @@ require RAIZ_PROYECTO . '/includes/encabezado.php';
     </div>
     <div class="col-md-4">
       <div class="tarjeta indicador">
-        <span class="indicador-icono"><i class="bi bi-truck" aria-hidden="true"></i></span>
         <div>
           <div class="indicador-valor"><?= escapar(formatearCantidad((int) $proyeccion['unidades_maximas'])) ?></div>
           <div class="indicador-etiqueta">
@@ -155,16 +152,12 @@ require RAIZ_PROYECTO . '/includes/encabezado.php';
         </table>
       </div>
     </div>
-    <p class="texto-ayuda mt-2">
-      «Alcanza para» indica cuántas unidades del producto se pueden hacer si ese fuera el único ingrediente.
-      La producción posible es la menor de todas.
-    </p>
   </div>
 
   <div class="col-xl-5">
     <?php if ($receta['ingredientes'] !== []) : ?>
       <div class="tarjeta mb-4" id="calculadora">
-        <div class="card-header">¿Qué necesito para producir…?</div>
+        <div class="card-header">¿Qué necesito para producir...?</div>
         <div class="p-3">
           <script type="application/json" id="datosCalculadora"><?= json_encode($datosCalculadora, JSON_HEX_TAG | JSON_HEX_AMP) ?></script>
           <label class="form-label" for="unidadesCalculadora">Unidades a producir</label>
@@ -179,7 +172,7 @@ require RAIZ_PROYECTO . '/includes/encabezado.php';
           <?php endif; ?>
           <div id="resultadoCalculadora" aria-live="polite"></div>
           <a class="btn btn-primary w-100 mt-3" id="planificarCalculadora" href="<?= escapar($datosCalculadora['urlPlan']) ?>">
-            <i class="bi bi-calendar-plus" aria-hidden="true"></i> Planificar esta cantidad
+            Planificar esta cantidad
           </a>
         </div>
       </div>

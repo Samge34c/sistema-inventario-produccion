@@ -1,5 +1,3 @@
-// Muestra cuánto quedará en existencia mientras se escribe la cantidad.
-
 ;(function () {
   'use strict'
 

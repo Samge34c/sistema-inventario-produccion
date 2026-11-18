@@ -19,7 +19,7 @@ $analisis = $produccion['analisis'];
 $unidadesMaximasAhora = (int) ($produccion['capacidad_actual']['unidades_maximas'] ?? 0);
 $alcanzaHoy = $unidadesMaximasAhora >= $produccion['cantidad_planeada'];
 
-$tituloPagina = $produccion['receta'] . ' · ' . describirDia($produccion['fecha_planeada']);
+$tituloPagina = $produccion['receta'] . ' - ' . describirDia($produccion['fecha_planeada']);
 $seccionActiva = 'produccion';
 require RAIZ_PROYECTO . '/includes/encabezado.php';
 ?>
@@ -32,23 +32,23 @@ require RAIZ_PROYECTO . '/includes/encabezado.php';
 
 <div class="encabezado-pagina">
   <div>
-    <h1><?= escapar($produccion['receta']) ?> · <?= escapar(pluralizar($produccion['cantidad_planeada'], 'unidad', 'unidades')) ?></h1>
+    <h1><?= escapar($produccion['receta']) ?> - <?= escapar(pluralizar($produccion['cantidad_planeada'], 'unidad', 'unidades')) ?></h1>
     <p class="d-flex flex-wrap gap-2 align-items-center">
-      <span><i class="bi bi-calendar3" aria-hidden="true"></i> <?= escapar(ucfirst(formatearFechaLarga($produccion['fecha_planeada']))) ?></span>
+      <span><?= escapar(ucfirst(formatearFechaLarga($produccion['fecha_planeada']))) ?></span>
       <?= generarInsigniaProduccion($produccion['estado'], $produccion['esta_atrasada']) ?>
       <?= $analisis !== null ? generarInsigniaAbastecimiento($analisis['estado']) : '' ?>
     </p>
     <?php if ($produccion['observacion']) : ?>
-      <p class="mt-1"><i class="bi bi-chat-left-text" aria-hidden="true"></i> <?= escapar($produccion['observacion']) ?></p>
+      <p class="mt-1"><?= escapar($produccion['observacion']) ?></p>
     <?php endif; ?>
   </div>
   <?php if ($esPendiente) : ?>
     <div class="acciones">
       <a class="btn btn-outline-primary" href="<?= escapar(url('modules/produccion/plan.php?id=' . $produccion['id'])) ?>">
-        <i class="bi bi-pencil" aria-hidden="true"></i> Modificar
+        Modificar
       </a>
       <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#modalCancelar">
-        <i class="bi bi-slash-circle" aria-hidden="true"></i> Cancelar plan
+        Cancelar plan
       </button>
     </div>
   <?php endif; ?>
@@ -78,19 +78,19 @@ require RAIZ_PROYECTO . '/includes/encabezado.php';
                   <td><?= escapar($fila['nombre']) ?></td>
                   <td class="numero fw-semibold"><?= escapar(formatearCantidadConUnidad($fila['cantidad_requerida'], $unidad)) ?></td>
                   <td class="numero"><?= escapar(formatearCantidad($fila['cantidad_disponible'])) ?></td>
-                  <td class="numero text-body-secondary"><?= $fila['cantidad_comprometida'] > 0 ? '−' . escapar(formatearCantidad($fila['cantidad_comprometida'])) : '—' ?></td>
+                  <td class="numero text-body-secondary"><?= $fila['cantidad_comprometida'] > 0 ? '-' . escapar(formatearCantidad($fila['cantidad_comprometida'])) : '-' ?></td>
                   <td class="numero <?= $fila['cantidad_por_llegar'] > 0 ? 'texto-pedido' : 'text-body-secondary' ?>">
-                    <?= $fila['cantidad_por_llegar'] > 0 ? '+' . escapar(formatearCantidad($fila['cantidad_por_llegar'])) : '—' ?>
+                    <?= $fila['cantidad_por_llegar'] > 0 ? '+' . escapar(formatearCantidad($fila['cantidad_por_llegar'])) : '-' ?>
                   </td>
                   <td class="numero">
                     <?php if ($fila['faltante'] > 0) : ?>
                       <span class="texto-faltante"><?= escapar(formatearCantidadConUnidad($fila['faltante'], $unidad)) ?></span>
                     <?php elseif ($fila['faltante_sin_pedidos'] > 0) : ?>
                       <span class="texto-pedido" title="Falta si el pedido no llega a tiempo">
-                        <i class="bi bi-truck" aria-hidden="true"></i> <?= escapar(formatearCantidad($fila['faltante_sin_pedidos'])) ?>
+                        <?= escapar(formatearCantidad($fila['faltante_sin_pedidos'])) ?>
                       </span>
                     <?php else : ?>
-                      <i class="bi bi-check2 text-success" aria-label="Completo"></i>
+                      
                     <?php endif; ?>
                   </td>
                 </tr>
@@ -98,18 +98,6 @@ require RAIZ_PROYECTO . '/includes/encabezado.php';
             </tbody>
           </table>
         </div>
-      </div>
-      <div class="texto-ayuda mt-2">
-        <p class="mb-1">
-          <strong>Cómo se calcula:</strong> lo que hay hoy, menos lo que usan los planes pendientes de fechas anteriores
-          (o del mismo día, creados antes), más los pedidos que llegan hasta la fecha de este plan.
-        </p>
-        <?php if ($analisis['estado'] === CalculadoraProduccion::FALTAN_MATERIALES) : ?>
-          <p class="mb-0">
-            Para resolverlo: <a href="<?= escapar(url('modules/inventario/pedido.php')) ?>">registre un pedido</a>,
-            reduzca las unidades del plan o muévalo a otra fecha.
-          </p>
-        <?php endif; ?>
       </div>
     </div>
 
@@ -136,7 +124,7 @@ require RAIZ_PROYECTO . '/includes/encabezado.php';
         <label class="form-label" for="observacion">Observación <span class="text-body-secondary fw-normal">(opcional)</span></label>
         <input type="text" class="form-control mb-3" id="observacion" name="observacion" maxlength="255" placeholder="Ej.: se quemaron 4">
         <button class="btn btn-success w-100" type="submit" <?= $unidadesMaximasAhora === 0 ? 'disabled' : '' ?>>
-          <i class="bi bi-check2-square" aria-hidden="true"></i> Registrar y descontar insumos
+          Registrar y descontar insumos
         </button>
       </form>
     </div>
@@ -167,12 +155,11 @@ require RAIZ_PROYECTO . '/includes/encabezado.php';
   <div class="row g-4">
     <div class="col-lg-4">
       <div class="tarjeta indicador">
-        <span class="indicador-icono bien"><i class="bi bi-check2-all" aria-hidden="true"></i></span>
         <div>
           <div class="indicador-valor"><?= escapar(formatearCantidad((int) $produccion['cantidad_producida'])) ?></div>
           <div class="indicador-etiqueta">
             unidades producidas de <?= escapar(formatearCantidad($produccion['cantidad_planeada'])) ?> planeadas
-            · <?= escapar(formatearFechaHora((string) $produccion['fecha_realizacion'])) ?>
+            - <?= escapar(formatearFechaHora((string) $produccion['fecha_realizacion'])) ?>
           </div>
         </div>
       </div>
@@ -185,7 +172,7 @@ require RAIZ_PROYECTO . '/includes/encabezado.php';
             <?php foreach ($produccion['consumos'] as $consumo) : ?>
               <tr>
                 <td><?= escapar($consumo['nombre']) ?></td>
-                <td class="numero text-danger">−<?= escapar(formatearCantidadConUnidad((float) $consumo['cantidad'], $consumo['unidad_medida'])) ?></td>
+                <td class="numero text-danger">-<?= escapar(formatearCantidadConUnidad((float) $consumo['cantidad'], $consumo['unidad_medida'])) ?></td>
               </tr>
             <?php endforeach; ?>
             <?php if ($produccion['consumos'] === []) : ?>
@@ -198,7 +185,7 @@ require RAIZ_PROYECTO . '/includes/encabezado.php';
   </div>
 <?php else : ?>
   <div class="tarjeta estado-vacio">
-    <i class="bi bi-slash-circle" aria-hidden="true"></i>
+    
     Este plan fue cancelado y no descontó insumos del inventario.
   </div>
 <?php endif; ?>

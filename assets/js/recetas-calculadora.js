@@ -1,6 +1,3 @@
-// Calculadora de la receta: materiales necesarios para una cantidad de
-// unidades, comparados con la existencia actual.
-
 ;(function () {
   'use strict'
 
@@ -59,7 +56,7 @@
           'numero',
         ),
         crearCelda(
-          falta > 0 ? `${formato.format(falta)} ${ingrediente.unidad}` : '—',
+          falta > 0 ? `${formato.format(falta)} ${ingrediente.unidad}` : '-',
           falta > 0 ? 'numero texto-faltante' : 'numero text-body-secondary',
         ),
       )

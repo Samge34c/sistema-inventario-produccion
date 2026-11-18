@@ -64,8 +64,8 @@ require RAIZ_PROYECTO . '/includes/encabezado.php';
         <h1><?= escapar($materia['nombre']) ?></h1>
         <p>
           Hay <strong><?= escapar(formatearCantidadConUnidad($materia['cantidad_disponible'], $materia['unidad_medida'])) ?></strong>
-          · mínimo <?= escapar(formatearCantidadConUnidad($materia['stock_minimo'], $materia['unidad_medida'])) ?>
-          · <?= generarInsigniaExistencia($materia['estado']) ?>
+          - mínimo <?= escapar(formatearCantidadConUnidad($materia['stock_minimo'], $materia['unidad_medida'])) ?>
+          - <?= generarInsigniaExistencia($materia['estado']) ?>
         </p>
       </div>
     </div>
@@ -84,9 +84,9 @@ require RAIZ_PROYECTO . '/includes/encabezado.php';
         <legend class="form-label fs-6">¿Qué pasó?</legend>
         <div class="btn-group w-100" role="group">
           <input type="radio" class="btn-check" name="tipo" id="tipoEntrada" value="ENTRADA" <?= $datos['tipo'] === 'ENTRADA' ? 'checked' : '' ?>>
-          <label class="btn btn-outline-success" for="tipoEntrada"><i class="bi bi-box-arrow-in-down" aria-hidden="true"></i> Entró (compra, ajuste)</label>
+          <label class="btn btn-outline-success" for="tipoEntrada">Entró (compra, ajuste)</label>
           <input type="radio" class="btn-check" name="tipo" id="tipoSalida" value="SALIDA" <?= $datos['tipo'] === 'SALIDA' ? 'checked' : '' ?>>
-          <label class="btn btn-outline-danger" for="tipoSalida"><i class="bi bi-box-arrow-up" aria-hidden="true"></i> Salió (merma, daño, uso)</label>
+          <label class="btn btn-outline-danger" for="tipoSalida">Salió (merma, daño, uso)</label>
         </div>
         <?= isset($errores['tipo']) ? '<div class="text-danger small mt-1">' . escapar($errores['tipo']) . '</div>' : '' ?>
       </fieldset>
@@ -119,14 +119,10 @@ require RAIZ_PROYECTO . '/includes/encabezado.php';
         </datalist>
       </div>
 
-      <p class="texto-ayuda mb-0">
-        Para lo que se gasta al hornear no hace falta registrar salidas: el sistema las descuenta solo al
-        <a href="<?= escapar(url('modules/produccion/index.php')) ?>">registrar la producción</a>.
-      </p>
 
       <div class="d-flex gap-2 justify-content-end mt-4">
         <a class="btn btn-outline-secondary" href="<?= escapar(url('modules/inventario/index.php')) ?>">Cancelar</a>
-        <button class="btn btn-primary" type="submit"><i class="bi bi-check-lg" aria-hidden="true"></i> Registrar movimiento</button>
+        <button class="btn btn-primary" type="submit">Registrar movimiento</button>
       </div>
     </form>
   </div>
@@ -148,7 +144,7 @@ require RAIZ_PROYECTO . '/includes/encabezado.php';
                 <div><?= escapar($movimiento['observacion'] ?? ($movimiento['tipo'] === 'ENTRADA' ? 'Entrada' : 'Salida')) ?></div>
               </div>
               <div class="numero fw-semibold <?= $movimiento['tipo'] === 'ENTRADA' ? 'text-success' : 'text-danger' ?>">
-                <?= $movimiento['tipo'] === 'ENTRADA' ? '+' : '−' ?><?= escapar(formatearCantidad($movimiento['cantidad'])) ?>
+                <?= $movimiento['tipo'] === 'ENTRADA' ? '+' : '-' ?><?= escapar(formatearCantidad($movimiento['cantidad'])) ?>
               </div>
             </li>
           <?php endforeach; ?>

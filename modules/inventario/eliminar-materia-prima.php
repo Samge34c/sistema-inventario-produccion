@@ -19,7 +19,7 @@ $materia = $inventario->obtenerMateriaPrima($id);
 
 try {
     $inventario->eliminarMateriaPrima($id);
-    agregarMensaje('exito', sprintf('Se eliminó «%s».', $materia['nombre'] ?? 'la materia prima'));
+    agregarMensaje('exito', sprintf('Se eliminó "%s".', $materia['nombre'] ?? 'la materia prima'));
 } catch (ErrorValidacion $error) {
     agregarMensaje('error', $error->getMessage());
 }

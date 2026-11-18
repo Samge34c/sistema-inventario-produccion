@@ -40,14 +40,12 @@ foreach ($planesPendientes as $plan) {
     if (($plan['analisis']['estado'] ?? '') === CalculadoraProduccion::FALTAN_MATERIALES) {
         $pendientes[] = [
             'nivel' => 'peligro',
-            'icono' => 'bi-cart-x',
             'texto' => sprintf('%s (%s): faltan %s.', $plan['receta'], $cuando, describirFaltantes($plan['analisis'])),
             'accion' => ['Ver plan', 'modules/produccion/detalle.php?id=' . $plan['id']],
         ];
     } elseif ($plan['esta_atrasada']) {
         $pendientes[] = [
             'nivel' => 'aviso',
-            'icono' => 'bi-clock-history',
             'texto' => sprintf('%s %s y no se ha registrado como producido ni cancelado.', $plan['receta'], $cuando),
             'accion' => ['Registrar', 'modules/produccion/detalle.php?id=' . $plan['id'] . '#registrar'],
         ];
@@ -57,7 +55,6 @@ foreach ($planesPendientes as $plan) {
 foreach ($pedidosAtrasados as $pedido) {
     $pendientes[] = [
         'nivel' => 'aviso',
-        'icono' => 'bi-truck',
         'texto' => sprintf(
             'El pedido de %s de %s%s debía llegar %s.',
             formatearCantidadConUnidad($pedido['cantidad'], $pedido['unidad_medida']),
@@ -76,7 +73,6 @@ foreach ($materiasEnAlerta as $materia) {
         : '';
     $pendientes[] = [
         'nivel' => $materia['cantidad_por_llegar'] > 0 ? 'info' : ($estaAgotada ? 'peligro' : 'aviso'),
-        'icono' => $estaAgotada ? 'bi-x-octagon' : 'bi-exclamation-triangle',
         'texto' => $estaAgotada
             ? sprintf('%s está agotado.%s', $materia['nombre'], $textoPedido)
             : sprintf(
@@ -94,10 +90,7 @@ foreach ($materiasEnAlerta as $materia) {
 
 $ordenNivel = ['peligro' => 0, 'aviso' => 1, 'info' => 2];
 usort($pendientes, static fn (array $a, array $b): int => $ordenNivel[$a['nivel']] <=> $ordenNivel[$b['nivel']]);
-$coloresNivel = ['peligro' => 'text-danger', 'aviso' => 'text-warning-emphasis', 'info' => 'text-primary'];
-
-$hora = (int) date('G');
-$saludo = $hora < 12 ? 'Buenos días' : ($hora < 19 ? 'Buenas tardes' : 'Buenas noches');
+$coloresNivel = ['peligro' => 'text-danger', 'aviso' => 'text-warning-emphasis', 'info' => ''];
 
 $tituloPagina = 'Inicio';
 $seccionActiva = 'inicio';
@@ -105,15 +98,15 @@ require RAIZ_PROYECTO . '/includes/encabezado.php';
 ?>
 <div class="encabezado-pagina">
   <div>
-    <h1><?= escapar($saludo) ?></h1>
-    <p><?= escapar(ucfirst(formatearFechaLarga($hoy))) ?>. Esto es lo que pasa hoy en la panadería.</p>
+    <h1>Inicio</h1>
+    <p><?= escapar(ucfirst(formatearFechaLarga($hoy))) ?></p>
   </div>
   <div class="acciones">
     <a class="btn btn-outline-primary" href="<?= escapar(url('modules/produccion/plan.php')) ?>">
-      <i class="bi bi-calendar-plus" aria-hidden="true"></i> Planificar
+      Planificar
     </a>
     <a class="btn btn-primary" href="<?= escapar(url('modules/ventas/index.php')) ?>">
-      <i class="bi bi-shop" aria-hidden="true"></i> Registrar venta
+      Registrar venta
     </a>
   </div>
 </div>
@@ -121,7 +114,6 @@ require RAIZ_PROYECTO . '/includes/encabezado.php';
 <div class="row g-3 mb-4">
   <div class="col-sm-6 col-xl-3">
     <a class="tarjeta indicador" href="<?= escapar(url('modules/ventas/reportes.php?tipo=diario')) ?>">
-      <span class="indicador-icono"><i class="bi bi-receipt" aria-hidden="true"></i></span>
       <div>
         <div class="indicador-valor"><?= escapar(formatearCantidad($ventasHoy['unidades'])) ?></div>
         <div class="indicador-etiqueta">unidades vendidas hoy en <?= escapar(pluralizar($ventasHoy['transacciones'], 'venta', 'ventas')) ?></div>
@@ -133,7 +125,6 @@ require RAIZ_PROYECTO . '/includes/encabezado.php';
   </div>
   <div class="col-sm-6 col-xl-3">
     <a class="tarjeta indicador" href="<?= escapar(url('modules/produccion/index.php')) ?>">
-      <span class="indicador-icono <?= $planesConFaltantes === [] ? 'bien' : 'alerta' ?>"><i class="bi bi-fire" aria-hidden="true"></i></span>
       <div>
         <div class="indicador-valor"><?= count($planesDeHoy) ?></div>
         <div class="indicador-etiqueta"><?= count($planesDeHoy) === 1 ? 'plan de producción pendiente hoy' : 'planes de producción pendientes hoy' ?></div>
@@ -145,7 +136,6 @@ require RAIZ_PROYECTO . '/includes/encabezado.php';
   </div>
   <div class="col-sm-6 col-xl-3">
     <a class="tarjeta indicador" href="<?= escapar(url('modules/inventario/index.php?estado=ALERTA')) ?>">
-      <span class="indicador-icono <?= $materiasEnAlerta === [] ? 'bien' : 'aviso' ?>"><i class="bi bi-box-seam" aria-hidden="true"></i></span>
       <div>
         <div class="indicador-valor"><?= count($materiasEnAlerta) ?></div>
         <div class="indicador-etiqueta"><?= count($materiasEnAlerta) === 1 ? 'materia prima por reabastecer' : 'materias primas por reabastecer' ?></div>
@@ -154,7 +144,6 @@ require RAIZ_PROYECTO . '/includes/encabezado.php';
   </div>
   <div class="col-sm-6 col-xl-3">
     <a class="tarjeta indicador" href="<?= escapar(url('modules/inventario/pedidos.php')) ?>">
-      <span class="indicador-icono <?= $pedidosAtrasados === [] ? '' : 'alerta' ?>"><i class="bi bi-truck" aria-hidden="true"></i></span>
       <div>
         <div class="indicador-valor"><?= count($pedidosPendientes) ?></div>
         <div class="indicador-etiqueta"><?= count($pedidosPendientes) === 1 ? 'pedido por llegar' : 'pedidos por llegar' ?></div>
@@ -176,16 +165,12 @@ require RAIZ_PROYECTO . '/includes/encabezado.php';
         <?php endif; ?>
       </div>
       <?php if ($pendientes === []) : ?>
-        <div class="estado-vacio">
-          <i class="bi bi-emoji-smile" aria-hidden="true"></i>
-          Todo en orden: no hay faltantes, pedidos atrasados ni materias primas bajo el mínimo.
-        </div>
+        <p class="estado-vacio mb-0">No hay pendientes.</p>
       <?php else : ?>
         <ul class="list-group list-group-flush lista-pendientes">
           <?php foreach ($pendientes as $pendiente) : ?>
             <li class="list-group-item">
-              <i class="bi <?= $pendiente['icono'] ?> icono-pendiente <?= $coloresNivel[$pendiente['nivel']] ?>" aria-hidden="true"></i>
-              <span class="flex-grow-1"><?= escapar($pendiente['texto']) ?></span>
+              <span class="flex-grow-1 <?= $coloresNivel[$pendiente['nivel']] ?>"><?= escapar($pendiente['texto']) ?></span>
               <a class="btn btn-sm btn-outline-primary text-nowrap" href="<?= escapar(url($pendiente['accion'][1])) ?>"><?= escapar($pendiente['accion'][0]) ?></a>
             </li>
           <?php endforeach; ?>
@@ -201,11 +186,7 @@ require RAIZ_PROYECTO . '/includes/encabezado.php';
         <a class="small fw-normal" href="<?= escapar(url('modules/produccion/index.php')) ?>">Ver agenda</a>
       </div>
       <?php if ($producciones === []) : ?>
-        <div class="estado-vacio">
-          <i class="bi bi-calendar3" aria-hidden="true"></i>
-          <p class="mb-2">No hay producción planificada para hoy ni mañana.</p>
-          <a class="btn btn-sm btn-primary" href="<?= escapar(url('modules/produccion/plan.php')) ?>">Planificar</a>
-        </div>
+        <p class="estado-vacio mb-0">No hay producción planificada para hoy ni mañana.</p>
       <?php else : ?>
         <ul class="list-group list-group-flush">
           <?php foreach ($producciones as $plan) : ?>
@@ -215,7 +196,7 @@ require RAIZ_PROYECTO . '/includes/encabezado.php';
                   <?= escapar($plan['receta']) ?>
                 </a>
                 <div class="small text-body-secondary">
-                  <?= escapar(describirDia($plan['fecha_planeada'])) ?> ·
+                  <?= escapar(describirDia($plan['fecha_planeada'])) ?> -
                   <?= escapar(pluralizar((int) ($plan['cantidad_producida'] ?? $plan['cantidad_planeada']), 'unidad', 'unidades')) ?>
                 </div>
               </div>
@@ -246,7 +227,7 @@ require RAIZ_PROYECTO . '/includes/encabezado.php';
               </a>
               <span class="small text-body-secondary text-end">
                 hasta <strong class="text-body"><?= escapar(formatearCantidad($receta['capacidad']['unidades_maximas'])) ?></strong>
-                · limita <?= escapar(mb_strtolower($receta['capacidad']['limitante']['nombre'])) ?>
+                - limita <?= escapar(mb_strtolower($receta['capacidad']['limitante']['nombre'])) ?>
               </span>
             </li>
           <?php endforeach; ?>

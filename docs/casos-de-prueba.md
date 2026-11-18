@@ -50,7 +50,7 @@ Existencias iniciales relevantes:
 
 ### CP-03 · Calculadora de materiales
 
-- **Pasos:** Recetas → Roscón de bocadillo → en «¿Qué necesito para producir…?» escriba 9.
+- **Pasos:** Recetas → Roscón de bocadillo → en «¿Qué necesito para producir...?» escriba 9.
 - **Esperado:** bocadillo necesita 450 g y falta 450 g; mantequilla 187,5 g; huevos 3 unidades; mensaje «Falta 1 ingrediente con la existencia actual».
 
 ## Inventario
@@ -73,7 +73,7 @@ Existencias iniciales relevantes:
 ### CP-07 · Materia prima con recetas no se elimina
 
 - **Pasos:** Inventario → Sal → menú ⋮ → Eliminar → Confirmar.
-- **Esperado:** «No se puede eliminar «Sal» porque se usa en 3 recetas. Quítela primero de esas recetas.»
+- **Esperado:** «No se puede eliminar "Sal" porque se usa en 3 recetas. Quítela primero de esas recetas.»
 
 ## Planificación y producción
 

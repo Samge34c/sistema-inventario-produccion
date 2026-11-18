@@ -60,7 +60,6 @@ require RAIZ_PROYECTO . '/includes/encabezado.php';
     <div class="encabezado-pagina">
       <div>
         <h1>Registrar pedido</h1>
-        <p>Anote lo que pidió al proveedor. Mientras llega, el sistema lo usa para proyectar la producción.</p>
       </div>
     </div>
 
@@ -79,7 +78,7 @@ require RAIZ_PROYECTO . '/includes/encabezado.php';
               data-minimo="<?= escapar(formatearCantidadConUnidad($materia['stock_minimo'], $materia['unidad_medida'])) ?>"
               data-por-llegar="<?= escapar(formatearCantidadConUnidad($materia['cantidad_por_llegar'], $materia['unidad_medida'])) ?>"
               data-sugerencia="<?= escapar(formatearValorCampo(ceil($sugerencia))) ?>">
-              <?= escapar($materia['nombre']) ?><?= $materia['estado'] !== GestorInventario::DISPONIBLE ? ' — por reabastecer' : '' ?>
+              <?= escapar($materia['nombre']) ?><?= $materia['estado'] !== GestorInventario::DISPONIBLE ? ' - por reabastecer' : '' ?>
             </option>
           <?php endforeach; ?>
         </select>
@@ -93,7 +92,7 @@ require RAIZ_PROYECTO . '/includes/encabezado.php';
           <div class="input-group has-validation">
             <input type="number" class="form-control<?= generarClaseError($errores, 'cantidad') ?>" id="cantidad" name="cantidad"
               min="0.01" step="0.01" inputmode="decimal" required value="<?= escapar(formatearValorCampo($datos['cantidad'])) ?>">
-            <span class="input-group-text" id="unidadCantidad">—</span>
+            <span class="input-group-text" id="unidadCantidad">-</span>
             <?= generarMensajeError($errores, 'cantidad') ?>
           </div>
           <button type="button" class="btn btn-link btn-sm px-0" id="usarSugerencia" hidden></button>
@@ -127,7 +126,7 @@ require RAIZ_PROYECTO . '/includes/encabezado.php';
 
       <div class="d-flex gap-2 justify-content-end mt-4">
         <a class="btn btn-outline-secondary" href="<?= escapar(url('modules/inventario/pedidos.php')) ?>">Cancelar</a>
-        <button class="btn btn-primary" type="submit"><i class="bi bi-check-lg" aria-hidden="true"></i> Registrar pedido</button>
+        <button class="btn btn-primary" type="submit">Registrar pedido</button>
       </div>
     </form>
   </div>

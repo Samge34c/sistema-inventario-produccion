@@ -41,12 +41,12 @@ require RAIZ_PROYECTO . '/includes/encabezado.php';
 <div class="encabezado-pagina">
   <div>
     <h1>Caja</h1>
-    <p>Toque un producto para sumarlo a la venta. Hoy van <?= escapar(pluralizar($resumenHoy['transacciones'], 'venta', 'ventas')) ?>
-      y <?= escapar(pluralizar($resumenHoy['unidades'], 'unidad vendida', 'unidades vendidas')) ?>.</p>
+    <p>Hoy: <?= escapar(pluralizar($resumenHoy['transacciones'], 'venta', 'ventas')) ?>,
+      <?= escapar(pluralizar($resumenHoy['unidades'], 'unidad', 'unidades')) ?>.</p>
   </div>
   <div class="acciones">
     <a class="btn btn-outline-primary" href="<?= escapar(url('modules/ventas/reportes.php')) ?>">
-      <i class="bi bi-bar-chart-line" aria-hidden="true"></i> Ver reportes
+      Ver reportes
     </a>
   </div>
 </div>
@@ -55,7 +55,7 @@ require RAIZ_PROYECTO . '/includes/encabezado.php';
 
 <?php if ($productos === []) : ?>
   <div class="tarjeta estado-vacio">
-    <i class="bi bi-shop" aria-hidden="true"></i>
+    
     <p class="mb-3">No hay productos para vender. Los productos salen de las recetas activas.</p>
     <a class="btn btn-primary" href="<?= escapar(url('modules/recetas/receta.php')) ?>">Crear receta</a>
   </div>
@@ -121,7 +121,7 @@ require RAIZ_PROYECTO . '/includes/encabezado.php';
           <?= generarMensajeError($errores, 'observacion') ?>
 
           <button class="btn btn-primary btn-lg w-100" type="submit" id="botonRegistrarVenta">
-            <i class="bi bi-check2-circle" aria-hidden="true"></i> Registrar venta
+            Registrar venta
           </button>
           <button class="btn btn-link btn-sm w-100 mt-1 text-body-secondary" type="button" id="limpiarVenta">Empezar de nuevo</button>
         </div>
@@ -131,7 +131,7 @@ require RAIZ_PROYECTO . '/includes/encabezado.php';
     <div class="barra-venta-movil d-lg-none">
       <span class="fw-semibold" data-total-movil>0 unidades</span>
       <button class="btn btn-primary" type="submit" data-registrar-movil>
-        <i class="bi bi-check2-circle" aria-hidden="true"></i> Registrar venta
+        Registrar venta
       </button>
     </div>
   </form>

@@ -1,6 +1,3 @@
-// Formulario de recetas: filas de ingredientes dinámicas, unidad de cada
-// materia prima y cálculo en vivo de cuánto se podría producir.
-
 ;(function () {
   'use strict'
 
@@ -27,7 +24,7 @@
     )
     fila.querySelector('[data-unidad]').textContent = materia
       ? materia.unidad
-      : '—'
+      : '-'
   }
 
   function actualizarCapacidad() {
@@ -58,14 +55,7 @@
     }
 
     vistaCapacidad.hidden = false
-    vistaCapacidad.innerHTML = ''
-    const icono = document.createElement('i')
-    icono.className = 'bi bi-calculator me-1'
-    icono.setAttribute('aria-hidden', 'true')
-    vistaCapacidad.append(
-      icono,
-      `Con la existencia actual alcanzaría para ${formato.format(unidadesMaximas)} unidades. Limita: ${limitante}.`,
-    )
+    vistaCapacidad.textContent = `Alcanza para ${formato.format(unidadesMaximas)} unidades. Limita: ${limitante}.`
   }
 
   function agregarFila() {

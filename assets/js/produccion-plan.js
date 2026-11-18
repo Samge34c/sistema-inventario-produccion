@@ -1,6 +1,3 @@
-// Formulario de plan de producción: atajos de cantidad y vista previa de los
-// materiales necesarios comparados con la existencia actual.
-
 ;(function () {
   'use strict'
 
@@ -108,7 +105,7 @@
           'numero text-body-secondary',
         ),
         crearCelda(
-          falta > 0 ? `${formato.format(falta)} ${ingrediente.unidad}` : '—',
+          falta > 0 ? `${formato.format(falta)} ${ingrediente.unidad}` : '-',
           falta > 0 ? 'numero texto-faltante' : 'numero text-body-secondary',
         ),
       )

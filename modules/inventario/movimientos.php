@@ -38,7 +38,6 @@ require RAIZ_PROYECTO . '/includes/encabezado.php';
 <div class="encabezado-pagina">
   <div>
     <h1>Inventario</h1>
-    <p>Cada entrada y salida queda registrada, con su origen: manual, pedido recibido o producción.</p>
   </div>
 </div>
 
@@ -74,10 +73,10 @@ require RAIZ_PROYECTO . '/includes/encabezado.php';
       <input type="date" class="form-control form-control-sm" id="hasta" name="hasta" value="<?= escapar($filtros['hasta']) ?>">
     </div>
     <div class="col-6 col-md-2 d-flex gap-2">
-      <button class="btn btn-sm btn-primary flex-grow-1" type="submit"><i class="bi bi-funnel" aria-hidden="true"></i> Filtrar</button>
+      <button class="btn btn-sm btn-primary flex-grow-1" type="submit">Filtrar</button>
       <?php if ($hayFiltros) : ?>
         <a class="btn btn-sm btn-outline-secondary" href="<?= escapar(url('modules/inventario/movimientos.php')) ?>" title="Quitar filtros">
-          <i class="bi bi-x-lg" aria-hidden="true"></i><span class="visually-hidden">Quitar filtros</span>
+          <span class="visually-hidden">Quitar filtros</span>
         </a>
       <?php endif; ?>
     </div>
@@ -109,15 +108,15 @@ require RAIZ_PROYECTO . '/includes/encabezado.php';
             </td>
             <td><?= escapar($movimiento['materia_prima']) ?></td>
             <td class="numero fw-semibold <?= $esEntrada ? 'text-success' : 'text-danger' ?>">
-              <?= $esEntrada ? '+' : '−' ?><?= escapar(formatearCantidadConUnidad($movimiento['cantidad'], $movimiento['unidad_medida'])) ?>
+              <?= $esEntrada ? '+' : '-' ?><?= escapar(formatearCantidadConUnidad($movimiento['cantidad'], $movimiento['unidad_medida'])) ?>
             </td>
             <td class="text-nowrap">
               <?php if ($movimiento['origen'] === 'PRODUCCION' && $movimiento['referencia_id'] !== null) : ?>
                 <a href="<?= escapar(url('modules/produccion/detalle.php?id=' . $movimiento['referencia_id'])) ?>">
-                  <i class="bi <?= $iconoOrigen ?>" aria-hidden="true"></i> <?= $textoOrigen ?> #<?= (int) $movimiento['referencia_id'] ?>
+                  <?= $textoOrigen ?> #<?= (int) $movimiento['referencia_id'] ?>
                 </a>
               <?php else : ?>
-                <i class="bi <?= $iconoOrigen ?> text-body-secondary" aria-hidden="true"></i> <?= $textoOrigen ?>
+                <?= $textoOrigen ?>
                 <?= $movimiento['referencia_id'] !== null ? '#' . (int) $movimiento['referencia_id'] : '' ?>
               <?php endif; ?>
             </td>
@@ -127,7 +126,7 @@ require RAIZ_PROYECTO . '/includes/encabezado.php';
         <?php if ($resultado['movimientos'] === []) : ?>
           <tr>
             <td colspan="5" class="estado-vacio">
-              <i class="bi bi-arrow-left-right" aria-hidden="true"></i>
+              
               <?= $hayFiltros ? 'No hay movimientos con esos filtros.' : 'Todavía no hay movimientos registrados.' ?>
             </td>
           </tr>
@@ -140,7 +139,7 @@ require RAIZ_PROYECTO . '/includes/encabezado.php';
 <?php if ($totalPaginas > 1) : ?>
   <nav class="d-flex justify-content-between align-items-center mt-3" aria-label="Páginas de movimientos">
     <span class="small text-body-secondary">
-      <?= escapar(pluralizar($resultado['total'], 'movimiento', 'movimientos')) ?> · página <?= $pagina ?> de <?= $totalPaginas ?>
+      <?= escapar(pluralizar($resultado['total'], 'movimiento', 'movimientos')) ?> - página <?= $pagina ?> de <?= $totalPaginas ?>
     </span>
     <ul class="pagination pagination-sm mb-0">
       <li class="page-item <?= $pagina <= 1 ? 'disabled' : '' ?>">

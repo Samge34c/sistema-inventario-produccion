@@ -145,7 +145,7 @@ final class GestorInventario
 
         if ($uso['recetas'] > 0) {
             throw new ErrorValidacion(['general' => sprintf(
-                'No se puede eliminar «%s» porque se usa en %s. Quítela primero de esas recetas.',
+                'No se puede eliminar "%s" porque se usa en %s. Quítela primero de esas recetas.',
                 $materia['nombre'],
                 pluralizar($uso['recetas'], 'receta', 'recetas')
             )]);
@@ -153,7 +153,7 @@ final class GestorInventario
 
         if ($uso['movimientos'] + $uso['pedidos'] > 0) {
             throw new ErrorValidacion(['general' => sprintf(
-                'No se puede eliminar «%s» porque tiene historial de movimientos o pedidos, '
+                'No se puede eliminar "%s" porque tiene historial de movimientos o pedidos, '
                     . 'y borrarlo dejaría el inventario sin explicación.',
                 $materia['nombre']
             )]);

@@ -18,7 +18,7 @@ declare(strict_types=1);
       <?php foreach ($reporte['por_producto'] as $indice => $producto) : ?>
         <tr>
           <td>
-            <?= $indice === 0 ? '<i class="bi bi-star-fill text-warning" aria-label="Más vendido"></i> ' : '' ?>
+            <?= $indice === 0 ? '' : '' ?>
             <?= escapar($producto['nombre']) ?>
           </td>
           <td class="numero fw-semibold"><?= escapar(formatearCantidad($producto['unidades'])) ?></td>

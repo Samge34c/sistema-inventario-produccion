@@ -28,18 +28,17 @@ require RAIZ_PROYECTO . '/includes/encabezado.php';
 <div class="encabezado-pagina">
   <div>
     <h1>Recetas</h1>
-    <p>Cuánto se puede producir de cada producto con lo que hay en inventario, y qué ingrediente lo limita.</p>
   </div>
   <div class="acciones">
     <a class="btn btn-primary" href="<?= escapar(url('modules/recetas/receta.php')) ?>">
-      <i class="bi bi-plus-lg" aria-hidden="true"></i> Nueva receta
+      Nueva receta
     </a>
   </div>
 </div>
 
 <?php if ($todas === []) : ?>
   <div class="tarjeta estado-vacio">
-    <i class="bi bi-journal-text" aria-hidden="true"></i>
+    
     <p class="mb-3">Todavía no hay recetas. Cree la primera para calcular cuánto puede producir.</p>
     <a class="btn btn-primary" href="<?= escapar(url('modules/recetas/receta.php')) ?>">Crear receta</a>
   </div>
@@ -64,7 +63,7 @@ require RAIZ_PROYECTO . '/includes/encabezado.php';
 
   <?php if ($recetas === []) : ?>
     <div class="tarjeta estado-vacio">
-      <i class="bi bi-funnel" aria-hidden="true"></i>
+      
       No hay recetas en este grupo.
     </div>
   <?php endif; ?>
@@ -88,7 +87,7 @@ require RAIZ_PROYECTO . '/includes/encabezado.php';
               </h2>
               <div class="small text-body-secondary">
                 Rinde <?= escapar(pluralizar($receta['cantidad_producir'], 'unidad', 'unidades')) ?> por tanda
-                · <?= escapar(pluralizar(count($receta['ingredientes']), 'ingrediente', 'ingredientes')) ?>
+                - <?= escapar(pluralizar(count($receta['ingredientes']), 'ingrediente', 'ingredientes')) ?>
               </div>
             </div>
             <?php if (!$receta['esta_activa']) : ?>
@@ -96,7 +95,7 @@ require RAIZ_PROYECTO . '/includes/encabezado.php';
             <?php elseif ($unidadesMaximas === null) : ?>
               <span class="badge text-bg-secondary align-self-start">Sin ingredientes</span>
             <?php elseif ($receta['puede_producirse']) : ?>
-              <span class="badge bg-success-subtle text-success-emphasis align-self-start"><i class="bi bi-check2" aria-hidden="true"></i> Se puede producir</span>
+              <span class="badge bg-success-subtle text-success-emphasis align-self-start">Se puede producir</span>
             <?php else : ?>
               <span class="badge text-bg-danger align-self-start">No alcanza</span>
             <?php endif; ?>
@@ -109,13 +108,13 @@ require RAIZ_PROYECTO . '/includes/encabezado.php';
                 <span class="text-body-secondary"><?= $unidadesMaximas === 1 ? 'unidad posible ahora' : 'unidades posibles ahora' ?></span>
               </div>
               <div class="small mt-1">
-                <i class="bi bi-bullseye text-body-secondary" aria-hidden="true"></i>
+                
                 Limita: <strong><?= escapar($capacidad['limitante']['nombre']) ?></strong>
                 (hay <?= escapar(formatearCantidadConUnidad($capacidad['limitante']['cantidad_disponible'], $capacidad['limitante']['unidad_medida'])) ?>)
               </div>
               <?php if ($mejoraConPedidos) : ?>
                 <div class="small mt-1 texto-pedido">
-                  <i class="bi bi-truck" aria-hidden="true"></i>
+                  
                   Con los pedidos por llegar: <?= escapar(pluralizar((int) $proyeccion['unidades_maximas'], 'unidad', 'unidades')) ?>
                 </div>
               <?php endif; ?>
@@ -128,11 +127,11 @@ require RAIZ_PROYECTO . '/includes/encabezado.php';
             <a class="btn btn-sm btn-outline-primary" href="<?= escapar(url('modules/recetas/detalle.php?id=' . $receta['id'])) ?>">Ver detalle</a>
             <?php if ($receta['esta_activa'] && $unidadesMaximas !== null) : ?>
               <a class="btn btn-sm btn-primary" href="<?= escapar(url('modules/produccion/plan.php?receta_id=' . $receta['id'])) ?>">
-                <i class="bi bi-calendar-plus" aria-hidden="true"></i> Planificar
+                Planificar
               </a>
             <?php endif; ?>
             <a class="btn btn-sm btn-link text-body-secondary ms-auto" href="<?= escapar(url('modules/recetas/receta.php?id=' . $receta['id'])) ?>">
-              <i class="bi bi-pencil" aria-hidden="true"></i> Editar
+              Editar
             </a>
           </div>
         </article>

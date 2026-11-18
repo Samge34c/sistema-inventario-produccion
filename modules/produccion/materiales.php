@@ -26,7 +26,7 @@ require RAIZ_PROYECTO . '/includes/encabezado.php';
 <div class="encabezado-pagina">
   <div>
     <h1>Materiales para <?= escapar(mb_strtolower(describirDia($fecha))) ?></h1>
-    <p><?= escapar(ucfirst(formatearFechaLarga($fecha))) ?> · lista de alistamiento con lo que necesitan los planes pendientes.</p>
+    <p><?= escapar(ucfirst(formatearFechaLarga($fecha))) ?></p>
   </div>
   <div class="acciones">
     <form method="get" class="d-flex gap-2">
@@ -34,14 +34,14 @@ require RAIZ_PROYECTO . '/includes/encabezado.php';
       <input type="date" class="form-control" id="fecha" name="fecha" value="<?= escapar($fecha) ?>" data-enviar-al-cambiar>
     </form>
     <button type="button" class="btn btn-outline-primary" data-imprimir>
-      <i class="bi bi-printer" aria-hidden="true"></i> Imprimir
+      Imprimir
     </button>
   </div>
 </div>
 
 <?php if ($planes === []) : ?>
   <div class="tarjeta estado-vacio">
-    <i class="bi bi-calendar3" aria-hidden="true"></i>
+    
     <p class="mb-3">No hay planes pendientes para este día.</p>
     <a class="btn btn-primary no-imprimir" href="<?= escapar(url('modules/produccion/plan.php?fecha=' . $fecha)) ?>">Planificar producción</a>
   </div>
@@ -63,7 +63,7 @@ require RAIZ_PROYECTO . '/includes/encabezado.php';
     <div class="col-lg-8">
       <?php if ($totalFaltantes > 0) : ?>
         <div class="alert alert-danger d-flex gap-2">
-          <i class="bi bi-cart-x" aria-hidden="true"></i>
+          
           <div>
             <?= escapar(pluralizar($totalFaltantes, 'material no alcanza', 'materiales no alcanzan')) ?> para todo lo planeado,
             aun contando los pedidos que llegan hasta ese día.
@@ -95,9 +95,9 @@ require RAIZ_PROYECTO . '/includes/encabezado.php';
                     <?php if ($fila['faltante'] > 0) : ?>
                       <span class="texto-faltante"><?= escapar(formatearCantidadConUnidad($fila['faltante'], $fila['unidad_medida'])) ?></span>
                     <?php elseif ($fila['faltante_sin_pedidos'] > 0) : ?>
-                      <span class="texto-pedido"><i class="bi bi-truck" aria-hidden="true"></i> llega pedido</span>
+                      <span class="texto-pedido">llega pedido</span>
                     <?php else : ?>
-                      <i class="bi bi-check2 text-success" aria-label="Completo"></i>
+                      
                     <?php endif; ?>
                   </td>
                 </tr>
@@ -106,9 +106,6 @@ require RAIZ_PROYECTO . '/includes/encabezado.php';
           </table>
         </div>
       </div>
-      <p class="texto-ayuda mt-2">
-        «Falta» ya tiene en cuenta los planes pendientes de días anteriores y los pedidos que llegan hasta este día.
-      </p>
     </div>
   </div>
 <?php endif; ?>

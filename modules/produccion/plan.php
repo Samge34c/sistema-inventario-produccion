@@ -89,7 +89,6 @@ require RAIZ_PROYECTO . '/includes/encabezado.php';
 <div class="encabezado-pagina">
   <div>
     <h1><?= escapar($tituloPagina) ?></h1>
-    <p>Elija qué producto hornear, cuándo y cuántas unidades. A la derecha verá si alcanzan los materiales.</p>
   </div>
 </div>
 
@@ -146,7 +145,7 @@ require RAIZ_PROYECTO . '/includes/encabezado.php';
       <div class="d-flex gap-2 justify-content-end mt-4">
         <a class="btn btn-outline-secondary" href="<?= escapar(url($esEdicion ? 'modules/produccion/detalle.php?id=' . $produccion['id'] : 'modules/produccion/index.php')) ?>">Cancelar</a>
         <button class="btn btn-primary" type="submit">
-          <i class="bi bi-check-lg" aria-hidden="true"></i> <?= $esEdicion ? 'Guardar cambios' : 'Guardar plan' ?>
+          <?= $esEdicion ? 'Guardar cambios' : 'Guardar plan' ?>
         </button>
       </div>
     </form>
@@ -159,10 +158,6 @@ require RAIZ_PROYECTO . '/includes/encabezado.php';
         <p class="text-body-secondary mb-0">Elija el producto y la cantidad para ver los materiales.</p>
       </div>
     </div>
-    <p class="texto-ayuda mt-2">
-      Esta vista compara con la existencia de hoy. Al guardar, el sistema también descuenta lo que necesitan
-      los planes anteriores y suma los pedidos que llegan antes de la fecha.
-    </p>
   </div>
 </div>
 

@@ -1,5 +1,3 @@
-// Llena la ventana «Recibir pedido» con los datos del pedido elegido.
-
 ;(function () {
   'use strict'
 

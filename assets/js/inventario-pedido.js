@@ -1,6 +1,3 @@
-// Formulario de pedido: muestra la unidad, la existencia de la materia prima
-// elegida y una cantidad sugerida para llegar al doble del mínimo.
-
 ;(function () {
   'use strict'
 
@@ -17,14 +14,14 @@
     const datos = opcion ? opcion.dataset : {}
 
     if (!datos.unidad) {
-      unidad.textContent = '—'
+      unidad.textContent = '-'
       contexto.textContent = ''
       botonSugerencia.hidden = true
       return
     }
 
     unidad.textContent = datos.unidad
-    contexto.textContent = `Hay ${datos.existencia} · mínimo ${datos.minimo} · ya pedido ${datos.porLlegar}.`
+    contexto.textContent = `Hay ${datos.existencia} - mínimo ${datos.minimo} - ya pedido ${datos.porLlegar}.`
 
     const sugerencia = parseFloat(datos.sugerencia)
     botonSugerencia.hidden = !(sugerencia > 0)

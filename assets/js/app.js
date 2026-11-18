@@ -1,11 +1,8 @@
-// Comportamiento común a todas las páginas.
-
 /* global bootstrap */
 
 ;(function () {
   'use strict'
 
-  /** Quita tildes y pasa a minúsculas para buscar sin importar cómo se escriba. */
   function normalizarTexto(texto) {
     return texto
       .normalize('NFD')
@@ -14,8 +11,6 @@
       .trim()
   }
 
-  // Confirmación antes de acciones que no se pueden deshacer.
-  // Uso: <form data-confirmar="Mensaje" data-confirmar-boton="Eliminar">
   function iniciarConfirmaciones() {
     const elementoModal = document.getElementById('modalConfirmacion')
     if (!elementoModal) return
@@ -54,7 +49,6 @@
     })
   }
 
-  // Evita que un doble clic registre dos veces la misma operación.
   function evitarDobleEnvio() {
     document.addEventListener('submit', function (evento) {
       const formulario = evento.target
@@ -74,8 +68,6 @@
     })
   }
 
-  // Filtro instantáneo de tablas.
-  // Uso: <input data-filtrar="#idTabla"> y, opcional, <tr data-sin-resultados> dentro del tbody.
   function iniciarFiltrosDeTabla() {
     document.querySelectorAll('[data-filtrar]').forEach(function (campo) {
       const tabla = document.querySelector(campo.dataset.filtrar)
@@ -114,7 +106,6 @@
       })
   }
 
-  // Atajos declarativos: <input data-enviar-al-cambiar> y <button data-imprimir>.
   function iniciarAtajos() {
     document
       .querySelectorAll('[data-enviar-al-cambiar]')

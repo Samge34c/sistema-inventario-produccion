@@ -27,8 +27,8 @@ if (esPeticionPost()) {
     try {
         $inventario->guardarMateriaPrima($_POST, $id);
         agregarMensaje('exito', $id === null
-            ? sprintf('Se registró «%s».', trim((string) $_POST['nombre']))
-            : sprintf('Se guardaron los cambios de «%s».', trim((string) $_POST['nombre'])));
+            ? sprintf('Se registró "%s".', trim((string) $_POST['nombre']))
+            : sprintf('Se guardaron los cambios de "%s".', trim((string) $_POST['nombre'])));
         redirigir('modules/inventario/index.php');
     } catch (ErrorValidacion $error) {
         $errores = $error->obtenerErrores();
@@ -52,9 +52,6 @@ require RAIZ_PROYECTO . '/includes/encabezado.php';
     <div class="encabezado-pagina">
       <div>
         <h1><?= escapar($esEdicion ? $materia['nombre'] : 'Nueva materia prima') ?></h1>
-        <p><?= $esEdicion
-            ? 'Cambie el nombre, la unidad o el mínimo. La existencia se ajusta con entradas y salidas.'
-            : 'Registre un ingrediente o insumo que la panadería compra y usa en sus recetas.' ?></p>
       </div>
     </div>
 
@@ -81,10 +78,7 @@ require RAIZ_PROYECTO . '/includes/encabezado.php';
           <?php endforeach; ?>
         </select>
         <?= generarMensajeError($errores, 'unidad_medida') ?>
-        <div class="form-text" id="ayudaUnidad">
-          Es la unidad en la que se cuenta la existencia y en la que se escriben las cantidades de las recetas.
-          Por ejemplo: harina en gramos, leche en mililitros, huevos en unidades.
-        </div>
+        <div class="form-text" id="ayudaUnidad">Las recetas usan esta misma unidad.</div>
       </div>
 
       <div class="row g-3">
@@ -95,7 +89,7 @@ require RAIZ_PROYECTO . '/includes/encabezado.php';
               name="cantidad_inicial" min="0" step="0.01" inputmode="decimal" placeholder="0"
               value="<?= escapar(formatearValorCampo($datos['cantidad_inicial'])) ?>" aria-describedby="ayudaInicial">
             <?= generarMensajeError($errores, 'cantidad_inicial') ?>
-            <div class="form-text" id="ayudaInicial">Queda registrada como entrada «Inventario inicial».</div>
+            <div class="form-text" id="ayudaInicial">Queda registrada como entrada "Inventario inicial".</div>
           </div>
         <?php else : ?>
           <div class="col-sm-6">
@@ -113,14 +107,14 @@ require RAIZ_PROYECTO . '/includes/encabezado.php';
             name="stock_minimo" min="0" step="0.01" inputmode="decimal" required placeholder="0"
             value="<?= escapar(formatearValorCampo($datos['stock_minimo'])) ?>" aria-describedby="ayudaMinimo">
           <?= generarMensajeError($errores, 'stock_minimo') ?>
-          <div class="form-text" id="ayudaMinimo">Por debajo de esta cantidad, el sistema avisa que hay que reabastecer.</div>
+          <div class="form-text" id="ayudaMinimo">Se avisa cuando la existencia baja de este valor.</div>
         </div>
       </div>
 
       <div class="d-flex gap-2 justify-content-end mt-4">
         <a class="btn btn-outline-secondary" href="<?= escapar(url('modules/inventario/index.php')) ?>">Cancelar</a>
         <button class="btn btn-primary" type="submit">
-          <i class="bi bi-check-lg" aria-hidden="true"></i> <?= $esEdicion ? 'Guardar cambios' : 'Registrar materia prima' ?>
+          <?= $esEdicion ? 'Guardar cambios' : 'Registrar materia prima' ?>
         </button>
       </div>
     </form>

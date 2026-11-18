@@ -86,9 +86,9 @@ function generarFilaIngrediente(string $indice, string $materiaSeleccionada, str
         . $opciones . '</select>' . generarMensajeError($errores, $claveMateria) . '</div>'
         . '<div class="col-9 col-sm-4"><label class="visually-hidden" for="cantidad_' . $indice . '">Cantidad por tanda</label>'
         . '<div class="input-group has-validation"><input type="number" class="form-control' . generarClaseError($errores, $claveCantidad) . '" id="cantidad_' . $indice . '" name="ingredientes[' . $indice . '][cantidad]" min="0.01" step="0.01" inputmode="decimal" placeholder="Cantidad" value="' . escapar($cantidad) . '" data-campo-cantidad>'
-        . '<span class="input-group-text" data-unidad>—</span>' . generarMensajeError($errores, $claveCantidad) . '</div></div>'
+        . '<span class="input-group-text" data-unidad>-</span>' . generarMensajeError($errores, $claveCantidad) . '</div></div>'
         . '<div class="col-3 col-sm-1 text-end"><button type="button" class="btn btn-outline-secondary" data-quitar-ingrediente title="Quitar ingrediente">'
-        . '<i class="bi bi-trash" aria-hidden="true"></i><span class="visually-hidden">Quitar ingrediente</span></button></div>'
+        . '<span class="visually-hidden">Quitar ingrediente</span></button></div>'
         . '</div>';
 }
 
@@ -109,7 +109,6 @@ require RAIZ_PROYECTO . '/includes/encabezado.php';
     <div class="encabezado-pagina">
       <div>
         <h1><?= $esEdicion ? 'Editar receta' : 'Nueva receta' ?></h1>
-        <p>Escriba las cantidades de una tanda y cuántas unidades salen de ella. El sistema escala el resto.</p>
       </div>
     </div>
 
@@ -148,10 +147,10 @@ require RAIZ_PROYECTO . '/includes/encabezado.php';
         <div class="d-flex justify-content-between align-items-center mb-1">
           <h2 class="h6 text-uppercase text-body-secondary mb-0">Ingredientes de una tanda</h2>
           <a class="small" href="<?= escapar(url('modules/inventario/materia-prima.php')) ?>" target="_blank" rel="noopener">
-            ¿Falta una materia prima? Regístrela <i class="bi bi-box-arrow-up-right" aria-hidden="true"></i>
+            ¿Falta una materia prima? Regístrela 
           </a>
         </div>
-        <p class="texto-ayuda">La cantidad va en la unidad de cada materia prima, la misma del inventario.</p>
+        <p class="form-text">Las cantidades van en la unidad de cada materia prima.</p>
 
         <?php if (isset($errores['ingredientes'])) : ?>
           <div class="alert alert-danger py-2"><?= escapar($errores['ingredientes']) ?></div>
@@ -174,7 +173,7 @@ require RAIZ_PROYECTO . '/includes/encabezado.php';
         </template>
 
         <button type="button" class="btn btn-outline-primary btn-sm mt-3" id="agregarIngrediente">
-          <i class="bi bi-plus-lg" aria-hidden="true"></i> Agregar ingrediente
+          Agregar ingrediente
         </button>
 
         <div class="alert alert-light border mt-3 mb-0 small" id="vistaCapacidad" aria-live="polite" hidden></div>
@@ -182,7 +181,7 @@ require RAIZ_PROYECTO . '/includes/encabezado.php';
 
       <div class="d-flex gap-2 justify-content-end">
         <a class="btn btn-outline-secondary" href="<?= escapar(url($esEdicion ? 'modules/recetas/detalle.php?id=' . $receta['id'] : 'modules/recetas/index.php')) ?>">Cancelar</a>
-        <button class="btn btn-primary" type="submit"><i class="bi bi-check-lg" aria-hidden="true"></i> <?= $esEdicion ? 'Guardar cambios' : 'Crear receta' ?></button>
+        <button class="btn btn-primary" type="submit"><?= $esEdicion ? 'Guardar cambios' : 'Crear receta' ?></button>
       </div>
     </form>
 
@@ -190,8 +189,7 @@ require RAIZ_PROYECTO . '/includes/encabezado.php';
       <div class="tarjeta p-4 mt-4 border-danger-subtle">
         <h2 class="h6 text-uppercase text-body-secondary">Archivar o eliminar</h2>
         <p class="small text-body-secondary">
-          Archivar oculta la receta de la caja y de la planificación, pero conserva sus ventas y producciones.
-          Eliminar solo es posible si nunca se ha producido ni vendido.
+          Archivada no aparece en la caja ni en la planificación. Solo se puede eliminar si no tiene ventas ni producciones.
         </p>
         <div class="d-flex flex-wrap gap-2">
           <form method="post" action="<?= escapar(url('modules/recetas/cambiar-estado.php')) ?>">
@@ -199,16 +197,15 @@ require RAIZ_PROYECTO . '/includes/encabezado.php';
             <input type="hidden" name="id" value="<?= $receta['id'] ?>">
             <input type="hidden" name="activa" value="<?= $receta['esta_activa'] ? '0' : '1' ?>">
             <button class="btn btn-outline-secondary" type="submit">
-              <i class="bi <?= $receta['esta_activa'] ? 'bi-archive' : 'bi-arrow-counterclockwise' ?>" aria-hidden="true"></i>
               <?= $receta['esta_activa'] ? 'Archivar receta' : 'Reactivar receta' ?>
             </button>
           </form>
           <form method="post" action="<?= escapar(url('modules/recetas/eliminar.php')) ?>"
-            data-confirmar="¿Eliminar la receta «<?= escapar($receta['nombre']) ?>» y sus ingredientes? Esta acción no se puede deshacer."
+            data-confirmar="¿Eliminar la receta <?= escapar($receta['nombre']) ?> y sus ingredientes? Esta acción no se puede deshacer."
             data-confirmar-boton="Eliminar receta">
             <?= generarCampoCsrf() ?>
             <input type="hidden" name="id" value="<?= $receta['id'] ?>">
-            <button class="btn btn-outline-danger" type="submit"><i class="bi bi-trash" aria-hidden="true"></i> Eliminar</button>
+            <button class="btn btn-outline-danger" type="submit">Eliminar</button>
           </form>
         </div>
       </div>

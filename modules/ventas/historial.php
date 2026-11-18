@@ -19,7 +19,6 @@ require RAIZ_PROYECTO . '/includes/encabezado.php';
 <div class="encabezado-pagina">
   <div>
     <h1>Caja</h1>
-    <p>Consulte las ventas de cualquier día y anule las que se registraron por error.</p>
   </div>
 </div>
 
@@ -40,15 +39,15 @@ require RAIZ_PROYECTO . '/includes/encabezado.php';
     <span class="fw-semibold ms-1"><?= escapar(describirDia($fecha)) ?></span>
   </div>
   <div class="small text-body-secondary">
-    <?= escapar(pluralizar($resumen['transacciones'], 'venta', 'ventas')) ?> ·
-    <?= escapar(pluralizar($resumen['unidades'], 'unidad', 'unidades')) ?> ·
+    <?= escapar(pluralizar($resumen['transacciones'], 'venta', 'ventas')) ?> -
+    <?= escapar(pluralizar($resumen['unidades'], 'unidad', 'unidades')) ?> -
     <a href="<?= escapar(url('modules/ventas/reportes.php?tipo=diario&fecha=' . $fecha)) ?>">ver reporte</a>
   </div>
 </div>
 
 <div class="tarjeta">
   <?php if ($ventas === []) : ?>
-    <p class="estado-vacio mb-0"><i class="bi bi-receipt" aria-hidden="true"></i> No hay ventas registradas este día.</p>
+    <p class="estado-vacio mb-0">No hay ventas registradas este día.</p>
   <?php else : ?>
     <div class="table-responsive">
       <table class="table table-hover align-middle">

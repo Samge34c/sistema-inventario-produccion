@@ -20,11 +20,10 @@ require RAIZ_PROYECTO . '/includes/encabezado.php';
 <div class="encabezado-pagina">
   <div>
     <h1>Inventario</h1>
-    <p>Lo que ya se pidió a los proveedores. Al recibirlo, se suma solo a la existencia.</p>
   </div>
   <div class="acciones">
     <a class="btn btn-primary" href="<?= escapar(url('modules/inventario/pedido.php')) ?>">
-      <i class="bi bi-plus-lg" aria-hidden="true"></i> Registrar pedido
+      Registrar pedido
     </a>
   </div>
 </div>
@@ -40,8 +39,8 @@ require RAIZ_PROYECTO . '/includes/encabezado.php';
   </div>
   <?php if ($totalAtrasados > 0) : ?>
     <span class="text-danger small fw-semibold">
-      <i class="bi bi-clock-history" aria-hidden="true"></i>
-      <?= escapar(pluralizar($totalAtrasados, 'pedido atrasado', 'pedidos atrasados')) ?>: confirme con el proveedor.
+      
+      <?= escapar(pluralizar($totalAtrasados, 'pedido atrasado', 'pedidos atrasados')) ?>.
     </span>
   <?php endif; ?>
 </div>
@@ -66,12 +65,12 @@ require RAIZ_PROYECTO . '/includes/encabezado.php';
             <td>
               <div class="fw-semibold"><?= escapar($pedido['materia_prima']) ?></div>
               <div class="small text-body-secondary">
-                Pedido #<?= (int) $pedido['id'] ?> · <?= escapar(formatearFecha($pedido['fecha_registro'])) ?>
-                <?= $pedido['observacion'] ? ' · ' . escapar($pedido['observacion']) : '' ?>
+                Pedido #<?= (int) $pedido['id'] ?> - <?= escapar(formatearFecha($pedido['fecha_registro'])) ?>
+                <?= $pedido['observacion'] ? ' - ' . escapar($pedido['observacion']) : '' ?>
               </div>
             </td>
             <td class="numero"><?= escapar(formatearCantidadConUnidad($pedido['cantidad'], $pedido['unidad_medida'])) ?></td>
-            <td><?= escapar($pedido['proveedor'] ?? '—') ?></td>
+            <td><?= escapar($pedido['proveedor'] ?? '-') ?></td>
             <td class="text-nowrap">
               <?php if ($estado === 'RECIBIDO') : ?>
                 <?= escapar(formatearFechaHora((string) $pedido['fecha_recepcion'])) ?>
@@ -92,7 +91,7 @@ require RAIZ_PROYECTO . '/includes/encabezado.php';
                   data-cantidad="<?= escapar(formatearValorCampo($pedido['cantidad'])) ?>"
                   data-cantidad-texto="<?= escapar(formatearCantidad($pedido['cantidad'])) ?>"
                   data-unidad="<?= escapar(obtenerNombreUnidad($pedido['unidad_medida'])) ?>">
-                  <i class="bi bi-box-arrow-in-down" aria-hidden="true"></i> Recibir
+                  Recibir
                 </button>
                 <form method="post" class="d-inline" action="<?= escapar(url('modules/inventario/cancelar-pedido.php')) ?>"
                   data-confirmar="¿Cancelar el pedido de <?= escapar(formatearCantidadConUnidad($pedido['cantidad'], $pedido['unidad_medida'])) ?> de <?= escapar(mb_strtolower($pedido['materia_prima'])) ?>? Dejará de contarse en la planificación."
@@ -108,7 +107,7 @@ require RAIZ_PROYECTO . '/includes/encabezado.php';
         <?php if ($pedidos === []) : ?>
           <tr>
             <td colspan="5" class="estado-vacio">
-              <i class="bi bi-truck" aria-hidden="true"></i>
+              
               <?= match ($estado) {
                   'RECIBIDO' => 'Todavía no se ha recibido ningún pedido.',
                   'CANCELADO' => 'No hay pedidos cancelados.',
@@ -138,11 +137,11 @@ require RAIZ_PROYECTO . '/includes/encabezado.php';
           <input type="number" class="form-control" id="cantidad_recibida" name="cantidad_recibida" min="0.01" step="0.01" required>
           <span class="input-group-text" id="recibirUnidad"></span>
         </div>
-        <div class="form-text">Si llegó una cantidad distinta a la pedida, escriba la real: eso es lo que se suma al inventario.</div>
+        <div class="form-text">Escriba la cantidad que llegó.</div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Volver</button>
-        <button type="submit" class="btn btn-success"><i class="bi bi-check-lg" aria-hidden="true"></i> Confirmar recepción</button>
+        <button type="submit" class="btn btn-success">Confirmar recepción</button>
       </div>
     </form>
   </div>
