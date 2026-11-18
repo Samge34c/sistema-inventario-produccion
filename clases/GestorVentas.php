@@ -2,29 +2,13 @@
 
 declare(strict_types=1);
 
-/**
- * Registro de ventas y reportes diario, semanal y de hora pico.
- *
- * Una venta es una atención en caja (un cliente) y puede llevar varios
- * productos. En los reportes, «ventas» cuenta atenciones y «unidades» cuenta
- * productos vendidos.
- *
- * Hora pico: la franja de una hora con más ventas; si hay empate, la de más
- * unidades, y si sigue el empate, la más temprana.
- */
 final class GestorVentas
 {
     public function __construct(private readonly PDO $conexion)
     {
     }
 
-    /**
-     * Registra una venta con sus productos.
-     *
-     * @param array<string, mixed> $datos 'cantidades' => [receta_id => unidades],
-     *                                    'fecha_hora' (opcional, AAAA-MM-DDTHH:MM),
-     *                                    'observacion' (opcional)
-     */
+    /** @param array<string, mixed> $datos */
     public function registrarVenta(array $datos): int
     {
         $validador = new Validador($datos);
@@ -50,11 +34,7 @@ final class GestorVentas
         });
     }
 
-    /**
-     * Ventas de un día, la más reciente primero, con sus productos.
-     *
-     * @return list<array<string, mixed>>
-     */
+    /** @return list<array<string, mixed>> */
     public function listarVentasDelDia(string $fecha): array
     {
         $consulta = $this->conexion->prepare(
@@ -94,21 +74,13 @@ final class GestorVentas
         }
     }
 
-    /**
-     * @return array{transacciones: int, unidades: int}
-     */
+    /** @return array{transacciones: int, unidades: int} */
     public function obtenerResumenDia(string $fecha): array
     {
         return $this->consultarTotales($fecha . ' 00:00:00', sumarDias($fecha, 1) . ' 00:00:00');
     }
 
-    /**
-     * Unidades vendidas por día, en promedio, de cada producto durante los
-     * últimos $dias días completos (sin contar hoy). Sirve para decidir
-     * cuánto planificar.
-     *
-     * @return array<int, float> receta_id => promedio de unidades por día
-     */
+    /** @return array<int, float> */
     public function calcularPromedioDiarioPorProducto(int $dias = 7): array
     {
         $hoy = obtenerFechaHoy();
@@ -129,15 +101,7 @@ final class GestorVentas
         return $promedios;
     }
 
-    // -----------------------------------------------------------------------
-    // Reportes
-    // -----------------------------------------------------------------------
-
-    /**
-     * Reporte de un día, comparado con el mismo día de la semana anterior.
-     *
-     * @return array<string, mixed>
-     */
+    /** @return array<string, mixed> */
     public function generarReporteDiario(string $fecha): array
     {
         $inicio = $fecha . ' 00:00:00';
@@ -156,11 +120,7 @@ final class GestorVentas
         ];
     }
 
-    /**
-     * Reporte de lunes a domingo, comparado con la semana anterior.
-     *
-     * @return array<string, mixed>
-     */
+    /** @return array<string, mixed> */
     public function generarReporteSemanal(string $fechaCualquiera): array
     {
         $lunes = obtenerLunesDeSemana($fechaCualquiera);
@@ -194,12 +154,7 @@ final class GestorVentas
         ];
     }
 
-    /**
-     * Ventas por franja horaria en un rango de días, con promedio por día y
-     * el cruce día de la semana × hora.
-     *
-     * @return array<string, mixed>
-     */
+    /** @return array<string, mixed> */
     public function generarReporteHoraPico(string $desde, string $hasta): array
     {
         $inicio = $desde . ' 00:00:00';
@@ -244,13 +199,7 @@ final class GestorVentas
         return $horaPico;
     }
 
-    // -----------------------------------------------------------------------
-    // Consultas
-    // -----------------------------------------------------------------------
-
-    /**
-     * @return array{transacciones: int, unidades: int}
-     */
+    /** @return array{transacciones: int, unidades: int} */
     private function consultarTotales(string $inicio, string $fin): array
     {
         $consulta = $this->conexion->prepare(
@@ -265,9 +214,7 @@ final class GestorVentas
         return ['transacciones' => (int) $fila['transacciones'], 'unidades' => (int) $fila['unidades']];
     }
 
-    /**
-     * @return list<array{receta_id: int, nombre: string, unidades: int, transacciones: int, porcentaje: float}>
-     */
+    /** @return list<array{receta_id: int, nombre: string, unidades: int, transacciones: int, porcentaje: float}> */
     private function consultarPorProducto(string $inicio, string $fin): array
     {
         $consulta = $this->conexion->prepare(
@@ -292,9 +239,7 @@ final class GestorVentas
         ], $filas);
     }
 
-    /**
-     * @return array<int, array{transacciones: int, unidades: int}> hora (0-23) => totales, solo horas con ventas
-     */
+    /** @return array<int, array{transacciones: int, unidades: int}> */
     private function consultarPorHora(string $inicio, string $fin): array
     {
         $consulta = $this->conexion->prepare(
@@ -318,9 +263,7 @@ final class GestorVentas
         return $porHora;
     }
 
-    /**
-     * @return array<string, array{transacciones: int, unidades: int}> fecha => totales
-     */
+    /** @return array<string, array{transacciones: int, unidades: int}> */
     private function consultarPorDia(string $inicio, string $fin): array
     {
         $consulta = $this->conexion->prepare(
@@ -343,11 +286,7 @@ final class GestorVentas
         return $porDia;
     }
 
-    /**
-     * Ventas por día de la semana (1 = lunes … 7 = domingo) y hora.
-     *
-     * @return array<int, array<int, int>>
-     */
+    /** @return array<int, array<int, int>> */
     private function consultarMapaDiaHora(string $inicio, string $fin): array
     {
         $consulta = $this->conexion->prepare(
@@ -366,10 +305,6 @@ final class GestorVentas
         return $mapa;
     }
 
-    // -----------------------------------------------------------------------
-    // Apoyo
-    // -----------------------------------------------------------------------
-
     /**
      * @param array{transacciones: int, unidades: int} $candidata
      * @param array{hora: int, transacciones: int, unidades: int} $actual
@@ -383,10 +318,6 @@ final class GestorVentas
         return $candidata['unidades'] > $actual['unidades'];
     }
 
-    /**
-     * Fecha y hora de la venta. Vacía significa «ahora»; no se aceptan
-     * fechas futuras.
-     */
     private function leerFechaHora(string $texto, Validador $validador): string
     {
         $texto = trim($texto);
@@ -410,9 +341,7 @@ final class GestorVentas
         return $fechaHora->format('Y-m-d H:i:s');
     }
 
-    /**
-     * @return array<int, int> receta_id => unidades
-     */
+    /** @return array<int, int> */
     private function leerLineas(mixed $cantidades, Validador $validador): array
     {
         $lineas = [];

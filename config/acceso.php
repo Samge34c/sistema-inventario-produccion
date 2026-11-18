@@ -2,12 +2,6 @@
 
 declare(strict_types=1);
 
-/*
- * Inicio de sesión y protección de las páginas (SCRUM-22). Todas las páginas
- * del sistema, salvo iniciar-sesion.php, exigen una cuenta activa, y todos
- * los formularios llevan el código de seguridad de la sesión (campo «token»).
- */
-
 function iniciarSesionSegura(): void
 {
     if (session_status() !== PHP_SESSION_ACTIVE) {

@@ -4,10 +4,6 @@ declare(strict_types=1);
 
 use PHPUnit\Framework\TestCase;
 
-/**
- * Base para las pruebas que usan la base de datos de pruebas. Cada prueba
- * empieza con los datos de EntornoPruebas::cargarDatosBase().
- */
 abstract class PruebaIntegracion extends TestCase
 {
     protected PDO $conexion;
@@ -32,9 +28,7 @@ abstract class PruebaIntegracion extends TestCase
         return EntornoPruebas::obtenerExistencia($this->conexion, $materiaPrimaId);
     }
 
-    /**
-     * @param array<string, mixed> $parametros
-     */
+    /** @param array<string, mixed> $parametros */
     protected function consultarValor(string $sql, array $parametros = []): mixed
     {
         $consulta = $this->conexion->prepare($sql);

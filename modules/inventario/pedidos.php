@@ -6,8 +6,6 @@ require_once __DIR__ . '/../../includes/inicio.php';
 
 $conexion = obtenerConexion();
 
-// Materiales pedidos que aún no llegan, y el historial de recibidos y cancelados.
-
 $gestorPedidos = new GestorPedidos($conexion);
 $estado = in_array(leerParametro('estado'), ['RECIBIDO', 'CANCELADO'], true) ? leerParametro('estado') : 'PENDIENTE';
 $pedidos = $gestorPedidos->listarPedidos($estado);

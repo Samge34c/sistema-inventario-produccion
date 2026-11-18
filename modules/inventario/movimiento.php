@@ -6,8 +6,6 @@ require_once __DIR__ . '/../../includes/inicio.php';
 
 $conexion = obtenerConexion();
 
-// Registrar una entrada o salida de una materia prima (?id=…&tipo=ENTRADA|SALIDA).
-
 $inventario = new GestorInventario($conexion);
 $materia = $inventario->obtenerMateriaPrima(leerParametroEntero('id'));
 

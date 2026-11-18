@@ -6,8 +6,6 @@ require_once __DIR__ . '/../../includes/inicio.php';
 
 $conexion = obtenerConexion();
 
-// Detalle de un plan: materiales, faltantes y registro de lo producido.
-
 $gestorProduccion = new GestorProduccion($conexion);
 $produccion = $gestorProduccion->obtenerProduccion(leerParametroEntero('id'));
 

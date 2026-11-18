@@ -2,12 +2,6 @@
 
 declare(strict_types=1);
 
-/**
- * Planificación, faltantes y descuento de insumos con resultados conocidos.
- *
- * Datos base: 10.000 g de harina y 100 g de levadura; el pan rinde 20 por
- * tanda con 1.000 g de harina y 20 g de levadura (1 g de levadura por unidad).
- */
 final class GestorProduccionTest extends PruebaIntegracion
 {
     private GestorProduccion $produccion;
@@ -35,7 +29,6 @@ final class GestorProduccionTest extends PruebaIntegracion
 
         $analisis = $this->produccion->analizarPlanesPendientes();
 
-        // El primero usa los 100 g de levadura; al segundo le faltan sus 50 g.
         $this->assertSame(CalculadoraProduccion::COMPLETO, $analisis[$primero]['estado']);
         $this->assertSame(CalculadoraProduccion::FALTAN_MATERIALES, $analisis[$segundo]['estado']);
         $levaduraSegundo = $analisis[$segundo]['ingredientes'][1];
@@ -67,7 +60,6 @@ final class GestorProduccionTest extends PruebaIntegracion
     {
         $plan = $this->planificarPan(obtenerFechaHoy(), 100);
 
-        // Se producen 80 de los 100 planeados: 4.000 g de harina y 80 g de levadura.
         $this->produccion->registrarProduccion($plan, ['unidades_producidas' => '80']);
 
         $this->assertSame(6000.0, $this->obtenerExistencia($this->ids['harina']));
@@ -146,7 +138,6 @@ final class GestorProduccionTest extends PruebaIntegracion
 
         $resumen = array_column($this->produccion->resumirMaterialesPorFecha($hoy), null, 'nombre');
 
-        // Harina: 5.000 (pan) + 2.000 (galleta) = 7.000; huevos: 8 de 12.
         $this->assertSame(7000.0, $resumen['Harina de trigo']['cantidad_requerida']);
         $this->assertSame(8.0, $resumen['Huevos']['cantidad_requerida']);
         $this->assertSame(0.0, $resumen['Harina de trigo']['faltante']);

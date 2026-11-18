@@ -2,12 +2,6 @@
 
 declare(strict_types=1);
 
-/**
- * Pedidos de materias primas que todavía no llegan. Al recibirlos, la
- * cantidad que realmente llegó entra al inventario como movimiento de origen
- * PEDIDO. Mientras están pendientes, la planificación y la proyección de
- * recetas los tienen en cuenta.
- */
 final class GestorPedidos
 {
     private readonly GestorInventario $inventario;
@@ -17,11 +11,7 @@ final class GestorPedidos
         $this->inventario = new GestorInventario($conexion);
     }
 
-    // -----------------------------------------------------------------------
-
-    /**
-     * @return list<array<string, mixed>>
-     */
+    /** @return list<array<string, mixed>> */
     public function listarPedidos(string $estado = 'PENDIENTE'): array
     {
         $orden = $estado === 'PENDIENTE' ? 'pe.fecha_estimada_llegada ASC, pe.id ASC' : 'pe.fecha_registro DESC, pe.id DESC';
@@ -45,11 +35,7 @@ final class GestorPedidos
         }, $consulta->fetchAll());
     }
 
-    /**
-     * Pedidos pendientes cuya fecha estimada ya pasó.
-     *
-     * @return list<array<string, mixed>>
-     */
+    /** @return list<array<string, mixed>> */
     public function listarPedidosAtrasados(): array
     {
         return array_values(array_filter(
@@ -58,9 +44,7 @@ final class GestorPedidos
         ));
     }
 
-    /**
-     * @return array<string, mixed>|null
-     */
+    /** @return array<string, mixed>|null */
     public function obtenerPedido(int $id): ?array
     {
         $consulta = $this->conexion->prepare(
@@ -81,9 +65,7 @@ final class GestorPedidos
         return $pedido;
     }
 
-    /**
-     * @param array<string, mixed> $datos
-     */
+    /** @param array<string, mixed> $datos */
     public function crearPedido(array $datos): int
     {
         $validador = new Validador($datos);
@@ -115,11 +97,7 @@ final class GestorPedidos
         return (int) $this->conexion->lastInsertId();
     }
 
-    /**
-     * Marca el pedido como recibido y suma la cantidad que realmente llegó.
-     *
-     * @param array<string, mixed> $datos
-     */
+    /** @param array<string, mixed> $datos */
     public function recibirPedido(int $id, array $datos): void
     {
         $validador = new Validador($datos);
@@ -162,13 +140,7 @@ final class GestorPedidos
         });
     }
 
-    /**
-     * Total pendiente por llegar de cada materia prima. Si se indica una
-     * fecha, solo cuenta los pedidos que llegan hasta ese día (incluidos los
-     * atrasados).
-     *
-     * @return array<int, float> materia_prima_id => cantidad
-     */
+    /** @return array<int, float> */
     public function obtenerCantidadesPorLlegar(?string $hastaFecha = null): array
     {
         $sql = "SELECT materia_prima_id, SUM(cantidad) AS total
@@ -192,11 +164,7 @@ final class GestorPedidos
         return $cantidades;
     }
 
-    /**
-     * Pedidos pendientes ordenados por fecha de llegada, para la planificación.
-     *
-     * @return list<array{materia_prima_id: int, fecha_estimada_llegada: string, cantidad: float}>
-     */
+    /** @return list<array{materia_prima_id: int, fecha_estimada_llegada: string, cantidad: float}> */
     public function listarLlegadasPendientes(): array
     {
         $filas = $this->conexion
@@ -215,9 +183,7 @@ final class GestorPedidos
         ], $filas);
     }
 
-    /**
-     * @return array<string, mixed>
-     */
+    /** @return array<string, mixed> */
     private function bloquearPedidoPendiente(int $id): array
     {
         $consulta = $this->conexion->prepare('SELECT * FROM materiales_pendientes WHERE id = :id FOR UPDATE');

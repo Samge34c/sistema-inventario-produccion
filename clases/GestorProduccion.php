@@ -2,14 +2,6 @@
 
 declare(strict_types=1);
 
-/**
- * Planificación de la producción por fecha, revisión de materiales y
- * registro de lo producido con su descuento de insumos.
- *
- * Los planes pendientes se revisan en orden (fecha y luego orden de
- * creación): cada plan cuenta con la existencia actual, menos lo que ya
- * comprometieron los planes anteriores, más los pedidos que llegan hasta su fecha.
- */
 final class GestorProduccion
 {
     private readonly CalculadoraProduccion $calculadora;
@@ -25,12 +17,7 @@ final class GestorProduccion
         $this->recetas = new GestorRecetas($conexion);
     }
 
-    /**
-     * Producciones de un rango de fechas. Si $incluirAtrasadas es true, agrega
-     * los planes pendientes de días anteriores que nadie registró ni canceló.
-     *
-     * @return list<array<string, mixed>>
-     */
+    /** @return list<array<string, mixed>> */
     public function listarProducciones(string $desde, string $hasta, string $estado = '', bool $incluirAtrasadas = true): array
     {
         $condicionFecha = 'p.fecha_planeada BETWEEN :desde AND :hasta';
@@ -61,9 +48,7 @@ final class GestorProduccion
         );
     }
 
-    /**
-     * @return array<string, mixed>|null
-     */
+    /** @return array<string, mixed>|null */
     public function obtenerProduccion(int $id): ?array
     {
         $consulta = $this->conexion->prepare(
@@ -91,11 +76,7 @@ final class GestorProduccion
         return $produccion;
     }
 
-    /**
-     * Últimas producciones de una receta, la más reciente primero.
-     *
-     * @return list<array<string, mixed>>
-     */
+    /** @return list<array<string, mixed>> */
     public function listarUltimasProduccionesDeReceta(int $recetaId, int $limite = 5): array
     {
         $consulta = $this->conexion->prepare(
@@ -112,12 +93,7 @@ final class GestorProduccion
         return $consulta->fetchAll();
     }
 
-    /**
-     * Analiza todos los planes pendientes en orden y devuelve, por id de
-     * producción, su estado de abastecimiento y el detalle por ingrediente.
-     *
-     * @return array<int, array{estado: string, ingredientes: list<array<string, mixed>>}>
-     */
+    /** @return array<int, array{estado: string, ingredientes: list<array<string, mixed>>}> */
     public function analizarPlanesPendientes(): array
     {
         $planes = $this->conexion
@@ -170,12 +146,7 @@ final class GestorProduccion
         return $resultado;
     }
 
-    /**
-     * Materiales que necesitan todos los planes pendientes de un día, sumados
-     * por materia prima. Sirve como lista de alistamiento.
-     *
-     * @return list<array<string, mixed>>
-     */
+    /** @return list<array<string, mixed>> */
     public function resumirMaterialesPorFecha(string $fecha): array
     {
         $planesDelDia = array_filter(
@@ -203,15 +174,10 @@ final class GestorProduccion
         return $resumen;
     }
 
-    /**
-     * Crea o modifica un plan de producción.
-     *
-     * @param array<string, mixed> $datos
-     */
+    /** @param array<string, mixed> $datos */
     public function planificarProduccion(array $datos, ?int $id = null): int
     {
         $produccionActual = $id === null ? null : $this->obtenerPlanPendiente($id);
-        // Un plan atrasado se puede editar sin moverlo de fecha; las fechas nuevas no pueden ser pasadas.
         $esLaMismaFecha = $produccionActual !== null && ($datos['fecha_planeada'] ?? '') === $produccionActual['fecha_planeada'];
         $validador = new Validador($datos);
         $recetaId = $validador->obtenerId('receta_id', 'la receta');
@@ -250,13 +216,7 @@ final class GestorProduccion
         return $id;
     }
 
-    /**
-     * Registra lo que se produjo y descuenta del inventario los insumos
-     * correspondientes a las unidades producidas. Si algún insumo no alcanza,
-     * no descuenta nada y explica qué falta.
-     *
-     * @param array<string, mixed> $datos
-     */
+    /** @param array<string, mixed> $datos */
     public function registrarProduccion(int $id, array $datos): void
     {
         $validador = new Validador($datos);
@@ -302,9 +262,7 @@ final class GestorProduccion
         });
     }
 
-    /**
-     * @param array<string, mixed> $datos
-     */
+    /** @param array<string, mixed> $datos */
     public function cancelarProduccion(int $id, array $datos): void
     {
         $validador = new Validador($datos);
@@ -318,10 +276,6 @@ final class GestorProduccion
                 ->execute([':motivo' => $motivo === '' ? null : $motivo, ':id' => $id]);
         });
     }
-
-    // -----------------------------------------------------------------------
-    // Apoyo
-    // -----------------------------------------------------------------------
 
     /**
      * @param array<string, mixed> $produccion
@@ -341,9 +295,7 @@ final class GestorProduccion
         return $produccion;
     }
 
-    /**
-     * @return list<array<string, mixed>>
-     */
+    /** @return list<array<string, mixed>> */
     private function listarConsumos(int $produccionId): array
     {
         $consulta = $this->conexion->prepare(
@@ -358,9 +310,7 @@ final class GestorProduccion
         return $consulta->fetchAll();
     }
 
-    /**
-     * @return array<string, mixed>
-     */
+    /** @return array<string, mixed> */
     private function obtenerPlanPendiente(int $id): array
     {
         $produccion = $this->obtenerProduccion($id);
@@ -376,9 +326,7 @@ final class GestorProduccion
         return $produccion;
     }
 
-    /**
-     * @param array<string, mixed>|null $produccionActual
-     */
+    /** @param array<string, mixed>|null $produccionActual */
     private function validarRecetaPlanificable(Validador $validador, int $recetaId, ?array $produccionActual): void
     {
         if ($recetaId <= 0) {
@@ -395,9 +343,7 @@ final class GestorProduccion
         }
     }
 
-    /**
-     * @return array<string, mixed>
-     */
+    /** @return array<string, mixed> */
     private function bloquearPlanPendiente(int $id): array
     {
         $consulta = $this->conexion->prepare(
@@ -421,12 +367,7 @@ final class GestorProduccion
         return $plan;
     }
 
-    /**
-     * Ingredientes de la receta con la existencia bloqueada hasta terminar la
-     * transacción, para que nadie más la cambie mientras se descuenta.
-     *
-     * @return list<array{materia_prima_id: int, nombre: string, unidad_medida: string, cantidad: float, cantidad_disponible: float}>
-     */
+    /** @return list<array{materia_prima_id: int, nombre: string, unidad_medida: string, cantidad: float, cantidad_disponible: float}> */
     private function bloquearIngredientes(int $recetaId): array
     {
         $consulta = $this->conexion->prepare(

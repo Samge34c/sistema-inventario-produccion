@@ -2,22 +2,14 @@
 
 declare(strict_types=1);
 
-/**
- * Lee y valida los datos de un formulario. Acumula los errores por campo y
- * los lanza juntos, para que el usuario vea todo lo que debe corregir de una
- * sola vez.
- */
 final class Validador
 {
-    /** Máximo que cabe en una columna DECIMAL(10,2). */
     public const DECIMAL_MAXIMO = 99999999.99;
 
     /** @var array<string, string> */
     private array $errores = [];
 
-    /**
-     * @param array<string, mixed> $datos
-     */
+    /** @param array<string, mixed> $datos */
     public function __construct(private readonly array $datos)
     {
     }
@@ -36,10 +28,6 @@ final class Validador
         return $texto;
     }
 
-    /**
-     * Número decimal. Si $esCeroPermitido es false, exige un valor mayor que
-     * cero; si es true, un campo vacío vale cero.
-     */
     public function obtenerDecimal(string $campo, string $etiqueta, bool $esCeroPermitido = false): float
     {
         $valor = $this->datos[$campo] ?? '';
@@ -84,9 +72,6 @@ final class Validador
         return (int) $valor;
     }
 
-    /**
-     * Identificador elegido en un selector (entero positivo).
-     */
     public function obtenerId(string $campo, string $etiqueta): int
     {
         $valor = filter_var($this->datos[$campo] ?? null, FILTER_VALIDATE_INT, ['options' => ['min_range' => 1]]);
@@ -100,9 +85,6 @@ final class Validador
         return (int) $valor;
     }
 
-    /**
-     * Fecha en formato AAAA-MM-DD. Si se indica $fechaMinima, no la deja ser anterior.
-     */
     public function obtenerFecha(string $campo, string $etiqueta, ?string $fechaMinima = null): string
     {
         $valor = $this->datos[$campo] ?? '';
@@ -117,9 +99,7 @@ final class Validador
         return $fecha;
     }
 
-    /**
-     * @param list<string> $opciones
-     */
+    /** @param list<string> $opciones */
     public function obtenerOpcion(string $campo, string $etiqueta, array $opciones): string
     {
         $valor = $this->datos[$campo] ?? '';

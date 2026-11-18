@@ -6,8 +6,6 @@ require_once __DIR__ . '/../../includes/inicio.php';
 
 $conexion = obtenerConexion();
 
-// Agenda de producción agrupada por fecha, con el estado de materiales de cada plan.
-
 $gestorProduccion = new GestorProduccion($conexion);
 $hoy = obtenerFechaHoy();
 $rangos = [

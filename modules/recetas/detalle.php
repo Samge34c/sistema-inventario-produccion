@@ -6,8 +6,6 @@ require_once __DIR__ . '/../../includes/inicio.php';
 
 $conexion = obtenerConexion();
 
-// Detalle de una receta: capacidad por ingrediente y calculadora de materiales.
-
 $gestorRecetas = new GestorRecetas($conexion);
 $receta = $gestorRecetas->obtenerReceta(leerParametroEntero('id'));
 

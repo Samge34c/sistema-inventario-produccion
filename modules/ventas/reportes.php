@@ -14,8 +14,6 @@ $tipo = in_array(leerParametro('tipo'), ['diario', 'semanal', 'hora-pico'], true
 $fecha = min(leerParametroFecha('fecha', $hoy), $hoy);
 
 /**
- * Columnas por hora, desde la primera hasta la última hora con ventas.
- *
  * @param array<int, array<string, int|float>> $porHora
  * @return list<array{etiqueta: string, valor: float, texto: string, titulo: string, esDestacada: bool}>
  */

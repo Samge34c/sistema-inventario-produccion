@@ -2,9 +2,6 @@
 
 declare(strict_types=1);
 
-/**
- * Pedidos pendientes de llegada contra la base de datos de pruebas.
- */
 final class GestorPedidosTest extends PruebaIntegracion
 {
     private GestorPedidos $pedidos;

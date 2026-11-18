@@ -2,16 +2,7 @@
 
 declare(strict_types=1);
 
-/**
- * Crea la conexión PDO a MySQL con los datos de config/configuracion.php.
- *
- * Si la configuración trae un DSN completo (variable INVENTARIO_DSN), se usa
- * tal cual; si no, se arma con host, puerto y nombre de la base. La sesión de
- * MySQL usa la misma zona horaria que PHP, para que NOW() y CURDATE()
- * coincidan con las fechas que muestra la aplicación.
- *
- * @param array<string, mixed> $configuracion
- */
+/** @param array<string, mixed> $configuracion */
 function crearConexion(array $configuracion): PDO
 {
     $dsn = is_string($configuracion['bd_dsn'] ?? null) && $configuracion['bd_dsn'] !== ''

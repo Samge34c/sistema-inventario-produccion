@@ -2,11 +2,6 @@
 
 declare(strict_types=1);
 
-/*
- * Tabla de productos más vendidos, compartida por los reportes diario y
- * semanal. Espera $reporte['por_producto'] de GestorVentas.
- */
-
 /** @var array<string, mixed> $reporte */
 ?>
 <div class="tarjeta h-100">

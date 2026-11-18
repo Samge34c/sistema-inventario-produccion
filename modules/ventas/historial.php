@@ -6,8 +6,6 @@ require_once __DIR__ . '/../../includes/inicio.php';
 
 $conexion = obtenerConexion();
 
-// Ventas de un día, con navegación entre días y opción de anular.
-
 $gestorVentas = new GestorVentas($conexion);
 $hoy = obtenerFechaHoy();
 $fecha = min(leerParametroFecha('fecha', $hoy), $hoy);

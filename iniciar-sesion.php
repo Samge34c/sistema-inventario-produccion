@@ -2,8 +2,6 @@
 
 declare(strict_types=1);
 
-// Inicio de sesión (SCRUM-22). Única página que se abre sin una cuenta activa.
-
 const PAGINA_PUBLICA = true;
 
 require_once __DIR__ . '/includes/inicio.php';

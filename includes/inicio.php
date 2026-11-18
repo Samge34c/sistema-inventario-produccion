@@ -2,16 +2,6 @@
 
 declare(strict_types=1);
 
-/*
- * Punto de arranque de todas las páginas web: carga el sistema, abre la
- * sesión segura, exige una cuenta activa y muestra una página amable si
- * ocurre un error inesperado. Cada página obtiene la base de datos con
- * obtenerConexion().
- *
- * Una página que no requiere sesión (solo iniciar-sesion.php) define la
- * constante PAGINA_PUBLICA antes de incluir este archivo.
- */
-
 require_once __DIR__ . '/cargador.php';
 
 iniciarSesionSegura();

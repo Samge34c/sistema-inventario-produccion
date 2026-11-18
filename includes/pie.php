@@ -2,11 +2,6 @@
 
 declare(strict_types=1);
 
-/*
- * Parte inferior de todas las páginas. Si la página define $scriptsPagina
- * (lista de rutas), se cargan después del JavaScript común.
- */
-
 $scriptsPagina ??= [];
 ?>
   </main>
@@ -18,7 +13,6 @@ $scriptsPagina ??= [];
     </div>
   </footer>
 
-  <!-- Ventana de confirmación para acciones que no se pueden deshacer -->
   <div class="modal fade" id="modalConfirmacion" tabindex="-1" aria-labelledby="modalConfirmacionTitulo" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">

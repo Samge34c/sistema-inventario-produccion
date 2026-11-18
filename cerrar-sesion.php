@@ -2,8 +2,6 @@
 
 declare(strict_types=1);
 
-// Cierra la sesión (solo por POST, con el código de seguridad de la sesión).
-
 const PAGINA_PUBLICA = true;
 
 require_once __DIR__ . '/includes/inicio.php';

@@ -6,8 +6,6 @@ require_once __DIR__ . '/../../includes/inicio.php';
 
 $conexion = obtenerConexion();
 
-// Marca un pedido como recibido y suma lo que llegó (solo por POST).
-
 if (!esPeticionPost()) {
     redirigir('modules/inventario/pedidos.php');
 }

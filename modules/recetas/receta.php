@@ -6,8 +6,6 @@ require_once __DIR__ . '/../../includes/inicio.php';
 
 $conexion = obtenerConexion();
 
-// Crear (sin id) o editar (con ?id=) una receta y sus ingredientes.
-
 $gestorRecetas = new GestorRecetas($conexion);
 $inventario = new GestorInventario($conexion);
 $id = leerParametroEntero('id') ?: null;
@@ -67,8 +65,6 @@ $seccionActiva = 'recetas';
 $scriptsPagina = ['assets/js/recetas-formulario.js'];
 
 /**
- * Fila de ingrediente del formulario. Se usa también como plantilla (índice «__indice__»).
- *
  * @param list<array{id: int, nombre: string, unidad_medida: string, cantidad_disponible: float}> $materias
  * @param array<string, string> $errores
  */

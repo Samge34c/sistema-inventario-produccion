@@ -2,13 +2,6 @@
 
 declare(strict_types=1);
 
-/**
- * Materias primas y movimientos de entrada y salida. Los pedidos pendientes
- * de llegada están en GestorPedidos.
- *
- * La existencia (cantidad_disponible) solo cambia mediante movimientos, para
- * que el historial siempre explique la cantidad actual.
- */
 final class GestorInventario
 {
     public const UNIDADES = [
@@ -29,16 +22,7 @@ final class GestorInventario
     {
     }
 
-    // -----------------------------------------------------------------------
-    // Materias primas
-    // -----------------------------------------------------------------------
-
-    /**
-     * Materias primas con su estado de existencia, lo que está por llegar y
-     * en cuántas recetas se usan.
-     *
-     * @return list<array<string, mixed>>
-     */
+    /** @return list<array<string, mixed>> */
     public function listarMateriasPrimas(string $busqueda = '', string $estado = ''): array
     {
         $consulta = $this->conexion->prepare(
@@ -72,19 +56,13 @@ final class GestorInventario
         ));
     }
 
-    /**
-     * Materias primas sin existencias o por debajo del mínimo.
-     *
-     * @return list<array<string, mixed>>
-     */
+    /** @return list<array<string, mixed>> */
     public function listarMateriasEnAlerta(): array
     {
         return $this->listarMateriasPrimas('', 'ALERTA');
     }
 
-    /**
-     * @return array<string, mixed>|null
-     */
+    /** @return array<string, mixed>|null */
     public function obtenerMateriaPrima(int $id): ?array
     {
         $consulta = $this->conexion->prepare('SELECT * FROM materias_primas WHERE id = :id');
@@ -94,11 +72,7 @@ final class GestorInventario
         return $fila === false ? null : $this->normalizarMateriaPrima($fila);
     }
 
-    /**
-     * Lista corta para selectores: id, nombre, unidad y existencia.
-     *
-     * @return list<array{id: int, nombre: string, unidad_medida: string, cantidad_disponible: float}>
-     */
+    /** @return list<array{id: int, nombre: string, unidad_medida: string, cantidad_disponible: float}> */
     public function listarOpcionesMateriasPrimas(): array
     {
         $filas = $this->conexion
@@ -113,13 +87,7 @@ final class GestorInventario
         ], $filas);
     }
 
-    /**
-     * Crea o actualiza una materia prima a partir de los datos del formulario.
-     * Al crearla, la cantidad inicial queda registrada como un movimiento de
-     * entrada «Inventario inicial».
-     *
-     * @param array<string, mixed> $datos
-     */
+    /** @param array<string, mixed> $datos */
     public function guardarMateriaPrima(array $datos, ?int $id = null): int
     {
         $validador = new Validador($datos);
@@ -163,10 +131,6 @@ final class GestorInventario
         });
     }
 
-    /**
-     * Elimina una materia prima que no tenga historial. Si se usa en recetas,
-     * movimientos o pedidos, explica por qué no se puede.
-     */
     public function eliminarMateriaPrima(int $id): void
     {
         $materia = $this->obtenerMateriaPrimaOFallar($id);
@@ -198,15 +162,7 @@ final class GestorInventario
         $this->conexion->prepare('DELETE FROM materias_primas WHERE id = :id')->execute([':id' => $id]);
     }
 
-    // -----------------------------------------------------------------------
-    // Movimientos
-    // -----------------------------------------------------------------------
-
-    /**
-     * Registra una entrada o salida desde el formulario de movimientos.
-     *
-     * @param array<string, mixed> $datos
-     */
+    /** @param array<string, mixed> $datos */
     public function registrarMovimientoDesdeFormulario(int $materiaPrimaId, array $datos): void
     {
         $validador = new Validador($datos);
@@ -218,10 +174,6 @@ final class GestorInventario
         $this->registrarMovimiento($materiaPrimaId, $tipo, $cantidad, $observacion);
     }
 
-    /**
-     * Suma o resta existencias y deja el movimiento en el historial. Una
-     * salida nunca puede dejar la existencia en negativo.
-     */
     public function registrarMovimiento(
         int $materiaPrimaId,
         string $tipo,
@@ -276,8 +228,6 @@ final class GestorInventario
     }
 
     /**
-     * Historial de movimientos con filtros opcionales y paginación.
-     *
      * @param array{materia_prima_id?: int, tipo?: string, desde?: string, hasta?: string} $filtros
      * @return array{movimientos: list<array<string, mixed>>, total: int}
      */
@@ -316,10 +266,6 @@ final class GestorInventario
         return ['movimientos' => $movimientos, 'total' => $total];
     }
 
-    // -----------------------------------------------------------------------
-    // Apoyo
-    // -----------------------------------------------------------------------
-
     public static function determinarEstadoExistencia(float $cantidadDisponible, float $stockMinimo): string
     {
         if ($cantidadDisponible <= 0) {
@@ -357,10 +303,6 @@ final class GestorInventario
         return (int) $consulta->fetchColumn() > 0;
     }
 
-    /**
-     * Cambiar la unidad de una materia prima con existencias o en recetas
-     * cambiaría el significado de esas cantidades, así que no se permite.
-     */
     private function validarCambioDeUnidad(Validador $validador, ?int $id, string $unidadMedida): void
     {
         if ($id === null || $unidadMedida === '') {
@@ -387,9 +329,7 @@ final class GestorInventario
         }
     }
 
-    /**
-     * @return array<string, mixed>
-     */
+    /** @return array<string, mixed> */
     private function obtenerMateriaPrimaOFallar(int $id): array
     {
         $materia = $this->obtenerMateriaPrima($id);
@@ -401,9 +341,7 @@ final class GestorInventario
         return $materia;
     }
 
-    /**
-     * @return array<string, mixed>
-     */
+    /** @return array<string, mixed> */
     private function bloquearMateriaPrima(int $id): array
     {
         $consulta = $this->conexion->prepare('SELECT * FROM materias_primas WHERE id = :id FOR UPDATE');
@@ -417,9 +355,7 @@ final class GestorInventario
         return $this->normalizarMateriaPrima($fila);
     }
 
-    /**
-     * @param array<string, mixed> $materia
-     */
+    /** @param array<string, mixed> $materia */
     private function validarCantidadResultante(array $materia, float $cantidad, float $cantidadNueva): void
     {
         if ($cantidadNueva < 0) {

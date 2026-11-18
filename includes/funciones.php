@@ -2,11 +2,6 @@
 
 declare(strict_types=1);
 
-/*
- * Funciones de apoyo para las páginas: rutas, seguridad, mensajes y formato
- * de cantidades y fechas en español de Colombia.
- */
-
 const DIAS_SEMANA_CORTOS = ['dom', 'lun', 'mar', 'mié', 'jue', 'vie', 'sáb'];
 const DIAS_SEMANA_LARGOS = ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado'];
 const MESES_CORTOS = ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic'];
@@ -15,20 +10,11 @@ const MESES_LARGOS = [
     'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre',
 ];
 
-// ---------------------------------------------------------------------------
-// Configuración y rutas
-// ---------------------------------------------------------------------------
-
 function obtenerConfiguracion(string $clave): mixed
 {
     return $GLOBALS['configuracion'][$clave] ?? null;
 }
 
-/**
- * Conexión a la base de datos del sistema, creada una sola vez por petición.
- * Si MySQL no responde, muestra una página con instrucciones en lugar de un
- * error técnico.
- */
 function obtenerConexion(): PDO
 {
     static $conexion = null;
@@ -53,10 +39,6 @@ function obtenerConexion(): PDO
     return $conexion;
 }
 
-/**
- * Devuelve la URL de un archivo del proyecto, sin importar en qué carpeta de
- * htdocs esté instalado ni desde qué página se llame.
- */
 function url(string $ruta = ''): string
 {
     static $urlBase = null;
@@ -125,28 +107,16 @@ function leerParametroFecha(string $clave, string $valorPorDefecto): string
     return esFechaValida($valor) ? $valor : $valorPorDefecto;
 }
 
-// ---------------------------------------------------------------------------
-// Seguridad
-// ---------------------------------------------------------------------------
-
 function escapar(mixed $valor): string
 {
     return htmlspecialchars((string) $valor, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
 }
 
-/**
- * Campo oculto con el código de seguridad de la sesión. Usa el mismo token y
- * el mismo nombre de campo («token») que el inicio de sesión (config/acceso.php).
- */
 function generarCampoCsrf(): string
 {
     return '<input type="hidden" name="token" value="' . escapar(obtenerTokenAcceso()) . '">';
 }
 
-/**
- * Rechaza formularios enviados desde otro sitio o con la sesión vencida, con
- * un mensaje amable en lugar de un error.
- */
 function verificarTokenCsrf(string $rutaRegreso = 'index.php'): void
 {
     if (validarTokenAcceso($_POST['token'] ?? null)) {
@@ -157,18 +127,12 @@ function verificarTokenCsrf(string $rutaRegreso = 'index.php'): void
     redirigir($rutaRegreso);
 }
 
-// ---------------------------------------------------------------------------
-// Mensajes para el usuario (se muestran una sola vez, después de redirigir)
-// ---------------------------------------------------------------------------
-
 function agregarMensaje(string $tipo, string $texto): void
 {
     $_SESSION['mensajes'][] = ['tipo' => $tipo, 'texto' => $texto];
 }
 
-/**
- * @return list<array{tipo: string, texto: string}>
- */
+/** @return list<array{tipo: string, texto: string}> */
 function obtenerMensajes(): array
 {
     $mensajes = $_SESSION['mensajes'] ?? [];
@@ -177,13 +141,6 @@ function obtenerMensajes(): array
     return $mensajes;
 }
 
-// ---------------------------------------------------------------------------
-// Formato de números y unidades
-// ---------------------------------------------------------------------------
-
-/**
- * Formatea una cantidad al estilo colombiano: 1.250,5 (sin ceros sobrantes).
- */
 function formatearCantidad(float $valor, int $decimalesMaximos = 2): string
 {
     $texto = number_format($valor, $decimalesMaximos, ',', '.');
@@ -195,10 +152,6 @@ function formatearCantidad(float $valor, int $decimalesMaximos = 2): string
     return $texto === '-0' ? '0' : $texto;
 }
 
-/**
- * Valor para un campo de formulario: los números se escriben con punto
- * decimal y sin ceros sobrantes (formato que aceptan los campos numéricos).
- */
 function formatearValorCampo(mixed $valor): string
 {
     if (is_float($valor) || is_int($valor)) {
@@ -229,10 +182,6 @@ function pluralizar(int $cantidad, string $singular, string $plural): string
     return formatearCantidad($cantidad) . ' ' . ($cantidad === 1 ? $singular : $plural);
 }
 
-/**
- * Convierte texto con coma o punto decimal en número. Acepta «1.250,5»,
- * «1250,5» y «1250.5». Devuelve null si el texto no es un número.
- */
 function convertirTextoANumero(string $texto): ?float
 {
     $texto = str_replace(' ', '', trim($texto));
@@ -245,10 +194,6 @@ function convertirTextoANumero(string $texto): ?float
 
     return is_numeric($texto) ? (float) $texto : null;
 }
-
-// ---------------------------------------------------------------------------
-// Fechas
-// ---------------------------------------------------------------------------
 
 function obtenerFechaHoy(): string
 {
@@ -283,7 +228,6 @@ function obtenerLunesDeSemana(string $fecha): string
     return $objetoFecha->modify('-' . ($diaSemana - 1) . ' days')->format('Y-m-d');
 }
 
-/** Ej.: «mar 17 nov» o «mar 17 nov 2026». */
 function formatearFecha(string $fecha, bool $incluirAnio = false): string
 {
     $objetoFecha = new DateTimeImmutable($fecha);
@@ -294,7 +238,6 @@ function formatearFecha(string $fecha, bool $incluirAnio = false): string
     return $incluirAnio ? $texto . ' ' . $objetoFecha->format('Y') : $texto;
 }
 
-/** Ej.: «martes 17 de noviembre de 2026». */
 function formatearFechaLarga(string $fecha): string
 {
     $objetoFecha = new DateTimeImmutable($fecha);
@@ -305,7 +248,6 @@ function formatearFechaLarga(string $fecha): string
         . $objetoFecha->format('Y');
 }
 
-/** Ej.: «7:05 a. m.». */
 function formatearHora(string $fechaHora): string
 {
     $objetoFecha = new DateTimeImmutable($fechaHora);
@@ -313,7 +255,6 @@ function formatearHora(string $fechaHora): string
     return $objetoFecha->format('g:i') . ($objetoFecha->format('A') === 'AM' ? ' a. m.' : ' p. m.');
 }
 
-/** Ej.: «7 a. m.» para la franja que empieza a las 7:00. */
 function formatearFranjaHoraria(int $hora): string
 {
     $hora12 = $hora % 12 === 0 ? 12 : $hora % 12;
@@ -326,7 +267,6 @@ function formatearFechaHora(string $fechaHora): string
     return describirDia(substr($fechaHora, 0, 10)) . ', ' . formatearHora($fechaHora);
 }
 
-/** «Hoy», «Mañana», «Ayer» o la fecha corta. */
 function describirDia(string $fecha): string
 {
     return match (calcularDiferenciaDias(obtenerFechaHoy(), $fecha)) {
@@ -337,21 +277,13 @@ function describirDia(string $fecha): string
     };
 }
 
-// ---------------------------------------------------------------------------
-// Fragmentos de interfaz
-// ---------------------------------------------------------------------------
-
-/**
- * @param array<string, string> $errores
- */
+/** @param array<string, string> $errores */
 function generarClaseError(array $errores, string $campo): string
 {
     return isset($errores[$campo]) ? ' is-invalid' : '';
 }
 
-/**
- * @param array<string, string> $errores
- */
+/** @param array<string, string> $errores */
 function generarMensajeError(array $errores, string $campo): string
 {
     if (!isset($errores[$campo])) {
@@ -361,11 +293,7 @@ function generarMensajeError(array $errores, string $campo): string
     return '<div class="invalid-feedback">' . escapar($errores[$campo]) . '</div>';
 }
 
-/**
- * Pestañas de navegación dentro de un módulo.
- *
- * @param array<string, array{0: string, 1: string, 2: string}> $pestanas clave => [texto, ícono, ruta]
- */
+/** @param array<string, array{0: string, 1: string, 2: string}> $pestanas */
 function generarPestanas(array $pestanas, string $pestanaActiva): string
 {
     $html = '<nav class="pestanas-modulo mb-4" aria-label="Secciones del módulo"><ul class="nav nav-underline">';
@@ -413,11 +341,7 @@ function generarInsigniaProduccion(string $estado, bool $estaAtrasada = false): 
     };
 }
 
-/**
- * Resumen corto de lo que le falta a un plan, por ejemplo «Faltan 80 g de levadura seca».
- *
- * @param array<string, mixed> $analisis
- */
+/** @param array<string, mixed> $analisis */
 function describirFaltantes(array $analisis, string $campo = 'faltante'): string
 {
     $partes = [];
@@ -431,11 +355,7 @@ function describirFaltantes(array $analisis, string $campo = 'faltante'): string
     return implode(', ', $partes);
 }
 
-/**
- * Gráfica de columnas hecha solo con HTML y CSS.
- *
- * @param list<array{etiqueta: string, valor: float, texto: string, titulo: string, esDestacada?: bool}> $columnas
- */
+/** @param list<array{etiqueta: string, valor: float, texto: string, titulo: string, esDestacada?: bool}> $columnas */
 function generarGraficaColumnas(array $columnas, string $descripcion): string
 {
     $maximo = max(array_merge([0.0], array_map(static fn (array $columna): float => $columna['valor'], $columnas)));
@@ -453,9 +373,6 @@ function generarGraficaColumnas(array $columnas, string $descripcion): string
     return $html . '</div>';
 }
 
-/**
- * Variación porcentual frente a un periodo anterior, o null si no hay base.
- */
 function calcularVariacion(int $actual, int $anterior): ?float
 {
     return $anterior > 0 ? ($actual - $anterior) * 100 / $anterior : null;
@@ -474,10 +391,6 @@ function generarTextoVariacion(?float $variacion, string $periodo): string
         . escapar(($esPositiva ? '+' : '') . formatearCantidad($variacion, 0)) . ' % frente a ' . escapar($periodo) . '</span>';
 }
 
-/**
- * Página de error independiente del diseño general, para cuando la base de
- * datos u otra parte del sistema no está disponible.
- */
 function mostrarPaginaError(string $titulo, string $mensaje, ?string $detalle = null): never
 {
     if (PHP_SAPI === 'cli') {

@@ -6,8 +6,6 @@ require_once __DIR__ . '/../../includes/inicio.php';
 
 $conexion = obtenerConexion();
 
-// Anula (borra) una venta registrada por error (solo por POST).
-
 if (!esPeticionPost()) {
     redirigir('modules/ventas/index.php');
 }

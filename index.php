@@ -6,8 +6,6 @@ require_once __DIR__ . '/includes/inicio.php';
 
 $conexion = obtenerConexion();
 
-// Panel de inicio: lo que necesita atención hoy en inventario, producción y ventas.
-
 $inventario = new GestorInventario($conexion);
 $gestorProduccion = new GestorProduccion($conexion);
 $gestorVentas = new GestorVentas($conexion);

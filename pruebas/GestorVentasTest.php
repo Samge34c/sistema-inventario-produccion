@@ -2,18 +2,6 @@
 
 declare(strict_types=1);
 
-/**
- * Registro de ventas y reportes con un conjunto de ventas conocido
- * (regla especial de la Definition of Done para reportes).
- *
- * Ventas del lunes 9 de noviembre de 2026:
- *   07:10  3 pan
- *   07:40  2 pan + 1 galleta
- *   08:05  10 pan
- *   17:30  4 galletas
- * Total: 4 ventas y 20 unidades (15 pan, 5 galletas).
- * Hora pico: 7 a. m. (2 ventas); 8 a. m. tiene más unidades pero 1 sola venta.
- */
 final class GestorVentasTest extends PruebaIntegracion
 {
     private const LUNES = '2026-11-09';
@@ -26,9 +14,7 @@ final class GestorVentasTest extends PruebaIntegracion
         $this->ventas = new GestorVentas($this->conexion);
     }
 
-    /**
-     * @param array<int, int> $cantidades receta_id => unidades
-     */
+    /** @param array<int, int> $cantidades */
     private function venderEn(string $fechaHora, array $cantidades): int
     {
         return $this->ventas->registrarVenta(['fecha_hora' => $fechaHora, 'cantidades' => array_map('strval', $cantidades)]);
@@ -91,7 +77,6 @@ final class GestorVentasTest extends PruebaIntegracion
         $this->cargarVentasDelLunes();
         $this->venderEn('2026-11-10T07:30', [$this->ids['pan'] => 4]);
 
-        // Del lunes al miércoles (3 días): la franja de las 7 tiene 3 ventas → 1 por día.
         $reporte = $this->ventas->generarReporteHoraPico('2026-11-09', '2026-11-11');
 
         $this->assertSame(3, $reporte['dias']);

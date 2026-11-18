@@ -4,9 +4,6 @@ declare(strict_types=1);
 
 use PHPUnit\Framework\TestCase;
 
-/**
- * Formato de cantidades, números y fechas en español de Colombia.
- */
 final class FuncionesTest extends TestCase
 {
     public function testFormateaCantidadesConPuntoDeMilesYComaDecimal(): void

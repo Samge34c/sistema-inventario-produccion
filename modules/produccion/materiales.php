@@ -6,8 +6,6 @@ require_once __DIR__ . '/../../includes/inicio.php';
 
 $conexion = obtenerConexion();
 
-// Lista de alistamiento: materiales de todos los planes pendientes de un día.
-
 $gestorProduccion = new GestorProduccion($conexion);
 $fecha = leerParametroFecha('fecha', obtenerFechaHoy());
 $planes = $gestorProduccion->listarProducciones($fecha, $fecha, 'PLANEADA', false);

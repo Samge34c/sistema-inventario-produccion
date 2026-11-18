@@ -2,9 +2,6 @@
 
 declare(strict_types=1);
 
-/**
- * Materias primas y movimientos contra la base de datos de pruebas.
- */
 final class GestorInventarioTest extends PruebaIntegracion
 {
     private GestorInventario $inventario;

@@ -2,9 +2,6 @@
 
 declare(strict_types=1);
 
-/**
- * Recetas, sus ingredientes y su capacidad contra la base de datos de pruebas.
- */
 final class GestorRecetasTest extends PruebaIntegracion
 {
     private GestorRecetas $recetas;
@@ -25,7 +22,6 @@ final class GestorRecetasTest extends PruebaIntegracion
 
         $pan = $this->recetas->obtenerReceta($this->ids['pan']);
 
-        // Hoy: levadura 100 × 20 / 20 = 100. Con el pedido: levadura 400 → 400, harina 200 → 200.
         $this->assertSame(100, $pan['capacidad']['unidades_maximas']);
         $this->assertSame('Levadura seca', $pan['capacidad']['limitante']['nombre']);
         $this->assertSame(200, $pan['proyeccion']['unidades_maximas']);
@@ -47,7 +43,6 @@ final class GestorRecetasTest extends PruebaIntegracion
 
         $receta = $this->recetas->obtenerReceta($id);
         $this->assertCount(2, $receta['ingredientes']);
-        // Huevos: 12 × 6 / 6 = 12 unidades; harina: 10.000 × 6 / 300,5 = 199,6 → 199. Limitan los huevos.
         $this->assertSame(12, $receta['capacidad']['unidades_maximas']);
     }
 

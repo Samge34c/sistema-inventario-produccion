@@ -3,20 +3,6 @@
 declare(strict_types=1);
 
 /**
- * Cálculos de producción sin acceso a base de datos: producción máxima,
- * ingrediente limitante, materiales requeridos y faltantes.
- *
- * Convenciones:
- * - Cada ingrediente trae la cantidad que pide UNA tanda de la receta, en la
- *   unidad de medida de su materia prima.
- * - El rendimiento es la cantidad de unidades de producto que salen de una tanda.
- * - Las cantidades se escalan en proporción: para 60 unidades de una receta
- *   que rinde 30, se necesita el doble de cada ingrediente.
- *
- * Formato de un ingrediente:
- *   ['materia_prima_id' => int, 'nombre' => string, 'unidad_medida' => string,
- *    'cantidad' => float, 'cantidad_disponible' => float]
- *
  * @phpstan-type Ingrediente array{materia_prima_id: int, nombre: string, unidad_medida: string, cantidad: float, cantidad_disponible: float}
  */
 final class CalculadoraProduccion
@@ -26,16 +12,11 @@ final class CalculadoraProduccion
     public const FALTAN_MATERIALES = 'FALTAN_MATERIALES';
     public const SIN_INGREDIENTES = 'SIN_INGREDIENTES';
 
-    /** Margen para errores de redondeo de punto flotante. */
     private const TOLERANCIA = 0.000001;
 
     /**
-     * Unidades máximas que se pueden producir con lo disponible y cuál
-     * ingrediente lo limita.
-     *
      * @param list<Ingrediente> $ingredientes
-     * @param array<int, float> $cantidadesAdicionales materia_prima_id => cantidad extra
-     *                                                  (por ejemplo, pedidos por llegar)
+     * @param array<int, float> $cantidadesAdicionales
      * @return array{unidades_maximas: ?int, limitante: ?array<string, mixed>, ingredientes: list<array<string, mixed>>}
      */
     public function calcularProduccionMaxima(
@@ -74,9 +55,6 @@ final class CalculadoraProduccion
         ];
     }
 
-    /**
-     * Unidades completas de producto que alcanzan con una cantidad de un ingrediente.
-     */
     public function calcularUnidadesPosibles(
         float $cantidadDisponible,
         float $cantidadPorTanda,
@@ -93,9 +71,6 @@ final class CalculadoraProduccion
         return (int) floor($cantidadDisponible * $rendimientoUnidades / $cantidadPorTanda + self::TOLERANCIA);
     }
 
-    /**
-     * Cantidad de un ingrediente que se necesita para producir $unidades.
-     */
     public function calcularCantidadRequerida(float $cantidadPorTanda, int $rendimientoUnidades, int $unidades): float
     {
         $this->validarRendimiento($rendimientoUnidades);
@@ -105,7 +80,7 @@ final class CalculadoraProduccion
 
     /**
      * @param list<Ingrediente> $ingredientes
-     * @return array<int, float> materia_prima_id => cantidad requerida
+     * @return array<int, float>
      */
     public function calcularRequerimientos(array $ingredientes, int $rendimientoUnidades, int $unidades): array
     {
@@ -123,19 +98,9 @@ final class CalculadoraProduccion
     }
 
     /**
-     * Revisa si un plan de producción tiene los materiales que necesita.
-     *
-     * Para cada ingrediente compara lo requerido contra:
-     *   existencia actual − lo comprometido por planes anteriores + pedidos que llegan hasta la fecha.
-     *
-     * Estados posibles:
-     * - COMPLETO: alcanza con lo que hay hoy.
-     * - DEPENDE_DE_PEDIDOS: alcanza solo si llegan los pedidos pendientes.
-     * - FALTAN_MATERIALES: no alcanza ni contando los pedidos.
-     *
      * @param list<Ingrediente> $ingredientes
-     * @param array<int, float> $cantidadesComprometidas materia_prima_id => lo que piden planes anteriores
-     * @param array<int, float> $cantidadesPorLlegar     materia_prima_id => pedidos que llegan a tiempo
+     * @param array<int, float> $cantidadesComprometidas
+     * @param array<int, float> $cantidadesPorLlegar
      * @return array{estado: string, ingredientes: list<array<string, mixed>>}
      */
     public function analizarAbastecimiento(
@@ -190,9 +155,6 @@ final class CalculadoraProduccion
         ];
     }
 
-    /**
-     * Lo que le falta a este plan, entre cero y lo requerido.
-     */
     private function calcularFaltante(float $cantidadRequerida, float $saldoDisponible): float
     {
         $faltante = $cantidadRequerida - max(0.0, $saldoDisponible);
@@ -200,9 +162,7 @@ final class CalculadoraProduccion
         return round(min($cantidadRequerida, max(0.0, $faltante)), 2);
     }
 
-    /**
-     * @param list<array<string, mixed>> $filas
-     */
+    /** @param list<array<string, mixed>> $filas */
     private function determinarEstado(array $filas): string
     {
         $tieneFaltantes = false;

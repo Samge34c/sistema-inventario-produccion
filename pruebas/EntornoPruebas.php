@@ -2,14 +2,6 @@
 
 declare(strict_types=1);
 
-/**
- * Base de datos aparte para las pruebas de integración.
- *
- * Usa los mismos datos de conexión del sistema, pero sobre una base llamada
- * «<bd_nombre>_pruebas», que se crea desde database/schema.sql. Nunca toca
- * la base real. Si MySQL no está disponible, las pruebas que la necesitan
- * se marcan como omitidas.
- */
 final class EntornoPruebas
 {
     private static ?PDO $conexion = null;
@@ -45,9 +37,6 @@ final class EntornoPruebas
     }
 
     /**
-     * DSN del servidor (sin base) y nombre de la base configurada, tanto si se
-     * usa INVENTARIO_DSN como si se usan host, puerto y nombre.
-     *
      * @param array<string, mixed> $configuracion
      * @return array{0: string, 1: string}
      */
@@ -67,20 +56,7 @@ final class EntornoPruebas
         return [rtrim((string) preg_replace('/dbname=[^;]*;?/', '', $dsn), ';'), $nombreBase];
     }
 
-    /**
-     * Deja la base vacía y carga un conjunto pequeño de datos con resultados
-     * conocidos:
-     *
-     *   Harina de trigo   10.000 g   mínimo 2.000
-     *   Levadura seca        100 g   mínimo 50
-     *   Huevos                12 u   mínimo 6
-     *
-     *   Pan (rinde 20 por tanda): 1.000 g de harina y 20 g de levadura
-     *     → harina alcanza para 200, levadura para 100 → máximo 100 (limita la levadura)
-     *   Galleta (rinde 10 por tanda): 500 g de harina y 2 huevos
-     *
-     * @return array{harina: int, levadura: int, huevos: int, pan: int, galleta: int}
-     */
+    /** @return array{harina: int, levadura: int, huevos: int, pan: int, galleta: int} */
     public static function cargarDatosBase(PDO $conexion): array
     {
         $conexion->exec('SET FOREIGN_KEY_CHECKS = 0');

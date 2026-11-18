@@ -2,9 +2,6 @@
 
 declare(strict_types=1);
 
-/**
- * Recetas, sus ingredientes y la capacidad de producción de cada una.
- */
 final class GestorRecetas
 {
     private readonly CalculadoraProduccion $calculadora;
@@ -18,12 +15,7 @@ final class GestorRecetas
         $this->pedidos = new GestorPedidos($conexion);
     }
 
-    /**
-     * Recetas con sus ingredientes y su capacidad: producción máxima con lo
-     * que hay, ingrediente limitante y proyección contando los pedidos por llegar.
-     *
-     * @return list<array<string, mixed>>
-     */
+    /** @return list<array<string, mixed>> */
     public function listarRecetas(bool $incluirArchivadas = false): array
     {
         $sql = 'SELECT * FROM recetas' . ($incluirArchivadas ? '' : ' WHERE activa = 1') . ' ORDER BY activa DESC, nombre';
@@ -42,11 +34,7 @@ final class GestorRecetas
         }, $recetas);
     }
 
-    /**
-     * Lista corta de recetas activas para selectores y la caja.
-     *
-     * @return list<array{id: int, nombre: string, cantidad_producir: int}>
-     */
+    /** @return list<array{id: int, nombre: string, cantidad_producir: int}> */
     public function listarOpcionesRecetas(): array
     {
         $filas = $this->conexion
@@ -60,11 +48,7 @@ final class GestorRecetas
         ], $filas);
     }
 
-    /**
-     * Receta con ingredientes y capacidad, o null si no existe.
-     *
-     * @return array<string, mixed>|null
-     */
+    /** @return array<string, mixed>|null */
     public function obtenerReceta(int $id): ?array
     {
         $consulta = $this->conexion->prepare('SELECT * FROM recetas WHERE id = :id');
@@ -82,8 +66,6 @@ final class GestorRecetas
     }
 
     /**
-     * Ingredientes de varias recetas, con los datos de su materia prima.
-     *
      * @param list<int> $recetaIds
      * @return array<int, list<array{materia_prima_id: int, nombre: string, unidad_medida: string, cantidad: float, cantidad_disponible: float}>>
      */
@@ -118,13 +100,7 @@ final class GestorRecetas
         return $agrupados;
     }
 
-    /**
-     * Crea o actualiza una receta con sus ingredientes.
-     *
-     * @param array<string, mixed> $datos Campos del formulario; los ingredientes
-     *                                    llegan en $datos['ingredientes'] como
-     *                                    lista de [materia_prima_id, cantidad].
-     */
+    /** @param array<string, mixed> $datos */
     public function guardarReceta(array $datos, ?int $id = null): int
     {
         $validador = new Validador($datos);
@@ -176,10 +152,6 @@ final class GestorRecetas
         });
     }
 
-    /**
-     * Archiva o reactiva una receta. Las archivadas no aparecen en la caja ni
-     * en la planificación, pero conservan su historial.
-     */
     public function cambiarEstadoReceta(int $id, bool $estaActiva): void
     {
         $this->conexion
@@ -187,9 +159,6 @@ final class GestorRecetas
             ->execute([':activa' => $estaActiva ? 1 : 0, ':id' => $id]);
     }
 
-    /**
-     * Elimina una receta sin producciones ni ventas. Si tiene historial, pide archivarla.
-     */
     public function eliminarReceta(int $id): void
     {
         $consulta = $this->conexion->prepare(
@@ -206,12 +175,7 @@ final class GestorRecetas
         $this->conexion->prepare('DELETE FROM recetas WHERE id = :id')->execute([':id' => $id]);
     }
 
-    /**
-     * Lee las filas de ingredientes del formulario. Ignora las filas vacías y
-     * avisa de cantidades no válidas o materias repetidas.
-     *
-     * @return array<int, float> materia_prima_id => cantidad por tanda
-     */
+    /** @return array<int, float> */
     private function leerIngredientes(mixed $filas, Validador $validador): array
     {
         $ingredientes = [];

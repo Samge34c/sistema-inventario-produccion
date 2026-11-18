@@ -6,8 +6,6 @@ require_once __DIR__ . '/../../includes/inicio.php';
 
 $conexion = obtenerConexion();
 
-// Registra lo producido y descuenta los insumos (solo por POST).
-
 if (!esPeticionPost()) {
     redirigir('modules/produccion/index.php');
 }

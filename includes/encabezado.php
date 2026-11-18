@@ -2,17 +2,8 @@
 
 declare(strict_types=1);
 
-/*
- * Parte superior de todas las páginas.
- *
- * Variables que debe definir la página antes de incluir este archivo:
- *   $tituloPagina   texto de la pestaña del navegador
- *   $seccionActiva  clave del menú que se marca como activa
- */
-
 /** @var string $tituloPagina */
 /** @var string $seccionActiva */
-
 $seccionesMenu = [
     'inicio' => ['Inicio', 'bi-house-door', 'index.php'],
     'inventario' => ['Inventario', 'bi-box-seam', 'modules/inventario/index.php'],
