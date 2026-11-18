@@ -308,35 +308,44 @@ function generarPestanas(array $pestanas, string $pestanaActiva): string
     return $html . '</ul></nav>';
 }
 
+function urlImagenProducto(string $nombre): string
+{
+    $clave = strtr(mb_strtolower(trim($nombre)), ['á' => 'a', 'é' => 'e', 'í' => 'i', 'ó' => 'o', 'ú' => 'u', 'ñ' => 'n']);
+    $clave = trim((string) preg_replace('/[^a-z0-9]+/', '-', $clave), '-');
+    $archivo = is_file(RAIZ_PROYECTO . '/assets/img/productos/' . $clave . '.svg') ? $clave : 'generico';
+
+    return url('assets/img/productos/' . $archivo . '.svg');
+}
+
 function generarInsigniaExistencia(string $estado): string
 {
     return match ($estado) {
-        'SIN_EXISTENCIAS' => '<span class="badge text-bg-danger">Sin existencias</span>',
-        'BAJO_MINIMO' => '<span class="badge text-bg-warning">Bajo el mínimo</span>',
-        default => '<span class="badge bg-success-subtle text-success-emphasis">Disponible</span>',
+        'SIN_EXISTENCIAS' => '<span class="estado estado-mal">Sin existencias</span>',
+        'BAJO_MINIMO' => '<span class="estado estado-aviso">Bajo el mínimo</span>',
+        default => '<span class="estado estado-bien">Disponible</span>',
     };
 }
 
 function generarInsigniaAbastecimiento(string $estado): string
 {
     return match ($estado) {
-        CalculadoraProduccion::FALTAN_MATERIALES => '<span class="badge text-bg-danger">Faltan materiales</span>',
-        CalculadoraProduccion::DEPENDE_DE_PEDIDOS => '<span class="badge text-bg-warning">Depende de pedidos</span>',
-        CalculadoraProduccion::SIN_INGREDIENTES => '<span class="badge text-bg-secondary">Receta sin ingredientes</span>',
-        default => '<span class="badge text-bg-success">Materiales completos</span>',
+        CalculadoraProduccion::FALTAN_MATERIALES => '<span class="estado estado-mal">Faltan materiales</span>',
+        CalculadoraProduccion::DEPENDE_DE_PEDIDOS => '<span class="estado estado-aviso">Depende de pedidos</span>',
+        CalculadoraProduccion::SIN_INGREDIENTES => '<span class="estado">Receta sin ingredientes</span>',
+        default => '<span class="estado estado-bien">Materiales completos</span>',
     };
 }
 
 function generarInsigniaProduccion(string $estado, bool $estaAtrasada = false): string
 {
     if ($estado === 'PLANEADA' && $estaAtrasada) {
-        return '<span class="badge bg-danger-subtle text-danger-emphasis">Atrasada</span>';
+        return '<span class="estado estado-mal">Atrasada</span>';
     }
 
     return match ($estado) {
-        'REALIZADA' => '<span class="badge bg-success-subtle text-success-emphasis">Realizada</span>',
-        'CANCELADA' => '<span class="badge bg-secondary-subtle text-secondary-emphasis">Cancelada</span>',
-        default => '<span class="badge bg-primary-subtle text-primary-emphasis">Planeada</span>',
+        'REALIZADA' => '<span class="estado estado-bien">Realizada</span>',
+        'CANCELADA' => '<span class="estado">Cancelada</span>',
+        default => '<span class="estado">Planeada</span>',
     };
 }
 

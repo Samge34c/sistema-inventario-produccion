@@ -23,7 +23,7 @@ require RAIZ_PROYECTO . '/includes/encabezado.php';
   </div>
   <div class="acciones">
     <a class="btn btn-primary" href="<?= escapar(url('modules/inventario/pedido.php')) ?>">
-      Registrar pedido
+      <i class="bi bi-truck" aria-hidden="true"></i> Registrar pedido
     </a>
   </div>
 </div>

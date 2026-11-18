@@ -122,7 +122,16 @@
     })
   }
 
+  function ocultarAvisosDeExito() {
+    document.querySelectorAll('.alert-success').forEach(function (aviso) {
+      setTimeout(function () {
+        bootstrap.Alert.getOrCreateInstance(aviso).close()
+      }, 6000)
+    })
+  }
+
   document.addEventListener('DOMContentLoaded', function () {
+    ocultarAvisosDeExito()
     iniciarConfirmaciones()
     evitarDobleEnvio()
     iniciarFiltrosDeTabla()

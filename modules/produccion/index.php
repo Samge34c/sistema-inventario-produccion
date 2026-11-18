@@ -48,10 +48,10 @@ require RAIZ_PROYECTO . '/includes/encabezado.php';
   </div>
   <div class="acciones">
     <a class="btn btn-outline-primary" href="<?= escapar(url('modules/produccion/materiales.php?fecha=' . $hoy)) ?>">
-      Materiales de hoy
+      <i class="bi bi-list-check" aria-hidden="true"></i> Materiales de hoy
     </a>
     <a class="btn btn-primary" href="<?= escapar(url('modules/produccion/plan.php')) ?>">
-      Planificar producción
+      <i class="bi bi-calendar-plus" aria-hidden="true"></i> Planificar producción
     </a>
   </div>
 </div>
@@ -82,65 +82,62 @@ require RAIZ_PROYECTO . '/includes/encabezado.php';
 <?php endif; ?>
 
 <?php foreach ($porFecha as $fecha => $planesDelDia) : ?>
-  <section class="tarjeta mb-3" aria-labelledby="dia-<?= escapar($fecha) ?>">
-    <div class="card-header d-flex flex-wrap justify-content-between align-items-center gap-2">
-      <h2 class="h6 mb-0" id="dia-<?= escapar($fecha) ?>">
-        <?php if ($fecha === 'atrasadas') : ?>
-          Planes atrasados
-          <span class="fw-normal text-body-secondary small">- eran para días anteriores y no se registraron</span>
-        <?php else : ?>
-          <?= escapar(describirDia($fecha)) ?>
-          <span class="fw-normal text-body-secondary"><?= escapar(formatearFecha($fecha)) ?></span>
-        <?php endif; ?>
-      </h2>
-      <?php if ($fecha !== 'atrasadas' && array_filter($planesDelDia, static fn (array $plan): bool => $plan['estado'] === 'PLANEADA') !== []) : ?>
-        <a class="small fw-normal" href="<?= escapar(url('modules/produccion/materiales.php?fecha=' . $fecha)) ?>">
-          Materiales del día
-        </a>
-      <?php endif; ?>
-    </div>
-    <ul class="list-group list-group-flush">
+  <h2 class="titulo-seccion" id="dia-<?= escapar($fecha) ?>">
+    <?php if ($fecha === 'atrasadas') : ?>
+      Planes atrasados <span class="fw-normal small">(eran para días anteriores y no se registraron)</span>
+    <?php else : ?>
+      <?= escapar(describirDia($fecha)) ?> <span class="fw-normal"><?= escapar(formatearFecha($fecha)) ?></span>
+    <?php endif; ?>
+    <?php if ($fecha !== 'atrasadas' && array_filter($planesDelDia, static fn (array $plan): bool => $plan['estado'] === 'PLANEADA') !== []) : ?>
+      <a class="small fw-normal" href="<?= escapar(url('modules/produccion/materiales.php?fecha=' . $fecha)) ?>">(materiales del día)</a>
+    <?php endif; ?>
+  </h2>
+  <table class="table table-bordered mb-4">
+    <thead>
+      <tr>
+        <th scope="col">Producto</th>
+        <th scope="col" class="numero">Unidades</th>
+        <th scope="col">Estado</th>
+        <th scope="col">Materiales</th>
+        <th scope="col">Acción</th>
+      </tr>
+    </thead>
+    <tbody>
       <?php foreach ($planesDelDia as $plan) : ?>
-        <li class="list-group-item py-3">
-          <div class="d-flex flex-wrap align-items-center gap-3">
-            <div class="flex-grow-1" style="min-width: 220px">
-              <a class="fw-semibold link-body-emphasis text-decoration-none" href="<?= escapar(url('modules/produccion/detalle.php?id=' . $plan['id'])) ?>">
-                <?= escapar($plan['receta']) ?>
-              </a>
-              <div class="small text-body-secondary">
-                <?php if ($plan['estado'] === 'REALIZADA') : ?>
-                  <?= escapar(pluralizar((int) $plan['cantidad_producida'], 'unidad producida', 'unidades producidas')) ?>
-                  <?= $plan['cantidad_producida'] !== $plan['cantidad_planeada'] ? '(de ' . escapar(formatearCantidad($plan['cantidad_planeada'])) . ' planeadas)' : '' ?>
-                <?php else : ?>
-                  <?= escapar(pluralizar($plan['cantidad_planeada'], 'unidad', 'unidades')) ?>
-                  <?= $fecha === 'atrasadas' ? '- era para ' . escapar(mb_strtolower(describirDia($plan['fecha_planeada']))) : '' ?>
-                <?php endif; ?>
-                <?= $plan['observacion'] ? '- ' . escapar($plan['observacion']) : '' ?>
-              </div>
-              <?php if ($plan['analisis'] !== null && $plan['analisis']['estado'] === CalculadoraProduccion::FALTAN_MATERIALES) : ?>
-                <div class="small texto-faltante mt-1">Faltan <?= escapar(describirFaltantes($plan['analisis'])) ?></div>
-              <?php elseif ($plan['analisis'] !== null && $plan['analisis']['estado'] === CalculadoraProduccion::DEPENDE_DE_PEDIDOS) : ?>
-                <div class="small texto-pedido mt-1">Si no llegan los pedidos faltarían <?= escapar(describirFaltantes($plan['analisis'], 'faltante_sin_pedidos')) ?></div>
-              <?php endif; ?>
-            </div>
-            <div class="d-flex flex-wrap gap-2 align-items-center">
-              <?= generarInsigniaProduccion($plan['estado'], $plan['esta_atrasada']) ?>
-              <?= $plan['analisis'] !== null ? generarInsigniaAbastecimiento($plan['analisis']['estado']) : '' ?>
-            </div>
-            <div class="ms-auto">
-              <?php if ($plan['estado'] === 'PLANEADA') : ?>
-                <a class="btn btn-sm btn-success" href="<?= escapar(url('modules/produccion/detalle.php?id=' . $plan['id'] . '#registrar')) ?>">
-                  Registrar
-                </a>
-              <?php else : ?>
-                <a class="btn btn-sm btn-outline-secondary" href="<?= escapar(url('modules/produccion/detalle.php?id=' . $plan['id'])) ?>">Ver</a>
-              <?php endif; ?>
-            </div>
-          </div>
-        </li>
+        <tr>
+          <td>
+            <a href="<?= escapar(url('modules/produccion/detalle.php?id=' . $plan['id'])) ?>"><?= escapar($plan['receta']) ?></a>
+            <?= $fecha === 'atrasadas' ? '<span class="small">(era para ' . escapar(mb_strtolower(describirDia($plan['fecha_planeada']))) . ')</span>' : '' ?>
+            <?php if ($plan['observacion']) : ?>
+              <div class="small text-body-secondary"><?= escapar($plan['observacion']) ?></div>
+            <?php endif; ?>
+            <?php if ($plan['analisis'] !== null && $plan['analisis']['estado'] === CalculadoraProduccion::FALTAN_MATERIALES) : ?>
+              <div class="small texto-faltante">Faltan <?= escapar(describirFaltantes($plan['analisis'])) ?></div>
+            <?php elseif ($plan['analisis'] !== null && $plan['analisis']['estado'] === CalculadoraProduccion::DEPENDE_DE_PEDIDOS) : ?>
+              <div class="small texto-pedido">Si no llegan los pedidos faltarían <?= escapar(describirFaltantes($plan['analisis'], 'faltante_sin_pedidos')) ?></div>
+            <?php endif; ?>
+          </td>
+          <td class="numero">
+            <?php if ($plan['estado'] === 'REALIZADA') : ?>
+              <?= escapar(formatearCantidad((int) $plan['cantidad_producida'])) ?>
+              <?= $plan['cantidad_producida'] !== $plan['cantidad_planeada'] ? '<div class="small">de ' . escapar(formatearCantidad($plan['cantidad_planeada'])) . ' planeadas</div>' : '' ?>
+            <?php else : ?>
+              <?= escapar(formatearCantidad($plan['cantidad_planeada'])) ?>
+            <?php endif; ?>
+          </td>
+          <td><?= generarInsigniaProduccion($plan['estado'], $plan['esta_atrasada']) ?></td>
+          <td><?= $plan['analisis'] !== null ? generarInsigniaAbastecimiento($plan['analisis']['estado']) : '-' ?></td>
+          <td class="text-nowrap">
+            <?php if ($plan['estado'] === 'PLANEADA') : ?>
+              <a class="btn btn-sm btn-primary" href="<?= escapar(url('modules/produccion/detalle.php?id=' . $plan['id'] . '#registrar')) ?>">Registrar</a>
+            <?php else : ?>
+              <a href="<?= escapar(url('modules/produccion/detalle.php?id=' . $plan['id'])) ?>">Ver</a>
+            <?php endif; ?>
+          </td>
+        </tr>
       <?php endforeach; ?>
-    </ul>
-  </section>
+    </tbody>
+  </table>
 <?php endforeach; ?>
 
 <?php require RAIZ_PROYECTO . '/includes/pie.php'; ?>

@@ -65,7 +65,7 @@ require RAIZ_PROYECTO . '/includes/encabezado.php';
     <h1>Reportes de ventas</h1>
   </div>
   <div class="acciones">
-    <button type="button" class="btn btn-outline-primary" data-imprimir>Imprimir</button>
+    <button type="button" class="btn btn-outline-primary" data-imprimir><i class="bi bi-printer" aria-hidden="true"></i> Imprimir</button>
   </div>
 </div>
 
@@ -93,42 +93,28 @@ require RAIZ_PROYECTO . '/includes/encabezado.php';
     <span class="fw-semibold ms-1"><?= escapar(ucfirst(formatearFechaLarga($fecha))) ?></span>
   </div>
 
-  <div class="row g-3 mb-4">
-    <div class="col-md-4">
-      <div class="tarjeta indicador">
-        <div>
-          <div class="indicador-valor"><?= escapar(formatearCantidad($reporte['resumen']['transacciones'])) ?></div>
-          <div class="indicador-etiqueta">ventas</div>
-          <?= generarTextoVariacion($variacionVentas, $periodoComparacion) ?>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-4">
-      <div class="tarjeta indicador">
-        <div>
-          <div class="indicador-valor"><?= escapar(formatearCantidad($reporte['resumen']['unidades'])) ?></div>
-          <div class="indicador-etiqueta">unidades vendidas</div>
-          <?= generarTextoVariacion($variacionUnidades, $periodoComparacion) ?>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-4">
-      <div class="tarjeta indicador">
-        <div>
-          <?php if ($reporte['hora_pico'] !== null) : ?>
-            <div class="indicador-valor"><?= escapar(formatearFranjaHoraria($reporte['hora_pico']['hora'])) ?></div>
-            <div class="indicador-etiqueta">
-              hora pico: <?= escapar(pluralizar($reporte['hora_pico']['transacciones'], 'venta', 'ventas')) ?>,
-              <?= escapar(pluralizar($reporte['hora_pico']['unidades'], 'unidad', 'unidades')) ?>
-            </div>
-          <?php else : ?>
-            <div class="indicador-valor">-</div>
-            <div class="indicador-etiqueta">sin ventas este día</div>
-          <?php endif; ?>
-        </div>
-      </div>
-    </div>
-  </div>
+  <table class="table table-bordered tabla-resumen mb-4">
+    <tr>
+      <th scope="row">Ventas</th>
+      <td><?= escapar(formatearCantidad($reporte['resumen']['transacciones'])) ?> <?= generarTextoVariacion($variacionVentas, $periodoComparacion) ?></td>
+    </tr>
+    <tr>
+      <th scope="row">Unidades vendidas</th>
+      <td><?= escapar(formatearCantidad($reporte['resumen']['unidades'])) ?> <?= generarTextoVariacion($variacionUnidades, $periodoComparacion) ?></td>
+    </tr>
+    <tr>
+      <th scope="row">Hora pico</th>
+      <td>
+        <?php if ($reporte['hora_pico'] !== null) : ?>
+          <?= escapar(formatearFranjaHoraria($reporte['hora_pico']['hora'])) ?>:
+          <?= escapar(pluralizar($reporte['hora_pico']['transacciones'], 'venta', 'ventas')) ?>,
+          <?= escapar(pluralizar($reporte['hora_pico']['unidades'], 'unidad', 'unidades')) ?>
+        <?php else : ?>
+          Sin ventas este día
+        <?php endif; ?>
+      </td>
+    </tr>
+  </table>
 
   <?php if ($reporte['resumen']['transacciones'] === 0) : ?>
     <div class="tarjeta estado-vacio">No hay ventas registradas este día.</div>
@@ -177,42 +163,28 @@ require RAIZ_PROYECTO . '/includes/encabezado.php';
       Semana del <?= escapar(formatearFecha($reporte['inicio'])) ?> al <?= escapar(formatearFecha($reporte['fin'], true)) ?>
     </span>
     <?php if ($reporte['fin'] >= $hoy) : ?>
-      <span class="badge bg-primary-subtle text-primary-emphasis">En curso</span>
+      <span class="estado">(en curso)</span>
     <?php endif; ?>
   </div>
 
-  <div class="row g-3 mb-4">
-    <div class="col-md-4">
-      <div class="tarjeta indicador">
-        <div>
-          <div class="indicador-valor"><?= escapar(formatearCantidad($reporte['resumen']['transacciones'])) ?></div>
-          <div class="indicador-etiqueta">ventas en la semana</div>
-          <?= generarTextoVariacion($variacionVentas, 'la semana anterior') ?>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-4">
-      <div class="tarjeta indicador">
-        <div>
-          <div class="indicador-valor"><?= escapar(formatearCantidad($reporte['resumen']['unidades'])) ?></div>
-          <div class="indicador-etiqueta">unidades vendidas</div>
-          <?= generarTextoVariacion($variacionUnidades, 'la semana anterior') ?>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-4">
-      <div class="tarjeta indicador">
-        <div>
-          <div class="indicador-valor"><?= $reporte['mejor_dia'] ? escapar(ucfirst(formatearFecha($reporte['mejor_dia']))) : '-' ?></div>
-          <div class="indicador-etiqueta">
-            <?= $reporte['mejor_dia']
-                  ? 'mejor día: ' . escapar(pluralizar($reporte['por_dia'][$reporte['mejor_dia']]['unidades'], 'unidad', 'unidades'))
-                  : 'sin ventas esta semana' ?>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+  <table class="table table-bordered tabla-resumen mb-4">
+    <tr>
+      <th scope="row">Ventas en la semana</th>
+      <td><?= escapar(formatearCantidad($reporte['resumen']['transacciones'])) ?> <?= generarTextoVariacion($variacionVentas, 'la semana anterior') ?></td>
+    </tr>
+    <tr>
+      <th scope="row">Unidades vendidas</th>
+      <td><?= escapar(formatearCantidad($reporte['resumen']['unidades'])) ?> <?= generarTextoVariacion($variacionUnidades, 'la semana anterior') ?></td>
+    </tr>
+    <tr>
+      <th scope="row">Mejor día</th>
+      <td>
+        <?= $reporte['mejor_dia']
+              ? escapar(ucfirst(formatearFecha($reporte['mejor_dia']))) . ': ' . escapar(pluralizar($reporte['por_dia'][$reporte['mejor_dia']]['unidades'], 'unidad', 'unidades'))
+              : 'Sin ventas esta semana' ?>
+      </td>
+    </tr>
+  </table>
 
   <?php if ($reporte['resumen']['transacciones'] === 0) : ?>
     <div class="tarjeta estado-vacio">No hay ventas registradas esta semana.</div>
@@ -253,31 +225,23 @@ require RAIZ_PROYECTO . '/includes/encabezado.php';
   <?php if ($horaPico === null) : ?>
     <div class="tarjeta estado-vacio">No hay ventas en este periodo.</div>
   <?php else : ?>
-    <div class="row g-3 mb-4">
-      <div class="col-md-6">
-        <div class="tarjeta indicador">
-          <div>
-            <div class="indicador-valor">
-              <?= escapar(formatearFranjaHoraria($horaPico['hora'])) ?> - <?= escapar(formatearFranjaHoraria(($horaPico['hora'] + 1) % 24)) ?>
-            </div>
-            <div class="indicador-etiqueta">
-              es la hora pico: <?= escapar(pluralizar($horaPico['transacciones'], 'venta', 'ventas')) ?> en el periodo,
-              unas <?= escapar(formatearCantidad($promedioPico, 1)) ?> por día
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-6">
-        <div class="tarjeta indicador">
-          <div>
-            <div class="indicador-valor"><?= escapar(formatearCantidad($reporte['resumen']['transacciones'] / $reporte['dias'], 1)) ?></div>
-            <div class="indicador-etiqueta">
-              ventas por día en promedio (<?= escapar(formatearCantidad($reporte['resumen']['unidades'] / $reporte['dias'], 1)) ?> unidades)
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+    <table class="table table-bordered tabla-resumen mb-4">
+      <tr>
+        <th scope="row">Hora pico</th>
+        <td>
+          <?= escapar(formatearFranjaHoraria($horaPico['hora'])) ?> - <?= escapar(formatearFranjaHoraria(($horaPico['hora'] + 1) % 24)) ?>:
+          <?= escapar(pluralizar($horaPico['transacciones'], 'venta', 'ventas')) ?> en el periodo,
+          unas <?= escapar(formatearCantidad($promedioPico, 1)) ?> por día
+        </td>
+      </tr>
+      <tr>
+        <th scope="row">Promedio por día</th>
+        <td>
+          <?= escapar(formatearCantidad($reporte['resumen']['transacciones'] / $reporte['dias'], 1)) ?> ventas
+          (<?= escapar(formatearCantidad($reporte['resumen']['unidades'] / $reporte['dias'], 1)) ?> unidades)
+        </td>
+      </tr>
+    </table>
 
     <div class="tarjeta p-3 mb-4">
       <h2 class="h6">Promedio de ventas por día en cada franja horaria</h2>
@@ -309,7 +273,7 @@ require RAIZ_PROYECTO . '/includes/encabezado.php';
                   $valor = $reporte['mapa'][$diaIso][$hora] ?? 0;
                     $intensidad = $maximoMapa > 0 ? $valor / $maximoMapa : 0;
                     ?>
-                  <td style="background-color: rgba(13, 110, 253, <?= round(0.06 + $intensidad * 0.88, 2) ?>); color: <?= $intensidad > 0.55 ? '#fff' : 'inherit' ?>"
+                  <td style="background-color: rgba(138, 90, 43, <?= round(0.06 + $intensidad * 0.88, 2) ?>); color: <?= $intensidad > 0.55 ? '#fff' : 'inherit' ?>"
                     title="<?= escapar(ucfirst(DIAS_SEMANA_LARGOS[$indiceDia]) . ', ' . formatearFranjaHoraria($hora) . ': ' . pluralizar($valor, 'venta', 'ventas')) ?>">
                     <?= $valor > 0 ? $valor : '' ?>
                   </td>
