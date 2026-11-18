@@ -40,19 +40,13 @@ $mensajes = obtenerMensajes();
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Iniciar sesión · <?= escapar($nombreNegocio) ?></title>
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%A5%96%3C/text%3E%3C/svg%3E">
+  <title>Iniciar sesión - <?= escapar($nombreNegocio) ?></title>
   <link rel="stylesheet" href="<?= escapar(url('assets/lib/bootstrap/bootstrap.min.css')) ?>">
-  <link rel="stylesheet" href="<?= escapar(url('assets/lib/bootstrap-icons/bootstrap-icons.min.css')) ?>">
   <link rel="stylesheet" href="<?= escapar(url('assets/css/estilos.css')) ?>">
 </head>
-<body class="pagina-acceso">
-  <main class="container py-5" style="max-width: 440px">
-    <div class="text-center mb-4">
-      <span class="marca-icono marca-icono-grande" aria-hidden="true"><i class="bi bi-basket2-fill"></i></span>
-      <h1 class="h3 mt-3 mb-1"><?= escapar($nombreNegocio) ?></h1>
-      <p class="text-body-secondary">Inventario, recetas y producción</p>
-    </div>
+<body class="bg-light">
+  <main class="container py-5" style="max-width: 420px">
+    <h1 class="h3 mb-4 text-center"><?= escapar($nombreNegocio) ?></h1>
 
     <?php foreach ($mensajes as $mensaje) : ?>
       <p class="alert alert-<?= $mensaje['tipo'] === 'error' ? 'danger' : 'info' ?>" role="alert"><?= escapar($mensaje['texto']) ?></p>
@@ -61,7 +55,7 @@ $mensajes = obtenerMensajes();
       <p class="alert alert-danger" role="alert"><?= escapar($error) ?></p>
     <?php endif; ?>
 
-    <form method="post" class="tarjeta p-4">
+    <form method="post" class="card card-body">
       <?= generarCampoCsrf() ?>
       <div class="mb-3">
         <label class="form-label" for="correo">Correo</label>
@@ -74,9 +68,6 @@ $mensajes = obtenerMensajes();
       </div>
       <button class="btn btn-primary w-100" type="submit">Entrar</button>
     </form>
-    <p class="texto-ayuda text-center mt-3">
-      Las cuentas se crean desde la terminal con <code>herramientas/crear-usuario.php</code> (ver README).
-    </p>
   </main>
 </body>
 </html>
