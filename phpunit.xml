@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Pruebas automáticas. Ejecutar desde la raíz del proyecto con:
+    vendor/bin/phpunit
+  Las pruebas de integración crean la base «sistema_inventario_pruebas»
+  con los datos de conexión de config/configuracion.php; nunca tocan la base real.
+-->
+<phpunit bootstrap="pruebas/bootstrap.php" colors="true" cacheResult="false">
+  <testsuites>
+    <testsuite name="Unidad">
+      <file>pruebas/CalculadoraProduccionTest.php</file>
+      <file>pruebas/FuncionesTest.php</file>
+    </testsuite>
+    <testsuite name="Integracion">
+      <file>pruebas/GestorInventarioTest.php</file>
+      <file>pruebas/GestorPedidosTest.php</file>
+      <file>pruebas/GestorRecetasTest.php</file>
+      <file>pruebas/GestorProduccionTest.php</file>
+      <file>pruebas/GestorVentasTest.php</file>
+    </testsuite>
+  </testsuites>
+</phpunit>

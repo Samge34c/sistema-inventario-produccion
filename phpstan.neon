@@ -1,0 +1,13 @@
+# Análisis estático (PHPStan). Ejecutar con: vendor/bin/phpstan analyse
+parameters:
+    level: 6
+    paths:
+        - clases
+        - config
+        - includes
+        - modules
+        - index.php
+        - iniciar-sesion.php
+        - cerrar-sesion.php
+    bootstrapFiles:
+        - includes/cargador.php

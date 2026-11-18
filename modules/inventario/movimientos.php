@@ -2,124 +2,154 @@
 
 declare(strict_types=1);
 
-require_once __DIR__ . '/../../config/acceso.php';
-exigirAcceso();
+require_once __DIR__ . '/../../includes/inicio.php';
 
+$conexion = obtenerConexion();
 
-require_once __DIR__ . '/../../config/database.php';
-require_once __DIR__ . '/movimientos-funciones.php';
+// Historial de entradas y salidas con filtros.
 
-$errores = $_SESSION['errores_movimiento'] ?? [];
-$datosAnteriores = $_SESSION['datos_movimiento'] ?? [];
-unset($_SESSION['errores_movimiento'], $_SESSION['datos_movimiento']);
-$materiasPrimas = [];
-$movimientos = [];
-$pendientes = [];
-try {
-    $materiasPrimas = $conexion->query('SELECT id, nombre, unidad_medida, cantidad_disponible FROM materias_primas ORDER BY nombre, id')->fetchAll();
-    $movimientos = $conexion->query('SELECT m.id, m.tipo, m.cantidad, m.fecha, m.observacion, p.nombre, p.unidad_medida
-        FROM movimientos_inventario m INNER JOIN materias_primas p ON p.id = m.materia_prima_id ORDER BY m.fecha DESC, m.id DESC')->fetchAll();
-    $pendientes = $conexion->query('SELECT m.id, m.cantidad, m.fecha_registro, m.observacion, p.nombre, p.unidad_medida
-        FROM materiales_pendientes m INNER JOIN materias_primas p ON p.id = m.materia_prima_id ORDER BY m.fecha_registro DESC, m.id DESC')->fetchAll();
-} catch (PDOException $error) {
-    error_log('No se pudieron consultar movimientos: ' . $error->getMessage());
-    $errores[] = 'No se pudo consultar. Revise la conexión y aplique la migración HU02 antes de usar Movimientos.';
-}
+$inventario = new GestorInventario($conexion);
+$filtros = [
+    'materia_prima_id' => leerParametroEntero('materia_prima_id'),
+    'tipo' => leerParametro('tipo'),
+    'desde' => leerParametroFecha('desde', ''),
+    'hasta' => leerParametroFecha('hasta', ''),
+];
+$pagina = max(1, leerParametroEntero('pagina', 1));
+$resultado = $inventario->listarMovimientos($filtros, $pagina);
+$totalPaginas = max(1, (int) ceil($resultado['total'] / GestorInventario::MOVIMIENTOS_POR_PAGINA));
+$materias = $inventario->listarOpcionesMateriasPrimas();
+$hayFiltros = $filtros['materia_prima_id'] > 0 || $filtros['tipo'] !== '' || $filtros['desde'] !== '' || $filtros['hasta'] !== '';
 
-function escaparMovimiento(mixed $valor): string
-{
-    return htmlspecialchars((string) $valor, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
-}
+$etiquetasOrigen = [
+    'MANUAL' => ['Manual', 'bi-person'],
+    'PEDIDO' => ['Pedido', 'bi-truck'],
+    'PRODUCCION' => ['Producción', 'bi-fire'],
+];
+
+$construirUrlPagina = static function (int $numero) use ($filtros): string {
+    return url('modules/inventario/movimientos.php?' . http_build_query(array_filter($filtros) + ['pagina' => $numero]));
+};
+
+$tituloPagina = 'Movimientos de inventario';
+$seccionActiva = 'inventario';
+require RAIZ_PROYECTO . '/includes/encabezado.php';
 ?>
-<!doctype html>
-<html lang="es">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Movimientos de inventario</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body class="bg-light">
-<main class="container py-4">
-    <div class="d-flex justify-content-between mb-4">
-        <h1 class="h3">Movimientos de inventario</h1>
-        <a class="btn btn-outline-secondary" href="index.php">Materias primas</a>
-    </div>
-    <p>Use la unidad de la materia prima. Los materiales pendientes se registran aparte y no aumentan las existencias actuales.</p>
-    <?php if (($_GET['estado'] ?? '') === 'registrado'): ?>
-        <div class="alert alert-success" role="alert">Movimiento registrado correctamente.</div>
-    <?php endif; ?>
-    <?php if ($errores !== []): ?>
-        <div class="alert alert-danger" role="alert"><ul class="mb-0">
-            <?php foreach ($errores as $error): ?>
-                <li><?= escaparMovimiento($error) ?></li>
-            <?php endforeach; ?>
-        </ul></div>
-    <?php endif; ?>
-    <section class="card mb-4"><div class="card-body">
-        <h2 class="h5">Registrar movimiento o material pendiente</h2>
-        <?php if ($materiasPrimas === []): ?>
-            <p>Registre una materia prima antes de registrar movimientos.</p>
-        <?php else: ?>
-            <form action="guardar-movimiento.php" method="post" class="row g-3">
-                <input type="hidden" name="token" value="<?= escaparMovimiento(obtenerTokenMovimiento()) ?>">
-                <div class="col-md-5">
-                    <label class="form-label" for="materia_prima_id">Materia prima, unidad y existencia actual</label>
-                    <select class="form-select" id="materia_prima_id" name="materia_prima_id" required>
-                        <option value="">Seleccione</option>
-                        <?php foreach ($materiasPrimas as $materiaPrima): ?>
-                            <option value="<?= (int) $materiaPrima['id'] ?>" <?= (($datosAnteriores['materia_prima_id'] ?? '') === (string) $materiaPrima['id']) ? 'selected' : '' ?>>
-                                <?= escaparMovimiento($materiaPrima['nombre'] . ' (' . $materiaPrima['unidad_medida'] . ') — ' . $materiaPrima['cantidad_disponible']) ?>
-                            </option>
-                        <?php endforeach; ?>
-                    </select>
-                </div>
-                <div class="col-md-3">
-                    <label class="form-label" for="tipo">Tipo</label>
-                    <select class="form-select" id="tipo" name="tipo" required>
-                        <?php foreach (obtenerTiposMovimiento() as $tipo): ?>
-                            <option value="<?= escaparMovimiento($tipo) ?>" <?= (($datosAnteriores['tipo'] ?? '') === $tipo) ? 'selected' : '' ?>><?= escaparMovimiento($tipo) ?></option>
-                        <?php endforeach; ?>
-                    </select>
-                </div>
-                <div class="col-md-4">
-                    <label class="form-label" for="cantidad">Cantidad en la unidad seleccionada</label>
-                    <input class="form-control" id="cantidad" name="cantidad" type="number" min="0.01" max="99999999.99" step="0.01" required value="<?= escaparMovimiento($datosAnteriores['cantidad'] ?? '') ?>">
-                </div>
-                <div class="col-12">
-                    <label class="form-label" for="observacion">Observación opcional</label>
-                    <input class="form-control" id="observacion" name="observacion" maxlength="255" value="<?= escaparMovimiento($datosAnteriores['observacion'] ?? '') ?>">
-                </div>
-                <div class="col-12"><button class="btn btn-primary" type="submit">Guardar movimiento</button></div>
-            </form>
-        <?php endif; ?>
-    </div></section>
-    <section class="card mb-4"><div class="card-body">
-        <h2 class="h5">Entradas y salidas realizadas</h2>
-        <div class="table-responsive"><table class="table table-striped">
-            <thead><tr><th>Fecha</th><th>Materia prima</th><th>Tipo</th><th>Cantidad</th><th>Observación</th></tr></thead>
-            <tbody>
-            <?php foreach ($movimientos as $movimiento): ?>
-                <tr><td><?= escaparMovimiento($movimiento['fecha']) ?></td><td><?= escaparMovimiento($movimiento['nombre']) ?></td><td><?= escaparMovimiento($movimiento['tipo']) ?></td><td><?= escaparMovimiento($movimiento['cantidad'] . ' ' . $movimiento['unidad_medida']) ?></td><td><?= escaparMovimiento($movimiento['observacion'] ?? '') ?></td></tr>
-            <?php endforeach; ?>
-            </tbody>
-        </table></div>
-        <?php if ($movimientos === []): ?><p>No hay entradas ni salidas registradas.</p><?php endif; ?>
-    </div></section>
-    <section class="card"><div class="card-body">
-        <h2 class="h5">Materiales pendientes de llegada</h2>
-        <p>Disponibilidad futura. Este listado no representa existencias actuales.</p>
-        <div class="table-responsive"><table class="table table-striped">
-            <thead><tr><th>Fecha de registro</th><th>Materia prima</th><th>Cantidad pendiente</th><th>Observación</th></tr></thead>
-            <tbody>
-            <?php foreach ($pendientes as $pendiente): ?>
-                <tr><td><?= escaparMovimiento($pendiente['fecha_registro']) ?></td><td><?= escaparMovimiento($pendiente['nombre']) ?></td><td><?= escaparMovimiento($pendiente['cantidad'] . ' ' . $pendiente['unidad_medida']) ?></td><td><?= escaparMovimiento($pendiente['observacion'] ?? '') ?></td></tr>
-            <?php endforeach; ?>
-            </tbody>
-        </table></div>
-        <?php if ($pendientes === []): ?><p>No hay materiales pendientes registrados.</p><?php endif; ?>
-    </div></section>
-</main>
-</body>
-</html>
+<div class="encabezado-pagina">
+  <div>
+    <h1>Inventario</h1>
+  </div>
+</div>
 
+<?= generarPestanas(require __DIR__ . '/pestanas.php', 'movimientos') ?>
+
+<form class="tarjeta p-3 mb-3" method="get">
+  <div class="row g-2 align-items-end">
+    <div class="col-md-4">
+      <label class="form-label small" for="materia_prima_id">Materia prima</label>
+      <select class="form-select form-select-sm" id="materia_prima_id" name="materia_prima_id">
+        <option value="">Todas</option>
+        <?php foreach ($materias as $opcion) : ?>
+          <option value="<?= $opcion['id'] ?>" <?= $filtros['materia_prima_id'] === $opcion['id'] ? 'selected' : '' ?>>
+            <?= escapar($opcion['nombre']) ?>
+          </option>
+        <?php endforeach; ?>
+      </select>
+    </div>
+    <div class="col-6 col-md-2">
+      <label class="form-label small" for="tipo">Tipo</label>
+      <select class="form-select form-select-sm" id="tipo" name="tipo">
+        <option value="">Todos</option>
+        <option value="ENTRADA" <?= $filtros['tipo'] === 'ENTRADA' ? 'selected' : '' ?>>Entradas</option>
+        <option value="SALIDA" <?= $filtros['tipo'] === 'SALIDA' ? 'selected' : '' ?>>Salidas</option>
+      </select>
+    </div>
+    <div class="col-6 col-md-2">
+      <label class="form-label small" for="desde">Desde</label>
+      <input type="date" class="form-control form-control-sm" id="desde" name="desde" value="<?= escapar($filtros['desde']) ?>">
+    </div>
+    <div class="col-6 col-md-2">
+      <label class="form-label small" for="hasta">Hasta</label>
+      <input type="date" class="form-control form-control-sm" id="hasta" name="hasta" value="<?= escapar($filtros['hasta']) ?>">
+    </div>
+    <div class="col-6 col-md-2 d-flex gap-2">
+      <button class="btn btn-sm btn-primary flex-grow-1" type="submit">Filtrar</button>
+      <?php if ($hayFiltros) : ?>
+        <a class="btn btn-sm btn-outline-secondary" href="<?= escapar(url('modules/inventario/movimientos.php')) ?>" title="Quitar filtros">
+          <span class="visually-hidden">Quitar filtros</span>
+        </a>
+      <?php endif; ?>
+    </div>
+  </div>
+</form>
+
+<div class="tarjeta">
+  <div class="table-responsive">
+    <table class="table table-hover align-middle">
+      <thead>
+        <tr>
+          <th scope="col">Fecha</th>
+          <th scope="col">Materia prima</th>
+          <th scope="col" class="text-end">Cantidad</th>
+          <th scope="col">Origen</th>
+          <th scope="col">Observación</th>
+        </tr>
+      </thead>
+      <tbody>
+        <?php foreach ($resultado['movimientos'] as $movimiento) : ?>
+          <?php
+          [$textoOrigen, $iconoOrigen] = $etiquetasOrigen[$movimiento['origen']] ?? $etiquetasOrigen['MANUAL'];
+            $esEntrada = $movimiento['tipo'] === 'ENTRADA';
+            ?>
+          <tr>
+            <td class="text-nowrap">
+              <div><?= escapar(describirDia(substr($movimiento['fecha'], 0, 10))) ?></div>
+              <div class="small text-body-secondary"><?= escapar(formatearHora($movimiento['fecha'])) ?></div>
+            </td>
+            <td><?= escapar($movimiento['materia_prima']) ?></td>
+            <td class="numero fw-semibold <?= $esEntrada ? 'text-success' : 'text-danger' ?>">
+              <?= $esEntrada ? '+' : '-' ?><?= escapar(formatearCantidadConUnidad($movimiento['cantidad'], $movimiento['unidad_medida'])) ?>
+            </td>
+            <td class="text-nowrap">
+              <?php if ($movimiento['origen'] === 'PRODUCCION' && $movimiento['referencia_id'] !== null) : ?>
+                <a href="<?= escapar(url('modules/produccion/detalle.php?id=' . $movimiento['referencia_id'])) ?>">
+                  <?= $textoOrigen ?> #<?= (int) $movimiento['referencia_id'] ?>
+                </a>
+              <?php else : ?>
+                <?= $textoOrigen ?>
+                <?= $movimiento['referencia_id'] !== null ? '#' . (int) $movimiento['referencia_id'] : '' ?>
+              <?php endif; ?>
+            </td>
+            <td class="text-body-secondary"><?= escapar($movimiento['observacion'] ?? '') ?></td>
+          </tr>
+        <?php endforeach; ?>
+        <?php if ($resultado['movimientos'] === []) : ?>
+          <tr>
+            <td colspan="5" class="estado-vacio">
+              
+              <?= $hayFiltros ? 'No hay movimientos con esos filtros.' : 'Todavía no hay movimientos registrados.' ?>
+            </td>
+          </tr>
+        <?php endif; ?>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<?php if ($totalPaginas > 1) : ?>
+  <nav class="d-flex justify-content-between align-items-center mt-3" aria-label="Páginas de movimientos">
+    <span class="small text-body-secondary">
+      <?= escapar(pluralizar($resultado['total'], 'movimiento', 'movimientos')) ?> - página <?= $pagina ?> de <?= $totalPaginas ?>
+    </span>
+    <ul class="pagination pagination-sm mb-0">
+      <li class="page-item <?= $pagina <= 1 ? 'disabled' : '' ?>">
+        <a class="page-link" href="<?= escapar($construirUrlPagina($pagina - 1)) ?>">Anterior</a>
+      </li>
+      <li class="page-item <?= $pagina >= $totalPaginas ? 'disabled' : '' ?>">
+        <a class="page-link" href="<?= escapar($construirUrlPagina($pagina + 1)) ?>">Siguiente</a>
+      </li>
+    </ul>
+  </nav>
+<?php endif; ?>
+
+<?php require RAIZ_PROYECTO . '/includes/pie.php'; ?>

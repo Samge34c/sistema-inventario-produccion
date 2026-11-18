@@ -1,0 +1,284 @@
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #f8f9fa;
+}
+
+main {
+  flex: 1;
+}
+
+.saltar-contenido {
+  position: absolute;
+  top: 0.5rem;
+  left: 0.5rem;
+  z-index: 2000;
+  padding: 0.5rem 1rem;
+  background: #fff;
+}
+
+.pie {
+  border-top: 1px solid var(--bs-border-color);
+}
+
+.encabezado-pagina {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.encabezado-pagina h1 {
+  font-size: 1.6rem;
+  margin-bottom: 0.25rem;
+}
+
+.encabezado-pagina p {
+  margin-bottom: 0;
+  color: var(--bs-secondary-color);
+}
+
+.encabezado-pagina .acciones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.tarjeta {
+  background-color: #fff;
+  border: 1px solid var(--bs-border-color);
+  border-radius: var(--bs-border-radius);
+}
+
+.tarjeta > .card-header {
+  font-weight: 600;
+}
+
+.tarjeta .table {
+  margin-bottom: 0;
+}
+
+.fila-alerta > td {
+  background-color: var(--bs-warning-bg-subtle);
+}
+
+.fila-peligro > td {
+  background-color: var(--bs-danger-bg-subtle);
+}
+
+.numero {
+  text-align: right;
+  white-space: nowrap;
+}
+
+.indicador {
+  display: block;
+  height: 100%;
+  padding: 1rem;
+  color: inherit;
+  text-decoration: none;
+}
+
+.indicador-valor {
+  font-size: 1.6rem;
+  font-weight: 600;
+}
+
+.indicador-etiqueta {
+  color: var(--bs-secondary-color);
+}
+
+.lista-pendientes .list-group-item {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.estado-vacio {
+  padding: 1.5rem 1rem;
+  color: var(--bs-secondary-color);
+}
+
+.barra-horizontal {
+  position: relative;
+  height: 0.5rem;
+  background-color: var(--bs-secondary-bg);
+}
+
+.barra-horizontal > span {
+  position: absolute;
+  inset: 0 auto 0 0;
+  background-color: var(--bs-primary);
+}
+
+.barra-horizontal.peligro > span {
+  background-color: var(--bs-danger);
+}
+
+.barra-horizontal.aviso > span {
+  background-color: var(--bs-warning);
+}
+
+.barra-horizontal.bien > span {
+  background-color: var(--bs-success);
+}
+
+.grafica-columnas {
+  display: flex;
+  align-items: flex-end;
+  gap: 0.375rem;
+  height: 220px;
+  padding-top: 1.5rem;
+}
+
+.grafica-columna {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  height: 100%;
+  min-width: 0;
+}
+
+.grafica-columna .valor,
+.grafica-columna .etiqueta {
+  font-size: 0.75rem;
+  color: var(--bs-secondary-color);
+}
+
+.grafica-columna .columna {
+  width: 100%;
+  max-width: 48px;
+  min-height: 2px;
+  background-color: #9ec5fe;
+}
+
+.grafica-columna.destacada .columna {
+  background-color: var(--bs-primary);
+}
+
+.mapa-calor {
+  font-size: 0.75rem;
+}
+
+.mapa-calor th {
+  font-weight: normal;
+  text-align: center;
+  padding: 0 0.25rem;
+}
+
+.mapa-calor td {
+  min-width: 2.25rem;
+  height: 2rem;
+  text-align: center;
+}
+
+.producto-caja {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 0.75rem;
+  height: 100%;
+  padding: 1rem;
+  border: 1px solid var(--bs-border-color);
+  border-radius: var(--bs-border-radius);
+  background-color: #fff;
+}
+
+.producto-caja.seleccionado {
+  border-color: var(--bs-primary);
+  outline: 2px solid var(--bs-primary);
+}
+
+.producto-caja .boton-agregar {
+  all: unset;
+  cursor: pointer;
+  display: block;
+  font-weight: 600;
+}
+
+.producto-caja .boton-agregar::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+}
+
+.producto-caja .control-cantidad {
+  position: relative;
+  z-index: 1;
+}
+
+.producto-caja .control-cantidad input {
+  text-align: center;
+}
+
+.insignia-cantidad {
+  position: absolute;
+  top: -0.6rem;
+  right: -0.6rem;
+  min-width: 1.75rem;
+  height: 1.75rem;
+  padding: 0 0.4rem;
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+  background-color: var(--bs-primary);
+  color: #fff;
+  font-size: 0.85rem;
+}
+
+.resumen-venta {
+  position: sticky;
+  top: 1rem;
+}
+
+.barra-venta-movil {
+  position: fixed;
+  inset: auto 0 0 0;
+  z-index: 1020;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.75rem 1rem;
+  background-color: #fff;
+  border-top: 1px solid var(--bs-border-color);
+}
+
+@media (max-width: 991.98px) {
+  body:has(.barra-venta-movil) {
+    padding-bottom: 4.5rem;
+  }
+}
+
+.texto-faltante {
+  color: var(--bs-danger);
+  font-weight: 600;
+}
+
+.texto-pedido {
+  color: var(--bs-warning-text-emphasis);
+}
+
+.fila-ingrediente + .fila-ingrediente {
+  margin-top: 0.75rem;
+}
+
+@media print {
+  .navbar,
+  .pie,
+  .acciones,
+  .pestanas-modulo,
+  .no-imprimir {
+    display: none !important;
+  }
+
+  body {
+    background: #fff;
+  }
+}
