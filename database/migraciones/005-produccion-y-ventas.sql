@@ -1,27 +1,6 @@
--- Migración 005: producción, ventas y llegada de materiales pendientes.
---
--- Aplicar UNA VEZ sobre una instalación que ya tenga las migraciones 002,
--- 003 y 004 (o que se haya creado con el schema.sql anterior a esta versión).
--- No usar después del schema.sql nuevo, que ya contiene esta estructura.
--- Conserve una copia de seguridad antes de aplicarla: MySQL confirma cada
--- cambio de estructura por separado. No se borran datos.
---
--- Qué cambia:
---   1. Nombres únicos en materias primas y recetas, y un ingrediente no se
---      repite dentro de la misma receta.
---   2. Las recetas se pueden archivar (columna activa).
---   3. Los movimientos guardan su origen: manual, material recibido o producción.
---   4. Los materiales pendientes tienen proveedor, fecha estimada de llegada y
---      estado (pendiente, recibido o cancelado). Los que ya existían quedan
---      pendientes, con la fecha de registro como fecha estimada.
---   5. Tablas nuevas: producciones, ventas y venta_detalles.
---
--- Si el paso 1 falla por nombres o ingredientes repetidos, corrija esos
--- registros y vuelva a ejecutar el script desde ese paso. Para encontrarlos:
---   SELECT nombre, COUNT(*) FROM materias_primas GROUP BY nombre HAVING COUNT(*) > 1;
---   SELECT nombre, COUNT(*) FROM recetas GROUP BY nombre HAVING COUNT(*) > 1;
---   SELECT receta_id, materia_prima_id, COUNT(*) FROM receta_ingredientes
---    GROUP BY receta_id, materia_prima_id HAVING COUNT(*) > 1;
+-- Migración 005: producción, ventas y llegada de pedidos.
+-- Aplicar una vez sobre una base con las migraciones 002 a 004. No borra datos.
+-- Si falla por nombres repetidos en materias primas o recetas, corríjalos y vuelva a ejecutar.
 
 -- 1 y 2. Nombres únicos y recetas archivables
 ALTER TABLE materias_primas
@@ -34,8 +13,6 @@ ALTER TABLE recetas
 ALTER TABLE receta_ingredientes
     ADD UNIQUE KEY uq_receta_ingrediente (receta_id, materia_prima_id);
 
--- MySQL y MariaDB eliminan solos el índice que habían creado para la llave
--- foránea de receta_id, porque el índice nuevo empieza por esa columna.
 
 -- 3. Origen de los movimientos
 ALTER TABLE movimientos_inventario

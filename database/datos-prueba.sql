@@ -1,14 +1,7 @@
--- Datos de prueba de una panadería, para revisar el sistema con información realista.
--- Importe primero database/schema.sql sobre una base vacía y luego este archivo.
--- No toca la tabla de usuarios: cree su cuenta con herramientas/crear-usuario.php.
--- Las fechas son relativas al día de la importación (CURDATE y NOW), así que
--- el panel, la planificación y los reportes siempre muestran datos recientes.
--- Generado con cifras coherentes: la existencia final de cada materia prima es
--- igual al inventario inicial más entradas menos salidas registradas.
+-- Datos de prueba. Importar después de schema.sql; las fechas son relativas al día de la importación.
 
 USE sistema_inventario;
 
--- Hora de Colombia, para que NOW() y CURDATE() coincidan con la aplicación.
 SET time_zone = '-05:00';
 SET NAMES utf8mb4;
 
