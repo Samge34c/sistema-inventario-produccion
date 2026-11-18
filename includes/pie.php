@@ -6,10 +6,9 @@ $scriptsPagina ??= [];
 ?>
   </main>
 
-  <footer class="pie py-4">
-    <div class="container-xl small text-body-secondary d-flex flex-wrap justify-content-between gap-2">
-      <span>Sistema de inventario, recetas y producción</span>
-      <span><?= escapar(ucfirst(formatearFechaLarga(obtenerFechaHoy()))) ?></span>
+  <footer class="pie">
+    <div class="container-xl">
+      Proyecto de Gerencia de Software, Universidad Santo Tomás - <?= escapar(ucfirst(formatearFechaLarga(obtenerFechaHoy()))) ?>
     </div>
   </footer>
 

@@ -53,7 +53,7 @@ require RAIZ_PROYECTO . '/includes/encabezado.php';
     <h1>
       <?= escapar($receta['nombre']) ?>
       <?php if (!$receta['esta_activa']) : ?>
-        <span class="badge bg-secondary-subtle text-secondary-emphasis fs-6 align-middle">Archivada</span>
+        <span class="estado fs-6">(archivada)</span>
       <?php endif; ?>
     </h1>
     <p>
@@ -79,34 +79,23 @@ require RAIZ_PROYECTO . '/includes/encabezado.php';
     <a href="<?= escapar(url('modules/recetas/receta.php?id=' . $receta['id'])) ?>">Agréguelos</a> para calcular cuánto se puede producir.
   </div>
 <?php else : ?>
-  <div class="row g-3 mb-4">
-    <div class="col-md-4">
-      <div class="tarjeta indicador">
-        <div>
-          <div class="indicador-valor"><?= escapar(formatearCantidad($unidadesMaximas)) ?></div>
-          <div class="indicador-etiqueta">unidades se pueden producir ahora</div>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-4">
-      <div class="tarjeta indicador">
-        <div>
-          <div class="fw-semibold fs-5"><?= escapar($capacidad['limitante']['nombre']) ?></div>
-          <div class="indicador-etiqueta">es el ingrediente que limita la producción</div>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-4">
-      <div class="tarjeta indicador">
-        <div>
-          <div class="indicador-valor"><?= escapar(formatearCantidad((int) $proyeccion['unidades_maximas'])) ?></div>
-          <div class="indicador-etiqueta">
-            unidades al llegar los pedidos<?= $hayPedidos ? '' : ' (no hay pedidos pendientes de estos ingredientes)' ?>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+  <table class="table table-bordered tabla-resumen mb-4">
+    <tr>
+      <th scope="row">Se pueden producir ahora</th>
+      <td><strong><?= escapar(pluralizar($unidadesMaximas, 'unidad', 'unidades')) ?></strong></td>
+    </tr>
+    <tr>
+      <th scope="row">Ingrediente que limita</th>
+      <td><?= escapar($capacidad['limitante']['nombre']) ?></td>
+    </tr>
+    <tr>
+      <th scope="row">Con los pedidos por llegar</th>
+      <td>
+        <?= escapar(pluralizar((int) $proyeccion['unidades_maximas'], 'unidad', 'unidades')) ?>
+        <?= $hayPedidos ? '' : '(no hay pedidos pendientes de estos ingredientes)' ?>
+      </td>
+    </tr>
+  </table>
 <?php endif; ?>
 
 <div class="row g-4">
@@ -133,7 +122,7 @@ require RAIZ_PROYECTO . '/includes/encabezado.php';
                 <td>
                   <?= escapar($ingrediente['nombre']) ?>
                   <?php if ($esLimitante) : ?>
-                    <span class="badge text-bg-warning ms-1">Limitante</span>
+                    <span class="estado estado-aviso">(limitante)</span>
                   <?php endif; ?>
                 </td>
                 <td class="numero"><?= escapar(formatearCantidadConUnidad($ingrediente['cantidad'], $ingrediente['unidad_medida'])) ?></td>
@@ -183,22 +172,24 @@ require RAIZ_PROYECTO . '/includes/encabezado.php';
       <?php if ($ultimasProducciones === []) : ?>
         <p class="estado-vacio mb-0">Todavía no se ha planificado esta receta.</p>
       <?php else : ?>
-        <ul class="list-group list-group-flush">
+        <table class="table table-sm mb-0">
           <?php foreach ($ultimasProducciones as $produccion) : ?>
-            <li class="list-group-item d-flex justify-content-between align-items-center gap-2">
-              <a href="<?= escapar(url('modules/produccion/detalle.php?id=' . $produccion['id'])) ?>">
-                <?= escapar(describirDia($produccion['fecha_planeada'])) ?>
-              </a>
-              <span class="text-body-secondary small">
-                <?= escapar(formatearCantidad((int) ($produccion['cantidad_producida'] ?? $produccion['cantidad_planeada']))) ?> unidades
-              </span>
-              <?= generarInsigniaProduccion(
-                  $produccion['estado'],
-                  $produccion['estado'] === 'PLANEADA' && $produccion['fecha_planeada'] < obtenerFechaHoy()
-              ) ?>
-            </li>
+            <tr>
+              <td>
+                <a href="<?= escapar(url('modules/produccion/detalle.php?id=' . $produccion['id'])) ?>">
+                  <?= escapar(describirDia($produccion['fecha_planeada'])) ?>
+                </a>
+              </td>
+              <td class="numero"><?= escapar(formatearCantidad((int) ($produccion['cantidad_producida'] ?? $produccion['cantidad_planeada']))) ?> unidades</td>
+              <td>
+                <?= generarInsigniaProduccion(
+                    $produccion['estado'],
+                    $produccion['estado'] === 'PLANEADA' && $produccion['fecha_planeada'] < obtenerFechaHoy()
+                ) ?>
+              </td>
+            </tr>
           <?php endforeach; ?>
-        </ul>
+        </table>
       <?php endif; ?>
     </div>
   </div>

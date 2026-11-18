@@ -29,30 +29,23 @@ $nombreNegocio = (string) obtenerConfiguracion('nombre_negocio');
 <body>
   <a class="visually-hidden-focusable saltar-contenido" href="#contenido">Saltar al contenido</a>
 
-  <nav class="navbar navbar-expand-lg bg-dark" data-bs-theme="dark" aria-label="Menú principal">
+  <header class="cabecera">
     <div class="container-xl">
-      <a class="navbar-brand" href="<?= escapar(url('index.php')) ?>"><?= escapar($nombreNegocio) ?></a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menuPrincipal"
-        aria-controls="menuPrincipal" aria-expanded="false" aria-label="Abrir el menú">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="menuPrincipal">
-        <ul class="navbar-nav ms-auto gap-lg-1">
-          <?php foreach ($seccionesMenu as $clave => [$texto, $ruta]) : ?>
-            <li class="nav-item">
-              <a class="nav-link<?= $clave === $seccionActiva ? ' active' : '' ?>"
-                <?= $clave === $seccionActiva ? 'aria-current="page"' : '' ?>
-                href="<?= escapar(url($ruta)) ?>">
-                <?= escapar($texto) ?>
-              </a>
-            </li>
-          <?php endforeach; ?>
-        </ul>
-      </div>
+      <a class="cabecera-nombre" href="<?= escapar(url('index.php')) ?>"><?= escapar($nombreNegocio) ?></a>
+      <span class="cabecera-lema">Inventario, recetas y producción</span>
+    </div>
+  </header>
+  <nav class="menu" aria-label="Menú principal">
+    <div class="container-xl">
+      <?php foreach ($seccionesMenu as $clave => [$texto, $ruta]) : ?>
+        <a class="<?= $clave === $seccionActiva ? 'activo' : '' ?>"
+          <?= $clave === $seccionActiva ? 'aria-current="page"' : '' ?>
+          href="<?= escapar(url($ruta)) ?>"><?= escapar($texto) ?></a>
+      <?php endforeach; ?>
     </div>
   </nav>
 
-  <main id="contenido" class="container-xl py-4">
+  <main id="contenido" class="container-xl py-3">
     <?php foreach (obtenerMensajes() as $mensaje) : ?>
       <div class="alert alert-<?= $clasesMensaje[$mensaje['tipo']] ?? 'info' ?> alert-dismissible fade show" role="alert">
         <?= escapar($mensaje['texto']) ?>

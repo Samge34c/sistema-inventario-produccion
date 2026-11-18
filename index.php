@@ -90,7 +90,7 @@ foreach ($materiasEnAlerta as $materia) {
 
 $ordenNivel = ['peligro' => 0, 'aviso' => 1, 'info' => 2];
 usort($pendientes, static fn (array $a, array $b): int => $ordenNivel[$a['nivel']] <=> $ordenNivel[$b['nivel']]);
-$coloresNivel = ['peligro' => 'text-danger', 'aviso' => 'text-warning-emphasis', 'info' => ''];
+$coloresNivel = ['peligro' => 'estado-mal', 'aviso' => 'estado-aviso', 'info' => ''];
 
 $tituloPagina = 'Inicio';
 $seccionActiva = 'inicio';
@@ -111,129 +111,100 @@ require RAIZ_PROYECTO . '/includes/encabezado.php';
   </div>
 </div>
 
-<div class="row g-3 mb-4">
-  <div class="col-sm-6 col-xl-3">
-    <a class="tarjeta indicador" href="<?= escapar(url('modules/ventas/reportes.php?tipo=diario')) ?>">
-      <div>
-        <div class="indicador-valor"><?= escapar(formatearCantidad($ventasHoy['unidades'])) ?></div>
-        <div class="indicador-etiqueta">unidades vendidas hoy en <?= escapar(pluralizar($ventasHoy['transacciones'], 'venta', 'ventas')) ?></div>
-        <?php if ($ventasSemanaPasada['unidades'] > 0) : ?>
-          <div class="small text-body-secondary">El <?= escapar(DIAS_SEMANA_LARGOS[(int) date('w')]) ?> pasado: <?= escapar(formatearCantidad($ventasSemanaPasada['unidades'])) ?> en todo el día</div>
-        <?php endif; ?>
-      </div>
-    </a>
-  </div>
-  <div class="col-sm-6 col-xl-3">
-    <a class="tarjeta indicador" href="<?= escapar(url('modules/produccion/index.php')) ?>">
-      <div>
-        <div class="indicador-valor"><?= count($planesDeHoy) ?></div>
-        <div class="indicador-etiqueta"><?= count($planesDeHoy) === 1 ? 'plan de producción pendiente hoy' : 'planes de producción pendientes hoy' ?></div>
-        <div class="small <?= $planesConFaltantes === [] ? 'text-success' : 'text-danger' ?>">
-          <?= $planesConFaltantes === [] ? 'Materiales completos' : escapar(pluralizar(count($planesConFaltantes), 'plan con faltantes', 'planes con faltantes')) ?>
-        </div>
-      </div>
-    </a>
-  </div>
-  <div class="col-sm-6 col-xl-3">
-    <a class="tarjeta indicador" href="<?= escapar(url('modules/inventario/index.php?estado=ALERTA')) ?>">
-      <div>
-        <div class="indicador-valor"><?= count($materiasEnAlerta) ?></div>
-        <div class="indicador-etiqueta"><?= count($materiasEnAlerta) === 1 ? 'materia prima por reabastecer' : 'materias primas por reabastecer' ?></div>
-      </div>
-    </a>
-  </div>
-  <div class="col-sm-6 col-xl-3">
-    <a class="tarjeta indicador" href="<?= escapar(url('modules/inventario/pedidos.php')) ?>">
-      <div>
-        <div class="indicador-valor"><?= count($pedidosPendientes) ?></div>
-        <div class="indicador-etiqueta"><?= count($pedidosPendientes) === 1 ? 'pedido por llegar' : 'pedidos por llegar' ?></div>
-        <?php if ($pedidosAtrasados !== []) : ?>
-          <div class="small text-danger"><?= escapar(pluralizar(count($pedidosAtrasados), 'atrasado', 'atrasados')) ?></div>
-        <?php endif; ?>
-      </div>
-    </a>
-  </div>
-</div>
-
 <div class="row g-4">
   <div class="col-lg-7">
-    <section class="tarjeta" aria-labelledby="tituloPendientes">
-      <div class="card-header d-flex justify-content-between align-items-center">
-        <h2 class="h6 mb-0" id="tituloPendientes">Para atender</h2>
-        <?php if ($pendientes !== []) : ?>
-          <span class="badge rounded-pill text-bg-secondary"><?= count($pendientes) ?></span>
-        <?php endif; ?>
-      </div>
-      <?php if ($pendientes === []) : ?>
-        <p class="estado-vacio mb-0">No hay pendientes.</p>
-      <?php else : ?>
-        <ul class="list-group list-group-flush lista-pendientes">
-          <?php foreach ($pendientes as $pendiente) : ?>
-            <li class="list-group-item">
-              <span class="flex-grow-1 <?= $coloresNivel[$pendiente['nivel']] ?>"><?= escapar($pendiente['texto']) ?></span>
-              <a class="btn btn-sm btn-outline-primary text-nowrap" href="<?= escapar(url($pendiente['accion'][1])) ?>"><?= escapar($pendiente['accion'][0]) ?></a>
-            </li>
-          <?php endforeach; ?>
-        </ul>
-      <?php endif; ?>
-    </section>
+    <h2 class="titulo-seccion">Para atender</h2>
+    <?php if ($pendientes === []) : ?>
+      <p>No hay pendientes.</p>
+    <?php else : ?>
+      <table class="table table-bordered">
+        <?php foreach ($pendientes as $pendiente) : ?>
+          <tr>
+            <td class="<?= $coloresNivel[$pendiente['nivel']] ?>"><?= escapar($pendiente['texto']) ?></td>
+            <td class="text-nowrap"><a href="<?= escapar(url($pendiente['accion'][1])) ?>"><?= escapar($pendiente['accion'][0]) ?></a></td>
+          </tr>
+        <?php endforeach; ?>
+      </table>
+    <?php endif; ?>
+
+    <h2 class="titulo-seccion">Se puede hornear ahora</h2>
+    <?php if ($recetasPosibles === []) : ?>
+      <p>Con la existencia actual no alcanza para ninguna receta.</p>
+    <?php else : ?>
+      <table class="table table-bordered">
+        <thead>
+          <tr><th scope="col">Receta</th><th scope="col" class="numero">Hasta</th><th scope="col">Limita</th></tr>
+        </thead>
+        <?php foreach (array_slice($recetasPosibles, 0, 5) as $receta) : ?>
+          <tr>
+            <td><a href="<?= escapar(url('modules/recetas/detalle.php?id=' . $receta['id'])) ?>"><?= escapar($receta['nombre']) ?></a></td>
+            <td class="numero"><?= escapar(pluralizar($receta['capacidad']['unidades_maximas'], 'unidad', 'unidades')) ?></td>
+            <td><?= escapar($receta['capacidad']['limitante']['nombre']) ?></td>
+          </tr>
+        <?php endforeach; ?>
+      </table>
+    <?php endif; ?>
   </div>
 
   <div class="col-lg-5">
-    <section class="tarjeta mb-4" aria-labelledby="tituloProduccion">
-      <div class="card-header d-flex justify-content-between align-items-center">
-        <h2 class="h6 mb-0" id="tituloProduccion">Producción de hoy y mañana</h2>
-        <a class="small fw-normal" href="<?= escapar(url('modules/produccion/index.php')) ?>">Ver agenda</a>
-      </div>
-      <?php if ($producciones === []) : ?>
-        <p class="estado-vacio mb-0">No hay producción planificada para hoy ni mañana.</p>
-      <?php else : ?>
-        <ul class="list-group list-group-flush">
-          <?php foreach ($producciones as $plan) : ?>
-            <li class="list-group-item d-flex justify-content-between align-items-center gap-2">
-              <div>
-                <a class="fw-semibold link-body-emphasis text-decoration-none" href="<?= escapar(url('modules/produccion/detalle.php?id=' . $plan['id'])) ?>">
-                  <?= escapar($plan['receta']) ?>
-                </a>
-                <div class="small text-body-secondary">
-                  <?= escapar(describirDia($plan['fecha_planeada'])) ?> -
-                  <?= escapar(pluralizar((int) ($plan['cantidad_producida'] ?? $plan['cantidad_planeada']), 'unidad', 'unidades')) ?>
-                </div>
-              </div>
-              <div class="text-end">
-                <?= $plan['analisis'] !== null
-                    ? generarInsigniaAbastecimiento($plan['analisis']['estado'])
-                    : generarInsigniaProduccion($plan['estado'], $plan['esta_atrasada']) ?>
-              </div>
-            </li>
-          <?php endforeach; ?>
-        </ul>
-      <?php endif; ?>
-    </section>
+    <h2 class="titulo-seccion">Resumen de hoy</h2>
+    <table class="table table-bordered tabla-resumen">
+      <tr>
+        <th scope="row">Ventas</th>
+        <td>
+          <a href="<?= escapar(url('modules/ventas/reportes.php?tipo=diario')) ?>"><?= escapar(pluralizar((int) $ventasHoy['unidades'], 'unidad', 'unidades')) ?></a>
+          en <?= escapar(pluralizar($ventasHoy['transacciones'], 'venta', 'ventas')) ?>
+          <?php if ($ventasSemanaPasada['unidades'] > 0) : ?>
+            <div class="small text-body-secondary">El <?= escapar(DIAS_SEMANA_LARGOS[(int) date('w')]) ?> pasado: <?= escapar(formatearCantidad($ventasSemanaPasada['unidades'])) ?> en todo el día</div>
+          <?php endif; ?>
+        </td>
+      </tr>
+      <tr>
+        <th scope="row">Producción pendiente hoy</th>
+        <td>
+          <a href="<?= escapar(url('modules/produccion/index.php')) ?>"><?= escapar(pluralizar(count($planesDeHoy), 'plan', 'planes')) ?></a>
+          <?php if ($planesConFaltantes !== []) : ?>
+            <span class="estado-mal">(<?= count($planesConFaltantes) ?> con faltantes)</span>
+          <?php endif; ?>
+        </td>
+      </tr>
+      <tr>
+        <th scope="row">Materias primas por reabastecer</th>
+        <td><a href="<?= escapar(url('modules/inventario/index.php?estado=ALERTA')) ?>"><?= count($materiasEnAlerta) ?></a></td>
+      </tr>
+      <tr>
+        <th scope="row">Pedidos por llegar</th>
+        <td>
+          <a href="<?= escapar(url('modules/inventario/pedidos.php')) ?>"><?= count($pedidosPendientes) ?></a>
+          <?php if ($pedidosAtrasados !== []) : ?>
+            <span class="estado-mal">(<?= escapar(pluralizar(count($pedidosAtrasados), 'atrasado', 'atrasados')) ?>)</span>
+          <?php endif; ?>
+        </td>
+      </tr>
+    </table>
 
-    <section class="tarjeta" aria-labelledby="tituloPosibles">
-      <div class="card-header d-flex justify-content-between align-items-center">
-        <h2 class="h6 mb-0" id="tituloPosibles">Se puede hornear ahora</h2>
-        <a class="small fw-normal" href="<?= escapar(url('modules/recetas/index.php')) ?>">Ver recetas</a>
-      </div>
-      <?php if ($recetasPosibles === []) : ?>
-        <p class="estado-vacio mb-0">Con la existencia actual no alcanza para ninguna receta.</p>
-      <?php else : ?>
-        <ul class="list-group list-group-flush">
-          <?php foreach (array_slice($recetasPosibles, 0, 5) as $receta) : ?>
-            <li class="list-group-item d-flex justify-content-between align-items-center gap-2">
-              <a class="link-body-emphasis text-decoration-none" href="<?= escapar(url('modules/recetas/detalle.php?id=' . $receta['id'])) ?>">
-                <?= escapar($receta['nombre']) ?>
-              </a>
-              <span class="small text-body-secondary text-end">
-                hasta <strong class="text-body"><?= escapar(formatearCantidad($receta['capacidad']['unidades_maximas'])) ?></strong>
-                - limita <?= escapar(mb_strtolower($receta['capacidad']['limitante']['nombre'])) ?>
-              </span>
-            </li>
-          <?php endforeach; ?>
-        </ul>
-      <?php endif; ?>
-    </section>
+    <h2 class="titulo-seccion">Producción de hoy y mañana <a class="small fw-normal" href="<?= escapar(url('modules/produccion/index.php')) ?>">(ver agenda)</a></h2>
+    <?php if ($producciones === []) : ?>
+      <p>No hay producción planificada para hoy ni mañana.</p>
+    <?php else : ?>
+      <table class="table table-bordered">
+        <thead>
+          <tr><th scope="col">Producto</th><th scope="col">Día</th><th scope="col" class="numero">Unidades</th><th scope="col">Materiales</th></tr>
+        </thead>
+        <?php foreach ($producciones as $plan) : ?>
+          <tr>
+            <td><a href="<?= escapar(url('modules/produccion/detalle.php?id=' . $plan['id'])) ?>"><?= escapar($plan['receta']) ?></a></td>
+            <td><?= escapar(describirDia($plan['fecha_planeada'])) ?></td>
+            <td class="numero"><?= escapar(formatearCantidad((int) ($plan['cantidad_producida'] ?? $plan['cantidad_planeada']))) ?></td>
+            <td>
+              <?= $plan['analisis'] !== null
+                  ? generarInsigniaAbastecimiento($plan['analisis']['estado'])
+                  : generarInsigniaProduccion($plan['estado'], $plan['esta_atrasada']) ?>
+            </td>
+          </tr>
+        <?php endforeach; ?>
+      </table>
+    <?php endif; ?>
   </div>
 </div>
 

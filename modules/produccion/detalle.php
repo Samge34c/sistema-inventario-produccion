@@ -154,15 +154,16 @@ require RAIZ_PROYECTO . '/includes/encabezado.php';
 <?php elseif ($produccion['estado'] === 'REALIZADA') : ?>
   <div class="row g-4">
     <div class="col-lg-4">
-      <div class="tarjeta indicador">
-        <div>
-          <div class="indicador-valor"><?= escapar(formatearCantidad((int) $produccion['cantidad_producida'])) ?></div>
-          <div class="indicador-etiqueta">
-            unidades producidas de <?= escapar(formatearCantidad($produccion['cantidad_planeada'])) ?> planeadas
-            - <?= escapar(formatearFechaHora((string) $produccion['fecha_realizacion'])) ?>
-          </div>
-        </div>
-      </div>
+      <table class="table table-bordered tabla-resumen">
+        <tr>
+          <th scope="row">Producidas</th>
+          <td><strong><?= escapar(formatearCantidad((int) $produccion['cantidad_producida'])) ?></strong> de <?= escapar(formatearCantidad($produccion['cantidad_planeada'])) ?> planeadas</td>
+        </tr>
+        <tr>
+          <th scope="row">Registrada</th>
+          <td><?= escapar(formatearFechaHora((string) $produccion['fecha_realizacion'])) ?></td>
+        </tr>
+      </table>
     </div>
     <div class="col-lg-8">
       <div class="tarjeta">
