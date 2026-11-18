@@ -1,5 +1,6 @@
 # Verificación automática de la Definition of Done en cada Pull Request:
-# sintaxis, formato, análisis estático y pruebas con una base MySQL 8 temporal.
+# sintaxis, formato, análisis estático y pruebas con una base MySQL 8 temporal,
+# con la cobertura de las pruebas medida con PCOV.
 
 name: Calidad
 
@@ -38,7 +39,7 @@ jobs:
           php-version: '8.3'
           extensions: pdo_mysql, mbstring
           tools: composer
-          coverage: none
+          coverage: pcov
 
       - uses: actions/setup-node@v4
         with:
@@ -62,5 +63,5 @@ jobs:
       - name: Análisis estático
         run: vendor/bin/phpstan analyse --memory-limit=512M --no-progress
 
-      - name: Pruebas automáticas
-        run: vendor/bin/phpunit --display-warnings --display-deprecations
+      - name: Pruebas automáticas y cobertura
+        run: vendor/bin/phpunit --display-warnings --display-deprecations --coverage-text --coverage-filter clases --coverage-filter includes

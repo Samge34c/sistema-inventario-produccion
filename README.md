@@ -120,10 +120,13 @@ composer install        # PHPUnit, PHPStan y PHP CS Fixer
 npm install             # Prettier
 
 vendor/bin/phpunit                                   # pruebas automáticas
+composer cobertura                                   # pruebas con cobertura (necesita PCOV o Xdebug)
 vendor/bin/php-cs-fixer fix --dry-run --diff         # formato PHP (PSR-12)
 npx prettier "**/*.{js,mjs,html,css}" --check        # formato JS y CSS
 vendor/bin/phpstan analyse --memory-limit=512M       # análisis estático (nivel 6)
 ```
+
+La cobertura dice qué líneas de `clases/` e `includes/` ejecutan las pruebas y cuáles no. Es el mismo trabajo que hace JaCoCo en Java. En GitHub Actions se mide en cada PR, con PCOV, y el resultado queda en el registro del paso "Pruebas automáticas y cobertura". Para medirla en su equipo hace falta PCOV o Xdebug (con `xdebug.mode=coverage`); XAMPP no los trae activos.
 
 Las pruebas de integración crean y usan una base aparte, `sistema_inventario_pruebas`, con los mismos datos de conexión. Nunca tocan la base real. Si MySQL no está encendido, esas pruebas se omiten y las de cálculo se ejecutan igual.
 

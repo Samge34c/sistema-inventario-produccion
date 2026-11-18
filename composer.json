@@ -16,6 +16,7 @@
     },
     "scripts": {
         "pruebas": "phpunit",
+        "cobertura": "phpunit --coverage-text --coverage-filter clases --coverage-filter includes",
         "formato:revisar": "php-cs-fixer fix --dry-run --diff",
         "formato:aplicar": "php-cs-fixer fix",
         "analisis": "phpstan analyse --memory-limit=512M"
