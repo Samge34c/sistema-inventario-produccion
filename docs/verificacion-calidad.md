@@ -10,6 +10,7 @@ Resultados de las herramientas de la Definition of Done ejecutadas el 17 de novi
 | Análisis estático | PHPStan 2.3 · nivel 6 | `vendor/bin/phpstan analyse --memory-limit=512M` | 0 errores |
 | Pruebas automáticas | PHPUnit 9.6 | `vendor/bin/phpunit` | 49 pruebas y 153 aserciones, todas aprobadas |
 | Cobertura de las pruebas (18/11) | PHPUnit 9.6 con PCOV 1.0.11; en GitHub Actions, PHPUnit 11.5 con PCOV 1.0.12 | `composer cobertura` | 80,5 % de las líneas de `clases/` (824 de 1.023); 68,3 % contando `includes/` (68,4 % en GitHub Actions) |
+| Seguridad sin inicio de sesión (18/11) | Solicitudes HTTP y conteo en la base (7 intentos) | Ver la sección «Seguridad sin inicio de sesión» | 2 registros indebidos: los de una persona sin cuenta |
 | Complejidad ciclomática | PHPMD 3.0 · regla CyclomaticComplexity | `phpmd analyze --ruleset=codesize clases includes config` | Máximo por método: 8, en `GestorVentas::leerLineas` |
 | Esquema reproducible (DoD 5) | MariaDB 10.11 | Importar `schema.sql`, o el `schema.sql` de develop (`30e837a`) más `migraciones/005-produccion-y-ventas.sql` | Ambos caminos dejan una estructura idéntica (columnas, llaves, índices y restricciones CHECK comparados); un material pendiente existente quedó como pendiente con su fecha de registro como llegada estimada |
 
@@ -39,6 +40,22 @@ Diez métodos públicos no los ejecuta ninguna prueba, pero todos los usa alguna
 
 Código muerto: de los métodos sin cobertura, uno no lo usaba ninguna parte del sistema, `GestorPedidos::listarPedidosAtrasados`, porque el panel de inicio filtra los pedidos atrasados por su cuenta. Se quitó el 18 de noviembre. Los métodos privados sin uso y el código inalcanzable los revisa PHPStan, que da 0 errores.
 
+## Seguridad sin inicio de sesión
+
+El 18 de noviembre de 2026 se quitó el inicio de sesión (CC-08). Sobre el commit `f9dd0da`, con PHP 8.3.6 y MariaDB 10.11.14, se repitieron los cinco intentos indebidos de la medición de ACQ-02 del 17 de noviembre y se agregaron dos de una persona sin cuenta que abre el formulario.
+
+| Intento | Registros nuevos |
+|---|---|
+| Alta sin código, sin haber abierto el sistema | 0 |
+| Alta sin código, después de abrir el sistema | 0 |
+| Alta con un código falso | 0 |
+| Movimiento sin código, sin haber abierto el sistema | 0 |
+| Movimiento sin código, después de abrir el sistema | 0 |
+| Alta de una persona sin cuenta, con el código del formulario | 1 |
+| Movimiento de una persona sin cuenta, con el código del formulario | 1 |
+
+El código de seguridad sigue rechazando los envíos falsificados, así que D-02 sigue corregido. Pero sin cuentas no hay forma de rechazar a una persona sin autorización: ACQ-02 da 2 registros indebidos en 7 intentos y queda fuera de su umbral, que es 0. D-01 vuelve a estar abierto.
+
 ## Observaciones abiertas
 
 PHPMD, con sus umbrales por defecto, reporta dos avisos de tamaño de clase que no afectan el funcionamiento:
@@ -51,3 +68,5 @@ Antes de este informe ya se había separado `GestorPedidos` de `GestorInventario
 ## Pruebas en navegador
 
 Los flujos principales se recorrieron en Chromium a 1280 px y 390 px de ancho, con una cuenta creada con `herramientas/crear-usuario.php`: redirección al inicio de sesión sin cuenta, contraseña equivocada, cierre de sesión, venta desde el celular, salida rechazada, entrada, recepción de pedido, registro de producción, producción rechazada, creación y validación de recetas, plan con fecha pasada, anulación con confirmación, eliminación bloqueada y búsqueda sin tildes. No hubo errores de JavaScript en la consola. Los casos manuales equivalentes están en [`casos-de-prueba.md`](casos-de-prueba.md).
+
+El 18 de noviembre, ya sin cuentas, se abrieron sobre los datos de prueba las 16 páginas y pestañas del sistema: todas respondieron sin avisos de PHP y sin pedir inicio de sesión.
