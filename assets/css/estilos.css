@@ -37,51 +37,101 @@ main {
 /* Cabecera y menú */
 
 .cabecera {
-  padding: 0.6rem 0;
-  background-color: #6b4226;
-  color: #fff;
+  background-color: #5a3720;
+  border-bottom: 4px solid #c8873e;
 }
 
-.cabecera-nombre {
-  margin-right: 0.75rem;
+.cabecera .container-xl {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  column-gap: 1.5rem;
+}
+
+.marca {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  margin-right: auto;
+  padding: 0.7rem 0;
   color: #fff;
-  font-size: 1.4rem;
-  font-weight: bold;
   text-decoration: none;
 }
 
-.cabecera-nombre:hover {
+.marca:hover {
   color: #fff;
 }
 
-.cabecera-lema {
-  color: #ead9bf;
-  font-size: 0.9rem;
+.marca-logo {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background-color: #f3e2c7;
+  border: 3px solid #c8873e;
+  color: #5a3720;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 1.4rem;
+  font-weight: bold;
+}
+
+.marca-nombre {
+  display: block;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 1.45rem;
+  font-weight: bold;
+  line-height: 1.1;
+}
+
+.marca-lema {
+  display: block;
+  color: #e3c9a3;
+  font-size: 0.8rem;
 }
 
 .menu {
-  background-color: #ead9bf;
-  border-bottom: 1px solid #c9b18f;
-}
-
-.menu .container-xl {
   display: flex;
   flex-wrap: wrap;
+  align-items: stretch;
 }
 
 .menu a {
-  padding: 0.5rem 0.9rem;
-  color: #4a2f1a;
+  display: flex;
+  align-items: center;
+  padding: 0.7rem 1rem;
+  color: #f3e2c7;
+  font-size: 0.82rem;
+  font-weight: bold;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
   text-decoration: none;
+  transition: background-color 0.15s ease;
 }
 
 .menu a:hover {
-  background-color: #f3e7d3;
+  background-color: #6e4527;
+  color: #fff;
 }
 
 .menu a.activo {
   background-color: #fbf7f0;
-  font-weight: bold;
+  color: #5a3720;
+}
+
+@media (max-width: 767.98px) {
+  .menu {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    width: calc(100% + 1.5rem);
+    margin: 0 -0.75rem;
+  }
+
+  .menu a {
+    justify-content: center;
+    padding: 0.6rem 0.25rem;
+    font-size: 0.75rem;
+  }
 }
 
 .pie {
@@ -396,7 +446,6 @@ h1 {
 
 @media print {
   .cabecera,
-  .menu,
   .pie,
   .acciones,
   .pestanas-modulo,
@@ -556,10 +605,6 @@ details[open] > :not(summary) {
 
 .producto-caja.seleccionado {
   animation: resaltar 0.5s ease;
-}
-
-.menu a {
-  transition: background-color 0.15s ease;
 }
 
 @media (prefers-reduced-motion: reduce) {

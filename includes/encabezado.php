@@ -31,19 +31,22 @@ $nombreNegocio = (string) obtenerConfiguracion('nombre_negocio');
 
   <header class="cabecera">
     <div class="container-xl">
-      <a class="cabecera-nombre" href="<?= escapar(url('index.php')) ?>"><?= escapar($nombreNegocio) ?></a>
-      <span class="cabecera-lema">Inventario, recetas y producción</span>
+      <a class="marca" href="<?= escapar(url('index.php')) ?>">
+        <span class="marca-logo" aria-hidden="true"><?= escapar(mb_substr($nombreNegocio, 0, 1)) ?></span>
+        <span>
+          <span class="marca-nombre"><?= escapar($nombreNegocio) ?></span>
+          <span class="marca-lema">Inventario, recetas y producción</span>
+        </span>
+      </a>
+      <nav class="menu" aria-label="Menú principal">
+        <?php foreach ($seccionesMenu as $clave => [$texto, $ruta]) : ?>
+          <a class="<?= $clave === $seccionActiva ? 'activo' : '' ?>"
+            <?= $clave === $seccionActiva ? 'aria-current="page"' : '' ?>
+            href="<?= escapar(url($ruta)) ?>"><?= escapar($texto) ?></a>
+        <?php endforeach; ?>
+      </nav>
     </div>
   </header>
-  <nav class="menu" aria-label="Menú principal">
-    <div class="container-xl">
-      <?php foreach ($seccionesMenu as $clave => [$texto, $ruta]) : ?>
-        <a class="<?= $clave === $seccionActiva ? 'activo' : '' ?>"
-          <?= $clave === $seccionActiva ? 'aria-current="page"' : '' ?>
-          href="<?= escapar(url($ruta)) ?>"><?= escapar($texto) ?></a>
-      <?php endforeach; ?>
-    </div>
-  </nav>
 
   <main id="contenido" class="container-xl py-3">
     <?php foreach (obtenerMensajes() as $mensaje) : ?>
