@@ -15,7 +15,3 @@ set_exception_handler(static function (Throwable $error): void {
         obtenerConfiguracion('mostrar_detalle_errores') ? (string) $error : null
     );
 });
-
-if (!defined('PAGINA_PUBLICA')) {
-    exigirAcceso();
-}
