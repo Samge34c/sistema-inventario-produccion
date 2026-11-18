@@ -60,7 +60,7 @@ require RAIZ_PROYECTO . '/includes/encabezado.php';
 
   <div class="tarjeta">
     <div class="table-responsive">
-      <table class="table table-bordered table-hover align-middle" id="tablaMaterias">
+      <table class="table table-hover align-middle" id="tablaMaterias">
         <thead>
           <tr>
             <th scope="col">Materia prima</th>
@@ -113,18 +113,21 @@ require RAIZ_PROYECTO . '/includes/encabezado.php';
               <td class="text-nowrap">
                 <a class="btn btn-sm btn-outline-primary" href="<?= escapar(url($urlMovimiento . '&tipo=ENTRADA')) ?>">Entrada</a>
                 <a class="btn btn-sm btn-outline-primary" href="<?= escapar(url($urlMovimiento . '&tipo=SALIDA')) ?>">Salida</a>
-                <div class="small mt-1">
-                  <a href="<?= escapar(url('modules/inventario/materia-prima.php?id=' . $materia['id'])) ?>">Editar</a> |
-                  <a href="<?= escapar(url('modules/inventario/movimientos.php?materia_prima_id=' . $materia['id'])) ?>">Movimientos</a> |
-                  <a href="<?= escapar(url('modules/inventario/pedido.php?materia_prima_id=' . $materia['id'])) ?>">Pedir</a> |
-                  <form class="d-inline" method="post" action="<?= escapar(url('modules/inventario/eliminar-materia-prima.php')) ?>"
-                    data-confirmar="¿Eliminar <?= escapar($materia['nombre']) ?>? Solo se puede si no tiene recetas ni historial."
-                    data-confirmar-boton="Eliminar">
-                    <?= generarCampoCsrf() ?>
-                    <input type="hidden" name="id" value="<?= $materia['id'] ?>">
-                    <button class="btn btn-link btn-sm p-0 align-baseline text-danger" type="submit">Eliminar</button>
-                  </form>
-                </div>
+                <details class="mas-acciones">
+                  <summary>Más</summary>
+                  <div>
+                    <a href="<?= escapar(url('modules/inventario/materia-prima.php?id=' . $materia['id'])) ?>">Editar</a>
+                    <a href="<?= escapar(url('modules/inventario/movimientos.php?materia_prima_id=' . $materia['id'])) ?>">Movimientos</a>
+                    <a href="<?= escapar(url('modules/inventario/pedido.php?materia_prima_id=' . $materia['id'])) ?>">Pedir</a>
+                    <form method="post" action="<?= escapar(url('modules/inventario/eliminar-materia-prima.php')) ?>"
+                      data-confirmar="¿Eliminar <?= escapar($materia['nombre']) ?>? Solo se puede si no tiene recetas ni historial."
+                      data-confirmar-boton="Eliminar">
+                      <?= generarCampoCsrf() ?>
+                      <input type="hidden" name="id" value="<?= $materia['id'] ?>">
+                      <button class="btn btn-link btn-sm p-0 text-danger" type="submit">Eliminar</button>
+                    </form>
+                  </div>
+                </details>
               </td>
             </tr>
           <?php endforeach; ?>

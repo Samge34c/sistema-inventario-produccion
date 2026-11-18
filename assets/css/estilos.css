@@ -408,3 +408,165 @@ h1 {
     background: #fff;
   }
 }
+
+/* Inicio y listas cortas */
+
+.lista-atender {
+  margin: 0 0 0.75rem;
+  padding: 0;
+  list-style: none;
+  background-color: #fff;
+  border: 1px solid var(--borde);
+}
+
+.lista-atender li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.7rem 0.9rem;
+  border-left: 4px solid transparent;
+  transition: background-color 0.2s ease;
+}
+
+.lista-atender li + li {
+  border-top: 1px solid #eee2cf;
+}
+
+.lista-atender li:hover {
+  background-color: #fdf8f0;
+}
+
+.lista-atender li > a {
+  white-space: nowrap;
+}
+
+.lista-atender .nivel-peligro {
+  border-left-color: #b3261e;
+}
+
+.lista-atender .nivel-aviso {
+  border-left-color: #d89a2b;
+}
+
+.lista-atender .nivel-info {
+  border-left-color: #c9b18f;
+}
+
+.aviso-tranquilo {
+  padding: 0.9rem;
+  background-color: #eef5e9;
+  border: 1px solid #cfe1c4;
+  color: #2f6b2f;
+}
+
+.ver-mas > summary,
+.mas-acciones > summary {
+  cursor: pointer;
+  color: #7a4e24;
+}
+
+.mas-acciones {
+  display: inline-block;
+  margin-left: 0.25rem;
+  font-size: 0.85rem;
+}
+
+.mas-acciones > div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 0.75rem;
+  margin-top: 0.35rem;
+}
+
+.cantidad-grande {
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+/* Movimiento: suave y corto */
+
+@keyframes aparecer {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes resaltar {
+  0% {
+    box-shadow: 0 0 0 0 rgba(138, 90, 43, 0.45);
+  }
+  100% {
+    box-shadow: 0 0 0 10px rgba(138, 90, 43, 0);
+  }
+}
+
+main > * {
+  animation: aparecer 0.35s ease both;
+}
+
+main > *:nth-child(2) {
+  animation-delay: 0.05s;
+}
+
+main > *:nth-child(3) {
+  animation-delay: 0.1s;
+}
+
+main > *:nth-child(n + 4) {
+  animation-delay: 0.15s;
+}
+
+.lista-atender li,
+.table > tbody > tr {
+  animation: aparecer 0.3s ease both;
+}
+
+.table > tbody > tr > td {
+  transition: background-color 0.15s ease;
+}
+
+.btn {
+  transition:
+    transform 0.15s ease,
+    background-color 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+}
+
+.btn:active {
+  transform: translateY(0);
+}
+
+details[open] > :not(summary) {
+  animation: aparecer 0.25s ease both;
+}
+
+.alert {
+  animation: aparecer 0.3s ease both;
+}
+
+.producto-caja.seleccionado {
+  animation: resaltar 0.5s ease;
+}
+
+.menu a {
+  transition: background-color 0.15s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}

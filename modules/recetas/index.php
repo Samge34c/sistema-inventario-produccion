@@ -70,16 +70,13 @@ require RAIZ_PROYECTO . '/includes/encabezado.php';
 
   <?php if ($recetas !== []) : ?>
     <div class="table-responsive">
-      <table class="table table-bordered table-hover">
+      <table class="table table-hover align-middle">
         <thead>
           <tr>
             <th scope="col">Receta</th>
-            <th scope="col" class="numero">Rinde por tanda</th>
-            <th scope="col" class="numero">Se pueden hacer ahora</th>
-            <th scope="col">Ingrediente que limita</th>
-            <th scope="col">Con los pedidos por llegar</th>
-            <th scope="col">Estado</th>
-            <th scope="col">Acciones</th>
+            <th scope="col" class="numero">Se pueden hacer</th>
+            <th scope="col">Qué lo limita</th>
+            <th scope="col"><span class="visually-hidden">Acción</span></th>
           </tr>
         </thead>
         <tbody>
@@ -91,41 +88,28 @@ require RAIZ_PROYECTO . '/includes/encabezado.php';
               $mejoraConPedidos = ($proyeccion['unidades_maximas'] ?? 0) > ($unidadesMaximas ?? 0);
               ?>
             <tr>
-              <td>
-                <a href="<?= escapar(url('modules/recetas/detalle.php?id=' . $receta['id'])) ?>"><?= escapar($receta['nombre']) ?></a>
-                <div class="small text-body-secondary"><?= escapar(pluralizar(count($receta['ingredientes']), 'ingrediente', 'ingredientes')) ?></div>
-              </td>
-              <td class="numero"><?= escapar(pluralizar($receta['cantidad_producir'], 'unidad', 'unidades')) ?></td>
+              <td><a class="fw-bold" href="<?= escapar(url('modules/recetas/detalle.php?id=' . $receta['id'])) ?>"><?= escapar($receta['nombre']) ?></a></td>
               <?php if ($unidadesMaximas !== null) : ?>
-                <td class="numero <?= $unidadesMaximas === 0 ? 'estado-mal' : '' ?>"><strong><?= escapar(formatearCantidad($unidadesMaximas)) ?></strong></td>
+                <td class="numero">
+                  <span class="cantidad-grande <?= $unidadesMaximas === 0 ? 'estado-mal' : '' ?>"><?= escapar(formatearCantidad($unidadesMaximas)) ?></span>
+                  <?php if ($mejoraConPedidos) : ?>
+                    <div class="small texto-pedido">Con los pedidos por llegar: <?= escapar(pluralizar((int) $proyeccion['unidades_maximas'], 'unidad', 'unidades')) ?></div>
+                  <?php endif; ?>
+                </td>
                 <td>
                   <?= escapar($capacidad['limitante']['nombre']) ?>
-                  (hay <?= escapar(formatearCantidadConUnidad($capacidad['limitante']['cantidad_disponible'], $capacidad['limitante']['unidad_medida'])) ?>)
+                  <span class="small text-body-secondary">(hay <?= escapar(formatearCantidadConUnidad($capacidad['limitante']['cantidad_disponible'], $capacidad['limitante']['unidad_medida'])) ?>)</span>
                 </td>
-                <td class="texto-pedido">
-                  <?= $mejoraConPedidos ? escapar(pluralizar((int) $proyeccion['unidades_maximas'], 'unidad', 'unidades')) : '-' ?>
+                <td class="text-end">
+                  <?php if ($receta['esta_activa']) : ?>
+                    <a class="btn btn-sm btn-outline-primary" href="<?= escapar(url('modules/produccion/plan.php?receta_id=' . $receta['id'])) ?>">Planificar</a>
+                  <?php endif; ?>
                 </td>
               <?php else : ?>
-                <td colspan="3" class="text-body-secondary">Agregue ingredientes para calcular la producción posible.</td>
+                <td colspan="3" class="text-body-secondary">
+                  Sin ingredientes. <a href="<?= escapar(url('modules/recetas/receta.php?id=' . $receta['id'])) ?>">Agregarlos</a>
+                </td>
               <?php endif; ?>
-              <td>
-                <?php if (!$receta['esta_activa']) : ?>
-                  <span class="estado">Archivada</span>
-                <?php elseif ($unidadesMaximas === null) : ?>
-                  <span class="estado">Sin ingredientes</span>
-                <?php elseif ($receta['puede_producirse']) : ?>
-                  <span class="estado estado-bien">Se puede producir</span>
-                <?php else : ?>
-                  <span class="estado estado-mal">No alcanza</span>
-                <?php endif; ?>
-              </td>
-              <td class="text-nowrap">
-                <a href="<?= escapar(url('modules/recetas/detalle.php?id=' . $receta['id'])) ?>">Ver</a>
-                <?php if ($receta['esta_activa'] && $unidadesMaximas !== null) : ?>
-                  | <a href="<?= escapar(url('modules/produccion/plan.php?receta_id=' . $receta['id'])) ?>">Planificar</a>
-                <?php endif; ?>
-                | <a href="<?= escapar(url('modules/recetas/receta.php?id=' . $receta['id'])) ?>">Editar</a>
-              </td>
             </tr>
           <?php endforeach; ?>
         </tbody>
