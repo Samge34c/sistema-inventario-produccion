@@ -35,15 +35,6 @@ final class GestorPedidos
         }, $consulta->fetchAll());
     }
 
-    /** @return list<array<string, mixed>> */
-    public function listarPedidosAtrasados(): array
-    {
-        return array_values(array_filter(
-            $this->listarPedidos(),
-            static fn (array $pedido): bool => $pedido['esta_atrasado']
-        ));
-    }
-
     /** @return array<string, mixed>|null */
     public function obtenerPedido(int $id): ?array
     {
