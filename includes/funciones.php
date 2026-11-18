@@ -308,6 +308,15 @@ function generarPestanas(array $pestanas, string $pestanaActiva): string
     return $html . '</ul></nav>';
 }
 
+function urlImagenProducto(string $nombre): string
+{
+    $clave = strtr(mb_strtolower(trim($nombre)), ['á' => 'a', 'é' => 'e', 'í' => 'i', 'ó' => 'o', 'ú' => 'u', 'ñ' => 'n']);
+    $clave = trim((string) preg_replace('/[^a-z0-9]+/', '-', $clave), '-');
+    $archivo = is_file(RAIZ_PROYECTO . '/assets/img/productos/' . $clave . '.svg') ? $clave : 'generico';
+
+    return url('assets/img/productos/' . $archivo . '.svg');
+}
+
 function generarInsigniaExistencia(string $estado): string
 {
     return match ($estado) {

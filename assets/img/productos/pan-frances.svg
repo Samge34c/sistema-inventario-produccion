@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Pan francés">
+  <ellipse cx="32" cy="54" rx="24" ry="4" fill="#e9dcc6"/>
+  <g transform="rotate(-28 32 32)">
+    <rect x="4" y="22" width="56" height="20" rx="10" fill="#c98a43"/>
+    <rect x="6" y="23" width="52" height="9" rx="4.5" fill="#dba25a"/>
+    <path d="M15 27l6 9M26 26l6 10M37 26l6 10M48 27l5 8" stroke="#f3d9a8" stroke-width="2.6" stroke-linecap="round"/>
+  </g>
+</svg>

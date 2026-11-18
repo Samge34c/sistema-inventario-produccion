@@ -50,7 +50,8 @@ require RAIZ_PROYECTO . '/includes/encabezado.php';
 
 <div class="encabezado-pagina">
   <div>
-    <h1>
+    <h1 class="titulo-con-imagen">
+      <img src="<?= escapar(urlImagenProducto($receta['nombre'])) ?>" alt="" width="56" height="56">
       <?= escapar($receta['nombre']) ?>
       <?php if (!$receta['esta_activa']) : ?>
         <span class="estado fs-6">(archivada)</span>
@@ -67,7 +68,7 @@ require RAIZ_PROYECTO . '/includes/encabezado.php';
     </a>
     <?php if ($receta['esta_activa'] && $unidadesMaximas !== null) : ?>
       <a class="btn btn-primary" href="<?= escapar(url('modules/produccion/plan.php?receta_id=' . $receta['id'])) ?>">
-        Planificar producción
+        <i class="bi bi-calendar-plus" aria-hidden="true"></i> Planificar producción
       </a>
     <?php endif; ?>
   </div>

@@ -31,7 +31,7 @@ require RAIZ_PROYECTO . '/includes/encabezado.php';
   </div>
   <div class="acciones">
     <a class="btn btn-primary" href="<?= escapar(url('modules/recetas/receta.php')) ?>">
-      Nueva receta
+      <i class="bi bi-plus-lg" aria-hidden="true"></i> Nueva receta
     </a>
   </div>
 </div>
@@ -88,7 +88,12 @@ require RAIZ_PROYECTO . '/includes/encabezado.php';
               $mejoraConPedidos = ($proyeccion['unidades_maximas'] ?? 0) > ($unidadesMaximas ?? 0);
               ?>
             <tr>
-              <td><a class="fw-bold" href="<?= escapar(url('modules/recetas/detalle.php?id=' . $receta['id'])) ?>"><?= escapar($receta['nombre']) ?></a></td>
+              <td>
+                <a class="receta-nombre" href="<?= escapar(url('modules/recetas/detalle.php?id=' . $receta['id'])) ?>">
+                  <img class="miniatura" src="<?= escapar(urlImagenProducto($receta['nombre'])) ?>" alt="" width="40" height="40">
+                  <?= escapar($receta['nombre']) ?>
+                </a>
+              </td>
               <?php if ($unidadesMaximas !== null) : ?>
                 <td class="numero">
                   <span class="cantidad-grande <?= $unidadesMaximas === 0 ? 'estado-mal' : '' ?>"><?= escapar(formatearCantidad($unidadesMaximas)) ?></span>
@@ -102,7 +107,7 @@ require RAIZ_PROYECTO . '/includes/encabezado.php';
                 </td>
                 <td class="text-end">
                   <?php if ($receta['esta_activa']) : ?>
-                    <a class="btn btn-sm btn-outline-primary" href="<?= escapar(url('modules/produccion/plan.php?receta_id=' . $receta['id'])) ?>">Planificar</a>
+                    <a class="btn btn-sm btn-outline-primary" href="<?= escapar(url('modules/produccion/plan.php?receta_id=' . $receta['id'])) ?>"><i class="bi bi-calendar-plus" aria-hidden="true"></i> Planificar</a>
                   <?php endif; ?>
                 </td>
               <?php else : ?>

@@ -25,10 +25,10 @@ require RAIZ_PROYECTO . '/includes/encabezado.php';
   </div>
   <div class="acciones">
     <a class="btn btn-outline-primary" href="<?= escapar(url('modules/inventario/pedido.php')) ?>">
-      Registrar pedido
+      <i class="bi bi-truck" aria-hidden="true"></i> Registrar pedido
     </a>
     <a class="btn btn-primary" href="<?= escapar(url('modules/inventario/materia-prima.php')) ?>">
-      Nueva materia prima
+      <i class="bi bi-plus-lg" aria-hidden="true"></i> Nueva materia prima
     </a>
   </div>
 </div>
@@ -111,8 +111,8 @@ require RAIZ_PROYECTO . '/includes/encabezado.php';
               </td>
               <td><?= generarInsigniaExistencia($materia['estado']) ?></td>
               <td class="text-nowrap">
-                <a class="btn btn-sm btn-outline-primary" href="<?= escapar(url($urlMovimiento . '&tipo=ENTRADA')) ?>">Entrada</a>
-                <a class="btn btn-sm btn-outline-primary" href="<?= escapar(url($urlMovimiento . '&tipo=SALIDA')) ?>">Salida</a>
+                <a class="btn btn-sm btn-outline-primary" href="<?= escapar(url($urlMovimiento . '&tipo=ENTRADA')) ?>"><i class="bi bi-box-arrow-in-down" aria-hidden="true"></i> Entrada</a>
+                <a class="btn btn-sm btn-outline-primary" href="<?= escapar(url($urlMovimiento . '&tipo=SALIDA')) ?>"><i class="bi bi-box-arrow-up" aria-hidden="true"></i> Salida</a>
                 <details class="mas-acciones">
                   <summary>Más</summary>
                   <div>

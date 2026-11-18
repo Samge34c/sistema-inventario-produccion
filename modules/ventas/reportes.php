@@ -65,7 +65,7 @@ require RAIZ_PROYECTO . '/includes/encabezado.php';
     <h1>Reportes de ventas</h1>
   </div>
   <div class="acciones">
-    <button type="button" class="btn btn-outline-primary" data-imprimir>Imprimir</button>
+    <button type="button" class="btn btn-outline-primary" data-imprimir><i class="bi bi-printer" aria-hidden="true"></i> Imprimir</button>
   </div>
 </div>
 

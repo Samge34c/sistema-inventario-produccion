@@ -126,7 +126,7 @@ require RAIZ_PROYECTO . '/includes/encabezado.php';
 
       <div class="d-flex gap-2 justify-content-end mt-4">
         <a class="btn btn-outline-secondary" href="<?= escapar(url('modules/inventario/pedidos.php')) ?>">Cancelar</a>
-        <button class="btn btn-primary" type="submit">Registrar pedido</button>
+        <button class="btn btn-primary" type="submit"><i class="bi bi-truck" aria-hidden="true"></i> Registrar pedido</button>
       </div>
     </form>
   </div>

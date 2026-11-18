@@ -65,15 +65,11 @@ main {
 .marca-logo {
   display: grid;
   place-items: center;
-  width: 42px;
-  height: 42px;
+  width: 46px;
+  height: 46px;
   border-radius: 50%;
   background-color: #f3e2c7;
   border: 3px solid #c8873e;
-  color: #5a3720;
-  font-family: Georgia, 'Times New Roman', serif;
-  font-size: 1.4rem;
-  font-weight: bold;
 }
 
 .marca-nombre {
@@ -99,6 +95,7 @@ main {
 .menu a {
   display: flex;
   align-items: center;
+  gap: 0.4rem;
   padding: 0.7rem 1rem;
   color: #f3e2c7;
   font-size: 0.82rem;
@@ -613,5 +610,74 @@ details[open] > :not(summary) {
   *::after {
     animation: none !important;
     transition: none !important;
+  }
+}
+
+/* Imágenes e íconos */
+
+.bi {
+  line-height: 1;
+}
+
+.menu .bi {
+  font-size: 1rem;
+}
+
+.miniatura {
+  flex: none;
+  width: 40px;
+  height: 40px;
+  padding: 2px;
+  background-color: #fbf3e6;
+  border: 1px solid #ead9bf;
+  border-radius: 50%;
+}
+
+.receta-nombre {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-weight: bold;
+}
+
+.titulo-con-imagen {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.icono-nivel {
+  flex: none;
+  font-size: 1.05rem;
+}
+
+.nivel-peligro .icono-nivel {
+  color: #b3261e;
+}
+
+.nivel-aviso .icono-nivel {
+  color: #d08a1f;
+}
+
+.nivel-info .icono-nivel {
+  color: #a38866;
+}
+
+.producto-caja .imagen-producto {
+  display: block;
+  width: 64px;
+  height: 64px;
+  margin-bottom: 0.4rem;
+  transition: transform 0.2s ease;
+}
+
+.producto-caja:hover .imagen-producto {
+  transform: rotate(-6deg) scale(1.06);
+}
+
+@media (max-width: 767.98px) {
+  .menu a {
+    flex-direction: column;
+    gap: 0.15rem;
   }
 }

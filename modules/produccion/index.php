@@ -48,10 +48,10 @@ require RAIZ_PROYECTO . '/includes/encabezado.php';
   </div>
   <div class="acciones">
     <a class="btn btn-outline-primary" href="<?= escapar(url('modules/produccion/materiales.php?fecha=' . $hoy)) ?>">
-      Materiales de hoy
+      <i class="bi bi-list-check" aria-hidden="true"></i> Materiales de hoy
     </a>
     <a class="btn btn-primary" href="<?= escapar(url('modules/produccion/plan.php')) ?>">
-      Planificar producción
+      <i class="bi bi-calendar-plus" aria-hidden="true"></i> Planificar producción
     </a>
   </div>
 </div>

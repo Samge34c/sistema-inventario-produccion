@@ -13,6 +13,14 @@ $seccionesMenu = [
     'reportes' => ['Reportes', 'modules/ventas/reportes.php'],
 ];
 
+$iconosMenu = [
+    'inicio' => 'bi-house-door',
+    'inventario' => 'bi-box-seam',
+    'recetas' => 'bi-journal-text',
+    'produccion' => 'bi-fire',
+    'ventas' => 'bi-cart3',
+    'reportes' => 'bi-bar-chart-line',
+];
 $clasesMensaje = ['exito' => 'success', 'error' => 'danger', 'aviso' => 'warning', 'info' => 'info'];
 $nombreNegocio = (string) obtenerConfiguracion('nombre_negocio');
 ?>
@@ -32,7 +40,7 @@ $nombreNegocio = (string) obtenerConfiguracion('nombre_negocio');
   <header class="cabecera">
     <div class="container-xl">
       <a class="marca" href="<?= escapar(url('index.php')) ?>">
-        <span class="marca-logo" aria-hidden="true"><?= escapar(mb_substr($nombreNegocio, 0, 1)) ?></span>
+        <span class="marca-logo"><img src="<?= escapar(url('assets/img/logo.svg')) ?>" alt="" width="34" height="34"></span>
         <span>
           <span class="marca-nombre"><?= escapar($nombreNegocio) ?></span>
           <span class="marca-lema">Inventario, recetas y producción</span>
@@ -42,7 +50,7 @@ $nombreNegocio = (string) obtenerConfiguracion('nombre_negocio');
         <?php foreach ($seccionesMenu as $clave => [$texto, $ruta]) : ?>
           <a class="<?= $clave === $seccionActiva ? 'activo' : '' ?>"
             <?= $clave === $seccionActiva ? 'aria-current="page"' : '' ?>
-            href="<?= escapar(url($ruta)) ?>"><?= escapar($texto) ?></a>
+            href="<?= escapar(url($ruta)) ?>"><i class="bi <?= $iconosMenu[$clave] ?>" aria-hidden="true"></i><?= escapar($texto) ?></a>
         <?php endforeach; ?>
       </nav>
     </div>

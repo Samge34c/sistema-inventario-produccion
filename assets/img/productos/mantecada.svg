@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Mantecada">
+  <ellipse cx="32" cy="55" rx="20" ry="3.5" fill="#e9dcc6"/>
+  <path d="M14 26c0-9 8-15 18-15s18 6 18 15z" fill="#e9b85f"/>
+  <path d="M18 22c3-5 8-7 14-7" stroke="#f4d796" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <path d="M13 26h38l-5 27H18z" fill="#a55c2b"/>
+  <path d="M19 27l3 25M26 27l1.5 25M32 27v25M38 27l-1.5 25M45 27l-3 25" stroke="#7e4220" stroke-width="1.6"/>
+</svg>

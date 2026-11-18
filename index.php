@@ -80,6 +80,7 @@ foreach ($materiasEnAlerta as $materia) {
 }
 
 $ordenNivel = ['peligro' => 0, 'aviso' => 1, 'info' => 2];
+$iconosNivel = ['peligro' => 'bi-exclamation-triangle-fill', 'aviso' => 'bi-clock-fill', 'info' => 'bi-info-circle-fill'];
 usort($pendientes, static fn (array $a, array $b): int => $ordenNivel[$a['nivel']] <=> $ordenNivel[$b['nivel']]);
 
 $tituloPagina = 'Inicio';
@@ -95,21 +96,22 @@ require RAIZ_PROYECTO . '/includes/encabezado.php';
     </p>
   </div>
   <div class="acciones">
-    <a class="btn btn-primary btn-lg" href="<?= escapar(url('modules/ventas/index.php')) ?>">Registrar venta</a>
-    <a class="btn btn-outline-primary btn-lg" href="<?= escapar(url('modules/produccion/plan.php')) ?>">Planificar</a>
+    <a class="btn btn-primary btn-lg" href="<?= escapar(url('modules/ventas/index.php')) ?>"><i class="bi bi-cart-plus" aria-hidden="true"></i> Registrar venta</a>
+    <a class="btn btn-outline-primary btn-lg" href="<?= escapar(url('modules/produccion/plan.php')) ?>"><i class="bi bi-calendar-plus" aria-hidden="true"></i> Planificar</a>
   </div>
 </div>
 
 <div class="row g-4">
   <div class="col-lg-7">
-    <h2 class="titulo-seccion">Para atender</h2>
+    <h2 class="titulo-seccion"><i class="bi bi-bell" aria-hidden="true"></i> Para atender</h2>
     <?php if ($pendientes === []) : ?>
-      <p class="aviso-tranquilo">Todo en orden: no hay nada pendiente.</p>
+      <p class="aviso-tranquilo"><i class="bi bi-check-circle-fill" aria-hidden="true"></i> Todo en orden: no hay nada pendiente.</p>
     <?php else : ?>
       <ul class="lista-atender">
         <?php foreach (array_slice($pendientes, 0, 4) as $pendiente) : ?>
           <li class="nivel-<?= $pendiente['nivel'] ?>">
-            <span><?= escapar($pendiente['texto']) ?></span>
+            <i class="bi <?= $iconosNivel[$pendiente['nivel']] ?> icono-nivel" aria-hidden="true"></i>
+            <span class="flex-grow-1"><?= escapar($pendiente['texto']) ?></span>
             <a href="<?= escapar(url($pendiente['accion'][1])) ?>"><?= escapar($pendiente['accion'][0]) ?></a>
           </li>
         <?php endforeach; ?>
@@ -120,7 +122,8 @@ require RAIZ_PROYECTO . '/includes/encabezado.php';
           <ul class="lista-atender">
             <?php foreach (array_slice($pendientes, 4) as $pendiente) : ?>
               <li class="nivel-<?= $pendiente['nivel'] ?>">
-                <span><?= escapar($pendiente['texto']) ?></span>
+                <i class="bi <?= $iconosNivel[$pendiente['nivel']] ?> icono-nivel" aria-hidden="true"></i>
+                <span class="flex-grow-1"><?= escapar($pendiente['texto']) ?></span>
                 <a href="<?= escapar(url($pendiente['accion'][1])) ?>"><?= escapar($pendiente['accion'][0]) ?></a>
               </li>
             <?php endforeach; ?>
@@ -131,14 +134,15 @@ require RAIZ_PROYECTO . '/includes/encabezado.php';
   </div>
 
   <div class="col-lg-5">
-    <h2 class="titulo-seccion">Producción de hoy y mañana</h2>
+    <h2 class="titulo-seccion"><i class="bi bi-fire" aria-hidden="true"></i> Producción de hoy y mañana</h2>
     <?php if ($producciones === []) : ?>
       <p class="aviso-tranquilo">No hay producción planificada para hoy ni mañana.</p>
     <?php else : ?>
       <ul class="lista-atender">
         <?php foreach ($producciones as $plan) : ?>
           <li>
-            <span>
+            <img class="miniatura" src="<?= escapar(urlImagenProducto($plan['receta'])) ?>" alt="" width="36" height="36">
+            <span class="flex-grow-1">
               <a href="<?= escapar(url('modules/produccion/detalle.php?id=' . $plan['id'])) ?>"><?= escapar($plan['receta']) ?></a>
               <span class="small text-body-secondary">
                 <?= escapar(describirDia($plan['fecha_planeada'])) ?>,

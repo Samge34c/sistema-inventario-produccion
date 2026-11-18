@@ -46,7 +46,7 @@ require RAIZ_PROYECTO . '/includes/encabezado.php';
   </div>
   <div class="acciones">
     <a class="btn btn-outline-primary" href="<?= escapar(url('modules/ventas/reportes.php')) ?>">
-      Ver reportes
+      <i class="bi bi-bar-chart-line" aria-hidden="true"></i> Ver reportes
     </a>
   </div>
 </div>
@@ -75,6 +75,7 @@ require RAIZ_PROYECTO . '/includes/encabezado.php';
                 data-nombre="<?= escapar($producto['nombre']) ?>">
                 <span class="insignia-cantidad" data-insignia <?= (int) $cantidad > 0 ? '' : 'hidden' ?>><?= escapar((string) (int) $cantidad) ?></span>
                 <button type="button" class="boton-agregar" data-agregar>
+                  <img class="imagen-producto" src="<?= escapar(urlImagenProducto($producto['nombre'])) ?>" alt="" width="64" height="64">
                   <?= escapar($producto['nombre']) ?>
                   <span class="d-none d-sm-block small fw-normal text-body-secondary">Toque para sumar 1</span>
                 </button>
