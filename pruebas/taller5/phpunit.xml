@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit bootstrap="../../herramientas-calidad/vendor/autoload.php" colors="false" cacheDirectory="resultados/cache">
+<testsuites><testsuite name="Inventario"><file>InventarioTest.php</file><file>IntegracionTest.php</file></testsuite></testsuites>
+<source><include><file>../../modules/inventario/funciones.php</file><file>../../modules/inventario/movimientos-funciones.php</file></include></source>
+</phpunit>
